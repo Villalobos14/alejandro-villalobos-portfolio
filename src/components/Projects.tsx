@@ -6,7 +6,7 @@ function Projects() {
     <div className='w-full h-full bg-[#0d0d0d] px-8 md:px-20'>
       <div className='h-screen pt-16'>
         <div className='w-full flex justify-between text-3xl  md:text-6xl text-white font-medium'>
-          <h3>Selected works</h3>
+          <h3>SELECTED WORKS</h3>
           <h4 className='text-white/35'>21&apos;-24&apos;</h4>
         </div>
         <div className='w-full h-[550px] mt-12 relative rounded-2xl overflow-hidden group cursor-pointer'>
