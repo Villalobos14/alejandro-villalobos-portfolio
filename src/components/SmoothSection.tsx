@@ -39,14 +39,14 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center">
+    <section className="flex flex-col items-center">
       <div ref={gallery} className="relative flex gap-5 p-5 h-[175vh] bg-[#2a2929] overflow-hidden w-full">
         <Column images={[images[0], images[1], images[2]]} y={y} index={1} />
         <Column images={[images[3], images[4], images[5]]} y={y2} index={2} />
         <Column images={[images[6], images[7], images[8]]} y={y3} index={3} />
         <Column images={[images[9], images[10], images[11]]} y={y4} index={4} />
       </div>
-    </main>
+    </section>
   );
 }
 

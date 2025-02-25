@@ -15,7 +15,7 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
   return (
-    <Disclosure as="nav" className="mt-4 sticky top-0 mx-8">
+    <Disclosure as="nav" className="mt-4 sticky top-0 mx-8 z-50">
       <div className="mx-auto max-w-7xl">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">

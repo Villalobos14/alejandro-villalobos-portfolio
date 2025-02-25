@@ -3,7 +3,7 @@ import React from 'react'
 
 function Projects() {
   return (
-    <div className='w-full h-full bg-[#141414] p-8 pt-12 md:p-20'>
+    <section className='w-full h-full bg-[#141414] p-8 pt-12 md:p-20'>
       <div className='h-full'>
         <div className='w-full flex justify-between text-3xl  md:text-6xl text-white font-medium'>
           <h3>Selected works</h3>
@@ -36,7 +36,7 @@ function Projects() {
           />
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
