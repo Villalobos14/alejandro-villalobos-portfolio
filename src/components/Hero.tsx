@@ -5,7 +5,7 @@ function Hero() {
   return (
     <div className='h-screen flex flex-col items-center px-8 xl:px-20 pt-20 bg-[#0d0d0d]'>
       <div className='w-full flex flex-col gap-y-8'>
-        <h3 className='text-white text-4xl font-medium '>Hello!</h3>
+        <h3 className='text-white text-4xl font-medium '>HEllo!</h3>
         <div className='flex flex-col md:flex-row items-center gap-x-4'>
           <div className='flex items-center gap-x-4 w-full md:w-auto'>
             <h3 className='text-white text-5xl xl:text-7xl font-medium'>I&apos;m </h3>
