@@ -1,5 +1,6 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -28,10 +29,12 @@ export default function Header() {
           </div>
           <div className="flex flex-1 items-center justify-start">
             <div className="flex shrink-0 items-center">
-              <img
+              <Image
                 alt="Your Company"
                 src="/logo.svg"
                 className="h-8 w-auto"
+                width={10}
+                height={10}
               />
             </div>
           </div>

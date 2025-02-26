@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useTransform, useScroll, motion } from 'framer-motion';
+import { useTransform, useScroll, motion , MotionValue } from 'framer-motion';
 
 const images = [
   '1.png', '2.png', '3.png', '4.png', '5.png', '1.png',
@@ -52,8 +52,9 @@ export default function Home() {
 
 interface ColumnProps {
   images: string[];
-  y: any;
+  y: MotionValue<number>;
   index: number;
+
 }
 
 const Column: React.FC<ColumnProps> = ({ images, y, index }) => {
