@@ -3,9 +3,9 @@ import React from 'react'
 
 export default function About() {
   return (
-    <section className='h-full p-20'>
+    <section className='h-full p-8 md:p-20'>
       <h2 className='text-4xl font-medium text-black/75'>About me 👤 🎸</h2>
-      <article className='w-full flex gap-x-8'>
+      <article className='w-full flex-col md:flex-row flex gap-x-8 gap-y-4 md:gap-y-0 mt-12 '>
         <div className='w-full md:w-1/2 h-[400px]  md:mt-8 relative rounded-2xl overflow-hidden group cursor-pointer'>
           <Image
             src={'/me-and-friends.png'}
@@ -14,7 +14,7 @@ export default function About() {
             className='object-cover rounded-2xl duration-1000 group-hover:scale-110'
           />
         </div>
-        <div className='flex flex-col w-1/2 justify-center'>
+        <div className='flex flex-col md:w-1/2 justify-center'>
           <h3 className='text-3xl font-medium text-black/75'>
             Beyond Design
           </h3>
@@ -23,8 +23,8 @@ export default function About() {
           </p>
         </div>
       </article>
-      <article className='w-full flex gap-x-8'>
-        <div className='flex flex-col w-1/2 justify-center'>
+      <article className='w-full flex-col-reverse md:flex-row flex gap-x-8 gap-y-4 md:gap-y-0 mt-12 '>
+        <div className='flex flex-col md:w-1/2 justify-center'>
           <h3 className='text-3xl font-medium text-black/75'>
             Sharing Knowledge
           </h3>
@@ -41,7 +41,7 @@ export default function About() {
           />
         </div>
       </article>
-      <article className='w-full flex gap-x-8'>
+      <article className='w-full flex-col md:flex-row flex gap-x-8 gap-y-4 md:gap-y-0 mt-12 '>
         <div className='w-full md:w-1/2 h-[400px]  md:mt-8 relative rounded-2xl overflow-hidden group cursor-pointer'>
           <Image
             src={'/storytelling.png'}
@@ -50,7 +50,7 @@ export default function About() {
             className='object-cover rounded-2xl duration-1000 group-hover:scale-110'
           />
         </div>
-        <div className='flex flex-col w-1/2 justify-center'>
+        <div className='flex flex-col md:w-1/2 justify-center'>
           <h3 className='text-3xl font-medium text-black/75'>
             Storytelling
           </h3>
@@ -59,8 +59,8 @@ export default function About() {
           </p>
         </div>
       </article>
-      <article className='w-full flex gap-x-8'>
-        <div className='flex flex-col w-1/2 justify-center'>
+      <article className='w-full flex-col-reverse md:flex-row flex gap-x-8 gap-y-4 md:gap-y-0 mt-12 '>
+        <div className='flex flex-col md:w-1/2 justify-center'>
           <h3 className='text-3xl font-medium text-black/75'>
             Leadership Experiences
           </h3>

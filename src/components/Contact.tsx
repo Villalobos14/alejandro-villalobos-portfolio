@@ -3,9 +3,9 @@ import React from 'react'
 
 export default function Contact() {
   return (
-    <footer className='h-full p-20'>
+    <footer className='h-full md:p-20 p-8'>
       <h2 className='text-4xl font-medium text-black/75'>Contact</h2>
-      <div className='flex justify-center mt-10 items-center space-x-14'>
+      <div className='flex justify-center mt-10 items-center space-x-4 md:space-x-14'>
         <Image
           src={"/behance.png"}
           alt="Behance"

@@ -21,7 +21,7 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section className="w-full mx-auto py-10 px-20">
+    <section className="w-full mx-auto py-10 md:px-20 p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h2 className="text-4xl font-bold mb-6">Design Skills</h2>
