@@ -15,9 +15,9 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
   return (
-    <Disclosure as="nav" className="mt-4 sticky top-0 mx-8 ">
-      <div className="mx-auto max-w-7x ">
-        <div className="relative flex h-16 items-center justify-between ">
+    <Disclosure as="nav" className="mt-4 sticky top-0 mx-8 z-50">
+      <div className="mx-auto max-w-7xl">
+        <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-black hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
               <span className="absolute -inset-0.5" />
