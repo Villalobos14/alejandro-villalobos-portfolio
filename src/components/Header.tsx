@@ -3,11 +3,11 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Work', href: '#', current: false },
-  { name: 'LinkedIn', href: '#', current: false },
-  { name: 'Dribble', href: '#', current: false },
-  { name: 'Resumé', href: '#', current: false },
+  { name: 'Work', href: '#', current: true },
+  { name: 'Experience', href: '#', current: false },
+  { name: 'Skills', href: '#', current: false },
+  { name: 'About', href: '#', current: false },
+  { name: 'Contact', href: '#', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -16,7 +16,7 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
   return (
-    <Disclosure as="nav" className="mt-4 sticky top-0 mx-8 z-50">
+    <Disclosure as="nav" className=" sticky top-0 z-50 bg-black/10 backdrop-blur-lg">
       <div className="mx-auto max-w-7xl">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
@@ -47,8 +47,8 @@ export default function Header() {
                     href={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'hover:bg-black hover:text-white text-black',
-                      'px-4 py-1 text-sm font-medium rounded-3xl border-black border-[0.1px]',
+                      item.current ? ' text-black' : 'hover:bg-secondary hover:text-white text-black',
+                      'px-4 py-1 text-sm font-medium rounded-3xl bg-secondary',
                     )}
                   >
                     {item.name}
