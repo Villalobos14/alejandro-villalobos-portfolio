@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import "./globals.css";
 import ReactLenis from 'lenis/react'
@@ -26,12 +25,6 @@ const sanFrancisco = localFont(
     variable: '--font-sf',
   },
 )
-
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
 
 export const metadata: Metadata = {
   title: "Alejandro Villalobos | UX Designer",
