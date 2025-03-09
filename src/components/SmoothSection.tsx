@@ -1,12 +1,11 @@
 'use client';
-
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useTransform, useScroll, motion } from 'framer-motion';
+import { useTransform, useScroll, motion, MotionValue } from 'framer-motion';
 
 const images = [
-  '1.png', '2.png', '3.png', '4.png', '5.png', '1.png',
-  '2.png', '3.png', '4.png', '5.png', '1.png', '2.png',
+  'smooth-images/9.png', 'smooth-images/1.png', 'smooth-images/3.png', 'smooth-images/4.png', 'smooth-images/5.png', 'smooth-images/6.png',
+  'smooth-images/2.png', 'smooth-images/8.png', 'smooth-images/7.png', 'smooth-images/10.png', 'smooth-images/6.png', 'smooth-images/2.png',
 ];
 
 export default function Home() {
@@ -40,7 +39,7 @@ export default function Home() {
 
   return (
     <section className="flex flex-col items-center">
-      <div ref={gallery} className="relative flex gap-5 p-5 h-[175vh] bg-[#2a2929] overflow-hidden w-full">
+      <div ref={gallery} className="relative flex gap-5 p-5 h-[175vh] bg-[#0d0d0d] overflow-hidden w-full">
         <Column images={[images[0], images[1], images[2]]} y={y} index={1} />
         <Column images={[images[3], images[4], images[5]]} y={y2} index={2} />
         <Column images={[images[6], images[7], images[8]]} y={y3} index={3} />
@@ -52,7 +51,7 @@ export default function Home() {
 
 interface ColumnProps {
   images: string[];
-  y: any;
+  y: MotionValue<number>;
   index: number;
 }
 

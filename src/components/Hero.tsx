@@ -3,7 +3,7 @@ import React from 'react'
 
 function Hero() {
   return (
-    <main className='h-screen flex flex-col items-center px-8 xl:px-20 pt-20'>
+    <main className='h-screen flex flex-col items-center px-8 xl:px-16 pt-20 text-white'>
       <div className='w-full flex flex-col gap-y-8'>
         <h3 className='text-4xl font-medium '>Hello!</h3>
         <div className='flex flex-col md:flex-row items-center gap-x-4'>
@@ -30,7 +30,19 @@ function Hero() {
             />
           </div>
         </div>
-        <p className='text-3xl xl:text-6xl font-medium leading-tight'>I&apos;m UX/UI Designer and I create a digital experience that borders on efficiency, aesthetics and functionality. 🚀</p>
+        <p className='text-3xl xl:text-6xl font-medium leading-tight mt-4'>I&apos;m
+          <span className='text-secondary'>
+            {' '} UX | UI Designer {' '}
+          </span>
+          and I create a digital experience that borders on efficiency, aesthetics and functionality. 🚀</p>
+        <div>
+          <p className='text-gray text- xl'>
+            Hi, thanks for visiting my portfolio!
+          </p>
+          <p className='text-gray text- xl'>
+            It's still a work in progress, and some sections aren't ready yet. For now, click on projects to view them directly in Figma.
+          </p>
+        </div>
       </div>
     </main>
   )

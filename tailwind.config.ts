@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['var(--font-sf)'],
       }
+    },
+    colors: {
+      'primary': '#0C0D0E',
+      'secondary': '#3DD964',
+      'white': '#ffffff',
+      'black': '#000000',
+      'gray': '#8C8C8C',
     },
   },
   plugins: [],

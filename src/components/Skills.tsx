@@ -21,15 +21,15 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section className="w-full mx-auto py-10 md:px-20 p-8">
+    <section className="w-full mx-auto md:px-20 p-8 text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <h2 className="text-4xl font-bold mb-6">Design Skills</h2>
+          <h2 className="text-4xl font-medium mb-6">Design Skills</h2>
           <div className="flex flex-wrap gap-3">
             {designSkills.map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-full text-base"
+                className="px-4 py-2 text- border-[0.1px] border-gray-300 rounded-full text-gray"
               >
                 {skill}
               </span>
@@ -37,12 +37,12 @@ export default function SkillsSection() {
           </div>
         </div>
         <div>
-          <h2 className="text-4xl font-bold mb-6">Soft Skills</h2>
+          <h2 className="text-4xl font-medium mb-6 ">Soft Skills</h2>
           <div className="flex flex-wrap gap-3">
             {softSkills.map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-full text-base"
+                className="px-4 py-2 text-gray-700 border-[0.1px] border-gray-300 rounded-full text-gray"
               >
                 {skill}
               </span>
