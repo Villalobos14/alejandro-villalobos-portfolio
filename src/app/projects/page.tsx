@@ -4,7 +4,7 @@ import Header from '@/components/Header'
 import Works from '@/components/Works'
 import React, { useEffect } from 'react'
 
-export default function page() {
+export default function Page() {
 
   useEffect(() => {
     window.scrollTo(0, 0)

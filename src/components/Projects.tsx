@@ -8,7 +8,7 @@ function Projects() {
       <div className='h-full'>
         <div className='w-full flex justify-between text-3xl  md:text-5xl text-white font-normal'>
           <h3>Selected works</h3>
-          <h4 className='text-gray tracking-tighter'>21'-24'</h4>
+          <h4 className='text-gray tracking-tighter'>21&apos;-24&apos;</h4>
         </div>
         <div className='w-full flex flex-col'>
           <div className='h-[550px] mt-12 relative rounded-2xl overflow-hidden group cursor-pointer'>

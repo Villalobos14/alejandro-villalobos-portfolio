@@ -19,7 +19,7 @@ export default function About() {
             Beyond Design
           </h3>
           <p className=' mt-4 text-xl font-light text-gray'>
-            I'm a naturally curious and self-taught person with a passion for learning. Whether it's music, drawing, or sports, I'm always exploring new skills and diving into tutorials to improve. Resilient and empathetic, I thrive on challenges and enjoy leading and collaborating with others to bring ideas to life.
+            I&apos;m a naturally curious and self-taught person with a passion for learning. Whether it&apos;s music, drawing, or sports, I&apos;vm always exploring new skills and diving into tutorials to improve. Resilient and empathetic, I thrive on challenges and enjoy leading and collaborating with others to bring ideas to life.
           </p>
         </div>
       </article>
@@ -55,7 +55,7 @@ export default function About() {
             Storytelling
           </h3>
           <p className=' mt-4 text-xl font-light text-gray'>
-            I enjoy speaking, presenting ideas, and bringing projects to life through storytelling. Whether it’s pitching an idea, leading a workshop, or explaining complex concepts in a simple way, I thrive in environments where I can communicate and connect with others. I believe that a great presentation is not just about information, but about engaging the audience and making ideas resonate.
+            I enjoy speaking, presenting ideas, and bringing projects to life through storytelling. Whether it&apos;s pitching an idea, leading a workshop, or explaining complex concepts in a simple way, I thrive in environments where I can communicate and connect with others. I believe that a great presentation is not just about information, but about engaging the audience and making ideas resonate.
           </p>
         </div>
       </article>
@@ -65,7 +65,7 @@ export default function About() {
             Leadership Experiences
           </h3>
           <p className=' mt-4 text-xl font-light text-gray'>
-            I actively participate in hackathons, taking on leadership roles to guide teams, drive UX/UI design, I thrive in fast-paced environments where creativity, collaboration, and problem-solving come together. Through these competitions, I’ve had the opportunity to lead winning projects, and refine my skills in both design and development. For me, hackathons are more than just competitions—they’re a space to innovate, learn, and turn ideas into impactful solutions.
+            I actively participate in hackathons, taking on leadership roles to guide teams, drive UX/UI design, I thrive in fast-paced environments where creativity, collaboration, and problem-solving come together. Through these competitions, I&apos;ve had the opportunity to lead winning projects, and refine my skills in both design and development. For me, hackathons are more than just competitions—they&apos;re a space to innovate, learn, and turn ideas into impactful solutions.
           </p>
         </div>
         <div className='w-full md:w-1/2 h-[400px]  md:mt-8 relative rounded-2xl overflow-hidden group cursor-pointer'>
