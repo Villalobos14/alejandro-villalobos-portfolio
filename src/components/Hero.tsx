@@ -30,9 +30,6 @@ function Hero() {
             />
           </div>
         </div>
-<<<<<<< HEAD
-        <p className=' text-3xl xl:text-6xl font-medium leading-tight'>I&apos;m UX/UI Designer and I create a digital experience that borders on efficiency, aesthetics and functionality. 🚀</p>
-=======
         <p className='text-3xl xl:text-6xl font-medium leading-tight mt-4'>I&apos;m
           <span className='text-secondary'>
             {' '} UX | UI Designer {' '}
@@ -46,7 +43,6 @@ function Hero() {
             It's still a work in progress, and some sections aren't ready yet. For now, click on projects to view them directly in Figma.
           </p>
         </div>
->>>>>>> origin/leo-dev
       </div>
     </main>
   )

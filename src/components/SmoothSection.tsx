@@ -1,11 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-<<<<<<< HEAD
-import { useTransform, useScroll, motion , MotionValue } from 'framer-motion';
-=======
 import { useTransform, useScroll, motion, MotionValue } from 'framer-motion';
->>>>>>> origin/leo-dev
 
 const images = [
   'smooth-images/9.png', 'smooth-images/1.png', 'smooth-images/3.png', 'smooth-images/4.png', 'smooth-images/5.png', 'smooth-images/6.png',
