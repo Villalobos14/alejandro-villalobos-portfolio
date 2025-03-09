@@ -5,32 +5,32 @@ export default function Footer() {
   const links = [
     {
       id: 1,
-      href: "/about",
+      href: "https://www.behance.net/Villalobos14",
       label: "Behance",
     },
     {
       id: 2,
-      href: "https://forms.gle/PftXkai3sNZquWu68",
+      href: "https://github.com/Villalobos14",
       label: "Github",
     },
     {
       id: 3,
-      href: "https://forms.gle/s84TNQcUX1P22bTE7",
+      href: "https://www.linkedin.com/in/joshua-alejandro-villalobos-estrada-60194b224/",
       label: "LinkedIn",
     },
     {
       id: 4,
-      href: "https://ko-fi.com/supporthuyng",
+      href: "https://dribbble.com/Villaalobos14",
       label: "Dribbble",
     },
     {
       id: 5,
-      href: "https://github.com/huyngxyz/Pillarstack",
+      href: "https://www.instagram.com/villaalobos14/",
       label: "Instagram",
     },
     {
       id: 6,
-      href: "/legal",
+      href: "https://drive.google.com/file/d/1LsBpwTRqWjsmC26jEOBiApvok9ws_uG1/view?usp=drive_link",
       label: "Resumé",
     },
   ];
