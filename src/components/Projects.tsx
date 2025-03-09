@@ -19,7 +19,7 @@ function Projects() {
               className='object-cover rounded-2xl duration-1000 group-hover:scale-110'
             />
             <div className='absolute top-3 left-4 text-white'>
-              <p className='text-black bg-secondary py-1 px-3 rounded-3xl'>Best Project</p>
+              <p className='text-black bg-secondary py-1 px-3 rounded-3xl'>Latest Project</p>
             </div>
           </div>
           <div className='text-white mt-3 ml-2'>

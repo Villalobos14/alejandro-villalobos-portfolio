@@ -31,7 +31,7 @@ export default function Header() {
             <div className="flex shrink-0 items-center">
               <Image
                 alt="Your Company"
-                src="/logo.svg"
+                src="/myself-emoji.svg"
                 className="h-8 w-auto"
                 width={10}
                 height={10}
