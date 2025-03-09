@@ -34,7 +34,7 @@ function Hero() {
           <span className='text-secondary'>
             {' '} UX | UI Designer {' '}
           </span>
-          and I create a digital experience that borders on efficiency, aesthetics and functionality. 🚀</p>
+          crafting digital experiences focused on efficiency, aesthetics, and functionality</p>
         <div>
           <p className='text-gray text- xl'>
             Hi, thanks for visiting my portfolio!

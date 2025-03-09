@@ -13,7 +13,7 @@ export default function Experience() {
           UX/UI Designer, DaCodes (Remote)
         </h3>
         <div className="flex gap-2 mt-3 text-lg">
-          <time dateTime="2024-01">Jan 2024</time> -
+          <time dateTime="2024-01">2023</time> -
           <time dateTime="2025-02">Current</time>
         </div>
         <ul className='mt-3 list-disc ml-4'>
@@ -31,7 +31,7 @@ export default function Experience() {
           Freelance UX/UI Designer & Frontend Developer
         </h3>
         <div className="flex gap-2 mt-3 text-lg">
-          <time dateTime="2021-01">Jan 2021</time> -
+          <time dateTime="2021-01">2021</time> -
           <time dateTime="2025-02">Current</time>
         </div>
         <ul className='mt-3 list-disc ml-4'>
