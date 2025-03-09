@@ -78,7 +78,10 @@ export default function Footer() {
                   {link.label}
                 </Link>
               ) : (
-                <Link className="group" href={link.href}>
+                <Link 
+                className="group" 
+                 target="_blank"
+                href={link.href}>
                   {link.label}
                 </Link>
               )}
