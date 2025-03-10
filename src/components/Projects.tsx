@@ -75,7 +75,7 @@ function Projects() {
               </div>
             </div>
           </Link>
-          <div className='text-white mt-3 ml-2'>
+          <div className='text-white mt-3 ml-2 '>
             <h3>Andanac</h3>
             <p className='text-gray'>Intranet redesign for Nissan</p>
           </div>
