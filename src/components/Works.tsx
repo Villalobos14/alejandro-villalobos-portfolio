@@ -10,7 +10,7 @@ import Heading from "../components/ui/Heading";
 
 export default function Works() {
   return (
-    <main className="p-5 md:p-10 xl:p-20 2xl:p-28 bg-primary">
+    <main className="p-5 md:p-10 xl:p-20 2xl:p-28 bg-primary" >
       <section
         className="overflow-hidden"
       >

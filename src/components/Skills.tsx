@@ -21,7 +21,7 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section className="w-full mx-auto md:px-20 p-8 text-white">
+    <section className="w-full mx-auto md:px-20 p-8 text-white md:pt-16" id="skills">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h2 className="text-4xl font-medium mb-6">Design Skills</h2>
