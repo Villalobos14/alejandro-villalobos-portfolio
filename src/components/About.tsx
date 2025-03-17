@@ -19,7 +19,7 @@ export default function About() {
             Beyond Design
           </h3>
           <p className=' mt-4 text-xl font-light text-gray'>
-            I&apos;m a naturally curious and self-taught person with a passion for learning. Whether it&apos;s music, drawing, or sports, I&apos;vm always exploring new skills and diving into tutorials to improve. Resilient and empathetic, I thrive on challenges and enjoy leading and collaborating with others to bring ideas to life.
+            I&apos;m a naturally curious and self-taught person with a passion for learning. Whether it&apos;s music, drawing, or sports, I&apos;m always exploring new skills and diving into tutorials to improve. Resilient and empathetic, I thrive on challenges and enjoy leading and collaborating with others to bring ideas to life.
           </p>
         </div>
       </article>
