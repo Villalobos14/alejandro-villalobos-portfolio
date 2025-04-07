@@ -27,8 +27,8 @@ const sanFrancisco = localFont(
 )
 
 export const metadata: Metadata = {
-  title: "Alejandro Villalobos | UX Designer",
-  description: "UX designer with 3 years of experience, based in México. Currently with DaCodes working on Web.",
+  title: "Alejandro Villalobos | UX/UI Designer",
+  description: "UX designer with over 4 years of experience, based in México. Currently open to work.",
 };
 
 export default function RootLayout({
