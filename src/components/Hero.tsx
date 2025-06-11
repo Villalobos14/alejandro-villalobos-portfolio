@@ -40,7 +40,7 @@ function Hero() {
             Hi, thanks for visiting my portfolio!
           </p>
           <p className='text-gray text-xl 2xl:text-2xl'>
-            It&apos;s still a work in progress, and some sections aren&apos;t ready yet. For now, click on projects to view them directly in Figma.
+            It&apos;s still a work in progress, and some sections aren&apos;t ready yet. For now, click on projects to view them directly in Figma, thanks.
           </p>
         </div>
       </div>
