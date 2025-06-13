@@ -3,47 +3,40 @@ import React from 'react'
 
 function Hero() {
   return (
-    <main className='h-screen flex flex-col items-center px-8 xl:px-16 pt-20 text-white' id='home'>
-      <div className='w-full flex flex-col gap-y-8'>
-        <h3 className=' text-4xl font-medium 2xl:text-5xl'>Hello!</h3>
-        <div className='flex flex-col md:flex-row items-center gap-x-4'>
-          <div className='flex items-center gap-x-4 w-full md:w-auto'>
-            <h3 className='text-5xl xl:text-7xl 2xl:text-9xl font-medium'>I&apos;m </h3>
-            <Image
-              src={'/myself-emoji.svg'}
-              alt={'Alejandro Villalobos'}
-              width={80}
-              height={80}
-              draggable={false}
-              className='block md:hidden'
-            />
-          </div>
-          <div className='w-full md:w-auto flex items-center gap-x-4'>
-            <h3 className='text-5xl xl:text-7xl 2xl:text-9xl font-medium'>Alejandro VIllalobos</h3>
-            <Image
-              src={'/myself-emoji.svg'}
-              alt={'Alejandro Villalobos'}
-              width={100}
-              height={100}
-              draggable={false}
-              className='hidden md:block'
-            />
-          </div>
+    <main className='h-screen flex flex-col px-8 xl:px-16 pt-10 text-white' id='home'>
+
+      {/* Hero Text Block */}
+      <div className='flex flex-col  max-w-5xl items-start'>
+
+        <p className='text-4xl xl:text-7xl font-medium leading-tight'>
+          I&apos;m Alejandro Villalobos, a 
+          <span className='text-secondary'> UX | UI designer </span>
+          crafting efficient and aesthetic digital products.
+          <br />
+          Currently building solutions across 
+          <span className='text-secondary'> AI</span>, 
+          <span className='text-secondary'> education</span>, and 
+          <span className='text-secondary'> business platforms</span>.
+        </p>
+
+        {/* Skill Badges */}
+        <div className='flex flex-wrap gap-2 mt-8'>
+          <span className='px-4 py-1 border border-white rounded-full text-sm'>Product Design</span>
+          <span className='px-4 py-1 border border-white rounded-full text-sm'>UX Research</span>
+          <span className='px-4 py-1 border border-white rounded-full text-sm'>Prototyping</span>
+          <span className='px-4 py-1 border border-white rounded-full text-sm'>Frontend Dev</span>
         </div>
-        <p className='text-3xl xl:text-6xl 2xl:text-7xl font-medium leading-tight mt-4'>I&apos;m
-          <span className='text-secondary'>
-            {' '} UX | UI Designer {' '}
-          </span>
-          crafting digital experiences focused on efficiency, aesthetics, and functionality</p>
-        <div>
-          <p className='text-gray text-xl 2xl:text-2xl'>
-            Hi, thanks for visiting my portfolio!
-          </p>
-          <p className='text-gray text-xl 2xl:text-2xl'>
-            It&apos;s still a work in progress, and some sections aren&apos;t ready yet. For now, click on projects to view them directly in Figma, thanks.
-          </p>
-        </div>
+
       </div>
+
+      {/* Footer Line */}
+      <div className='flex justify-between items-center w-full px-0 border-t text-[#7b7b7b] border-gray-700 py-4 mt-8 text-gray-400 text-xl'>
+        <p>Based in México</p>
+        <p className='flex items-center gap-1 text-[#d2cfcf] text-xl'>
+          See Selected Works <span>↓</span>
+        </p>
+      </div>
+
     </main>
   )
 }
