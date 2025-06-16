@@ -18,7 +18,7 @@ export default function Experience() {
         </div>
         <ul className='mt-3 list-disc ml-4 2xl:text-xl'>
           <li>Directed UX/UI team for a university operations platform, aligning design with user needs.</li>
-          <li>Designed wireframes, prototypes, and a scalable design system for consistent UI/UX.</li>
+          <li>Designed wireframes, prototypes, and a scalable design system for consistent interfaces.</li>
           <li>Conducted research and usability tests to optimize workflows and boost satisfaction.</li>
         </ul>
         <hr className='border-t border-gray-300 my-4' />
