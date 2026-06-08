@@ -9,8 +9,8 @@ function Hero() {
 
         <p className='text-4xl xl:text-7xl font-medium leading-tight'>
           I&apos;m Alejandro Villalobos, a 
-          <span className='text-secondary'> UX | UI designer </span>
-          crafting efficient and aesthetic digital products.
+          <span className='text-secondary'> UX Researcher </span>
+          bla bla bla.
           <br />
           Currently building solutions across 
           <span className='text-secondary'> AI</span>, 
