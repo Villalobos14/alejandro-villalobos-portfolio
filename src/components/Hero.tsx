@@ -10,7 +10,7 @@ function Hero() {
         <p className='text-4xl xl:text-7xl font-medium leading-tight'>
           I&apos;m Alejandro Villalobos, a 
           <span className='text-secondary'> UX Researcher </span>
-          bla bla bla.
+          bla bla bla y mas blablablablablablabl.
           <br />
           Currently building solutions across 
           <span className='text-secondary'> AI</span>, 
