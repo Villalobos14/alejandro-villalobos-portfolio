@@ -30,7 +30,7 @@ export default function Footer() {
     },
     {
       id: 6,
-      href: "https://drive.google.com/file/d/1LsBpwTRqWjsmC26jEOBiApvok9ws_uG1/view?usp=drive_link",
+      href: "",
       label: "Resumé",
     },
   ];
