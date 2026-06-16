@@ -18,11 +18,12 @@ export default function Works() {
         <div className="mt-10 grid grid-cols-1 gap-16 gap-y-10 md:grid-cols-12 text-white">
           <div className=" col-span-1 md:col-span-12">
             <Projects
-              link="https://www.figma.com/design/YsON9Kz2hETJjlcWd4i8UZ/hackton2025?node-id=0-1&t=IxgNt15n0ps7gVRH-1"
+              //link="https://www.figma.com/design/YsON9Kz2hETJjlcWd4i8UZ/hackton2025?node-id=0-1&t=IxgNt15n0ps7gVRH-1"
+              link="https://www.figma.com/deck/80aZQZ0uXw5yU0PMTWxKUh"
               img={Monogatari}
-              alt="Monogatari website mockup"
-              name="Monogatari"
-              description="Web3 Platform International Hackathon Winner"
+              alt="Ominio Case Study"
+              name="Ominio"
+              description="Elearning platform"
             />
           </div>
           <div className="col-span-1 pt-0 md:col-span-7 md:pt-16">

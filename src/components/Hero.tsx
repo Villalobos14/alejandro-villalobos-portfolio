@@ -10,7 +10,7 @@ function Hero() {
       <div className="flex flex-col  max-w-5xl items-start">
         <p className="text-4xl xl:text-7xl font-medium leading-tight">
           I&apos;m Alejandro Villalobos, a
-          <span className="text-secondary"> UX Researcher </span>
+          <span className="text-secondary"> UX Designer | Software Engineer | Researcher </span>
           turning insights into better experiences.
           <br />
           Portfolio update in progress  currently building

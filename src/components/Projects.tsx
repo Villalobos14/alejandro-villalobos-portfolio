@@ -12,12 +12,13 @@ function Projects() {
         </div>
         <div className='w-full flex flex-col'>
           <Link
-            href="https://www.figma.com/design/YsON9Kz2hETJjlcWd4i8UZ/hackton2025?node-id=0-1&t=IxgNt15n0ps7gVRH-1"
+            href="https://www.figma.com/deck/80aZQZ0uXw5yU0PMTWxKUh"
+            //href="https://www.figma.com/design/YsON9Kz2hETJjlcWd4i8UZ/hackton2025?node-id=0-1&t=IxgNt15n0ps7gVRH-1"
             target='_blank'
           >
             <div className='h-[550px] mt-12 relative rounded-2xl overflow-hidden group cursor-pointer'>
               <Image
-                src={'/monogatari.png'}
+                src={'/omimm.png'}
                 alt='First project'
                 fill
                 className='object-cover rounded-2xl duration-1000 group-hover:scale-110'
@@ -28,10 +29,10 @@ function Projects() {
             </div>
           </Link>
           <div className='text-white mt-3 ml-2'>
-            <h3>Monogatari</h3>
-            <p className='text-gray'>Web3 Platform International Hackathon Winner</p>
+            <h3>Ominio Case Study</h3>
+            <p className='text-gray'>Elearning platform- web - AI</p>
           </div>
-        </div>
+        </div>  
       </div>
       <div className='w-full h-full flex flex-col md:flex-row justify-between gap-x-8 mt-8'>
         <div className='w-full flex flex-col'>
