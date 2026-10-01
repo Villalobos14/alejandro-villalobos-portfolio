@@ -1,9 +1,14 @@
+import type { MediaSource } from "@/components/media/Media";
+
 export interface FeaturedProject {
   id: string;
   name: string;
   tags: string[];
-  image?: string;
-  imageAlt: string;
+  /**
+   * Omit until the asset exists. `src` and `alt` travel together, so a
+   * thumbnail cannot be added without describing what the screen shows.
+   */
+  media?: MediaSource;
   href: string;
   linkLabel: string;
 }
@@ -17,7 +22,6 @@ export const featuredProjects: FeaturedProject[] = [
     id: "01",
     name: "MLSToolbox — CodeAssessment",
     tags: ["Static analysis", "Python", "Research software"],
-    imageAlt: "MLSToolbox CodeAssessment",
     href: "/work/mlstoolbox",
     linkLabel: "Read case study",
   },
@@ -25,8 +29,10 @@ export const featuredProjects: FeaturedProject[] = [
     id: "02",
     name: "Ominio",
     tags: ["E-Learning Platform", "Gamification", "AI"],
-    image: "/ominiocoer.png",
-    imageAlt: "Ominio landing page mockup",
+    media: {
+      src: "/ominiocoer.png",
+      alt: "Ominio course dashboard on a laptop, showing a lesson progress bar, an XP counter and a list of unlocked modules",
+    },
     href: "/work/ominio",
     linkLabel: "Read case study",
   },
@@ -34,8 +40,10 @@ export const featuredProjects: FeaturedProject[] = [
     id: "03",
     name: "Andanac",
     tags: ["Intranet redesign", "Nissan", "Web"],
-    image: "/nissan.png",
-    imageAlt: "Andanac intranet redesign mockup for Nissan",
+    media: {
+      src: "/nissan.png",
+      alt: "Andanac dealer intranet home screen for Nissan, with a vehicle inventory table and a sidebar of monthly sales reports",
+    },
     href: "/work/andanac",
     linkLabel: "Read case study",
   },

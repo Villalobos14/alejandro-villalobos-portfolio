@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
+import Media from "@/components/media/Media";
 import type { FeaturedProject } from "@/lib/projects";
 
 interface ProjectCardProps {
@@ -48,16 +48,17 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
         </TransitionLink>
       </div>
 
-      <div className="relative aspect-[16/10] w-full shrink-0 bg-primary lg:aspect-auto lg:h-auto lg:w-[60%]">
-        {project.image ? (
-          <Image
-            src={project.image}
-            alt={project.imageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            className="object-cover"
-          />
-        ) : null}
+      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-primary lg:aspect-auto lg:h-auto lg:w-[60%]">
+        <Media
+          source={project.media}
+          sizes="(max-width: 1024px) 100vw, 60vw"
+          placeholder={{
+            index: project.id,
+            tags: project.tags,
+            footer: "Case visuals in progress",
+            seed: project.href,
+          }}
+        />
       </div>
     </article>
   );
