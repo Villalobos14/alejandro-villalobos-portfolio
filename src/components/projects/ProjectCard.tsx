@@ -20,11 +20,17 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
           : ""
       }`}
     >
-      <div className="flex flex-col gap-scale p-scale lg:w-[40%] lg:p-8">
+      <div className="flex min-w-0 flex-col gap-scale p-scale lg:w-[40%] lg:p-8">
         <p className="text-body uppercase tracking-[0.2em] text-gray">
           {project.id}
         </p>
-        <h3 className="text-3xl font-medium leading-tight text-white md:text-4xl">
+        {/*
+          The jump from text-3xl to md:text-4xl left the title filling its
+          column at mid widths. A fluid size keeps it clear of the padding,
+          and the column is narrowest from lg up, where it is only 40% of the
+          card. break-words covers a future name with no place to wrap.
+        */}
+        <h3 className="text-balance break-words text-[clamp(1.5rem,3.2vw,2.25rem)] font-medium leading-tight text-white">
           {project.name}
         </h3>
         <ul className="flex flex-wrap gap-2">
