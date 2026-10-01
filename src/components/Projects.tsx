@@ -14,7 +14,7 @@ export default function Projects() {
       <Reveal>
         <SectionHeading
           lines={["Selected", "works"]}
-          aside={<p>21&apos;–24&apos;</p>}
+          aside={<p>&apos;21–&apos;24</p>}
         />
       </Reveal>
       <StackedProjects projects={featuredProjects} />
