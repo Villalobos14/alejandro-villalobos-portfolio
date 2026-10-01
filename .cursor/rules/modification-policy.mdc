@@ -1,0 +1,10 @@
+---
+description: Atomicidad de cambios y archivos globales intocables
+alwaysApply: true
+---
+
+# Modificación de archivos
+
+- Atomicidad: cambiar solo los componentes, funciones o bloques solicitados.
+- Prohibido refactor masivo, renombrar archivos o reestructurar directorios sin petición.
+- No alterar `next.config.mjs`, `tailwind.config.ts`, `tsconfig.json`, `globals.css` ni providers existentes (p. ej. `ReactLenis` en `src/app/layout.tsx`) salvo petición explícita.

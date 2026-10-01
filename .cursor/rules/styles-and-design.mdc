@@ -1,0 +1,12 @@
+---
+description: Tailwind exclusivo, paleta y tipografía del portafolio
+globs: "**/*.{tsx,ts,css}"
+alwaysApply: false
+---
+
+# Estilos y diseño
+
+- Solo clases utilitarias de Tailwind. No crear `.css` / `.module.css` extra.
+- Prohibido `style={}` salvo valores dinámicos de runtime indispensables para animaciones.
+- Paleta (`tailwind.config.ts`): `primary` (#0C0D0E), `secondary` (#3DD964), `white`, `black`, `gray` (#8C8C8C). Sin colores arbitrarios sin justificación.
+- Tipografía: `--font-sf` montada en `src/app/layout.tsx`. Usar `font-sans`.

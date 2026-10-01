@@ -1,0 +1,12 @@
+---
+description: Stack, dependencias permitidas y TypeScript estricto
+alwaysApply: true
+---
+
+# Stack y arquitectura
+
+- Base: Next.js 14 App Router, React 18, TypeScript 5, Tailwind CSS 3.4.
+- Dependencias permitidas: `lenis`, `motion` / `framer-motion`, `@headlessui/react`, `@heroicons/react`, `@vercel/analytics`.
+- Prohibido instalar o sugerir paquetes nuevos sin orden explícita.
+- TypeScript estricto. Props e interfaces fuertemente tipadas. Prohibido `any`.
+- Server Components por defecto. `'use client'` solo con hooks (`useState`, `useEffect`), interactividad o APIs de Framer Motion / Lenis.

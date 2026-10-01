@@ -1,0 +1,10 @@
+---
+description: Eficiencia de contexto y formato de respuesta del agente
+alwaysApply: true
+---
+
+# Tokens y formato de salida
+
+- Si el usuario adjunta `@archivo`, asume contexto completo. No leas ni busques archivos extra.
+- Entrega el código modificado o bloques relevantes. Sin prosa introductoria, teoría ni conclusiones.
+- Cambio puntual en un componente grande: solo la función, hook o JSX afectado, con comentarios de inserción precisos.
