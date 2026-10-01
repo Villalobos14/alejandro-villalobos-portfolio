@@ -8,6 +8,7 @@ import HomeDock from "@/components/home/HomeDock";
 import { CurtainProvider } from "@/components/curtain/CurtainProvider";
 import { LightboxProvider } from "@/components/media/LightboxProvider";
 import HashScroll from "@/components/ui/HashScroll";
+import { siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
 
 const sanFrancisco = localFont(
   {
@@ -33,8 +34,23 @@ const sanFrancisco = localFont(
 )
 
 export const metadata: Metadata = {
-  title: "Alejandro Villalobos | UX/UI Designer",
-  description: "UX designer with over 4 years of experience, based in México. Currently open to work.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName,
+    title: siteTitle,
+    description: siteDescription,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import Link from "next/link";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import Accordion, { type AccordionItem } from "@/components/about/Accordion";
@@ -16,11 +17,12 @@ import {
   skillGroups,
 } from "@/lib/professional";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About · Professional | Alejandro Villalobos",
   description:
     "Product Designer working across design, software engineering, and UX research.",
-};
+  path: "/about",
+});
 
 const linkStyles =
   "text-label text-gray transition-colors duration-300 fine:hover:text-secondary focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
