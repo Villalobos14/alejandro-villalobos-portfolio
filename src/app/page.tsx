@@ -1,23 +1,22 @@
-import About from "@/components/About";
-import Experience from "@/components/Experience";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import HomeNarrative from "@/components/home/HomeNarrative";
+import { HomeNarrativeProvider } from "@/components/home/NarrativeProvider";
 import Projects from "@/components/Projects";
-import Skills from "@/components/Skills";
 import SmoothSection from "@/components/SmoothSection";
 
+export const metadata: Metadata = {
+  title: "Work | Alejandro Villalobos",
+  description: "Selected product design and UX work by Alejandro Villalobos.",
+};
+
 export default function Home() {
- return (
-    <>
-      <Header />
-      <Hero/>
-      <Projects/>
-      <SmoothSection/>
-      <Experience/>
-      <Skills/>
-      <About/>
-      <Footer/>
-    </>
+  return (
+    <HomeNarrativeProvider>
+      <Hero />
+      <Projects />
+      <SmoothSection />
+      <HomeNarrative />
+    </HomeNarrativeProvider>
   );
 }

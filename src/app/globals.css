@@ -2,7 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: 12 13 14;
+  --ink: 255 255 255;
+  --ink-muted: 140 140 140;
+  --border: 140 140 140;
+  --accent: 61 217 100;
+  --site-header-h: 0px;
+  --page-gutter: clamp(16px, 3vw, 64px);
+  --bottom-nav-height: 0px;
+}
+
+body {
+  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 32px);
+}
+
+section {
+  scroll-margin-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 32px);
+}
+
 ::selection {
   background-color: #000000;
   color: #fff;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+[data-programmatic-focus]:focus {
+  outline: none;
+}
+
+html.site-cursor-on,
+html.site-cursor-on *,
+html.site-cursor-on *::before,
+html.site-cursor-on *::after,
+html.site-cursor-on a,
+html.site-cursor-on a:link,
+html.site-cursor-on a:visited,
+html.site-cursor-on a:hover,
+html.site-cursor-on a:active,
+html.site-cursor-on a:focus,
+html.site-cursor-on a:focus-visible,
+html.site-cursor-on button,
+html.site-cursor-on button:hover,
+html.site-cursor-on [role="button"],
+html.site-cursor-on img,
+html.site-cursor-on svg,
+html.site-cursor-on svg *,
+html.site-cursor-on [data-site-header],
+html.site-cursor-on [data-site-header] * {
+  cursor: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")
+      0 0,
+    none !important;
+}
+
+html.site-cursor-on [data-site-header] a *,
+html.site-cursor-on [data-site-header] button * {
+  pointer-events: none;
+}
+
+.site-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.1s ease-out;
+}
+
+.site-cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+.site-cursor[data-reduced-motion="true"] {
+  transition: opacity 0.3s ease-out;
+}
+
+.site-cursor-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding-inline: 0;
+  border-radius: 9999px;
+  background-color: rgb(var(--accent));
+  color: rgb(var(--bg));
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  transition: height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.site-cursor[data-expanded="true"] .site-cursor-pill {
+  height: 2rem;
+  padding-inline: 0.75rem;
+}
+
+.site-cursor-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.3s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
+}
+
+.site-cursor[data-expanded="true"] .site-cursor-label {
+  max-width: 16rem;
+  opacity: 1;
+  margin-inline: 0.15rem;
 }

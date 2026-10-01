@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import localFont from 'next/font/local'
 import "./globals.css";
 import ReactLenis from 'lenis/react'
+import CustomCursor from "@/components/CustomCursor";
+import Footer from "@/components/Footer";
+import HomeDock from "@/components/home/HomeDock";
+import { CurtainProvider } from "@/components/curtain/CurtainProvider";
+import { LightboxProvider } from "@/components/media/LightboxProvider";
+import HashScroll from "@/components/ui/HashScroll";
 
 const sanFrancisco = localFont(
   {
@@ -41,9 +47,19 @@ export default function RootLayout({
       <body
         className={`${sanFrancisco.className} antialiased bg-primary`}
       >
-        <ReactLenis root options={{ lerp: 0.5, duration: 0.8 }}>
-          {children}
-        </ReactLenis>
+        <CurtainProvider>
+          <CustomCursor />
+          <ReactLenis root options={{ lerp: 0.5, duration: 0.8, syncTouch: false }}>
+            <LightboxProvider>
+              <HashScroll />
+              <HomeDock />
+              <div className="flex w-full min-w-0 flex-col gap-stack">
+                {children}
+              </div>
+              <Footer />
+            </LightboxProvider>
+          </ReactLenis>
+        </CurtainProvider>
       </body>
     </html>
   );

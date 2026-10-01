@@ -1,20 +1,11 @@
-'use client'
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import Works from '@/components/Works'
-import React, { useEffect } from 'react'
+import type { Metadata } from "next";
+import Works from "@/components/Works";
 
-export default function Page() {
+export const metadata: Metadata = {
+  title: "Projects | Alejandro Villalobos",
+  description: "Selected product design and UX work by Alejandro Villalobos.",
+};
 
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[])
-  
-  return (
-    <>
-      <Header />
-      <Works />
-      <Footer />
-    </>
-  )
+export default function ProjectsPage() {
+  return <Works />;
 }

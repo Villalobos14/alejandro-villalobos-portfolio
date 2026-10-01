@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function About() {
   return (
-    <section className='h-full p-8 md:p-20 text-white' id='about'>
-      <h2 className='text-4xl font-medium '>About me</h2>
+    <section className="h-full w-full px-[var(--page-gutter)] py-8 text-white md:py-20">
+      <h1 className='text-4xl font-medium '>About me</h1>
       <article className='w-full flex-col md:flex-row flex gap-x-8 gap-y-4 md:gap-y-0 mt-12 '>
         <div className='w-full md:w-1/2 h-[400px]  md:mt-8 relative rounded-2xl overflow-hidden group cursor-pointer'>
           <Image

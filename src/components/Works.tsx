@@ -10,7 +10,7 @@ import Heading from "../components/ui/Heading";
 
 export default function Works() {
   return (
-    <main className="p-5 md:p-10 xl:p-20 2xl:p-28 bg-primary" >
+    <main className="w-full bg-primary px-[var(--page-gutter)] py-5 md:py-10">
       <section
         className="overflow-hidden"
       >
@@ -18,8 +18,7 @@ export default function Works() {
         <div className="mt-10 grid grid-cols-1 gap-16 gap-y-10 md:grid-cols-12 text-white">
           <div className=" col-span-1 md:col-span-12">
             <Projects
-              //link="https://www.figma.com/design/YsON9Kz2hETJjlcWd4i8UZ/hackton2025?node-id=0-1&t=IxgNt15n0ps7gVRH-1"
-              link="https://www.figma.com/deck/80aZQZ0uXw5yU0PMTWxKUh"
+              link="/work/mlstoolbox"
               img={Monogatari}
               alt="Ominio Case Study"
               name="Ominio"
