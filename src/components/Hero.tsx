@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative -mt-[var(--site-header-h)] flex min-h-[100dvh] w-full flex-col px-[var(--page-gutter)] pb-[clamp(2rem,6vh,4.5rem)] pt-[calc(var(--site-header-h)+1rem)] text-white"
+      className="relative -mt-[var(--site-header-h)] flex min-h-[100dvh] w-full flex-col px-[var(--page-gutter)] pb-[calc(var(--dock-clearance)+clamp(0.5rem,3vh,2rem))] pt-[calc(var(--site-header-h)+1rem)] text-white"
     >
       <HeroField />
 

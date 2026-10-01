@@ -11,14 +11,23 @@
   --site-header-h: 0px;
   --page-gutter: clamp(16px, 3vw, 64px);
   --bottom-nav-height: 0px;
+  /*
+   * How much room the fixed dock needs at the bottom of the viewport: its
+   * measured height, the offset it floats at, and a gap. Anything anchored to
+   * the bottom of a viewport-height box subtracts this so the dock never
+   * covers it.
+   */
+  --dock-clearance: calc(
+    var(--bottom-nav-height) + max(1.25rem, env(safe-area-inset-bottom) + 0.75rem) + 1rem
+  );
 }
 
 body {
-  padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 32px);
+  padding-bottom: var(--dock-clearance);
 }
 
 section {
-  scroll-margin-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 32px);
+  scroll-margin-bottom: var(--dock-clearance);
 }
 
 ::selection {

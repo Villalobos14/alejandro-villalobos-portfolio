@@ -30,7 +30,6 @@ export default function HomeDock() {
   const [section, setSection] = useState<DockSection>("home");
   const [indicator, setIndicator] = useState({ x: 0, width: 0 });
   const [dockHidden, setDockHidden] = useState(false);
-  const hideOnScroll = pathname.startsWith("/work/");
   const isHome = pathname === "/";
   const isWorkRoute = pathname === "/projects" || pathname.startsWith("/work");
   const active: DockItem | null = isHome ? (section === "work" ? "work" : "home") : isWorkRoute ? "work" : null;
@@ -112,11 +111,6 @@ export default function HomeDock() {
   }, []);
 
   useEffect(() => {
-    if (!hideOnScroll) {
-      setDockHidden(false);
-      return;
-    }
-
     let last = window.scrollY;
 
     const update = (y: number) => {
@@ -148,7 +142,7 @@ export default function HomeDock() {
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", onScroll);
-  }, [hideOnScroll, lenis]);
+  }, [lenis]);
 
   useLayoutEffect(() => {
     const list = listRef.current;
