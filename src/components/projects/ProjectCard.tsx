@@ -57,12 +57,15 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
       </div>
 
       <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-primary lg:aspect-auto lg:h-auto lg:w-[60%]">
+        {/*
+          The card already states the index and the tags in the column to the
+          left, so the placeholder carries only the glyph field and the status
+          line. Case-study slots stand alone and do pass them.
+        */}
         <Media
           source={project.media}
           sizes="(max-width: 1024px) 100vw, 60vw"
           placeholder={{
-            index: project.id,
-            tags: project.tags,
             footer: "Case visuals in progress",
             seed: project.href,
           }}
