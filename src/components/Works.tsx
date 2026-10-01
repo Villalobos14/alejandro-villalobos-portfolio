@@ -20,7 +20,7 @@ export default function Works() {
             <Projects
               link="/work/mlstoolbox"
               img={Monogatari}
-              alt="Two Monogatari manga-reader screens: a light landing page reading \"Discover unique stories anytime\" over manga panel art, and a dark catalogue page with a best-sellers row of cover thumbnails"
+              alt="Two Monogatari manga-reader screens: a light landing page reading “Discover unique stories anytime” over manga panel art, and a dark catalogue page with a best-sellers row of cover thumbnails"
               name="Ominio"
               description="Elearning platform"
             />
@@ -29,7 +29,7 @@ export default function Works() {
             <Projects
               link="https://www.figma.com/design/tKdLRGQEh6xPFcYLdROPlT/Ominio-Alejandro-VIllalobos?node-id=2266-18678&t=2W4b1l5b9l3EhVhb-1"
               img={ominio}
-              alt="Three Ominio phone screens: a green splash screen, an \"Interview Ready\" page offering 5 to 30 minute mock interview sessions, and a home screen with a level badge, a 21-day streak and weekly progress figures"
+              alt="Three Ominio phone screens: a green splash screen, an “Interview Ready” page offering 5 to 30 minute mock interview sessions, and a home screen with a level badge, a 21-day streak and weekly progress figures"
               name="Ominio"
               description="E-Learning Platform - Gamification - AI"
             />
@@ -38,7 +38,7 @@ export default function Works() {
             <Projects
               link="https://www.figma.com/design/areF0JOlZ4xTkJ9c4bjhVJ/ANDANAC-ALEJANDRO-VILLALOBOS?node-id=0-1&t=YonSVdhgmf8IbvOh-1"
               img={nissan}
-              alt="Andanac web page for Nissan headed \"Nissan presenta Xtremer\" over a close-up of an X-Trail headlight, with a banner reading \"16 años siendo líderes en la industria automotriz\""
+              alt="Andanac web page for Nissan headed “Nissan presenta Xtremer” over a close-up of an X-Trail headlight, with a banner reading “16 años siendo líderes en la industria automotriz”"
               name="Andanac"
               description="Intranet redesign for Nissan"
             />
@@ -47,7 +47,7 @@ export default function Works() {
             <Projects
               link="https://www.behance.net/gallery/217217671/GOOD-ACTIONS"
               img={Goodactions}
-              alt="Two Good Actions screens: a landing page headed \"Transforming education with GoodActions\" with a sign-up-with-wallet button, and a dark profile page showing a token wallet balance and a transaction list"
+              alt="Two Good Actions screens: a landing page headed “Transforming education with GoodActions” with a sign-up-with-wallet button, and a dark profile page showing a token wallet balance and a transaction list"
               name="Good Actions"
               description="Web3 / Blockchain Platform - Gamification- Education"
             />
