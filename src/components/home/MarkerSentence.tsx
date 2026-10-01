@@ -9,6 +9,14 @@ const REVEAL_MS = 700;
 const MARK_MS = 560;
 const MARK_STAGGER_MS = 150;
 
+/**
+ * How much of the block has to be on screen before it reveals. Raise these to
+ * hold the reveal longer, lower them to start it sooner. The viewport share
+ * caps the block share, so a sentence taller than the screen still fires.
+ */
+const REVEAL_AT_BLOCK_SHARE = 0.5;
+const REVEAL_AT_VIEWPORT_SHARE = 0.35;
+
 interface LineBox {
   left: number;
   top: number;
@@ -93,7 +101,10 @@ export function MarkerSentence({
       const rect = section.getBoundingClientRect();
       const viewport = window.innerHeight;
       const visible = Math.min(rect.bottom, viewport) - Math.max(rect.top, 0);
-      const enough = Math.min(rect.height * 0.35, viewport * 0.25);
+      const enough = Math.min(
+        rect.height * REVEAL_AT_BLOCK_SHARE,
+        viewport * REVEAL_AT_VIEWPORT_SHARE,
+      );
 
       if (visible >= enough) play();
     };
