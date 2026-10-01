@@ -10,7 +10,7 @@ import Heading from "../components/ui/Heading";
 
 export default function Works() {
   return (
-    <main className="w-full bg-primary px-[var(--page-gutter)] py-5 md:py-10">
+    <div className="w-full bg-primary px-[var(--page-gutter)] py-5 md:py-10">
       <section
         className="overflow-hidden"
       >
@@ -81,6 +81,6 @@ export default function Works() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

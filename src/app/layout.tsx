@@ -63,15 +63,25 @@ export default function RootLayout({
       <body
         className={`${sanFrancisco.className} antialiased bg-primary`}
       >
+        <a
+          href="#main-content"
+          className="sr-only rounded-full bg-secondary px-5 py-3 text-label text-black focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Skip to content
+        </a>
         <CurtainProvider>
           <CustomCursor />
           <ReactLenis root options={{ lerp: 0.5, duration: 0.8, syncTouch: false }}>
             <LightboxProvider>
               <HashScroll />
               <HomeDock />
-              <div className="flex w-full min-w-0 flex-col gap-stack">
+              <main
+                id="main-content"
+                tabIndex={-1}
+                className="flex w-full min-w-0 flex-col gap-stack focus:outline-none"
+              >
                 {children}
-              </div>
+              </main>
               <Footer />
             </LightboxProvider>
           </ReactLenis>
