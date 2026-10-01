@@ -47,11 +47,24 @@ const images = [
 
 const staticImages = images.slice(0, 10);
 
+const headingId = "visual-explorations";
+
 export default function SmoothSection() {
   const showParallax = useDesktopParallax();
 
   return (
-    <section aria-label="Galería visual" className="flex w-full flex-col items-center">
+    <section
+      aria-labelledby={headingId}
+      className="flex w-full flex-col items-center"
+    >
+      {/*
+        The gallery sat between two h2 sections without a heading of its own,
+        so jumping by heading skipped straight past it. The heading is hidden
+        rather than drawn, since the section is meant to read as pure image.
+      */}
+      <h2 id={headingId} className="sr-only">
+        Visual explorations
+      </h2>
       {showParallax ? <ParallaxGallery /> : <StaticGallery />}
     </section>
   );
