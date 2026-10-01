@@ -82,11 +82,20 @@ export function MarkerSentence({
       window.setTimeout(() => setPhase("marked"), REVEAL_MS);
     };
 
+    /**
+     * Waiting for the block's centre to climb to 65% of the viewport meant a
+     * tall sentence sat on screen at opacity 0 for most of a screen's worth of
+     * scrolling. Going by how much of it is actually visible instead reveals
+     * it as it arrives, and holds for a block either shorter or taller than
+     * the viewport.
+     */
     const ready = () => {
       const rect = section.getBoundingClientRect();
-      const center = rect.top + rect.height / 2;
+      const viewport = window.innerHeight;
+      const visible = Math.min(rect.bottom, viewport) - Math.max(rect.top, 0);
+      const enough = Math.min(rect.height * 0.35, viewport * 0.25);
 
-      if (rect.bottom > 0 && center <= window.innerHeight * 0.65) play();
+      if (visible >= enough) play();
     };
 
     ready();
