@@ -42,6 +42,7 @@ export default function Media({
       fill
       sizes={sizes}
       priority={priority}
+      unoptimized={source.src.endsWith(".svg")}
       className={className}
     />
   );

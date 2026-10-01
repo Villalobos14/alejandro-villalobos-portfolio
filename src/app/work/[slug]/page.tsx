@@ -28,7 +28,9 @@ export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.summary || frontmatter.title,
-      images: frontmatter.cover ? [{ url: frontmatter.cover }] : undefined,
+      images: frontmatter.cover
+        ? [{ url: frontmatter.cover.src, alt: frontmatter.cover.alt }]
+        : undefined,
     },
   };
 }

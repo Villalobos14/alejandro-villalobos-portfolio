@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { MediaSource } from "@/components/media/Media";
 import { Children, isValidElement, type ReactNode } from "react";
 
 interface CompareProps {
@@ -9,29 +10,28 @@ interface CompareProps {
 interface CompareOptionProps {
   title: string;
   outcome?: string;
-  src?: string;
-  alt?: string;
+  /** Omit until the asset exists; `src` cannot arrive without its `alt`. */
+  media?: MediaSource;
   children?: ReactNode;
 }
 
 function CompareOption({
   title,
   outcome,
-  src,
-  alt = "",
+  media,
   children,
 }: CompareOptionProps) {
   return (
     <div className="flex flex-col gap-scale rounded-2xl border border-gray/40 p-scale">
       <h4 className="text-label text-white">{title}</h4>
-      {src ? (
+      {media ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
           <Image
-            src={src}
-            alt={alt}
+            src={media.src}
+            alt={media.alt}
             fill
             sizes="(max-width: 768px) 100vw, 40vw"
-            unoptimized={src.endsWith(".svg")}
+            unoptimized={media.src.endsWith(".svg")}
             className="object-cover"
           />
         </div>

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import type { MediaSource } from "@/components/media/Media";
 
 export const CASE_STUDY_TYPES = ["Concept", "Contract", "Shipped"] as const;
 
@@ -16,7 +17,8 @@ export interface CaseStudyFrontmatter {
   timeline: string;
   team?: string;
   skills: string[];
-  cover: string;
+  /** Absent until the asset exists; `coverAlt` is required alongside it. */
+  cover?: MediaSource;
   summary: string;
   next?: string;
 }
@@ -60,7 +62,7 @@ function fail(source: string, message: string): never {
 
 function requireString(
   data: Record<string, unknown>,
-  field: keyof CaseStudyFrontmatter,
+  field: string,
   source: string,
 ): string {
   const value = data[field];
@@ -78,7 +80,7 @@ function requireString(
 
 function optionalString(
   data: Record<string, unknown>,
-  field: keyof CaseStudyFrontmatter,
+  field: string,
   source: string,
 ): string | undefined {
   if (!(field in data) || data[field] === undefined || data[field] === null) {
@@ -93,7 +95,7 @@ function optionalString(
     return fail(source, `"${field}" must be a string when provided`);
   }
 
-  const value = data[field].trim();
+  const value = (data[field] as string).trim();
 
   return value === "" ? undefined : value;
 }
@@ -118,6 +120,16 @@ function parseFrontmatter(
     fail(source, '"skills" is required and must be a non-empty string array');
   }
 
+  const coverSrc = optionalString(data, "cover", source);
+  const coverAlt = optionalString(data, "coverAlt", source);
+
+  if (coverSrc && !coverAlt) {
+    fail(
+      source,
+      '"coverAlt" is required whenever "cover" is set; describe what the cover shows, or drop the cover until it exists',
+    );
+  }
+
   return {
     slug: requireString(data, "slug", source),
     title: requireString(data, "title", source),
@@ -128,7 +140,7 @@ function parseFrontmatter(
     timeline: optionalString(data, "timeline", source) ?? "",
     team: optionalString(data, "team", source),
     skills: skills as string[],
-    cover: optionalString(data, "cover", source) ?? "",
+    cover: coverSrc ? { src: coverSrc, alt: coverAlt as string } : undefined,
     summary: optionalString(data, "summary", source) ?? "",
     next: optionalString(data, "next", source),
   };

@@ -31,7 +31,7 @@ export const featuredProjects: FeaturedProject[] = [
     tags: ["E-Learning Platform", "Gamification", "AI"],
     media: {
       src: "/ominiocoer.png",
-      alt: "Ominio course dashboard on a laptop, showing a lesson progress bar, an XP counter and a list of unlocked modules",
+      alt: "Three Ominio phone screens: a green splash screen, an \"Interview Ready\" page offering 5 to 30 minute mock interview sessions, and a home screen with a level badge, a 21-day streak and weekly progress figures",
     },
     href: "/work/ominio",
     linkLabel: "Read case study",
@@ -42,7 +42,7 @@ export const featuredProjects: FeaturedProject[] = [
     tags: ["Intranet redesign", "Nissan", "Web"],
     media: {
       src: "/nissan.png",
-      alt: "Andanac dealer intranet home screen for Nissan, with a vehicle inventory table and a sidebar of monthly sales reports",
+      alt: "Andanac web page for Nissan headed \"Nissan presenta Xtremer\" over a close-up of an X-Trail headlight, with a banner reading \"16 años siendo líderes en la industria automotriz\"",
     },
     href: "/work/andanac",
     linkLabel: "Read case study",

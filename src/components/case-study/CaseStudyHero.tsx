@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Media from "@/components/media/Media";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import MaskedLines from "@/components/ui/MaskedLines";
@@ -62,23 +62,22 @@ export default function CaseStudyHero({ frontmatter }: CaseStudyHeroProps) {
         </dl>
       </Reveal>
 
-      {frontmatter.cover ? (
-        <Reveal>
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gray/40">
-            <Image
-              src={frontmatter.cover}
-              alt=""
-              fill
-              sizes="(max-width: 1024px) 100vw, 70vw"
-              priority
-              unoptimized={frontmatter.cover.endsWith(".svg")}
-              className="object-cover"
-            />
-          </div>
-        </Reveal>
-      ) : (
-        <div className="aspect-[16/9] w-full rounded-2xl border border-gray/40" />
-      )}
+      <Reveal>
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gray/40">
+          <Media
+            source={frontmatter.cover}
+            sizes="(max-width: 1024px) 100vw, 70vw"
+            priority
+            placeholder={{
+              index: frontmatter.type,
+              title: `${frontmatter.title} cover`,
+              detail: frontmatter.summary || undefined,
+              footer: "Cover in progress",
+              seed: frontmatter.slug,
+            }}
+          />
+        </div>
+      </Reveal>
     </header>
   );
 }
