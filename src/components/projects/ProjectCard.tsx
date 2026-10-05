@@ -14,6 +14,8 @@ const linkStyles =
 export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
   return (
     <article
+      data-pet-surface="card"
+      data-pet-surface-id={`project-${project.id}`}
       className={`flex w-full flex-col overflow-hidden rounded-2xl border border-gray/40 bg-primary lg:flex-row ${
         isStacked
           ? "h-[min(40rem,calc(100svh-var(--dock-clearance)-4rem))]"

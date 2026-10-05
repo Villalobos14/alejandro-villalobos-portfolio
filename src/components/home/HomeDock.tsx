@@ -194,6 +194,8 @@ export default function HomeDock() {
     <nav
       ref={dockRef}
       aria-label="Primary"
+      data-pet-surface="dock"
+      data-pet-surface-id="main-dock"
       className={`fixed left-1/2 z-40 w-max max-w-[calc(100%-2rem)] rounded-full border border-gray/40 bg-primary px-1 py-1 transition-transform duration-300 motion-reduce:transition-none ${
         dockHidden ? "pointer-events-none" : ""
       }`}

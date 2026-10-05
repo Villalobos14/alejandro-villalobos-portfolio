@@ -1,5 +1,7 @@
+import { Fragment } from "react";
 import MaskedLines from "./ui/MaskedLines";
 import HeroField from "./hero/HeroField";
+import PetGlyphOrigin from "./pet-world/PetGlyphOrigin";
 import { profile } from "@/lib/professional";
 
 /*
@@ -28,7 +30,10 @@ export default function Hero() {
             <span key="name" className="font-medium">
               Alejandro Villalobos
             </span>,
-            "Product Designer creating",
+            // Calcifer starts life as the "o". The text is still "Product".
+            <Fragment key="role">
+              Pr<PetGlyphOrigin petId="calcifer">o</PetGlyphOrigin>duct Designer creating
+            </Fragment>,
             "AI products for people.",
           ]}
           className="w-full text-[clamp(1.55rem,7vw,9rem)] font-normal leading-[0.92] tracking-tight"
