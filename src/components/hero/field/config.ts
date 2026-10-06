@@ -505,6 +505,12 @@ export const HERO_FIELD_CONFIG = {
   relief: { size: 0.05, alpha: 0.12, step: 0.07 },
   /** Organisms dim slightly behind the headline; the opaque text does the rest. */
   veil: 0.9,
+  /**
+   * Small copy marked `data-field-quiet` is thinner than the headline, so the
+   * field eases further down around its lines: to `floor` on them, back to
+   * full within `reach` px. Glyphs thin out; nothing is covered.
+   */
+  quiet: { floor: 0.3, reach: 36 },
   /** Path ends are pushed this many radii past the edge, so a creature is gone before it reappears. */
   offscreen: 1.6,
   /**

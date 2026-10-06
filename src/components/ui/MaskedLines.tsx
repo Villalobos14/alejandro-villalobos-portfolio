@@ -16,20 +16,28 @@ interface MaskedLinesProps {
   as?: MaskedTag;
   className?: string;
   lineClassName?: string;
+  /**
+   * Overrides the mask's bleed. Neighbouring masks' negative margins collapse
+   * rather than add, so lines sit leading + 2 × padding − the larger margin apart.
+   */
+  maskClassName?: string;
 }
 
 interface MaskedLineProps {
   children: ReactNode;
   delayMs: number;
   className: string;
+  maskClassName: string;
 }
+
+const DEFAULT_MASK = "py-[0.16em] -my-[0.16em]";
 
 /**
  * The mask keeps 0.16em of breathing room on both sides so descenders and accents
  * of the SF faces never get cut, and pulls it back with a negative margin so the
  * surrounding rhythm stays identical.
  */
-function MaskedLine({ children, delayMs, className }: MaskedLineProps) {
+function MaskedLine({ children, delayMs, className, maskClassName }: MaskedLineProps) {
   const lineRef = useRef<HTMLSpanElement>(null);
 
   useLayoutEffect(() => {
@@ -54,7 +62,7 @@ function MaskedLine({ children, delayMs, className }: MaskedLineProps) {
   }, [delayMs]);
 
   return (
-    <span className="block overflow-hidden py-[0.16em] -my-[0.16em]">
+    <span className={`block overflow-hidden ${maskClassName}`}>
       <span ref={lineRef} className={`block ${className}`}>
         {children}
       </span>
@@ -67,6 +75,7 @@ export default function MaskedLines({
   as: Tag = "h2",
   className = "",
   lineClassName = "",
+  maskClassName = DEFAULT_MASK,
 }: MaskedLinesProps) {
   return (
     <Tag className={className}>
@@ -75,6 +84,7 @@ export default function MaskedLines({
           key={index}
           delayMs={index * LINE_STAGGER_MS}
           className={lineClassName}
+          maskClassName={maskClassName}
         >
           {line}
         </MaskedLine>

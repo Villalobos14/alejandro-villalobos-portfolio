@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { MediaSource } from "@/components/media/Media";
+import type { ImageSource } from "@/components/media/Media";
 
 export const CASE_STUDY_TYPES = ["Concept", "Contract", "Shipped"] as const;
 
@@ -18,7 +18,7 @@ export interface CaseStudyFrontmatter {
   team?: string;
   skills: string[];
   /** Absent until the asset exists; `coverAlt` is required alongside it. */
-  cover?: MediaSource;
+  cover?: ImageSource;
   summary: string;
   next?: string;
 }
@@ -140,7 +140,9 @@ function parseFrontmatter(
     timeline: optionalString(data, "timeline", source) ?? "",
     team: optionalString(data, "team", source),
     skills: skills as string[],
-    cover: coverSrc ? { src: coverSrc, alt: coverAlt as string } : undefined,
+    cover: coverSrc
+      ? { type: "image", src: coverSrc, alt: coverAlt as string }
+      : undefined,
     summary: optionalString(data, "summary", source) ?? "",
     next: optionalString(data, "next", source),
   };

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { MediaSource } from "@/components/media/Media";
+import type { ImageSource } from "@/components/media/Media";
 import { Children, isValidElement, type ReactNode } from "react";
 
 interface CompareProps {
@@ -11,7 +11,7 @@ interface CompareOptionProps {
   title: string;
   outcome?: string;
   /** Omit until the asset exists; `src` cannot arrive without its `alt`. */
-  media?: MediaSource;
+  media?: ImageSource;
   children?: ReactNode;
 }
 

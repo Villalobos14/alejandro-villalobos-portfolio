@@ -2,15 +2,30 @@ import Image from "next/image";
 import MediaPlaceholder, {
   type MediaPlaceholderProps,
 } from "./MediaPlaceholder";
+import VideoMedia from "./VideoMedia";
 
 /**
  * An asset can only enter the site paired with its own alt text. Decorative
  * assets pass `alt: ""` explicitly, so the choice is always recorded.
  */
-export interface MediaSource {
+export interface ImageSource {
+  type: "image";
   src: string;
   alt: string;
 }
+
+/**
+ * Always muted and looping, never with controls, so a video can only ever be
+ * a moving cover. `poster` is what reduced-motion visitors see instead.
+ */
+export interface VideoSource {
+  type: "video";
+  src: string;
+  poster?: string;
+  alt: string;
+}
+
+export type MediaSource = ImageSource | VideoSource;
 
 interface MediaProps {
   /** Omit while the asset does not exist yet. */
@@ -34,6 +49,10 @@ export default function Media({
   className = "object-cover",
 }: MediaProps) {
   if (!source) return <MediaPlaceholder {...placeholder} />;
+
+  if (source.type === "video") {
+    return <VideoMedia source={source} className={className} />;
+  }
 
   return (
     <Image

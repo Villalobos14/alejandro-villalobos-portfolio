@@ -1,6 +1,6 @@
 import { createAmbient, drawAmbient, type AmbientFrame } from "./ambient";
 import { HERO_FIELD_CONFIG as CONFIG } from "./config";
-import { createZones, measureZones, textFade, verticalMap } from "./layout";
+import { createZones, measureZones, quietFade, textFade, verticalMap } from "./layout";
 import { clamp } from "./math";
 import { createOrganism, drawOrganism, stepGlyphs, type FrameEnv } from "./organism";
 import { stepTimeline } from "./timeline";
@@ -36,7 +36,7 @@ export function createGlyphField(canvas: HTMLCanvasElement, mode: FieldMode): Gl
   const organisms = entities.map((entity, index) => createOrganism(entity, index, 17 + index * 1009, config));
   const ambient = createAmbient(config.ambient);
   const zones = createZones();
-  const fade = (x: number, y: number) => textFade(zones, x, y, 0.07);
+  const fade = (x: number, y: number) => textFade(zones, x, y, 0.07) * quietFade(zones, x, y);
   const pointer = { x: 0, y: 0, targetX: 0, targetY: 0, cx: -9999, cy: -9999, last: 0 };
 
   const env: FrameEnv = {
@@ -53,7 +53,7 @@ export function createGlyphField(canvas: HTMLCanvasElement, mode: FieldMode): Gl
     pointer: false,
     pointerX: -9999,
     pointerY: -9999,
-    veil: (x, y) => textFade(zones, x, y, CONFIG.veil),
+    veil: (x, y) => textFade(zones, x, y, CONFIG.veil) * quietFade(zones, x, y),
     horizon: 0.46,
   };
 
