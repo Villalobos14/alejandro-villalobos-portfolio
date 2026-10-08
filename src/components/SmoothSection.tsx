@@ -55,12 +55,14 @@ export default function SmoothSection() {
   return (
     <section
       aria-labelledby={headingId}
-      className="flex w-full flex-col items-center"
+      className="hidden w-full flex-col items-center md:flex"
     >
       {/*
         The gallery sat between two h2 sections without a heading of its own,
         so jumping by heading skipped straight past it. The heading is hidden
         rather than drawn, since the section is meant to read as pure image.
+        Below md the whole section is display:none: the screenshots are
+        supplementary and too small to read there.
       */}
       <h2 id={headingId} className="sr-only">
         Visual explorations

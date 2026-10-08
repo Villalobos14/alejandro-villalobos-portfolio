@@ -221,44 +221,41 @@ function CollageFrame({
   );
 }
 
-function MilestoneCopy({ item, reduced }: { item: TimelineItem; reduced: boolean }) {
-  const [shown, setShown] = useState(item);
-  const [visible, setVisible] = useState(true);
-  const timer = useRef(0);
-
-  useEffect(() => {
-    if (item.id === shown.id) return;
-
-    setVisible(false);
-    window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => {
-      setShown(item);
-    }, reduced ? 0 : 180);
-
-    return () => window.clearTimeout(timer.current);
-  }, [item, reduced, shown.id]);
-
-  useEffect(() => {
-    if (shown.id !== item.id) return;
-
-    const frame = window.requestAnimationFrame(() => setVisible(true));
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [item.id, shown.id]);
-
+function MilestoneCopy({
+  item,
+  reduced,
+  lift = true,
+}: {
+  item: TimelineItem;
+  reduced: boolean;
+  lift?: boolean;
+}) {
+  // Every chapter shares one grid cell, so the cell is always as tall as the
+  // tallest chapter at the current width (resize and font loads included).
   return (
-    <div
-      aria-live="polite"
-      className="max-w-[400px]"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translate3d(0, 0, 0)" : "translate3d(0, 10px, 0)",
-        transition: reduced ? "none" : "opacity 220ms ease, transform 220ms ease",
-      }}
-    >
-      <p className="text-body uppercase tracking-[0.18em] text-gray">{shown.shortLabel}</p>
-      <p className="mt-2 text-2xl font-medium leading-tight text-white">{shown.title}</p>
-      <p className="mt-2 line-clamp-3 text-body-lg text-gray">{shown.description}</p>
+    <div aria-live="polite" className="grid max-w-[400px]">
+      {items.map((entry) => {
+        const isActive = entry.id === item.id;
+
+        return (
+          <div
+            key={entry.id}
+            aria-hidden={isActive ? undefined : true}
+            className="col-start-1 row-start-1"
+            style={{
+              opacity: isActive ? 1 : 0,
+              transform: isActive || !lift ? "translate3d(0, 0, 0)" : "translate3d(0, 10px, 0)",
+              pointerEvents: isActive ? undefined : "none",
+              userSelect: isActive ? undefined : "none",
+              transition: reduced ? "none" : "opacity 220ms ease, transform 220ms ease",
+            }}
+          >
+            <p className="text-body uppercase tracking-[0.18em] text-gray">{entry.shortLabel}</p>
+            <p className="mt-2 text-2xl font-medium leading-tight text-white">{entry.title}</p>
+            <p className="mt-2 text-body-lg text-gray">{entry.description}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -269,15 +266,27 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
   const pathRef = useRef<SVGPathElement>(null);
   const collageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
   const zonesRef = useRef({ titleBottom: 0, limitBottom: 0, width: 0, xs: [] as number[] });
   const activeXRef = useRef(0);
   const pointerLockRef = useRef(0);
   const animRef = useRef<{ from: number; to: number; start: number } | null>(null);
   const frameRef = useRef(0);
+  const outgoingTimerRef = useRef(0);
   const [active, setActive] = useState(0);
   const [outgoingId, setOutgoingId] = useState<string | null>(null);
   const [boxWidth, setBoxWidth] = useState(0);
   const activeRef = useRef(0);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(outgoingTimerRef.current);
+      if (frameRef.current) window.cancelAnimationFrame(frameRef.current);
+      frameRef.current = 0;
+      animRef.current = null;
+    },
+    [],
+  );
 
   const draw = useCallback((xPos: number) => {
     const curve = curveRef.current;
@@ -381,7 +390,8 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
 
       if (previous) {
         setOutgoingId(previous.id);
-        window.setTimeout(() => {
+        window.clearTimeout(outgoingTimerRef.current);
+        outgoingTimerRef.current = window.setTimeout(() => {
           setOutgoingId((currentId) => (currentId === previous.id ? null : currentId));
         }, reduced ? 0 : 420);
       }
@@ -439,8 +449,20 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(curve);
+    if (sceneRef.current) observer.observe(sceneRef.current);
+    if (titleRef.current) observer.observe(titleRef.current);
+    if (collage) observer.observe(collage);
+    if (copyRef.current) observer.observe(copyRef.current);
 
-    return () => observer.disconnect();
+    let disposed = false;
+    document.fonts?.ready.then(() => {
+      if (!disposed) measure();
+    });
+
+    return () => {
+      disposed = true;
+      observer.disconnect();
+    };
   }, [draw, startLoop]);
 
   useEffect(() => {
@@ -611,7 +633,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
           boxWidth={boxWidth}
         />
       </div>
-      <div className="relative z-[4] mx-auto mt-8 w-[min(420px,calc(100%-3rem))] px-[var(--page-gutter)]">
+      <div ref={copyRef} className="relative z-[4] mx-auto mt-8 w-[min(420px,calc(100%-3rem))] px-[var(--page-gutter)]">
         <MilestoneCopy item={current} reduced={reduced} />
       </div>
       <div ref={curveRef} className="relative z-[2] mt-12 h-[220px] w-full shrink-0">
@@ -672,85 +694,65 @@ function MobileScene({ reduced }: { reduced: boolean }) {
   const [outgoingId, setOutgoingId] = useState<string | null>(null);
   const [boxWidth, setBoxWidth] = useState(0);
   const collageRef = useRef<HTMLDivElement>(null);
-  const curveRef = useRef<HTMLDivElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const outgoingTimerRef = useRef(0);
+  const activeRef = useRef(0);
   const current = items[active] ?? items[0];
   const outgoing = items.find((item) => item.id === outgoingId);
 
+  useEffect(() => () => window.clearTimeout(outgoingTimerRef.current), []);
+
   const select = (index: number) => {
     const next = Math.min(items.length - 1, Math.max(0, index));
-    const previous = items[active];
+    const previous = items[activeRef.current];
 
     if (previous && previous.id !== items[next]?.id) {
       setOutgoingId(previous.id);
-      window.setTimeout(() => setOutgoingId((value) => (value === previous.id ? null : value)), 420);
+      window.clearTimeout(outgoingTimerRef.current);
+      outgoingTimerRef.current = window.setTimeout(
+        () => setOutgoingId((value) => (value === previous.id ? null : value)),
+        reduced ? 0 : 320,
+      );
     }
 
+    activeRef.current = next;
     setActive(next);
-    const scroller = scrollerRef.current;
-    const button = scroller?.querySelectorAll<HTMLButtonElement>("button")[next];
-
-    if (scroller && button) {
-      const left = button.offsetLeft - scroller.clientWidth / 2 + button.offsetWidth / 2;
-      scroller.scrollTo({ left, behavior: reduced ? "auto" : "smooth" });
-    }
   };
 
   useLayoutEffect(() => {
     const collage = collageRef.current;
-    const curve = curveRef.current;
-    const path = pathRef.current;
 
-    if (!collage || !curve || !path) return;
+    if (!collage) return;
 
-    const draw = () => {
-      setBoxWidth(collage.clientWidth);
-      const width = curve.clientWidth;
-      const height = curve.clientHeight;
-      const svg = path.ownerSVGElement;
-      svg?.setAttribute("viewBox", `0 0 ${width} ${height}`);
-      svg?.setAttribute("preserveAspectRatio", "none");
-      path.setAttribute("d", curvePath(width, height, width / 2));
-      const dots = curve.querySelectorAll<HTMLElement>("[data-curve-dot]");
+    const measure = () => setBoxWidth(collage.clientWidth);
 
-      dots.forEach((dot, index) => {
-        const x = ((index + 0.5) / dots.length) * width;
-        const y = curveY(x, width / 2, width, height);
-        dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-      });
-    };
-
-    draw();
-    const observer = new ResizeObserver(draw);
-    observer.observe(curve);
+    measure();
+    const observer = new ResizeObserver(measure);
     observer.observe(collage);
 
     return () => observer.disconnect();
-  }, [active]);
+  }, []);
 
   if (!current) return null;
 
   const mobileLayouts: TimelineImageLayout[] = [
-    { x: 2, y: 8, width: 42, rotation: -4, aspectRatio: 0.82, zIndex: 2 },
-    { x: 34, y: 18, width: 36, rotation: 3, aspectRatio: 0.9, zIndex: 3 },
-    { x: 62, y: 4, width: 34, rotation: -2, aspectRatio: 1, zIndex: 1 },
+    { x: 3, y: 2, width: 44, rotation: -3, aspectRatio: 0.82, zIndex: 2 },
+    { x: 53, y: 10, width: 44, rotation: 2.5, aspectRatio: 0.9, zIndex: 3 },
+    { x: 30, y: 56, width: 40, rotation: -2, aspectRatio: 1, zIndex: 1 },
   ];
 
   return (
     <div className="flex w-full flex-col gap-8 px-[var(--page-gutter)] pb-[calc(7rem+env(safe-area-inset-bottom))] pt-8">
       <TimelineTitle desktop={false} />
-      <div
-        ref={scrollerRef}
-        className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-2"
-      >
+      <div role="group" aria-label="Timeline years" className="grid grid-cols-3 gap-2">
         {items.map((item, index) => (
           <button
             key={item.id}
             type="button"
             aria-current={index === active ? "step" : undefined}
-            className={`snap-center inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-3 text-sm uppercase tracking-[0.14em] ${focusStyles} ${
-              index === active ? "text-secondary" : "text-gray"
+            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-mono text-sm uppercase tracking-[0.14em] transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+              index === active
+                ? "border-secondary bg-secondary/10 text-secondary"
+                : "border-gray/30 text-gray"
             }`}
             onClick={() => select(index)}
           >
@@ -758,8 +760,8 @@ function MobileScene({ reduced }: { reduced: boolean }) {
           </button>
         ))}
       </div>
-      <MilestoneCopy item={current} reduced={reduced} />
-      <div ref={collageRef} aria-hidden="true" className="relative h-[42vh] min-h-[220px] overflow-hidden">
+      <MilestoneCopy item={current} reduced={reduced} lift={false} />
+      <div ref={collageRef} aria-hidden="true" className="relative mx-auto aspect-[10/11] w-full max-w-[420px] overflow-hidden">
         {outgoing ? (
           <CollageFrame
             item={{ ...outgoing, images: outgoing.images.slice(0, 3) }}
@@ -776,19 +778,6 @@ function MobileScene({ reduced }: { reduced: boolean }) {
           reduced={reduced}
           boxWidth={boxWidth}
         />
-      </div>
-      <div ref={curveRef} className="relative mt-10 h-40 w-full">
-        <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
-          <path ref={pathRef} fill="none" stroke="#d5d5d5" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-        {Array.from({ length: 18 }, (_, index) => (
-          <span
-            key={index}
-            data-curve-dot
-            aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-0 size-2 rounded-full border border-white/80 bg-black"
-          />
-        ))}
       </div>
     </div>
   );

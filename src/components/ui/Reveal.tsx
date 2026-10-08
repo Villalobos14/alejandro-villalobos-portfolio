@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, type ReactNode } from "react";
+import { createElement, useLayoutEffect, useRef, type ReactNode } from "react";
 import {
   BLOCK_DURATION_MS,
   BLOCK_EASE,
@@ -13,6 +13,13 @@ interface RevealProps {
   children: ReactNode;
   className?: string;
   delayMs?: number;
+  /** Starting offset and tilt; the block settles at rest. Defaults match the site-wide reveal. */
+  offsetY?: number;
+  offsetX?: number;
+  rotateDeg?: number;
+  durationMs?: number;
+  /** Lets a caption stay a direct child of its figure. */
+  as?: "div" | "figcaption";
 }
 
 /**
@@ -23,8 +30,13 @@ export default function Reveal({
   children,
   className = "",
   delayMs = 0,
+  offsetY = BLOCK_OFFSET_PX,
+  offsetX = 0,
+  rotateDeg = 0,
+  durationMs = BLOCK_DURATION_MS,
+  as = "div",
 }: RevealProps) {
-  const blockRef = useRef<HTMLDivElement>(null);
+  const blockRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
     const block = blockRef.current;
@@ -43,11 +55,14 @@ export default function Reveal({
 
         animation = block.animate(
           [
-            { opacity: 0, transform: `translateY(${BLOCK_OFFSET_PX}px)` },
-            { opacity: 1, transform: "translateY(0)" },
+            {
+              opacity: 0,
+              transform: `translate(${offsetX}px, ${offsetY}px) rotate(${rotateDeg}deg)`,
+            },
+            { opacity: 1, transform: "translate(0, 0) rotate(0deg)" },
           ],
           {
-            duration: BLOCK_DURATION_MS,
+            duration: durationMs,
             delay: delayMs,
             easing: BLOCK_EASE,
             fill: "both",
@@ -70,11 +85,7 @@ export default function Reveal({
       animation?.cancel();
       block.style.opacity = "";
     };
-  }, [delayMs]);
+  }, [delayMs, offsetX, offsetY, rotateDeg, durationMs]);
 
-  return (
-    <div ref={blockRef} className={className}>
-      {children}
-    </div>
-  );
+  return createElement(as, { ref: blockRef, className }, children);
 }

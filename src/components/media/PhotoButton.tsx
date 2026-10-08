@@ -9,6 +9,10 @@ interface PhotoButtonProps {
   index: number;
   sizes: string;
   className?: string;
+  /** Page-specific override for frames whose artwork already has rounded corners. */
+  rounded?: string;
+  /** Extra classes for the image itself, e.g. an object-position for a crop. */
+  imageClassName?: string;
   priority?: boolean;
 }
 
@@ -17,6 +21,8 @@ export default function PhotoButton({
   index,
   sizes,
   className = "",
+  rounded = "rounded-2xl",
+  imageClassName = "",
   priority = false,
 }: PhotoButtonProps) {
   const { openLightbox } = useLightbox();
@@ -30,7 +36,7 @@ export default function PhotoButton({
         photo.alt ? `Enlarge photo: ${photo.alt}` : "Enlarge photo"
       }
       data-cursor="Ampliar"
-      className={`relative block overflow-hidden rounded-2xl transition-transform duration-500 ease-out focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${className}`}
+      className={`relative block overflow-hidden ${rounded} transition-transform duration-500 ease-out focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${className}`}
     >
       <Image
         src={photo.src}
@@ -38,7 +44,7 @@ export default function PhotoButton({
         fill
         sizes={sizes}
         priority={priority}
-        className="pointer-events-none object-cover"
+        className={`pointer-events-none object-cover ${imageClassName}`}
       />
     </button>
   );

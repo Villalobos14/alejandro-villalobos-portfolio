@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
-import ClosingBlock from "@/components/about/ClosingBlock";
-import PageIntro from "@/components/about/PageIntro";
 import Collage from "@/components/fun/Collage";
-import HorizontalGallery from "@/components/fun/HorizontalGallery";
+import FunClosing from "@/components/fun/FunClosing";
+import FunHero from "@/components/fun/FunHero";
 import PersonalBlocks from "@/components/fun/PersonalBlocks";
-import { funIntro, galleryPhotos } from "@/lib/personal";
 
 export const metadata: Metadata = pageMetadata({
   title: "About · Fun | Alejandro Villalobos",
@@ -17,16 +15,10 @@ export const metadata: Metadata = pageMetadata({
 export default function FunPage() {
   return (
     <>
-      <PageIntro
-        label={funIntro.label}
-        lines={[funIntro.title[0], funIntro.title[1]]}
-        presentation={funIntro.body}
-        active="fun"
-      />
+      <FunHero />
       <Collage />
-      <HorizontalGallery title="Gallery" photos={galleryPhotos} />
       <PersonalBlocks />
-      <ClosingBlock label="Next" title="Professional" href="/about" />
+      <FunClosing />
     </>
   );
 }

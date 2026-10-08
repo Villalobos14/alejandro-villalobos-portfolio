@@ -3,17 +3,20 @@
  * rewrite public/pets/calcifer-world.png and calcifer-glyph.png, with 6x
  * review copies in design/calcifer/.
  *
- * Every frame is the approved neutral (scripts/calcifer-model.mjs) drawn in
- * a pose, never redrawn, so he cannot drift off-model. The motion follows the
- * principles taken from design/calcifer/fire.json:
- *   - the base and the face hold still; the spire moves most, the side
- *     flames a beat behind it, the inner colours less than the shell
- *   - poses change about eight times a second and are held unevenly, along
- *     a path that never simply mirrors itself
+ * Every frame is the neutral (scripts/calcifer-model.mjs) drawn in a pose,
+ * never redrawn, so he cannot drift off-model. The motion follows the anime
+ * and the principles taken from design/calcifer/fire.json:
+ *   - the base and the face hold still; the crown moves most, and the
+ *     layers less the deeper they sit: shell, then orange, the core hardly
+ *   - the central flame leads; the side flames answer a pose or two later,
+ *     one side after the other, never together
+ *   - poses change seven to ten times a second and are held unevenly, along
+ *     a path that never simply mirrors itself; most are subtle, a few strong
+ *   - he blinks at uneven moments, closing in a few steps and opening again
  *   - elastic moments gather, release fast and settle slower, with one
  *     overshoot
  *   - when he comes apart, a few clusters of his own colours drift out and
- *     cut out; nothing fades, glows or sparkles
+ *     cut out; nothing fades, glows or sparkles, and idle never sheds sparks
  *
  * Frames face right and stand on the anchor. The row order and frame counts
  * are mirrored in src/components/pet-world/world/sprites.ts, which also holds
@@ -27,7 +30,7 @@ import { encodePng, renderSheet, upscale } from "./lib/png.mjs";
 
 /*
  * Cells larger than the neutral's frame leave room to stretch, squash and
- * scatter; the character inside is drawn at exactly the approved size.
+ * scatter; the character inside is drawn at exactly the neutral's size.
  */
 const WORLD_CELL = { ...WORLD, canvas: [52, 56] };
 const GLYPH_CELL = { ...GLYPH, canvas: [40, 40] };
@@ -40,65 +43,86 @@ const glyph = (pose) => drawCalcifer(GLYPH_CELL, pose);
  * ==================================================================== */
 
 /*
- * The living flame: ten poses along an uneven path. The spire leans up-left,
- * the body gives a little, the right flame grows, the spire reaches, the
- * right flame dies down (a flick breaks off), the body breathes out, the left
- * side answers, the spire drops back, and a last variation with a glance.
+ * The living flame: thirteen poses, then a blink drawn over four quiet ones
+ * so the flame keeps moving while he blinks. sprites.ts walks them in an
+ * uneven order. Reading down the list: the central flame leans left and the
+ * left flame swells after it, then the right answers; the central flame
+ * stretches up and collapses into a broad, blunt crown; it rises again as
+ * the right flame dies down, flares tall with its tip almost splitting,
+ * whips back while the right flame swells late, and gathers in.
  */
 const IDLE = [
+  // 0: the neutral, and the still frame under reduced motion.
   {},
-  { tip: [-1, 1], lobes: [[0, 0, 0], [-1, 1, 0.25]] },
-  { tip: [-1, 0], breathe: [0, -1], lobes: [[0, -1, 0], [-1, 0, 0.2]], zones: { orange: [-1, 0] } },
-  { tip: [0, 0], lobes: [[1, 2, 0.25], [0, 0, 0]], zones: { orange: [-1, 0] } },
-  { tip: [1, 3], lobes: [[1, 1, 0.15], [0, 0, 0]], zones: { orange: [0, 1] } },
-  { tip: [1, 2], lobes: [[0, -1, -0.45], [0, 0, 0]], zones: { orange: [1, 1] }, sparks: [[9, 40, "R"]] },
-  { tip: [0, 1], breathe: [1, 1], lobes: [[0, 0, -0.2], [0, 0, 0]], zones: { orange: [1, 0], yellow: [0, 1] } },
-  { tip: [-1, 1], breathe: [1, 0], lobes: [[0, 0, 0], [-1, 2, 0.4]], tongues: [[-8, 2, -1]] },
-  { tip: [0, -1], lobes: [[0, 1, 0.1], [-1, 1, 0.2]], zones: { orange: [-1, 0] } },
-  { tip: [1, 0], lobes: [[1, 0, 0.1], [0, 0, 0]], zones: { orange: [1, 0], yellow: [1, 0] }, face: { pupil: [1, 0] } },
+  // 1-4: the central flame leads left; the left flame follows, then the right answers.
+  { tip: [-1, 1] },
+  { tip: [-2, 2], lobes: [[0, 0, 0], [0, 1, 0.1]] },
+  { tip: [-1, 1], lobes: [[0, -1, -0.1], [-1, 2, 0.3]] },
+  { tip: [0, 0, 0.1], breathe: [1, 0], lobes: [[1, 1, 0.15], [-1, 1, 0.15]] },
+  // 5-7: it stretches up, collapses into a broad crown, and gathers blunt and short.
+  { tip: [1, 4, -0.12], lobes: [[1, 2, 0.25], [0, 0, 0]], zones: { yellow: [0, 1] } },
+  { tip: [1, -2, 0.25], breathe: [1, -1], lobes: [[2, 1, 0.3], [-1, 1, 0.2]], zones: { orange: [0, 0] } },
+  { tip: [0, -1, 0.15], breathe: [0, -1], lobes: [[1, 0, 0.1], [0, 1, 0.25]] },
+  // 8-10: it rises leaning left as the right dies down, flares tall and almost splits, whips back.
+  { tip: [-1, 3], lobes: [[0, -1, -0.3], [-1, 1, 0.1]] },
+  { tip: [2, 5, 0, 0.22], breathe: [0, 1], lobes: [[1, 1, 0.1], [0, -1, -0.2]], zones: { orange: [1, 1], yellow: [0, 1] } },
+  { tip: [-1, 2, 0.05], lobes: [[2, 2, 0.35], [0, -1, -0.15]] },
+  // 11: everything gathered in, the crown narrow.
+  { tip: [0, 1, -0.15], breathe: [-1, 0], lobes: [[0, 0, -0.15], [0, 0, -0.1]] },
+  // 12: half right, the left flame up, and a glance.
+  { tip: [1, 1], lobes: [[0, 0, 0], [-1, 1, 0.2]], face: { pupil: [1, 0] } },
+  // 13-16: the blink, squeezed, a slit, shut, a slit, while the flame goes on.
+  { tip: [0, 1], face: { eyes: "half" } },
+  { tip: [-1, 1], lobes: [[0, 0, 0], [0, 1, 0.1]], face: { eyes: "slit" } },
+  { tip: [-1, 0], lobes: [[0, 0, 0], [-1, 1, 0.2]], face: { eyes: "shut" } },
+  { tip: [0, 0], lobes: [[1, 0, 0.1], [-1, 1, 0.15]], face: { eyes: "slit" } },
 ];
 
-/** Glances right, leaning into it a little; the flame keeps moving. Mirrored to look left. */
+/*
+ * Glances right: the pupils go first, then the flame leans after them and
+ * keeps flickering. Mirrored to look left.
+ */
 const LOOK = [
-  { lean: 1, tip: [1, 1], face: { pupil: [2, 0] } },
-  { lean: 1, tip: [1, 2], lobes: [[1, 1, 0.15], [0, 0, 0]], face: { pupil: [2, 0] } },
-  { lean: 1, tip: [2, 1], zones: { orange: [1, 0] }, face: { pupil: [2, 0] } },
-  { lean: 1, tip: [1, 0], breathe: [1, 0], lobes: [[0, -1, -0.2], [-1, 1, 0.2]], face: { pupil: [2, 0] } },
+  { tip: [0, 1], face: { pupil: [2, 0] } },
+  { tip: [1, 1], lobes: [[1, 0, 0.1], [0, 0, 0]], face: { pupil: [2, 0] } },
+  { lean: 1, tip: [2, 2], lobes: [[1, 1, 0.15], [0, 0, 0]], face: { pupil: [2, 0] } },
+  { lean: 1, tip: [2, 1], lobes: [[1, 1, 0.2], [-1, 1, 0.15]], face: { pupil: [2, 0] } },
+  { lean: 1, tip: [1, 0, 0.1], breathe: [1, 0], lobes: [[0, -1, -0.15], [-1, 1, 0.2]], face: { pupil: [2, 0] } },
   { lean: 1, tip: [1, 2], face: { pupil: [2, -1] } },
   { lean: 1, tip: [2, 1], lobes: [[1, 1, 0.1], [0, 0, 0]], face: { pupil: [2, -1] } },
 ];
 
 /*
- * A flame's scoot, not a walk: gather, spring up leaning forward with the
- * spire trailing, touch down, squash, recover. Code moves him along; the
- * sheet only bobs.
+ * A flame's scoot, not a walk: gather, squash, spring up leaning forward
+ * with the crown trailing, touch down, squash, recover. Code moves him
+ * along; the sheet only bobs.
  */
 const MOVE = [
-  { squash: [1.08, 0.9], tip: [-1, -1] },
-  { offset: [0, 2], squash: [0.94, 1.06], lean: 1, tip: [-2, 1] },
-  { offset: [0, 4], squash: [0.92, 1.08], lean: 1, tip: [-2, 2], lobes: [[-1, 1, 0], [-1, 1, 0]] },
-  { offset: [0, 3], squash: [0.96, 1.04], lean: 2, tip: [-3, 1] },
-  { offset: [0, 1], lean: 1, tip: [-2, 0] },
-  { squash: [1.1, 0.88], tip: [-1, -1], lobes: [[1, -1, 0.1], [-1, -1, 0.1]] },
-  { squash: [1.03, 0.97], tip: [0, 0] },
+  { squash: [1.08, 0.9], tip: [-1, -1], lobes: [[1, -1, 0.1], [-1, 0, 0.1]] },
+  { offset: [0, 2], squash: [0.94, 1.06], lean: 1, tip: [-2, 1], lobes: [[-1, 0, 0], [0, 1, 0.1]] },
+  { offset: [0, 4], squash: [0.92, 1.08], lean: 1, tip: [-3, 2], lobes: [[-1, 1, 0], [-1, 1, 0.15]] },
+  { offset: [0, 3], squash: [0.96, 1.04], lean: 2, tip: [-3, 1], lobes: [[-1, 1, 0.1], [-1, 0, 0.1]] },
+  { offset: [0, 1], lean: 1, tip: [-2, 0], lobes: [[0, 0, 0], [-1, 0, 0]] },
+  { squash: [1.1, 0.88], tip: [-1, -1], lobes: [[1, -1, 0.15], [-1, -1, 0.1]] },
+  { squash: [1.03, 0.97], tip: [0, 0], lobes: [[1, 0, 0.1], [0, 0, 0]] },
   { tip: [1, 1], lobes: [[1, 0, 0.1], [0, 0, 0]] },
 ];
 
-/** Startled: eyes wide, the flame shoots up and stretches, then he settles back with a small squash. */
+/** Startled: eyes wide, the crown shoots up and stretches, then he settles back with a small squash. */
 const REACT = [
-  { squash: [0.94, 1.08], tip: [0, 3], tongues: [[-5, 2, -1], [6, 2, 1]], face: { eyes: "wide" } },
-  { squash: [0.9, 1.12], tip: [0, 4], lobes: [[1, 2, 0.25], [-1, 2, 0.3]], face: { eyes: "wide", mouth: "oh" } },
-  { squash: [0.92, 1.1], tip: [1, 3], lobes: [[1, 1, 0.15], [-1, 1, 0.2]], face: { eyes: "wide", mouth: "oh" } },
-  { squash: [1.06, 0.92], tip: [0, 0], face: { mouth: "small" } },
-  { squash: [1.1, 0.88], tip: [0, -1], face: { eyes: "squeezed", mouth: "small" } },
+  { squash: [0.94, 1.08], tip: [0, 3], lobes: [[0, 1, 0.1], [0, 1, 0.1]], face: { eyes: "wide" } },
+  { squash: [0.9, 1.12], tip: [0, 5, -0.1], lobes: [[1, 2, 0.25], [-1, 2, 0.3]], face: { eyes: "wide", mouth: "oh" } },
+  { squash: [0.92, 1.1], tip: [1, 4, 0, 0.2], lobes: [[1, 1, 0.15], [-1, 1, 0.2]], face: { eyes: "wide", mouth: "oh" } },
+  { squash: [1.06, 0.92], tip: [0, 0, 0.1], face: { mouth: "small" } },
+  { squash: [1.1, 0.88], tip: [0, -1, 0.15], lobes: [[1, 0, 0.1], [-1, 0, 0.1]], face: { eyes: "squeezed", mouth: "small" } },
   { tip: [0, 1] },
 ];
 
-/** Settled on the surface: a lower flame on a wider body, lids half down, the smallest mouth. */
+/** Settled on the surface: a lower flame on a wider body, a quieter crown, lids half down, the smallest mouth. */
 const resting = (pose) => ({
   squash: [1.06, 0.92],
   ...pose,
-  tip: [pose.tip?.[0] ?? 0, -2 + (pose.tip?.[1] ?? 0)],
+  tip: [pose.tip?.[0] ?? 0, -2 + (pose.tip?.[1] ?? 0), pose.tip?.[2] ?? 0],
   face: { eyes: "lidded", mouth: "small" },
 });
 const REST = [
@@ -106,7 +130,7 @@ const REST = [
   { tip: [-1, 1] },
   { tip: [0, 1], breathe: [1, 0], lobes: [[0, -1, -0.1], [0, 0, 0]] },
   { tip: [1, 0], breathe: [1, 1] },
-  { tip: [1, 1], zones: { orange: [1, 0] } },
+  { tip: [1, 1], lobes: [[0, 0, 0.1], [0, 0, 0]] },
   { tip: [0, 0], lobes: [[0, 0, 0], [-1, 0, 0.2]] },
 ].map(resting);
 
@@ -114,7 +138,7 @@ const REST = [
 const sleeping = (pose) => ({
   squash: [1.1, 0.86],
   ...pose,
-  tip: [pose.tip?.[0] ?? 0, -3 + (pose.tip?.[1] ?? 0)],
+  tip: [pose.tip?.[0] ?? 0, -3 + (pose.tip?.[1] ?? 0), 0.1],
   face: { eyes: "closed", mouth: "small" },
 });
 const SLEEP = [
@@ -152,10 +176,10 @@ const TELEPORT_IN = [
  */
 const LAND = [
   { squash: [1.1, 0.88], tip: [0, -1], lobes: [[1, -1, 0.1], [-1, -1, 0.1]] },
-  { squash: [1.22, 0.78], tip: [0, -2], lobes: [[2, -2, 0.15], [-2, -1, 0.2]], face: { eyes: "squeezed", mouth: "wide" } },
-  { squash: [1.12, 0.88], tip: [0, -1], lobes: [[1, -1, 0.1], [-1, 0, 0.1]], face: { eyes: "squeezed" } },
+  { squash: [1.2, 0.78], tip: [0, -2, 0.2], lobes: [[2, -2, 0.15], [-2, -1, 0.2]], face: { eyes: "squeezed", mouth: "wide" } },
+  { squash: [1.12, 0.88], tip: [0, -1, 0.1], lobes: [[1, -1, 0.1], [-1, 0, 0.1]], face: { eyes: "squeezed" } },
   { squash: [0.98, 1.02], tip: [0, 1] },
-  { squash: [0.94, 1.08], tip: [0, 2], lobes: [[0, 1, 0], [0, 1, 0]] },
+  { squash: [0.94, 1.08], tip: [0, 3, -0.1], lobes: [[0, 1, 0], [0, 1, 0]] },
   { squash: [1.02, 0.98], tip: [-1, 0] },
 ];
 
@@ -173,7 +197,7 @@ const TELEPORT_OUT = [
     erode: 0.5,
     seed: 7,
     face: { eyes: "blank", mouth: null },
-    sparks: [[-15, 30, "R", 2, 2], [14, 33, "R", 2, 2], [-13, 12, "O", 2, 1], [16, 17, "R", 1, 2]],
+    sparks: [[-15, 30, "R", 2, 2], [14, 33, "R", 2, 2], [-18, 11, "O", 2, 1], [16, 17, "R", 1, 2]],
   }),
   world({
     squash: [0.6, 0.66],
@@ -217,19 +241,26 @@ const WORLD_ROWS = [
  * Glyph Calcifer: the same, quieter, and never mirrored inside the word
  * ==================================================================== */
 
-/** About a pixel of movement anywhere, the base and the face fixed. */
+/*
+ * About a pixel of movement anywhere, the base and the face fixed, so the
+ * word still reads first: eight quiet poses, then a blink (squeezed, shut,
+ * a slit) over three of them.
+ */
 const GLYPH_IDLE = [
   {},
-  { tip: [-1, 0], lobes: [[0, 0, 0], [0, 0, 0.2]] },
-  { tip: [-1, 1], zones: { orange: [-1, 0] } },
-  { tip: [0, 1], lobes: [[0, 0, 0.15], [0, 0, 0]] },
-  { tip: [1, 0], breathe: [0, 1] },
-  { tip: [1, 0], breathe: [1, 0], zones: { orange: [1, 0] } },
-  { tip: [0, 0], lobes: [[0, 0, -0.2], [0, 0, 0.15]], zones: { yellow: [0, 1] } },
-  { tip: [0, 1], zones: { orange: [1, 0] }, face: { pupil: [1, 0] } },
+  { tip: [-1, 0] },
+  { tip: [-1, 1], lobes: [[0, 0, 0], [0, 0, 0.2]] },
+  { tip: [0, 1], lobes: [[0, 0, 0.15], [0, 0, 0.1]] },
+  { tip: [1, 1], lobes: [[0, 1, 0.15], [0, 0, 0]] },
+  { tip: [1, 0], breathe: [1, 0], lobes: [[0, 0, 0.1], [0, 0, -0.15]] },
+  { tip: [0, 0, 0.15], lobes: [[0, 0, -0.2], [0, 0, 0.15]] },
+  { tip: [0, 1], face: { pupil: [1, 0] } },
+  { tip: [0, 1], face: { eyes: "half" } },
+  { tip: [-1, 1], lobes: [[0, 0, 0], [0, 0, 0.15]], face: { eyes: "shut" } },
+  { tip: [-1, 0], lobes: [[0, 0, 0], [0, 0, 0.2]], face: { eyes: "slit" } },
 ];
 
-/** Three frames looking right, then three looking left, so the letter never flips. */
+/** Three frames looking right, then three looking left, so the letter never flips. The eyes lead; the tip follows. */
 const GLYPH_LOOK = [
   { tip: [0, 0], face: { pupil: [1, 0] } },
   { tip: [1, 1], face: { pupil: [1, 0] } },
@@ -244,9 +275,9 @@ const GLYPH_PREPARE = [
   { tip: [0, 1] },
   { tip: [-1, 0], face: { pupil: [-1, 0] } },
   { tip: [1, 1], face: { pupil: [1, 0] } },
-  { tip: [0, 1], face: { eyes: "wide" } },
+  { tip: [0, 2], face: { eyes: "wide" } },
   { squash: [1.06, 0.92], tip: [0, 0] },
-  { squash: [1.12, 0.84], tip: [0, -1], face: { eyes: "squeezed" } },
+  { squash: [1.12, 0.84], tip: [0, -1, 0.1], face: { eyes: "squeezed" } },
 ];
 
 const GLYPH_OUT = [
@@ -258,7 +289,7 @@ const GLYPH_OUT = [
     erode: 0.5,
     seed: 7,
     face: { eyes: "blank", mouth: null },
-    sparks: [[-11, 22, "R", 2, 2], [10, 24, "R", 1, 2], [-10, 8, "O"], [12, 12, "R"]],
+    sparks: [[-11, 22, "R", 2, 2], [12, 23, "R", 1, 2], [-12, 8, "O"], [12, 12, "R"]],
   }),
   glyph({
     squash: [0.6, 0.66],
@@ -328,7 +359,7 @@ function write(name, rows, cell, anchorY) {
   writeFileSync(join(PETS, `${name}.png`), encodePng(sheet.width, sheet.height, sheet.rgba));
   const large = review(sheet, cell, 6, anchorY);
   writeFileSync(join(DESIGN, `${name}-sheet@6x.png`), encodePng(large.width, large.height, large.rgba));
-  console.log(`public/pets/${name}.png  ${sheet.width}x${sheet.height}, cells ${cell.join("x")}`);
+  console.log(`public/pets/${name}.png  ${sheet.width}x${sheet.height}, cells ${cell.join("x")}, ${sheet.columns} columns`);
   rows.forEach(([label, frames], index) => console.log(`  row ${index}  ${label.padEnd(12)} ${frames.length} frames`));
 }
 
