@@ -19,7 +19,7 @@ export default function Footer() {
               Made by{" "}
             </span>
             <Link
-              className="font-bold relative overflow-y-hidden w-full group h-fit"
+              className="font-bold relative overflow-y-hidden w-full group h-fit focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               target="_blank"
               href="https://www.villaalobos.com"
               data-cursor="Abrir web"
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
           <BackToTop />
         </div>
-        <ul className=" grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid xl:grid-cols-3 gap-x-8 gap-y-3">
+        <ul className="grid grid-cols-2 gap-x-8 gap-y-3 lg:grid-cols-3">
           {siteLinks.map((link) => (
             <li
               key={link.id}
@@ -42,7 +42,7 @@ export default function Footer() {
             >
               {link.href.startsWith("/") ? (
                 <TransitionLink
-                  className="group"
+                  className="group focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                   href={link.href}
                   data-cursor={`Abrir ${link.label}`}
                 >
@@ -50,7 +50,7 @@ export default function Footer() {
                 </TransitionLink>
               ) : (
                 <Link
-                  className="group"
+                  className="group focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"

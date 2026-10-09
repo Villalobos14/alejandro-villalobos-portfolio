@@ -85,6 +85,24 @@ export const experience: ExperienceEntry[] = [
   },
 ];
 
+/**
+ * GESSI research contract at UPC Barcelona, as documented in the MLSToolbox
+ * case study (src/content/case-studies/mlstoolbox.mdx). Kept out of
+ * `experience` for now so /resume is unchanged; /about lists it alongside.
+ */
+export const researchContract: ExperienceEntry = {
+  id: "upc",
+  role: "Software Engineer · Research",
+  company: "UPC Barcelona",
+  start: { label: "Sep 2025", dateTime: "2025-09" },
+  end: { label: "Dec 2025", dateTime: "2025-12" },
+  bullets: [
+    "Worked within MLEvol, a GESSI research project on the continuous evolution of machine learning systems, on MLSToolbox, a low-code tool for designing ML pipelines.",
+    "Extended CodeAssessment, the module that analyzes Python ML pipelines, with structural code analysis (AST, Radon, Pylint) that turns code characteristics into metrics.",
+    "Redesigned and built the CodeAssessment workflow so engineers can review detected pipeline stages and investigate prioritized issues with file-level evidence.",
+  ],
+};
+
 export const skillGroups: SkillGroup[] = [
   {
     id: "ux-design",

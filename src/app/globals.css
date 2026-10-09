@@ -30,6 +30,11 @@ section {
   scroll-margin-bottom: var(--dock-clearance);
 }
 
+/* Focus and in-page jumps stop above the floating dock, never under it. */
+html {
+  scroll-padding-bottom: var(--dock-clearance);
+}
+
 ::selection {
   background-color: #000000;
   color: #fff;
