@@ -1,11 +1,9 @@
 "use client";
 
 import { useLayoutEffect, useRef, type KeyboardEvent } from "react";
-import { homeNarrativeContent } from "@/lib/home-narrative";
 import { prefersReducedMotion } from "@/lib/motion";
 import HomePersonal from "./HomePersonal";
 import HomeTimeline from "./HomeTimeline";
-import { MarkerSentence } from "./MarkerSentence";
 import { useNarrativePanel, type NarrativePanel } from "./NarrativeProvider";
 
 const focusStyles =
@@ -116,10 +114,6 @@ function NarrativePanels() {
 export default function HomeNarrative() {
   return (
     <section id="home-narrative" aria-label="Practice and personal notes" className="w-full min-w-0">
-      <MarkerSentence
-        segments={homeNarrativeContent.professionalStatement.segments}
-        textClassName="text-[clamp(2rem,10vw,3.8rem)] font-medium leading-[1.08] tracking-tight lg:text-[clamp(2.8rem,5.5vw,7rem)]"
-      />
       <div id="home-panels" className="scroll-mt-6 pb-8">
         <div className="px-[var(--page-gutter)]">
           <NarrativeSwitch />

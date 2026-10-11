@@ -1,4 +1,4 @@
-import MediaPlaceholder from "@/components/media/MediaPlaceholder";
+import Image from "next/image";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import {
   PROJECTS_SECTION_ID,
@@ -11,9 +11,6 @@ import {
 
 const focusStyles =
   "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
-
-const studyMetaClass =
-  "font-mono text-[0.75rem] leading-none tracking-[0.06em] text-ink-muted";
 
 /** Mono at the small size without the uppercase transform, so the Figma case stays. */
 const eyebrowClass =
@@ -32,13 +29,17 @@ function CaseLink({ href, label }: { href: string; label: string }) {
 
 function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
   return (
-    <div className="mt-8 grid gap-6 sm:grid-cols-2">
+    <div className="mt-8 flex flex-col gap-6">
       {shifts.map((shift) => (
         <p key={shift.label}>
-          <span className="text-stat text-ink">
-            {shift.from} → {shift.to}
+          <span className="text-[20px] font-medium leading-none text-ink-muted line-through">
+            {shift.from}
           </span>
-          <span className="mt-2 block text-body-s text-ink-secondary">{shift.label}</span>
+          <span className="mx-2 text-[15px] text-ink-secondary" aria-hidden="true">
+            →
+          </span>
+          <span className="text-[40px] font-medium leading-none text-ink">{shift.to}</span>
+          <span className="mt-2 block text-[15px] leading-snug text-ink-secondary">{shift.label}</span>
         </p>
       ))}
     </div>
@@ -47,17 +48,14 @@ function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
 
 function FeaturedCase({ project }: { project: FeaturedProject }) {
   return (
-    <article className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
-      <div className="min-h-64">
-        <MediaPlaceholder
-          detail={project.coverSlot}
-          seed={project.id}
-          className="min-h-64 border border-border"
-        />
+    <article className="grid overflow-hidden rounded-xl border border-border lg:grid-cols-2">
+      <div className="flex min-h-64 items-center justify-center bg-gradient-to-br from-tint-ice to-tint-mint p-8">
+        {/* TODO(content): Cover B — product still or the 6 s loop, without its own title. */}
+        <p className="max-w-sm text-center text-mono text-ink-secondary">{project.coverSlot}</p>
       </div>
-      <div className="min-w-0">
+      <div className="min-w-0 bg-bg-subtle p-6 sm:p-8 lg:p-10">
         <p className={eyebrowClass}>{project.eyebrow}</p>
-        <h3 className="mt-3 text-h2 text-ink">
+        <h3 className="mt-3 text-h3 text-ink">
           {project.name}
           {project.subtitle ? (
             <>
@@ -68,9 +66,7 @@ function FeaturedCase({ project }: { project: FeaturedProject }) {
         </h3>
         <p className="mt-4 max-w-prose text-body text-ink-secondary">{project.summary}</p>
         {project.shifts ? <MetricShifts shifts={project.shifts} /> : null}
-        {project.note ? (
-          <p className="mt-4 text-body-s text-ink-muted">{project.note}</p>
-        ) : null}
+        {project.note ? <p className="mt-4 text-body-s text-ink-muted">{project.note}</p> : null}
         <CaseLink href={project.href} label={project.linkLabel} />
       </div>
     </article>
@@ -78,9 +74,22 @@ function FeaturedCase({ project }: { project: FeaturedProject }) {
 }
 
 function CaseCard({ project }: { project: FeaturedProject }) {
+  const cover = project.media?.type === "image" ? project.media : null;
+
   return (
-    <article className="flex h-full flex-col border-t border-border pt-8">
-      <p className={eyebrowClass}>{project.eyebrow}</p>
+    <article className="flex h-full min-w-0 flex-col">
+      {cover ? (
+        <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+          <Image
+            src={cover.src}
+            alt={cover.alt}
+            fill
+            sizes="(min-width: 1024px) 636px, 100vw"
+            className="object-cover"
+          />
+        </div>
+      ) : null}
+      <p className={`mt-5 ${eyebrowClass}`}>{project.eyebrow}</p>
       <h3 className="mt-3 text-h3 text-ink">{project.name}</h3>
       <p className="mt-3 max-w-prose text-body text-ink-secondary">{project.summary}</p>
       <CaseLink href={project.href} label={project.linkLabel} />
@@ -95,33 +104,29 @@ export default function Projects() {
     <section
       id={PROJECTS_SECTION_ID}
       aria-labelledby="selected-work-title"
-      className="w-full min-w-0 scroll-mt-8 px-[var(--page-gutter)] pb-16 pt-6 sm:pb-24"
+      className="w-full min-w-0 scroll-mt-8 px-[var(--page-gutter)] pb-16 pt-4 sm:pb-24"
     >
-      {featured ? (
-        <div className="mt-12">
-          <FeaturedCase project={featured} />
-        </div>
-      ) : null}
-      <div className="mt-12 grid gap-12 md:grid-cols-2 md:gap-16">
+      {featured ? <FeaturedCase project={featured} /> : null}
+      <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-16">
         {rest.map((project) => (
           <CaseCard key={project.id} project={project} />
         ))}
       </div>
       <div className="mt-16 sm:mt-24">
-        <h3 className="text-h4 text-ink">{researchStudiesHeading}</h3>
+        <h3 className="text-mono text-ink-muted">{researchStudiesHeading}</h3>
         <ul className="mt-6 border-t border-border">
           {researchStudies.map((study) => (
             <li
               key={study.id}
-              className="grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-start gap-x-3 border-b border-border py-4 sm:gap-x-6"
+              className="grid grid-cols-1 gap-y-1 border-b border-border py-4 lg:min-h-[73px] lg:grid-cols-[3.5rem_minmax(11rem,16rem)_minmax(0,1fr)_auto_1.5rem] lg:items-center lg:gap-x-6 lg:py-0"
             >
               <span className="text-mono text-ink">{study.id}</span>
-              <span className="min-w-0">
-                <span className="block text-h4 text-ink">{study.title}</span>
-                <span className="mt-1 block text-body text-ink-secondary">{study.summary}</span>
-                <span className={`mt-2 block ${studyMetaClass}`}>{study.meta}</span>
+              <span className="text-body font-medium text-ink">{study.title}</span>
+              <span className="text-[15px] leading-snug text-ink-secondary">{study.summary}</span>
+              <span className="font-mono text-[0.75rem] leading-none tracking-[0.06em] text-ink-muted">
+                {study.meta}
               </span>
-              <span aria-hidden="true" className="text-body text-ink">
+              <span aria-hidden="true" className="text-body text-ink lg:text-right">
                 →
               </span>
             </li>
