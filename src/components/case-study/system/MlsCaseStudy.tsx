@@ -1,497 +1,346 @@
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import CaseVisual from "@/components/case-study/CaseVisual";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
-import { PROJECTS_ANCHOR } from "@/lib/projects";
-import { CaseAnchor } from "./CaseAnchor";
-import ChapterNav, { type CaseChapter } from "./ChapterNav";
-import { SystemDiagram } from "./diagrams";
-import { ChapterIntro, NextProject } from "./editorial";
-import { caseFocus, prose, sectionGap } from "./styles";
+import MaskedLines from "@/components/ui/MaskedLines";
+import {
+  mlsBehind,
+  mlsContext,
+  mlsDecisions,
+  mlsFlow,
+  mlsHeader,
+  mlsNext,
+  mlsPlaceholders,
+  mlsProblem,
+  mlsReflection,
+  mlsResults,
+  mlsSystem,
+  mlsValidation,
+} from "@/content/case-studies/mlstoolbox";
+import { featuredProjects } from "@/lib/projects";
+import CaseHeroVideo from "./CaseHeroVideo";
+import MlsDisclosures from "./MlsDisclosures";
+import { caseFocus } from "./styles";
 
-const chapters: readonly CaseChapter[] = [
-  { id: "overview", index: "01", label: "Overview" },
-  { id: "decisions", index: "02", label: "Decisions" },
-  { id: "final-experience", index: "03", label: "Final experience" },
-  { id: "validation", index: "04", label: "Validation" },
-  { id: "outcome", index: "05", label: "Outcome" },
-];
+const eyebrow = "text-mono text-ink-muted";
+const body = "text-[17px] leading-[27px] text-ink-secondary";
+const h2 =
+  "text-[clamp(32px,8vw,48px)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink frame:text-[48px] frame:leading-[54px]";
+const h3 = "text-[28px] font-medium leading-[34px] tracking-[-0.015em] text-ink";
 
-const findings = [
-  "Engineers asked for a file and a severity before they asked for a formula.",
-  "Names such as FCPP and SCPP were useful to researchers and opaque to the people maintaining the code.",
-  "An invisible pipeline classification made the assessment feel like a black box.",
-  "A failed analyzer should not wipe out findings that had already succeeded.",
-];
-
-const versions = [
-  ["V1", "Raw scores", "Numbers, with nowhere to act."],
-  ["V2", "Metric dashboard", "Categories and ranges, still no file."],
-  ["V3", "File-level diagnosis", "Issues attached to files. Users then questioned the pipeline."],
-  ["V4", "Pipeline review", "Stages could be confirmed, moved, or excluded."],
-  ["V5", "Evidence and recommendations", "The suggested change had to point at something observable."],
-  ["V6", "Final flow", "Priority, drill-down, and a partial result when one analyzer failed."],
-];
-
-function Label({ children }: { children: string }) {
-  return <p className="text-xs uppercase tracking-[0.16em] text-ink/50">{children}</p>;
+function MetaValue({ lines }: { lines: readonly string[] }) {
+  return (
+    <dd className="text-[17px] leading-[27px] text-ink">
+      {lines.map((line) => (
+        <span key={line} className="block">
+          {line}
+        </span>
+      ))}
+    </dd>
+  );
 }
 
 export default function MlsCaseStudy() {
+  const ominio = featuredProjects.find((project) => project.href === "/work/ominio");
+  const ominioCover = ominio?.media?.type === "image" ? ominio.media : null;
+
   return (
-    <article className="mx-auto w-full min-w-0 max-w-[1440px] overflow-x-clip">
-      <ChapterNav title="MLSToolbox" chapters={chapters} />
-      <div className="px-[var(--page-gutter)] pb-8">
-        <header id="overview" className="scroll-mt-20 grid gap-10 pb-4 pt-8 lg:grid-cols-12 lg:pt-14">
-          <div className="lg:col-span-8">
-            <TransitionLink
-              href={PROJECTS_ANCHOR}
-              className={`group inline-flex min-h-11 items-center gap-2 text-sm text-ink/70 transition-colors duration-300 fine:hover:text-ink ${caseFocus}`}
-            >
-              <ArrowLeftIcon aria-hidden="true" className="size-4 transition-transform duration-300 fine:group-hover:-translate-x-1" />
-              Selected work
+    <article className="bg-bg text-ink">
+      <div className="page-container">
+        <header className="flex flex-col pb-12 pt-8 frame:min-h-[580px] frame:pb-[59px] frame:pt-[76px]">
+          <p className={`${eyebrow} flex flex-wrap items-center gap-x-3 gap-y-1`}>
+            <TransitionLink href="/projects" className={`inline-flex min-h-11 items-center ${caseFocus}`}>
+              ← Work
             </TransitionLink>
-            <p className="mt-8 text-sm text-ink/55">MLSToolbox / CodeAssessment</p>
-            <h1 className="mt-3 max-w-[16em] text-balance text-[clamp(2rem,4.4vw,3.7rem)] font-medium leading-[1.08] tracking-tight text-ink">
-              Helping ML engineers move from code-quality scores to actionable issues.
-            </h1>
-            <p className={`mt-5 ${prose}`}>
-              I redesigned and built CodeAssessment, an MLSToolbox workflow that helps engineers assess unfamiliar Python ML repositories, review detected pipeline stages, and investigate prioritized issues with file-level evidence.
-            </p>
-            <p className="mt-6">
-              <CaseAnchor
-                href="#final-experience"
-                className={`inline-flex min-h-11 items-center text-sm text-ink underline decoration-ink/30 underline-offset-4 transition-colors duration-200 fine:hover:text-accent ${caseFocus}`}
-              >
-                Explore the final experience
-              </CaseAnchor>
-            </p>
-          </div>
-          <dl className="grid content-end gap-5 sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
-            {[
-              ["Role", "Product Design + Software Engineering"],
-              ["Duration", "12 weeks"],
-              ["Team", "Researcher, software engineer, and me"],
-              ["Context", "GESSI · UPC Barcelona · September–December 2025"],
-            ].map(([term, detail]) => (
-              <div key={term}>
-                <dt className="text-xs uppercase tracking-[0.14em] text-ink/45">{term}</dt>
-                <dd className="mt-1 text-sm leading-6 text-ink/85">{detail}</dd>
+            <span aria-hidden="true">/</span>
+            <span>{mlsHeader.crumb}</span>
+          </p>
+          <MaskedLines
+            as="h1"
+            lines={[...mlsHeader.title]}
+            className="mt-6 max-w-[12em] text-[clamp(40px,11vw,56px)] font-semibold leading-none tracking-[-0.04em] text-ink frame:mt-6 frame:max-w-none frame:text-[80px] frame:leading-[80px]"
+          />
+          <p className={`mt-6 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px] frame:mt-10`}>
+            {mlsHeader.deck}
+          </p>
+          <dl className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 frame:mt-auto">
+            {mlsHeader.meta.map((item) => (
+              <div key={item.label}>
+                <dt className={eyebrow}>{item.label}</dt>
+                <MetaValue lines={item.lines} />
               </div>
             ))}
           </dl>
         </header>
 
-        <section aria-labelledby="eval-preview" className="mt-10 border-t border-ink/15 pt-6">
-          <h2 id="eval-preview" className="text-sm text-ink/70">
-            Evaluation preview
-          </h2>
-          <dl className="mt-4 grid gap-6 sm:grid-cols-3">
-            {[
-              ["10:52 → 4:18", "Median time to an actionable issue"],
-              ["2/6 → 5/6", "Task success"],
-              ["2.7 → 4.2 / 5", "Confidence"],
-            ].map(([value, caption]) => (
-              <div key={caption}>
-                <dt className="text-[clamp(1.35rem,2vw,1.7rem)] font-medium tracking-tight text-ink">{value}</dt>
-                <dd className="mt-1 text-sm leading-6 text-ink/70">{caption}</dd>
+        <section aria-label="Hero" className="pb-8 frame:min-h-[818px] frame:pb-0 frame:pt-2">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border frame:min-h-[810px] frame:aspect-auto">
+            <CaseHeroVideo />
+          </div>
+        </section>
+
+        <section aria-label="Results" className="pb-12 frame:flex frame:min-h-[211px] frame:flex-col frame:justify-between frame:pb-0">
+          <div className="grid divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
+            {mlsResults.shifts.map((shift) => (
+              <div key={shift.label} className="py-6 md:px-7 md:py-7 md:first:pl-0 md:last:pr-0">
+                <p className="flex flex-wrap items-baseline gap-x-3">
+                  <span className="text-[28px] font-medium leading-none text-ink-muted line-through">{shift.from}</span>
+                  <span className="text-[28px] font-medium leading-none text-ink-muted" aria-hidden="true">
+                    →
+                  </span>
+                  <span className="text-[40px] font-medium leading-none text-ink md:text-[52px]">{shift.to}</span>
+                </p>
+                <p className="mt-3 text-[15px] leading-snug text-ink-secondary">{shift.label}</p>
               </div>
             ))}
-          </dl>
-          <p className="mt-4 max-w-xl text-sm leading-6 text-ink/60">
-            Observed across two moderated usability rounds, six participants per round.{" "}
-            <CaseAnchor href="#validation" className={`underline decoration-ink/30 underline-offset-4 fine:hover:text-ink ${caseFocus}`}>
-              How this was measured
-            </CaseAnchor>
+          </div>
+          <p className="text-mono-s text-ink-muted">{mlsResults.note}</p>
+        </section>
+
+        <section aria-labelledby="mls-context" className="grid items-start gap-8 py-8 md:grid-cols-[408fr_840fr] md:gap-12 frame:min-h-[653px] frame:content-start frame:pb-0 frame:pt-32">
+          <div className="order-2 md:order-none">
+            <p className={eyebrow}>{mlsContext.eyebrow}</p>
+            <h2 id="mls-context" className={`mt-4 ${h3}`}>
+              {mlsContext.title}
+            </h2>
+            <p className={`mt-6 ${body}`}>{mlsContext.body}</p>
+            <div className="mt-8 rounded-xl bg-bg-subtle p-[22px]">
+              <p className={eyebrow}>{mlsContext.partLabel}</p>
+              <p className="mt-3 text-[15px] leading-snug text-ink">{mlsContext.part}</p>
+            </div>
+          </div>
+          <CaseVisual
+            className="order-1 md:order-none"
+            label={mlsPlaceholders.engineering}
+            alt=""
+            sizes="(min-width: 1024px) 840px, 100vw"
+          />
+        </section>
+
+        <section aria-labelledby="mls-problem" className="grid items-start gap-10 py-10 md:grid-cols-[463fr_612fr] md:gap-[221px] frame:min-h-[474px] frame:pt-28">
+          <div>
+            <p className={eyebrow}>{mlsProblem.eyebrow}</p>
+            <p className="mt-4 text-[clamp(32px,8vw,56px)] font-medium leading-[1.07] tracking-[-0.025em] text-ink frame:text-[56px] frame:leading-[60px]">
+              {mlsProblem.quote[0]}
+              <br />
+              {mlsProblem.quote[1]}
+            </p>
+            <p className="mt-6 max-w-[460px] text-[15px] leading-snug text-ink-secondary">{mlsProblem.attribution}</p>
+          </div>
+          <div>
+            <h2 id="mls-problem" className={h3}>
+              {mlsProblem.title}
+            </h2>
+            <p className={`mt-4 ${body}`}>{mlsProblem.body}</p>
+            <p className="mt-6 text-mono-s text-ink-muted">{mlsProblem.note}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="mls-flow" className="py-12 frame:min-h-[1157px] frame:pb-[12px] frame:pt-[147px]">
+          <p className={eyebrow}>{mlsFlow.eyebrow}</p>
+          <h2 id="mls-flow" className={`mt-3 ${h2}`}>
+            {mlsFlow.title}
+          </h2>
+          <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+            {mlsFlow.deck}
           </p>
+          <CaseVisual className="mt-8" label={mlsPlaceholders.flow} alt="" sizes="(min-width: 1024px) 1296px, 100vw" />
         </section>
 
-        <section className={`${sectionGap} grid gap-8 border-t border-ink/15 pt-8 lg:grid-cols-3`} aria-labelledby="snapshot-title">
-          <h2 id="snapshot-title" className="sr-only">
-            Project snapshot
+        <section aria-labelledby="mls-decisions" className="py-12 frame:min-h-[1771px] frame:pt-[147px]">
+          <p className={eyebrow}>{mlsDecisions.eyebrow}</p>
+          <h2 id="mls-decisions" className={`mt-3 ${h2}`}>
+            {mlsDecisions.title}
           </h2>
-          <div>
-            <Label>Starting point</Label>
-            <p className="mt-3 text-sm leading-6 text-ink/80">
-              MLSToolbox already had an Angular frontend, an HTTP gateway, and separate services for code generation and assessment. CodeAssessment could run Pylint and Radon. Research was defining ML-specific cohesion metrics. Scores were visible. Locating the file, and deciding what to do, was left to the engineer. The assessment screens were tied to inconsistent backend responses.
-            </p>
-          </div>
-          <div>
-            <Label>What changed in scope</Label>
-            <p className="mt-3 text-sm leading-6 text-ink/80">
-              I joined to integrate those cohesion metrics. In the first two weeks, interviews and walkthroughs showed that another score would not help someone decide what to review. I expanded the assignment into a guided assessment: workflow, information architecture, the result contract, and the analyzer architecture behind it.
-            </p>
-          </div>
-          <div>
-            <Label>What I delivered</Label>
-            <p className="mt-3 text-sm leading-6 text-ink/80">
-              A working path from an unfamiliar Python repository to a prioritized, file-level issue, with evidence and a recommendation. Pipeline classification could be reviewed before dependent analyses ran. The assessment stayed usable when one analyzer failed.
-            </p>
-          </div>
-        </section>
-
-        <section className={sectionGap} aria-labelledby="research-title">
-          <Label>Research</Label>
-          <h2 id="research-title" className="mt-3 max-w-3xl text-balance text-[clamp(1.6rem,2.8vw,2.3rem)] font-medium leading-snug tracking-tight text-ink">
-            A score of 5.1/10, and eleven minutes to find the file.
-          </h2>
-          <div className="mt-6 max-w-[40rem] space-y-5 text-[1.0625rem] leading-[1.65] text-ink/80 md:text-[1.125rem]">
-            <p>
-              The clearest episode was the third repository walkthrough. An ML engineer was looking at a model-training repository. The early interface showed maintainability, complexity, functional cohesion, and structural cohesion. Functional cohesion read 5.1/10.
-            </p>
-            <p>
-              He asked, in Spanish, “¿qué archivo está causando esto?” — which file is causing this. The interface could not answer. He opened the repository in his IDE, moved through three folders, inspected functions and imports, and spent 11 minutes finding that a preprocessing file also held feature-engineering and training logic.
-            </p>
-            <p>That was one session, not an average. The product had detected a signal and handed the localization work back to him.</p>
-          </div>
-          <p className="mt-8 max-w-3xl text-[clamp(1.35rem,2.2vw,1.85rem)] font-medium leading-snug tracking-tight text-ink">
-            The useful unit was a localized issue an engineer could investigate.
+          <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+            {mlsDecisions.deck}
           </p>
-          <dl className="mt-10 grid gap-x-8 gap-y-5 border-t border-ink/15 pt-6 sm:grid-cols-2">
-            {[
-              ["Interviews", "Seven semi-structured interviews, 45–60 minutes each."],
-              ["Walkthroughs", "Five repository walkthroughs. Five of the seven participants used a familiar repository; two used public repositories I supplied."],
-              ["Who took part", "Three ML engineers, two software engineers working with ML systems, one researcher, and one master’s student maintaining Python pipelines."],
-              ["Other inputs", "Six tools or interaction patterns benchmarked. Twelve repositories in the technical corpus. Thirty-four observations in an affinity map."],
-            ].map(([term, detail]) => (
-              <div key={term}>
-                <dt className="text-sm text-ink">{term}</dt>
-                <dd className="mt-1 text-sm leading-6 text-ink/70">{detail}</dd>
+          <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-x-6 md:gap-y-12">
+            {mlsDecisions.cells.map((cell) => (
+              <div key={cell.label}>
+                <CaseVisual label={cell.visual} alt="" sizes="(min-width: 1024px) 636px, 100vw" />
+                <p className={`mt-4 ${eyebrow}`}>{cell.label}</p>
+                <h3 className={`mt-3 ${h3}`}>{cell.title}</h3>
+                <p className={`mt-3 ${body}`}>{cell.body}</p>
               </div>
             ))}
-          </dl>
-          <ul className="mt-8 max-w-3xl space-y-3">
-            {findings.map((finding) => (
-              <li key={finding} className="border-t border-ink/15 pt-3 text-sm leading-6 text-ink/80">
-                {finding}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <div id="decisions" className="scroll-mt-20">
-          <ChapterIntro kicker="Decisions" statement="Four choices that changed what the interface could explain." />
-          <div className={`${sectionGap} space-y-16 md:space-y-20`}>
-            <section aria-labelledby="decision-file" className="grid gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-5">
-                <Label>01 · File-level issue</Label>
-                <h3 id="decision-file" className="mt-3 text-[clamp(1.35rem,2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink">
-                  The file became the thing you opened, not the score.
-                </h3>
-                <div className="mt-4 space-y-4 text-sm leading-6 text-ink/80">
-                  <p>The dashboard could say a metric was low. It could not say where. In V3 I made a prioritized issue the main object, and attached each issue to one or more files. The score stayed as context.</p>
-                  <p>I also tried a folder heatmap. It looked clear, and people still had to open several layers before they reached the file. With three participants, all three found the problem faster in an issue list. Two never used the heatmap. I did not time that comparison.</p>
-                </div>
-              </div>
-              <div className="grid gap-px border border-ink/15 bg-ink/15 sm:grid-cols-2 lg:col-span-7">
-                <div className="bg-bg p-5">
-                  <p className="text-xs uppercase tracking-[0.14em] text-ink/45">Before · explanatory</p>
-                  <p className="mt-6 text-lg text-ink">Functional cohesion: 5.1/10</p>
-                  <p className="mt-3 text-sm leading-6 text-ink/60">The number is from the walkthrough above. This is not a screenshot.</p>
-                </div>
-                <div className="bg-bg p-5">
-                  <p className="text-xs uppercase tracking-[0.14em] text-ink/45">After · explanatory</p>
-                  <p className="mt-6 text-lg leading-snug text-ink">preprocessing.py mixes preprocessing, feature engineering, and training.</p>
-                  <p className="mt-3 text-sm text-ink/80">Severity: high</p>
-                </div>
-              </div>
-            </section>
-
-            <section aria-labelledby="decision-pipeline" className="max-w-3xl">
-              <Label>02 · Pipeline review</Label>
-              <h3 id="decision-pipeline" className="mt-3 text-[clamp(1.35rem,2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink">
-                The system proposes the pipeline. The engineer can correct it.
-              </h3>
-              <div className="mt-4 space-y-4 text-[1.0625rem] leading-[1.65] text-ink/80">
-                <p>Cohesion metrics depended on how stages and files were classified. When that classification stayed hidden, people treated the result as a guess. I added a review where the system showed the stages it had detected and the files assigned to them. An engineer could confirm a file, move it, or exclude it before analyses that depended on that structure.</p>
-                <p>The extra step made the flow less automatic. I accepted that because a wrong stage would quietly change the diagnosis. In sessions, that review took about 20–40 seconds. It is a description of those interactions, not a completion time for every repository.</p>
-                <p>Confidence later moved from 2.7 to 4.2 out of 5 between the two usability rounds. Pipeline review was one of several changes between those versions, so I do not treat that shift as evidence for this step alone.</p>
-              </div>
-            </section>
-
-            <section aria-labelledby="decision-evidence" className="grid items-start gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-5">
-                <Label>03 · Evidence</Label>
-                <h3 id="decision-evidence" className="mt-3 text-[clamp(1.35rem,2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink">
-                  A recommendation had to point at something in the file.
-                </h3>
-                <div className="mt-4 space-y-4 text-sm leading-6 text-ink/80">
-                  <p>By V3 people could find a file, and some recommendations still felt arbitrary. In V5 I attached the suggestion to functions, mixed stages, or structural relationships the analyzer had actually seen.</p>
-                  <p>The first layer is the issue, its severity, the file, and why it matters. Under that: evidence and a suggested action. Further down: the metric’s definition, interpretation, formula, and references. The recommendation supports a judgment. It does not replace one.</p>
-                </div>
-              </div>
-              <div className="border border-ink/15 p-5 lg:col-span-7">
-                <p className="text-xs uppercase tracking-[0.14em] text-ink/45">Example issue · from the case notes</p>
-                <p className="mt-4 text-sm text-ink/60">High</p>
-                <p className="mt-1 text-xl text-ink">preprocessing.py</p>
-                <p className="mt-3 text-sm leading-6 text-ink/80">Preprocessing, feature engineering, and training responsibilities are mixed in one file.</p>
-                <ul className="mt-4 space-y-1 text-sm leading-6 text-ink/75">
-                  <li>scale_features() → data preprocessing</li>
-                  <li>build_features() → feature engineering</li>
-                  <li>train_model() → model training</li>
-                </ul>
-                <p className="mt-4 text-sm leading-6 text-ink/80">Suggested action: move the training logic into the training module and separate feature construction.</p>
-              </div>
-            </section>
-
-            <section aria-labelledby="decision-partial" className="max-w-3xl border-t border-ink/15 pt-8">
-              <Label>04 · Partial results</Label>
-              <h3 id="decision-partial" className="mt-3 text-[clamp(1.35rem,2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink">
-                Radon failed. Ten other analyzers had already finished.
-              </h3>
-              <div className="mt-4 space-y-4 text-[1.0625rem] leading-[1.65] text-ink/80">
-                <p>On a medium repository, Radon failed on an automatically generated file. The first implementation marked the whole assessment as an error. That was the wrong status for the person waiting on it: ten analyzers had completed.</p>
-                <p>I changed the state model so each analyzer reports completed, warning, or failed. Valid findings stay on screen. The interface names the missing check and can retry that analysis. The summary can read completed with warnings.</p>
-                <p>This incident is separate from the twelve analyzers available at handoff. It was one failed check among eleven in that run.</p>
-              </div>
-            </section>
-
-            <aside className="max-w-3xl border-l border-ink/20 pl-5">
-              <Label>A score I dropped</Label>
-              <h3 className="mt-3 text-lg font-medium text-ink">A 0–100 Repository Health Score</h3>
-              <p className="mt-3 text-sm leading-6 text-ink/80">
-                In V2 I proposed one number so repositories would be easier to compare. I dropped it after two sessions. A single score hid the difference between maintainability and separation of responsibilities. A repository could be easy to maintain and still mix stages, and 74/100 would bury the distinction the engineer needed. Category context and severity stayed. There is no global health gauge in the final flow.
+          </div>
+          <div className="mt-12 rounded-2xl bg-bg-subtle px-6 py-8 md:px-[33px] frame:mt-12 frame:flex frame:min-h-[192px] frame:items-center frame:gap-8">
+            <p className="text-mono-s text-ink-muted md:w-[156px] md:shrink-0">{mlsDecisions.droppedLabel}</p>
+            <div>
+              <p className="text-[clamp(32px,6vw,48px)] font-semibold leading-none tracking-[-0.025em] text-ink">
+                {mlsDecisions.droppedTitle}
               </p>
-            </aside>
+              <p className="mt-3 max-w-[1041px] text-[17px] leading-snug text-ink-secondary md:text-[20px] md:leading-[31px]">
+                {mlsDecisions.droppedBody}
+              </p>
+            </div>
           </div>
+        </section>
 
-          <section className={sectionGap} aria-labelledby="evolution-title">
-            <h3 id="evolution-title" className="text-lg font-medium text-ink">How the versions actually moved</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-ink/75">
-              The jumps that mattered were raw scores to a categorized dashboard, then to a file, then to a reviewable pipeline, then to evidence and a result that survives one failed analyzer.
+        <section aria-labelledby="mls-system" className="grid items-center gap-8 py-12 md:grid-cols-[840fr_408fr] md:gap-12 frame:min-h-[669px]">
+          <CaseVisual label={mlsPlaceholders.system} alt="" sizes="(min-width: 1024px) 840px, 100vw" />
+          <div>
+            <p className={eyebrow}>{mlsSystem.eyebrow}</p>
+            <h2 id="mls-system" className={`mt-4 ${h3}`}>
+              {mlsSystem.title}
+            </h2>
+            <p className={`mt-4 ${body}`}>{mlsSystem.body}</p>
+            <p className="mt-8 flex flex-wrap items-baseline gap-x-3">
+              <span className="text-[28px] font-medium leading-none text-ink-muted">{mlsSystem.from}</span>
+              <span className="text-[28px] leading-none text-ink-muted" aria-hidden="true">
+                →
+              </span>
+              <span className="text-[44px] font-medium leading-none text-ink">{mlsSystem.to}</span>
             </p>
-            <ol className="mt-6 max-w-3xl">
-              {versions.map(([version, title, note]) => (
-                <li key={version} className="grid gap-1 border-t border-ink/15 py-3 sm:grid-cols-[4.5rem_minmax(0,1fr)] sm:gap-4">
-                  <p className="text-sm text-ink/50">{version}</p>
-                  <p className="text-sm leading-6 text-ink/85">
-                    <span className="text-ink">{title}.</span> {note}
+            <p className="mt-3 text-[15px] leading-snug text-ink-secondary">{mlsSystem.caption}</p>
+            <p className="mt-4 text-mono-s text-ink-muted">{mlsSystem.note}</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="mls-validation" className="py-12 frame:min-h-[1310px] frame:pt-[163px]">
+          <p className={eyebrow}>{mlsValidation.eyebrow}</p>
+          <h2 id="mls-validation" className={`mt-3 ${h2}`}>
+            {mlsValidation.title}
+          </h2>
+          <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+            {mlsValidation.deck}
+          </p>
+          <div className="mt-10 grid items-start gap-10 lg:grid-cols-[636fr_636fr] lg:gap-6">
+            <div>
+              <div className="hidden grid-cols-[344fr_130fr_130fr] gap-4 border-b border-border pb-3 md:grid">
+                {mlsValidation.columns.map((column) => (
+                  <p key={column} className="text-mono-s text-ink-muted">
+                    {column}
                   </p>
+                ))}
+              </div>
+              <div className="hidden md:block">
+                {mlsValidation.rows.map((row) => (
+                  <div
+                    key={row[0]}
+                    className="grid grid-cols-[344fr_130fr_130fr] gap-4 border-b border-border py-4"
+                  >
+                    <p className="text-[17px] leading-[27px] text-ink">{row[0]}</p>
+                    <p className="text-[17px] leading-[27px] text-ink">{row[1]}</p>
+                    <p className="text-[20px] font-medium leading-7 text-ink">{row[2]}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="md:hidden">
+                {mlsValidation.rows.map((row) => (
+                  <div key={row[0]} className="border-b border-border py-4">
+                    <p className="text-[17px] leading-snug text-ink">{row[0]}</p>
+                    <div className="mt-3 grid grid-cols-2 gap-3">
+                      <div>
+                        <p className="text-mono-s text-ink-muted">{mlsValidation.columns[1]}</p>
+                        <p className="mt-2 text-[17px] leading-snug text-ink">{row[1]}</p>
+                      </div>
+                      <div>
+                        <p className="text-mono-s text-ink-muted">{mlsValidation.columns[2]}</p>
+                        <p className="mt-2 text-[20px] font-medium leading-7 text-ink">{row[2]}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <CaseVisual
+              src="/case-studies/visual-10-outcomes.jpg"
+              alt="Outcomes dashboard of the documented study"
+              label="Visual 10 — Outcomes"
+              sizes="(min-width: 1024px) 636px, 100vw"
+            />
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
+            {mlsValidation.cards.map((card) => (
+              <div key={card.label}>
+                <p className={eyebrow}>{card.label}</p>
+                <p className="mt-2 text-[28px] font-medium leading-none text-ink">{card.value}</p>
+                <p className="mt-3 text-[15px] leading-snug text-ink-secondary">{card.body}</p>
+                <p className="mt-3 text-mono-s text-ink-muted">{card.note}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12">
+            <MlsDisclosures titles={mlsValidation.disclosures} />
+          </div>
+        </section>
+
+        <section aria-labelledby="mls-behind" className="py-12 frame:min-h-[703px] frame:pt-[131px]">
+          <p className={eyebrow}>{mlsBehind.eyebrow}</p>
+          <h2 id="mls-behind" className={`mt-3 ${h2}`}>
+            {mlsBehind.title}
+          </h2>
+          <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">
+            {mlsBehind.columns.map((column) => (
+              <figure key={column.src}>
+                {column.src.endsWith("visual-12-themes.png") ? (
+                  // TODO(content): re-exportar, el archivo está vacío
+                  <CaseVisual src={column.src} alt={column.alt} label={column.alt} sizes="(min-width: 1024px) 416px, 100vw" />
+                ) : (
+                  <CaseVisual src={column.src} alt={column.alt} label={column.alt} sizes="(min-width: 1024px) 416px, 100vw" />
+                )}
+                <figcaption className="mt-4 text-[15px] leading-snug text-ink-secondary">{column.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="mls-reflection" className="grid gap-10 py-12 md:grid-cols-[612fr_684fr] frame:min-h-[540px] frame:pt-32">
+          <div>
+            <p className={eyebrow}>{mlsReflection.eyebrow}</p>
+            <h2 id="mls-reflection" className={`mt-4 ${h2}`}>
+              {mlsReflection.title}
+            </h2>
+            <p className="mt-6 text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+              {mlsReflection.body}
+            </p>
+          </div>
+          <div>
+            <p className="text-mono-s text-ink-muted">{mlsReflection.nextLabel}</p>
+            <ol className="mt-4 space-y-6">
+              {mlsReflection.items.map((item, index) => (
+                <li key={item} className="grid grid-cols-[3rem_minmax(0,1fr)] gap-2">
+                  <span className={eyebrow}>{String(index + 1).padStart(2, "0")}</span>
+                  <p className={body}>{item}</p>
                 </li>
               ))}
             </ol>
-          </section>
-        </div>
-
-        <section id="final-experience" className={`scroll-mt-20 ${sectionGap}`} aria-labelledby="final-title">
-          <ChapterIntro kicker="Final experience" statement="Five steps, from an unfamiliar repository to a file worth opening." />
-          <p id="final-title" className="sr-only">
-            The final CodeAssessment workflow
-          </p>
-          <ol className="mt-8 max-w-3xl">
-            {[
-              ["01", "Connect", "Upload a ZIP or paste a Git URL. The form checks the input before processing starts."],
-              ["02", "Review", "Inspect the detected ML stages. Confirm, move, or exclude files before analyses that depend on them."],
-              ["03", "Assess", "Choose categories in plain language — code quality, maintainability, architecture, ML structure — and follow progress that names the work instead of spinning."],
-              ["04", "Investigate", "Issues are ordered by severity. Scores stay in the background. Opening an issue shows the affected files."],
-              ["05", "Act", "Evidence and a recommendation sit with the issue. Metric definitions, formulas, and references are one level further down."],
-            ].map(([index, title, body]) => (
-              <li key={index} className="grid gap-2 border-t border-ink/15 py-5 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-6">
-                <p className="text-sm text-ink/45">{index}</p>
-                <div>
-                  <h3 className="text-lg text-ink">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-ink/75">{body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-ink/70">
-            The same session could re-run an analysis or export the findings. Academic metric names stayed in the advanced layer.
-          </p>
-          <p className="mt-6">
-            <CaseAnchor href="#system" className={`text-sm text-ink/70 underline decoration-ink/25 underline-offset-4 fine:hover:text-ink ${caseFocus}`}>
-              How the result contract made this consistent
-            </CaseAnchor>
-          </p>
-        </section>
-
-        <section id="system" className={`scroll-mt-20 ${sectionGap}`} aria-labelledby="system-title">
-          <h2 id="system-title" className="max-w-3xl text-balance text-[clamp(1.6rem,2.8vw,2.3rem)] font-medium leading-snug tracking-tight text-ink">
-            The result contract made the experience consistent.
-          </h2>
-          <p className={`mt-4 ${prose}`}>
-            If every analyzer returned a different shape, the interface could not explain them the same way. I defined a shared result so severity, a file diagnosis, evidence, and a recommendation arrived in one structure. The researcher owned the scientific definitions. I operationalized them: formula to algorithm, then a normalized result the interface could present.
-          </p>
-          <div className="mt-8">
-            <SystemDiagram />
-          </div>
-          <ul className="mt-8 max-w-3xl space-y-3 text-sm leading-6 text-ink/75">
-            <li>A shared syntax tree meant analyzers described the same repository, and the project was not parsed again for every metric.</li>
-            <li>Independent analyzers meant one failure did not delete the rest of the run.</li>
-            <li>Feature-based Angular components kept input, scanning, and results able to change without rewriting the rest of MLSToolbox.</li>
-            <li>Each upload used its own UUID session, so concurrent runs did not share files or state.</li>
-          </ul>
-
-          <details className="group mt-10 max-w-3xl border-t border-ink/15">
-            <summary className={`flex min-h-11 cursor-pointer list-none items-center justify-between py-4 text-ink marker:content-none [&::-webkit-details-marker]:hidden ${caseFocus}`}>
-              Implementation details
-              <span aria-hidden="true" className="text-ink/50 group-open:hidden">+</span>
-              <span aria-hidden="true" className="hidden text-ink/50 group-open:inline">–</span>
-            </summary>
-            <div className="space-y-4 pb-6 text-sm leading-6 text-ink/75">
-              <p>The assessment service is Python and Flask. The interface is Angular. Pylint covers general quality signals. Radon covers cyclomatic complexity and maintainability. I mapped both into the same result shape as the research metrics.</p>
-              <p>The six cohesion metrics — CCPM, SCPM, FCPM, CCPP, SCPP, and FCPP — were defined by the principal researcher. I integrated them as analyzers and designed how a diagnosis appears before the formula.</p>
-              <p>A factory builds the analyzers the engineer selected. Each one is a strategy. BaseAnalyzer holds the shared path checks, file selection, context access, and result assembly, which removed about 150 lines of duplicated setup. New metrics register instead of branching through the whole application.</p>
-              <p>The conceptual result carries an analyzer id, a score, a module count, a severity, file diagnostics, a recommendation, details, and metric metadata. That is the contract described for the product, not a pasted production schema.</p>
-              <p>CodeAssessment loads lazily. Errors are typed — invalid input, missing session, analyzer failure — and sessions are cleaned up so the interface can offer a next action instead of a generic failure.</p>
-            </div>
-          </details>
-        </section>
-
-        <section id="validation" className="scroll-mt-20" aria-labelledby="validation-title">
-          <ChapterIntro kicker="Validation" statement="Three different questions, measured separately." />
-
-          <div className={`${sectionGap} space-y-14`}>
-            <section aria-labelledby="usability-title">
-              <h3 id="usability-title" className="text-lg text-ink">Usability</h3>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-ink/75">
-                Round 1 used V2 with six participants. Round 2 used V6 with six participants: four new, two returning. The task stayed the same. Identify a priority issue in an unfamiliar repository, explain the problem, and choose a coherent file without help from the moderator.
-              </p>
-              <div className="mt-6 overflow-x-auto">
-                <table className="w-full min-w-[32rem] border-t border-ink/15 text-left text-sm">
-                  <caption className="sr-only">Usability results from round 1 and round 2</caption>
-                  <thead>
-                    <tr className="text-ink/50">
-                      <th className="py-2 pr-4 font-normal">Measure</th>
-                      <th className="py-2 pr-4 font-normal">Round 1</th>
-                      <th className="py-2 font-normal">Round 2</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-ink/85">
-                    <tr className="border-t border-ink/15">
-                      <th className="py-3 pr-4 text-left font-normal">Median time</th>
-                      <td className="py-3 pr-4">10 min 52 sec</td>
-                      <td className="py-3">4 min 18 sec</td>
-                    </tr>
-                    <tr className="border-t border-ink/15">
-                      <th className="py-3 pr-4 text-left font-normal">Task success</th>
-                      <td className="py-3 pr-4">2/6</td>
-                      <td className="py-3">5/6</td>
-                    </tr>
-                    <tr className="border-t border-ink/15">
-                      <th className="py-3 pr-4 text-left font-normal">Correct interpretation without help</th>
-                      <td className="py-3 pr-4">3/6</td>
-                      <td className="py-3">5/6</td>
-                    </tr>
-                    <tr className="border-t border-ink/15">
-                      <th className="py-3 pr-4 text-left font-normal">Confidence</th>
-                      <td className="py-3 pr-4">2.7 / 5</td>
-                      <td className="py-3">4.2 / 5</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <ul className="mt-4 max-w-3xl space-y-2 text-sm leading-6 text-ink/70">
-                <li>Timing started once the repository was loaded and stopped when the participant named a concrete issue and a file.</li>
-                <li>Two evaluators judged each explanation as correct, partial, or incorrect.</li>
-                <li>Confidence was a 1–5 rating after the task: how sure they were that they would inspect the right place first.</li>
-              </ul>
-              <p className="mt-4 max-w-3xl text-sm leading-6 text-ink/60">
-                Directional findings from two small moderated rounds with partially overlapping participants. Multiple changes were introduced between versions.
-              </p>
-              <ul className="mt-6 max-w-3xl space-y-2 text-sm leading-6 text-ink/75">
-                <li>Evidence was opened in 14 of 18 diagnosis tasks. That is an interaction pattern, not 18 participants.</li>
-                <li>All six round-2 participants opened pipeline review. Four corrected or verified a classification.</li>
-                <li>Recommendation usefulness in round 2 averaged 4.4/5. Feedback during iteration pushed vague suggestions to name something observable in the file. I am not pinning that comment to a single version number.</li>
-              </ul>
-            </section>
-
-            <section aria-labelledby="technical-title">
-              <h3 id="technical-title" className="text-lg text-ink">Technical and expert review</h3>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-ink/75">
-                The corpus was twelve Python ML repositories: six small, four medium, two large. We labeled 182 files with a primary stage. I did the first pass. The researcher reviewed ambiguous cases. Disagreements were resolved by consensus.
-              </p>
-              <dl className="mt-6 max-w-3xl divide-y divide-ink/15 border-y border-ink/15">
-                {[
-                  ["Pipeline classification", "Macro F1 of 0.84 before overrides, and 0.92 after assisted correction. The second figure includes human review. It is not autonomous performance."],
-                  ["Diagnostic precision", "49 of 60 sampled issues held up in manual review, 81.7%. That is precision on the sample, not overall accuracy."],
-                  ["Expert review of recommendations", "Three senior reviewers scored 30 recommendations. Average usefulness was 4.3/5, and 26 of 30 were considered actionable. This is separate from the 4.4/5 rating in the usability round."],
-                  ["High-priority false positives", "On the same controlled cases, findings that were false or too weak to act on moved from 24% to 13% after pipeline review and severity-rule changes. The report does not state how many issues were in that comparison."],
-                  ["Partial failure", "Valid results stayed visible in every partial-failure case that was tested. The report does not say how many cases that was."],
-                ].map(([term, detail]) => (
-                  <div key={term} className="grid gap-1 py-4 sm:grid-cols-[14rem_minmax(0,1fr)] sm:gap-6">
-                    <dt className="text-sm text-ink">{term}</dt>
-                    <dd className="text-sm leading-6 text-ink/75">{detail}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-
-            <section aria-labelledby="extensibility-title" className="max-w-3xl">
-              <h3 id="extensibility-title" className="text-lg text-ink">An internal check on adding an analyzer</h3>
-              <p className="mt-3 text-sm leading-6 text-ink/75">
-                Integrating a metric with the earlier approach took about one working day. The same kind of integration, using the shared analyzer contract, took about 2 hours 20 minutes. That is a comparison of two integrations, not a productivity benchmark, and I am not turning it into a percentage.
-              </p>
-            </section>
           </div>
         </section>
 
-        <section id="outcome" className="scroll-mt-20" aria-labelledby="outcome-title">
-          <ChapterIntro kicker="Outcome" statement="Shipped into MLSToolbox, with a narrower claim about use." />
-          <div id="outcome-title" className="sr-only">
-            Outcome and handoff
-          </div>
-          <div className="mt-8 grid gap-8 lg:grid-cols-3">
-            <section>
-              <h3 className="text-sm text-ink">A working workflow</h3>
-              <p className="mt-3 text-sm leading-6 text-ink/75">
-                CodeAssessment shipped inside MLSToolbox, on the team’s development and production environments. Someone could load a repository, review the pipeline, run the assessment, and read the findings without the technical team stepping in. Twelve analyzers were available, covering quality, complexity, maintainability, structure, detection, and cohesion.
-              </p>
-            </section>
-            <section>
-              <h3 className="text-sm text-ink">What the evaluation can support</h3>
-              <p className="mt-3 text-sm leading-6 text-ink/75">
-                On the moderated task, median time fell from 10:52 to 4:18, and task success moved from 2/6 to 5/6. Those are directional results from two small rounds, not production KPIs, and not proof that one feature caused the change.
-              </p>
-            </section>
-            <section>
-              <h3 className="text-sm text-ink">Final two weeks</h3>
-              <p className="mt-3 text-sm leading-6 text-ink/75">
-                During the final two weeks, we ran 24 analysis sessions across the 12-repository evaluation corpus and three additional repositories from the research group.
-              </p>
-              <h3 className="mt-6 text-sm text-ink">After handoff</h3>
-              <p className="mt-3 text-sm leading-6 text-ink/75">
-                After handoff, the team used the shared result contract to add another metric without changing the frontend workflow.
-              </p>
-            </section>
-          </div>
-
-          <section className={sectionGap} aria-labelledby="reflection-title">
-            <h2 id="reflection-title" className="max-w-3xl text-balance text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-snug tracking-tight text-ink">
-              Control was the harder product decision.
-            </h2>
-            <div className="mt-5 max-w-[40rem] space-y-4 text-[1.0625rem] leading-[1.65] text-ink/80">
-              <p>The tempting promise was “upload a repository and get the answer.” Cohesion metrics depended on the pipeline context, so a fully automatic reading would have been confident and sometimes wrong. The review step added friction. I kept it because people could see the assumption and correct it.</p>
-              <p>I also gave up the global health score, for the reason above: it made unlike problems look comparable. And I learned that the response contract decides what a screen is allowed to say. If a failure has no type, the interface can only apologize. If a result has no file, the interface cannot point.</p>
-              <p>Static analysis still cannot establish data quality, runtime behavior, production model performance, or the business reason a structure exists. Recommendations stayed evidence for a person, not instructions.</p>
-            </div>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2">
-              <div>
-                <h3 className="text-sm text-ink">What I would do sooner</h3>
-                <ul className="mt-3 space-y-2 text-sm leading-6 text-ink/75">
-                  <li>Recruit external ML engineers in the first week.</li>
-                  <li>Record step-level behavior from the first version.</li>
-                  <li>Define ground truth before building each analyzer.</li>
-                  <li>Try notebooks and monorepos earlier.</li>
-                </ul>
+        <section aria-label="Next case" className="pb-16 frame:min-h-[403px] frame:pb-0">
+          <div className="grid overflow-hidden rounded-3xl border border-border transition-colors duration-300 fine:hover:bg-bg-subtle md:h-[275px] md:grid-cols-[425px_minmax(0,1fr)]">
+            {ominioCover ? (
+              <div className="relative aspect-[16/10] md:aspect-auto">
+                <Image src={ominioCover.src} alt={ominioCover.alt} fill sizes="425px" className="object-cover" />
               </div>
-              <div>
-                <h3 className="text-sm text-ink">Still out of scope</h3>
-                <ul className="mt-3 space-y-2 text-sm leading-6 text-ink/75">
-                  <li>Deeper notebook support.</li>
-                  <li>History across versions of a repository.</li>
-                  <li>Pull-request integration.</li>
-                  <li>Runtime and data-quality assessment.</li>
-                </ul>
+            ) : (
+              <div className="hidden md:block" />
+            )}
+            <div className="flex flex-col justify-center gap-3 px-6 py-8 md:px-8">
+              <p className={eyebrow}>{mlsNext.label}</p>
+              <TransitionLink href="/work/ominio" className={`inline-flex min-h-11 items-center ${caseFocus}`}>
+                <span className="text-[clamp(36px,10vw,48px)] font-semibold leading-none tracking-[-0.04em] text-ink frame:text-[80px] frame:leading-[80px]">
+                  {mlsNext.title}
+                </span>
+              </TransitionLink>
+              <p className="max-w-[650px] text-[17px] leading-[27px] text-ink">{mlsNext.description}</p>
+              <div className="mt-2 flex flex-col items-start gap-1">
+                <TransitionLink
+                  href="/work/ominio"
+                  className={`inline-flex min-h-11 items-center text-[17px] font-medium text-accent ${caseFocus}`}
+                >
+                  {mlsNext.read}
+                </TransitionLink>
+                <TransitionLink
+                  href="/projects"
+                  className={`inline-flex min-h-11 items-center text-[17px] text-ink-secondary ${caseFocus}`}
+                >
+                  {mlsNext.all}
+                </TransitionLink>
               </div>
             </div>
-          </section>
-
-          <div className={sectionGap}>
-            <NextProject
-              kicker="Next case study"
-              index="02"
-              title="Ominio"
-              href="/work/ominio"
-            />
           </div>
         </section>
       </div>
