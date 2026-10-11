@@ -10,7 +10,7 @@ import Heading from "../components/ui/Heading";
 
 export default function Works() {
   return (
-    <div className="w-full bg-bg px-[var(--page-gutter)] py-5 md:py-10">
+    <div className="w-full bg-bg px-[var(--page-gutter)] py-5 md:pb-10 md:pt-[76px]">
       <section
         className="overflow-hidden"
       >

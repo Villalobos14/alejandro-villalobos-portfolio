@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import AboutSwitch from "@/components/system/AboutSwitch";
 import ProjectRow from "@/components/system/ProjectRow";
 import SectionHeader from "@/components/system/SectionHeader";
-import TopBar from "@/components/system/TopBar";
 import { featuredProjects, type FeaturedProject } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -29,7 +28,6 @@ export default function SystemPage() {
 
   return (
     <div className="bg-bg text-ink">
-      <TopBar />
       <div className="mx-auto flex w-full max-w-content flex-col gap-16 px-[var(--page-gutter)] py-16">
         <section className="flex flex-col gap-6">
           <SectionHeader eyebrow="Navigation" title="About switch" variant="subtle" />

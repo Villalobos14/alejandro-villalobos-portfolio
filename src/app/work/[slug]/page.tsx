@@ -39,7 +39,7 @@ export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
 export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   if (params.slug === "mlstoolbox") {
     return (
-      <PageShell topBar={false}>
+      <PageShell>
         <MlsCaseStudy />
       </PageShell>
     );
