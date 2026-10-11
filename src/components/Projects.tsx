@@ -48,14 +48,14 @@ function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
 
 function FeaturedCase({ project }: { project: FeaturedProject }) {
   return (
-    <article className="grid overflow-hidden rounded-xl border border-border lg:grid-cols-2">
+    <article className="grid overflow-hidden rounded-xl border border-border lg:grid-cols-[2fr_1fr]">
       <div className="flex min-h-64 items-center justify-center bg-gradient-to-br from-tint-ice to-tint-mint p-8">
         {/* TODO(content): Cover B — product still or the 6 s loop, without its own title. */}
         <p className="max-w-sm text-center text-mono text-ink-secondary">{project.coverSlot}</p>
       </div>
       <div className="min-w-0 bg-bg-subtle p-6 sm:p-8 lg:p-10">
         <p className={eyebrowClass}>{project.eyebrow}</p>
-        <h3 className="mt-3 text-h3 text-ink">
+        <h3 className="mt-3 text-[40px] font-medium leading-[44px] tracking-[-0.025em] text-ink">
           {project.name}
           {project.subtitle ? (
             <>
@@ -118,14 +118,14 @@ export default function Projects() {
           {researchStudies.map((study) => (
             <li
               key={study.id}
-              className="grid grid-cols-1 gap-y-1 border-b border-border py-4 lg:min-h-[73px] lg:grid-cols-[3.5rem_minmax(11rem,16rem)_minmax(0,1fr)_auto_1.5rem] lg:items-center lg:gap-x-6 lg:py-0"
+              className="grid grid-cols-1 gap-y-1 border-b border-border py-4 lg:min-h-[73px] lg:grid-cols-[3.5rem_minmax(14rem,18rem)_minmax(0,1fr)_13.25rem_1.5rem] lg:items-center lg:gap-x-6 lg:py-0"
             >
               <span className="text-mono text-ink">{study.id}</span>
-              <span className="text-body font-medium text-ink">{study.title}</span>
-              <span className="text-[15px] leading-snug text-ink-secondary">{study.summary}</span>
-              <span className="font-mono text-[0.75rem] leading-none tracking-[0.06em] text-ink-muted">
-                {study.meta}
+              <span className="text-[20px] font-medium leading-[28px] tracking-[-0.01em] text-ink">
+                {study.title}
               </span>
+              <span className="text-[15px] leading-snug text-ink-secondary">{study.summary}</span>
+              <span className="text-mono text-ink-muted">{study.meta}</span>
               <span aria-hidden="true" className="text-body text-ink lg:text-right">
                 →
               </span>
