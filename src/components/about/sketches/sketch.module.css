@@ -12,13 +12,14 @@
  */
 
 .frame {
-  --sk-ink: rgb(244 242 236 / 0.86);
+  --sk-ink: rgb(var(--ink));
+  --sk-paper: rgb(var(--bg));
   /* Strokes only (non-text, ≥ 3:1 on the page background). */
-  --sk-muted: rgb(244 242 236 / 0.4);
-  /* Quiet words in sketches: ≥ 7:1 on the page background. */
-  --sk-muted-text: rgb(244 242 236 / 0.66);
-  --sk-faint: rgb(244 242 236 / 0.14);
-  --sk-accent: #3dd964;
+  --sk-muted: rgb(var(--ink) / 0.4);
+  /* Quiet words in sketches. */
+  --sk-muted-text: rgb(var(--ink-muted));
+  --sk-faint: rgb(var(--ink) / 0.14);
+  --sk-accent: rgb(var(--accent));
   --sk-ease-draw: cubic-bezier(0.45, 0.05, 0.3, 1);
   --sk-ease-in: cubic-bezier(0.32, 0.72, 0, 1);
   --base: 0ms;
@@ -47,10 +48,15 @@
 
 /* A hand-drawn underline that runs under every line of a wrapped phrase. */
 .frame [data-underline] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C 60 6, 120 11, 180 8 S 270 6, 298 4' fill='none' stroke='%233dd964' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 0.32em;
+  background-color: rgb(var(--accent));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C 60 6, 120 11, 180 8 S 270 6, 298 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C 60 6, 120 11, 180 8 S 270 6, 298 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 0 100%;
+  mask-position: 0 100%;
+  -webkit-mask-size: 100% 0.32em;
+  mask-size: 100% 0.32em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   padding-bottom: 0.08em;
@@ -67,7 +73,8 @@
   }
 
   .frame[data-sketch="armed"] [data-underline] {
-    background-size: 0% 0.32em;
+    -webkit-mask-size: 0% 0.32em;
+    mask-size: 0% 0.32em;
   }
 
   .frame[data-sketch="armed"] [data-appear] {
@@ -81,7 +88,9 @@
   }
 
   .frame[data-sketch="play"] [data-underline] {
-    transition: background-size var(--t, 600ms) var(--sk-ease-draw) calc(var(--base) + var(--d, 0ms));
+    transition:
+      mask-size var(--t, 600ms) var(--sk-ease-draw) calc(var(--base) + var(--d, 0ms)),
+      -webkit-mask-size var(--t, 600ms) var(--sk-ease-draw) calc(var(--base) + var(--d, 0ms));
   }
 
   .frame[data-sketch="play"] [data-appear] {
@@ -125,7 +134,8 @@
 
 @keyframes sk-reveal-underline {
   to {
-    background-size: 100% 0.32em;
+    -webkit-mask-size: 100% 0.32em;
+    mask-size: 100% 0.32em;
   }
 }
 

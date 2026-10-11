@@ -11,6 +11,57 @@ import {
 } from "./professional";
 
 /** Copy for the PF27 /about Professional frame. */
+export interface WorkHabit {
+  id: "understand" | "connect" | "make" | "challenge";
+  number: string;
+  title: string;
+  body: string;
+  foot: string;
+  sketchLabel: string;
+}
+
+export const howIWork = {
+  eyebrow: "01 — How I work",
+  title: "Four habits, each one from a real project.",
+  habits: [
+    {
+      id: "understand",
+      number: "01",
+      title: "Start where people get stuck.",
+      body: "Workarounds and odd questions are the signal. In CodeAssessment it was an engineer asking which file caused a 5.1.",
+      foot: "Seen in · MLSToolbox",
+      sketchLabel:
+        "Three notes: P1 “I just export it”, P2 “where’s the status?”, P3 “I ask someone”, a scatter of marks, and the note workarounds = signal.",
+    },
+    {
+      id: "connect",
+      number: "02",
+      title: "Make the system visible.",
+      body: "Most of my work is translation: a pipeline, a banking service, an analyzer — turned into something people can inspect and correct.",
+      foot: "Seen in · MLSToolbox · HSBC",
+      sketchLabel:
+        "People, Product, Data, Constraints and Technology joined at one point marked decided here, with a note back to 01?",
+    },
+    {
+      id: "make",
+      number: "03",
+      title: "Prototype in the real material.",
+      body: "When it helps, I build it. Figma → MCP → Cursor puts a working prototype in front of people quickly.",
+      foot: "Seen in · CodeAssessment V3",
+      sketchLabel: "A quick wireframe that resolves into an interface, labelled rough → resolved.",
+    },
+    {
+      id: "challenge",
+      number: "04",
+      title: "Say what the evidence can’t prove.",
+      body: "Small samples, partial results, directional findings. I’d rather label the limit than oversell the number.",
+      foot: "Seen in · every case study",
+      sketchLabel:
+        "Checks for Usability, Clarity and Feasibility, Evidence still open, and the note Keep improving.",
+    },
+  ] as const satisfies readonly WorkHabit[],
+};
+
 export const professionalHeader = {
   eyebrow: "About — Professional",
   title: ["Understand the system.", "Then shape the interface."] as const,
@@ -65,6 +116,7 @@ export interface ThinkingStage {
 
 export const thinkingStages: ThinkingStage[] = [
   {
+    // Not shown on the PF27 /about page. The frame uses four habits and drops this stage.
     id: "question",
     number: "01",
     title: "Question",

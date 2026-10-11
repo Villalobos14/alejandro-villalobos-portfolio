@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import AboutHeader from "@/components/about/AboutHeader";
+import HowIWork from "@/components/about/HowIWork";
 import ProfessionalCapabilities from "@/components/about/ProfessionalCapabilities";
 import ProfessionalClosing from "@/components/about/ProfessionalClosing";
 import ProfessionalExperience from "@/components/about/ProfessionalExperience";
-import ProfessionalThinking from "@/components/about/ProfessionalThinking";
 import { handFont } from "@/components/about/sketches/hand-font";
 import PageShell from "@/components/system/PageShell";
 import { professionalHeader } from "@/lib/about";
@@ -27,9 +27,9 @@ export default function AboutPage() {
         </noscript>
         <div className="page-container">
           <AboutHeader />
+          <HowIWork />
         </div>
         <div className="[&>section]:mt-16 lg:[&>section]:mt-24">
-          <ProfessionalThinking />
           <ProfessionalExperience />
           <ProfessionalCapabilities />
           <ProfessionalClosing />

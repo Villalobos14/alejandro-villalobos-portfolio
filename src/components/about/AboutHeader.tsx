@@ -28,7 +28,7 @@ export default function AboutHeader() {
       <div className="w-full md:col-start-1 md:w-max frame:absolute frame:left-0 frame:top-[470px]">
         <AboutSwitch stretch />
       </div>
-      <p className="order-6 max-w-[411px] text-mono text-ink-muted md:order-none md:col-start-1 frame:absolute frame:left-0 frame:top-[548px] frame:w-[411px]">
+      <p className="order-6 max-w-[411px] text-mono text-ink-muted md:max-w-none md:whitespace-nowrap md:order-none md:col-start-1 frame:absolute frame:left-0 frame:top-[548px] frame:w-[411px]">
         {professionalHeader.meta}
       </p>
       <figure className="relative order-5 mx-auto aspect-[330/420] w-full max-w-[330px] border border-border bg-bg md:order-none md:col-start-2 md:row-span-5 md:row-start-1 md:mx-0 md:justify-self-end frame:absolute frame:right-0 frame:top-[96px] frame:mx-0 frame:h-[420px] frame:w-[330px] frame:max-w-none">

@@ -19,10 +19,19 @@ import SketchFrame from "./SketchFrame";
  */
 
 const F: Frame = { w: 480, h: 360 };
+const CARD: Frame = { w: 306, h: 200 };
 
 function Panel({ label, children }: { label: string; children: ReactNode }) {
   return (
     <SketchFrame width={F.w} height={F.h} label={label} className="w-full">
+      {children}
+    </SketchFrame>
+  );
+}
+
+function Card({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <SketchFrame width={CARD.w} height={CARD.h} label={label} className="w-full">
       {children}
     </SketchFrame>
   );
@@ -63,211 +72,188 @@ export function QuestionSketch({ label }: { label: string }) {
   );
 }
 
-const CARDS = [
-  { id: "P1", x: 28, y: 36, w: 196, h: 96, r: -2, quote: "“I just export it”" },
-  { id: "P2", x: 248, y: 28, w: 214, h: 96, r: 1.5, quote: "“where’s the status?”" },
-  { id: "P3", x: 44, y: 158, w: 192, h: 92, r: 1, quote: "“I ask someone”" },
+const BUBBLES = [
+  { id: "P1", x: 10, y: 8, w: 168, h: 38, r: -1.5, quote: "“I just export it”", size: 14 },
+  { id: "P2", x: 16, y: 50, w: 176, h: 38, r: 1.2, quote: "“where’s the status?”", size: 13 },
+  { id: "P3", x: 8, y: 92, w: 158, h: 38, r: -0.4, quote: "“I ask someone”", size: 14 },
 ] as const;
 
 const DOTS: [number, number][] = [
-  [286, 252],
-  [304, 238],
-  [320, 246],
-  [338, 228],
-  [356, 236],
-  [372, 216],
-  [392, 224],
+  [214, 24],
+  [228, 18],
+  [242, 30],
+  [256, 20],
+  [270, 34],
+  [284, 26],
+  [224, 42],
+  [248, 46],
+  [266, 52],
+  [286, 48],
 ];
 
 export function UnderstandSketch({ label }: { label: string }) {
   return (
-    <Panel label={label}>
-      <svg viewBox={`0 0 ${F.w} ${F.h}`} aria-hidden="true">
+    <Card label={label}>
+      <svg viewBox={`0 0 ${CARD.w} ${CARD.h}`} aria-hidden="true">
         <g data-tone="muted">
-          {CARDS.map((card) => (
-            <Fade key={card.id}>
+          {BUBBLES.map((bubble) => (
+            <Fade key={bubble.id}>
               <rect
-                x={card.x}
-                y={card.y}
-                width={card.w}
-                height={card.h}
-                rx={4}
+                x={bubble.x}
+                y={bubble.y}
+                width={bubble.w}
+                height={bubble.h}
+                rx={8}
                 {...precise}
-                transform={`rotate(${card.r} ${card.x + card.w / 2} ${card.y + card.h / 2})`}
+                transform={`rotate(${bubble.r} ${bubble.x + bubble.w / 2} ${bubble.y + bubble.h / 2})`}
               />
             </Fade>
           ))}
           <Fade>
-            <line x1={270} y1={274} x2={456} y2={274} {...precise} />
-            <line x1={270} y1={174} x2={270} y2={274} {...precise} />
             {DOTS.map(([cx, cy]) => (
-              <circle key={cx} cx={cx} cy={cy} r={3} fill="currentColor" />
+              <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={2.2} fill="currentColor" />
             ))}
-            <circle cx={440} cy={186} r={3.2} fill="var(--sk-ink)" />
+            <circle cx={270} cy={20} r={2.6} fill="var(--sk-ink)" />
           </Fade>
         </g>
-        <Draw d={roughEllipse(440, 186, 15, 13, 47)} delay={150} duration={320} />
-        <Draw d={handUnderline(62, 206, 230, 49)} tone="accent" delay={350} duration={280} />
-        <DrawArrow arrow={curvedArrow([150, 290], [138, 246], -0.35, 51)} tone="accent" delay={650} duration={240} width={1.6} />
+        <Draw d={roughEllipse(270, 20, 12, 10, 47)} delay={180} duration={280} />
+        <Draw d={handUnderline(14, 168, 178, 49)} tone="accent" delay={420} duration={260} />
       </svg>
-      {CARDS.map((card) => (
-        <span key={card.id}>
-          <Note frame={F} x={card.x + 14} y={card.y + 20} variant="label" size={10} tone="muted">
-            {card.id}
+      {BUBBLES.map((bubble) => (
+        <span key={bubble.id}>
+          <Note frame={CARD} x={bubble.x + 10} y={bubble.y + 12} size={11} tone="muted" rotate={bubble.r}>
+            {bubble.id}
           </Note>
-          <Note frame={F} x={card.x + 14} y={card.y + 56} size={card.id === "P2" ? 24 : 26} rotate={card.r}>
-            {card.quote}
+          <Note frame={CARD} x={bubble.x + 10} y={bubble.y + 26} size={bubble.size} rotate={bubble.r}>
+            {bubble.quote}
           </Note>
         </span>
       ))}
-      <Note frame={F} x={270} y={296} variant="label" size={10} tone="muted" detail>
-        Time to an answer
-      </Note>
-      <Note frame={F} x={46} y={312} size={28} tone="accent">
+      <Note frame={CARD} x={14} y={186} size={15} tone="accent">
         workarounds = signal
       </Note>
-    </Panel>
+    </Card>
   );
 }
 
 const NODES = [
-  { id: "people", label: "People", x: 40, y: 54, w: 120, h: 36 },
-  { id: "product", label: "Product", x: 320, y: 40, w: 124, h: 36 },
-  { id: "data", label: "Data", x: 344, y: 196, w: 100, h: 36 },
-  { id: "constraints", label: "Constraints", x: 30, y: 214, w: 152, h: 36 },
-  { id: "technology", label: "Technology", x: 176, y: 296, w: 150, h: 36 },
+  { id: "people", label: "People", x: 12, y: 10, w: 74, h: 24 },
+  { id: "product", label: "Product", x: 214, y: 8, w: 78, h: 24 },
+  { id: "constraints", label: "Constraints", x: 8, y: 70, w: 104, h: 24 },
+  { id: "data", label: "Data", x: 228, y: 64, w: 64, h: 24 },
+  { id: "technology", label: "Technology", x: 104, y: 128, w: 104, h: 24 },
 ] as const;
 
-const HUB: [number, number] = [234, 158];
+const HUB: [number, number] = [168, 58];
 
 export function ConnectSketch({ label }: { label: string }) {
   return (
-    <Panel label={label}>
-      <svg viewBox={`0 0 ${F.w} ${F.h}`} aria-hidden="true">
+    <Card label={label}>
+      <svg viewBox={`0 0 ${CARD.w} ${CARD.h}`} aria-hidden="true">
         <g data-tone="muted">
-          <Fade>
-            {/* The notes from the last stage, now grouped under People. */}
-            {[48, 66, 84].map((x, index) => (
-              <rect key={x} x={x} y={100 + (index % 2) * 3} width={14} height={11} rx={1.5} {...precise} strokeOpacity={0.6} />
-            ))}
-          </Fade>
           <Fade>
             {NODES.map((node) => {
               const cx = node.x + node.w / 2;
               const cy = node.y + node.h / 2;
               return <line key={node.id} x1={cx} y1={cy} x2={HUB[0]} y2={HUB[1]} {...precise} strokeOpacity={0.7} />;
             })}
-            <circle cx={HUB[0]} cy={HUB[1]} r={13} {...precise} />
+            <circle cx={HUB[0]} cy={HUB[1]} r={10} {...precise} />
           </Fade>
-          {/* Filled so the connections stop at each node's edge. */}
           {NODES.map((node) => (
             <Fade key={node.id}>
-              <rect x={node.x} y={node.y} width={node.w} height={node.h} rx={18} {...precise} fill="#0C0D0E" />
+              <rect x={node.x} y={node.y} width={node.w} height={node.h} rx={12} {...precise} fill="var(--sk-paper)" />
             </Fade>
           ))}
         </g>
         <Fade>
-          <circle cx={HUB[0]} cy={HUB[1]} r={5} fill="var(--sk-accent)" />
+          <circle cx={HUB[0]} cy={HUB[1]} r={3.5} fill="var(--sk-accent)" />
         </Fade>
-        <DrawArrow arrow={curvedArrow([190, 152], [214, 156], 0.1, 53)} tone="accent" delay={300} duration={240} width={1.6} />
-        <DrawArrow arrow={curvedArrow([84, 256], [62, 292], 0.35, 55)} delay={550} duration={280} width={1.5} />
+        <DrawArrow arrow={curvedArrow([132, 86], [158, 66], 0.2, 53, 7)} tone="accent" delay={280} duration={220} width={1.5} />
+        <DrawArrow arrow={curvedArrow([70, 156], [36, 176], 0.3, 55, 7)} delay={520} duration={240} width={1.4} />
       </svg>
       {NODES.map((node) => (
         <Note
           key={node.id}
-          frame={F}
+          frame={CARD}
           x={node.x + node.w / 2}
           y={node.y + node.h / 2}
-          variant="label"
-          size={12}
+          size={13}
           align="center"
         >
           {node.label}
         </Note>
       ))}
-      <Note frame={F} x={40} y={154} size={26} tone="accent">
+      <Note frame={CARD} x={86} y={100} size={15} tone="accent">
         decided here
       </Note>
-      <Note frame={F} x={28} y={312} size={23} tone="muted">
+      <Note frame={CARD} x={12} y={186} size={12} tone="muted">
         back to 01?
       </Note>
-    </Panel>
+    </Card>
   );
 }
 
 export function MakeSketch({ label }: { label: string }) {
-  const x = 40;
-  const y = 36;
-  const w = 400;
-  const h = 270;
+  const x = 22;
+  const y = 12;
+  const w = 196;
+  const h = 140;
 
   return (
-    <Panel label={label}>
-      <svg viewBox={`0 0 ${F.w} ${F.h}`} aria-hidden="true">
-        {/* v0: drawn by hand, then it steps back. */}
-        <g data-dim="" style={{ ["--dim" as string]: "850ms" }}>
-          <Draw d={roughRect(x, y, w, h, 61)} duration={420} />
-          <Draw d={roughLine([x, y + 24], [x + w, y + 24], 62, 0.008)} delay={280} duration={160} />
-          <Draw d={roughRect(x + 12, y + 38, 72, h - 52, 63)} delay={340} duration={260} />
-          <Draw d={roughRect(x + w - 74, y + 36, 60, 20, 64)} delay={460} duration={180} />
-          {[92, 124, 156, 188, 220].map((dy, index) => (
-            <Draw
-              key={dy}
-              d={handUnderline(x + 104, x + 104 + 120 + (index % 3) * 34, y + dy, 70 + index)}
-              delay={520 + index * 50}
-              duration={150}
-              width={1.5}
-            />
-          ))}
-          <Draw d={roughLine([x + 100, y + 70], [x + w - 14, y + 72], 66, 0.01)} delay={500} duration={160} width={1.4} />
+    <Card label={label}>
+      <svg viewBox={`0 0 ${CARD.w} ${CARD.h}`} aria-hidden="true">
+        <g data-dim="" style={{ ["--dim" as string]: "720ms" }}>
+          <Draw d={roughRect(x, y, w, h, 61)} duration={380} />
+          <Draw d={roughLine([x, y + 18], [x + w, y + 18], 62, 0.01)} delay={240} duration={140} />
+          <Draw d={roughRect(x + 8, y + 28, 36, h - 40, 63)} delay={320} duration={200} />
+          <Draw d={roughLine([x + 54, y + 42], [x + w - 12, y + 42], 64, 0.012)} delay={420} duration={120} width={1.4} />
+          <Draw d={roughLine([x + 54, y + 64], [x + w - 28, y + 66], 65, 0.012)} delay={480} duration={120} width={1.4} />
+          <Draw d={roughLine([x + 54, y + 86], [x + w - 18, y + 84], 66, 0.012)} delay={540} duration={120} width={1.4} />
+          <Draw d={roughLine([x + 54, y + 108], [x + w - 36, y + 110], 67, 0.01)} delay={600} duration={120} width={1.4} />
         </g>
-        {/* v1: the same structure, decided. */}
-        <InterfaceSketch x={x} y={y} w={w} h={h} sidebar={96} rows={5} appear={850} />
+        <InterfaceSketch x={x} y={y} w={w} h={h} sidebar={44} rows={3} appear={720} />
       </svg>
-      <Note frame={F} x={440} y={334} size={24} tone="muted" align="right">
+      <Note frame={CARD} x={290} y={184} size={14} align="right">
         rough → resolved
       </Note>
-    </Panel>
+    </Card>
   );
 }
 
-const CHECKS = ["Usability", "Clarity", "Feasibility"] as const;
+const CHECKS = [
+  { label: "Usability", y: 36 },
+  { label: "Clarity", y: 68 },
+  { label: "Feasibility", y: 100 },
+] as const;
 
 export function ChallengeSketch({ label }: { label: string }) {
-  const loop = cubicArrow([390, 238], [392, 352], [8, 372], [30, 64]);
-
   return (
-    <Panel label={label}>
-      <svg viewBox={`0 0 ${F.w} ${F.h}`} aria-hidden="true">
-        <InterfaceSketch x={84} y={40} w={222} h={190} sidebar={56} rows={4} />
+    <Card label={label}>
+      <svg viewBox={`0 0 ${CARD.w} ${CARD.h}`} aria-hidden="true">
         {CHECKS.map((check, index) => (
           <Draw
-            key={check}
-            d={handCheck(322, 76 + index * 42, 17)}
+            key={check.label}
+            d={handCheck(28, check.y, 14)}
             tone="accent"
-            delay={100 + index * 150}
-            duration={200}
-            width={2}
+            delay={80 + index * 140}
+            duration={180}
+            width={1.8}
           />
         ))}
-        <Draw d={roughEllipse(331, 200, 9, 10, 71)} delay={500} duration={240} width={1.6} />
-        <DrawArrow arrow={loop} tone="accent" delay={650} duration={600} width={1.8} />
+        <Draw d={roughEllipse(36, 136, 8, 8, 71)} delay={520} duration={220} width={1.5} />
       </svg>
-      {CHECKS.map((check, index) => (
-        <Note key={check} frame={F} x={348} y={70 + index * 42} size={27}>
-          {check}
+      {CHECKS.map((check) => (
+        <Note key={check.label} frame={CARD} x={56} y={check.y - 2} size={14}>
+          {check.label}
         </Note>
       ))}
-      <Note frame={F} x={348} y={196} size={27}>
+      <Note frame={CARD} x={56} y={132} size={14}>
         Evidence?
       </Note>
-      <Note frame={F} x={12} y={22} size={21} tone="muted" detail>
-        back to 01
-      </Note>
-      <Note frame={F} x={214} y={340} size={29} tone="accent" align="center">
+      <Note frame={CARD} x={28} y={176} size={16} tone="accent">
         Keep improving.
       </Note>
-    </Panel>
+    </Card>
   );
 }
 
