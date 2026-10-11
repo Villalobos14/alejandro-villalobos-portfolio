@@ -1,10 +1,6 @@
-export interface Photo {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  caption?: string;
-}
+import type { Photo } from "@/lib/media";
+
+export type { Photo } from "@/lib/media";
 
 export interface PersonalBlock {
   id: string;

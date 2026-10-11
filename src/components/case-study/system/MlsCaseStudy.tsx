@@ -11,6 +11,7 @@ import {
   mlsFlow,
   mlsHeader,
   mlsNext,
+  mlsPhotos,
   mlsPlaceholders,
   mlsProblem,
   mlsReflection,
@@ -306,6 +307,8 @@ export default function MlsCaseStudy() {
                 alt="Outcomes dashboard of the documented study"
                 label="Visual 10 — Outcomes"
                 sizes="(min-width: 1024px) 636px, 100vw"
+                photos={mlsPhotos}
+                photoIndex={0}
               />
             </Reveal>
           </div>
@@ -343,9 +346,23 @@ export default function MlsCaseStudy() {
               <figure>
                 {column.src.endsWith("visual-12-themes.png") ? (
                   // TODO(content): re-exportar, el archivo está vacío
-                  <CaseVisual src={column.src} alt={column.alt} label={column.alt} sizes="(min-width: 1024px) 416px, 100vw" />
+                  <CaseVisual
+                    src={column.src}
+                    alt={column.alt}
+                    label={column.alt}
+                    sizes="(min-width: 1024px) 416px, 100vw"
+                    photos={mlsPhotos}
+                    photoIndex={mlsPhotos.findIndex((photo) => photo.src === column.src)}
+                  />
                 ) : (
-                  <CaseVisual src={column.src} alt={column.alt} label={column.alt} sizes="(min-width: 1024px) 416px, 100vw" />
+                  <CaseVisual
+                    src={column.src}
+                    alt={column.alt}
+                    label={column.alt}
+                    sizes="(min-width: 1024px) 416px, 100vw"
+                    photos={mlsPhotos}
+                    photoIndex={mlsPhotos.findIndex((photo) => photo.src === column.src)}
+                  />
                 )}
                 <figcaption className="mt-4 text-[15px] leading-snug text-ink-secondary">{column.caption}</figcaption>
               </figure>

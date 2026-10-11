@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { Photo } from "@/lib/personal";
+import type { Photo } from "@/lib/media";
 import { useLightbox } from "./LightboxProvider";
 
 interface PhotoButtonProps {

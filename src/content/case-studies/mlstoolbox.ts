@@ -1,3 +1,5 @@
+import type { Photo } from "@/lib/media";
+
 /** Final Figma copy for /work/mlstoolbox. The route renders this module. */
 
 export const mlsHeader = {
@@ -148,6 +150,24 @@ export const mlsBehind = {
     },
   ],
 } as const;
+
+const visualSize = { width: 3840, height: 2400 } as const;
+
+/** Real visuals in document order, so the lightbox can move between them. */
+export const mlsPhotos: Photo[] = [
+  {
+    src: "/case-studies/visual-10-outcomes.jpg",
+    alt: "Outcomes dashboard of the documented study",
+    caption: "Outcomes dashboard of the documented study",
+    ...visualSize,
+  },
+  ...mlsBehind.columns.map((column) => ({
+    src: column.src,
+    alt: column.alt,
+    caption: column.caption,
+    ...visualSize,
+  })),
+];
 
 export const mlsReflection = {
   eyebrow: "08 — Reflection",

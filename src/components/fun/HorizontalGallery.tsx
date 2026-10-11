@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { prefersReducedMotion } from "@/lib/motion";
-import type { Photo } from "@/lib/personal";
+import type { Photo } from "@/lib/media";
 import { useLightbox } from "@/components/media/LightboxProvider";
 
 interface HorizontalGalleryProps {

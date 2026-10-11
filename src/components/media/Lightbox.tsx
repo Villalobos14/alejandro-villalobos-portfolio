@@ -8,7 +8,7 @@ import {
   ArrowRightIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import type { Photo } from "@/lib/personal";
+import type { Photo } from "@/lib/media";
 import { BLOCK_EASE, prefersReducedMotion } from "@/lib/motion";
 
 interface LightboxProps {

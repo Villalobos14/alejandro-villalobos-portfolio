@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Photo } from "@/lib/personal";
+import type { Photo } from "@/lib/media";
 import Lightbox from "./Lightbox";
 
 interface LightboxState {

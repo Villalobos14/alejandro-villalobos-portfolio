@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import type { Photo } from "@/lib/media";
+import { useLightbox } from "@/components/media/LightboxProvider";
 
 interface CaseVisualProps {
   src?: string;
@@ -9,10 +13,17 @@ interface CaseVisualProps {
   priority?: boolean;
   sizes?: string;
   className?: string;
+  /** Full case collection. Only real images belong in it. */
+  photos?: readonly Photo[];
+  photoIndex?: number;
 }
+
+const focus =
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 /**
  * A 16:10 case-study slot. Without `src` it stays a labelled placeholder.
+ * With `src` and a collection index it opens the shared lightbox.
  */
 export default function CaseVisual({
   src,
@@ -22,7 +33,12 @@ export default function CaseVisual({
   priority = false,
   sizes = "(min-width: 1024px) 840px, 100vw",
   className = "",
+  photos,
+  photoIndex,
 }: CaseVisualProps) {
+  const { openLightbox } = useLightbox();
+  const canOpen = Boolean(src && photos && photoIndex !== undefined && photoIndex >= 0);
+
   return (
     <figure
       className={`relative overflow-hidden rounded-xl border border-border bg-bg-subtle ${
@@ -30,7 +46,24 @@ export default function CaseVisual({
       } ${className}`}
       style={{ aspectRatio: ratio }}
     >
-      {src ? (
+      {src && canOpen && photos && photoIndex !== undefined ? (
+        <button
+          type="button"
+          aria-label={`Ampliar: ${label}`}
+          onClick={() => openLightbox([...photos], photoIndex)}
+          className={`absolute inset-0 fine:cursor-zoom-in ${focus}`}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            className="pointer-events-none object-cover"
+          />
+        </button>
+      ) : src ? (
         <Image
           src={src}
           alt={alt}
