@@ -177,7 +177,7 @@ export function MarkerSentence({
   const marked = phase === "marked";
 
   return (
-    <div ref={sectionRef} className="px-[var(--page-gutter)] py-[clamp(4rem,10vh,7rem)]">
+    <div ref={sectionRef} className="py-[clamp(4rem,10vh,7rem)]">
       <div className="overflow-hidden">
         <Tag
           data-sentence

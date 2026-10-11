@@ -29,7 +29,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --site-header-h: 0px;
-  --page-gutter: clamp(16px, 3vw, 64px);
+  --page-gutter: clamp(16px, 5vw, 72px);
   --bottom-nav-height: 0px;
   /*
    * The dock sits 32px above the safe area. Clearance is that offset, the
@@ -157,4 +157,53 @@ html.site-cursor-on [data-site-header] button * {
   max-width: 16rem;
   opacity: 1;
   margin-inline: 0.15rem;
+}
+
+/* Shared column. The cutting mats stay full-bleed; text sits in this box. */
+.page-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1920px;
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/*
+ * Villalobos is pulled left of the gutter by its side bearing plus 6px, and
+ * the painted word is 4px narrower than the column. At 1440 that is x=66, 1292px.
+ */
+.page-wordmark {
+  display: block;
+  width: calc(100.687% - 4px);
+  height: auto;
+  margin-left: calc(-0.67% - 6px);
+}
+
+.hero-role {
+  width: 100%;
+  max-width: 922px;
+  margin-left: auto;
+  container-type: inline-size;
+}
+
+.hero-description {
+  max-width: 100%;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  color: rgb(var(--ink-secondary));
+}
+
+@container (min-width: 46.5rem) {
+  .hero-description {
+    width: max-content;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+}
+
+@container (min-width: 51rem) {
+  .hero-description {
+    font-size: 24px;
+  }
 }

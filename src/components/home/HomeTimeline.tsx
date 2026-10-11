@@ -610,7 +610,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
           boxWidth={boxWidth}
         />
       </div>
-      <div ref={copyRef} className="relative z-[4] mx-auto mt-8 w-[min(420px,calc(100%-3rem))] px-[var(--page-gutter)]">
+      <div ref={copyRef} className="relative z-[4] mx-auto mt-8 w-[min(420px,calc(100%-3rem))]">
         <MilestoneCopy item={current} reduced={reduced} />
       </div>
       <div ref={curveRef} className="relative z-[2] mt-12 h-[220px] w-full shrink-0">
@@ -718,7 +718,7 @@ function MobileScene({ reduced }: { reduced: boolean }) {
   ];
 
   return (
-    <div className="flex w-full flex-col gap-8 px-[var(--page-gutter)] pb-[calc(7rem+env(safe-area-inset-bottom))] pt-8">
+    <div className="flex w-full flex-col gap-8 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-8">
       <div role="group" aria-label="Timeline years" className="grid grid-cols-3 gap-2">
         {items.map((item, index) => (
           <button
@@ -766,7 +766,7 @@ export default function HomeTimeline() {
   return (
     <div className="min-w-0">
       {desktop ? <DesktopScene reduced={reduced} /> : <MobileScene reduced={reduced} />}
-      <div className="px-[var(--page-gutter)] pb-4 pt-8">
+      <div className="pb-4 pt-8">
         <ProfileLink />
       </div>
     </div>

@@ -104,7 +104,7 @@ export default function Projects() {
     <section
       id={PROJECTS_SECTION_ID}
       aria-labelledby="selected-work-title"
-      className="w-full min-w-0 scroll-mt-8 px-[var(--page-gutter)] pb-16 pt-4 sm:pb-24"
+      className="w-full min-w-0 scroll-mt-8 pb-16 pt-4 sm:pb-24"
     >
       {featured ? <FeaturedCase project={featured} /> : null}
       <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-16">

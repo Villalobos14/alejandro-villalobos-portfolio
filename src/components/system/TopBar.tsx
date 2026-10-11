@@ -32,7 +32,7 @@ export default function TopBar() {
 
   return (
     <header className="bg-bg text-ink">
-      <div className="mx-auto flex w-full max-w-[1440px] items-baseline justify-between gap-4 px-[clamp(16px,5vw,72px)] pb-2 pt-4">
+      <div className="page-container flex items-baseline justify-between gap-4 pb-2 pt-4">
         <p className="text-mono text-ink">AV</p>
         <p className="text-mono-s text-ink-secondary">{routeLabel(pathname)}</p>
       </div>

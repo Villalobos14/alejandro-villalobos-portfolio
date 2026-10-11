@@ -192,7 +192,7 @@ export default function HomePersonal() {
         textClassName="text-[clamp(1.7rem,7vw,3rem)] font-medium leading-[1.12] tracking-tight lg:text-[clamp(2rem,4vw,4.25rem)]"
         meme={<MemeMark />}
       />
-      <ul className="grid grid-cols-1 gap-10 px-[var(--page-gutter)] sm:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2">
         {homeNarrativeContent.personalPreview.map((item) => (
           <li key={item.label} className="border-t border-border pt-4">
             <p className="text-body uppercase tracking-[0.18em] text-ink-muted">{item.label}</p>
@@ -200,7 +200,7 @@ export default function HomePersonal() {
           </li>
         ))}
       </ul>
-      <div className="px-[var(--page-gutter)]">
+      <div>
         <TransitionLink
           href="/fun"
           className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-border px-5 py-3 text-label text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:bg-accent/10 ${focusStyles}`}

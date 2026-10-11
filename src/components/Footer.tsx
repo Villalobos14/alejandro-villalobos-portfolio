@@ -28,7 +28,7 @@ export default function Footer() {
           </span>
         ))}
       </div>
-      <div className="relative px-[var(--page-gutter)] pb-10 pt-16">
+      <div className="page-container relative pb-10 pt-16">
         <p className="text-mono-s text-ink-muted">Say hi</p>
         <MaskedLines
           as="h2"

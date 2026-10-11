@@ -104,7 +104,7 @@ function NarrativePanels() {
 export default function HomeNarrative() {
   return (
     <section id="home-narrative" aria-label="Practice and personal notes" className="w-full min-w-0">
-      <div className="flex flex-col gap-6 px-[var(--page-gutter)] pt-10 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-6 pt-10 sm:flex-row sm:items-start sm:justify-between">
         <h2 className="min-w-0 text-[clamp(2rem,4.6vw,66px)] font-medium leading-[0.98] text-ink">
           <span className="block">So, how did I get here? A quick tour,</span>
           <span className="block">2002 to now.</span>
