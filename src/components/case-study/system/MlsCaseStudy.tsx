@@ -62,9 +62,9 @@ export default function MlsCaseStudy() {
           <p className={`mt-6 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px] frame:mt-10`}>
             {mlsHeader.deck}
           </p>
-          <dl className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 frame:mt-auto">
+          <dl className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6 frame:mt-auto frame:grid-cols-[repeat(4,306px)]">
             {mlsHeader.meta.map((item) => (
-              <div key={item.label}>
+              <div key={item.label} data-hairline="meta" className="border-t border-border pt-[15px]">
                 <dt className={eyebrow}>{item.label}</dt>
                 <MetaValue lines={item.lines} />
               </div>
@@ -79,9 +79,13 @@ export default function MlsCaseStudy() {
         </section>
 
         <section aria-label="Results" className="pb-12 frame:flex frame:min-h-[211px] frame:flex-col frame:justify-between frame:pb-0">
-          <div className="grid divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
+          <div className="grid md:grid-cols-3 md:gap-x-6">
             {mlsResults.shifts.map((shift) => (
-              <div key={shift.label} className="py-6 md:px-7 md:py-7 md:first:pl-0 md:last:pr-0">
+              <div
+                key={shift.label}
+                data-hairline="result"
+                className="border-t border-border py-6 md:h-[141px] md:border-r md:px-7 md:py-7 md:last:border-r-0"
+              >
                 <p className="flex flex-wrap items-baseline gap-x-3">
                   <span className="text-[28px] font-medium leading-none text-ink-muted line-through">{shift.from}</span>
                   <span className="text-[28px] font-medium leading-none text-ink-muted" aria-hidden="true">
@@ -135,25 +139,29 @@ export default function MlsCaseStudy() {
           </div>
         </section>
 
-        <section aria-labelledby="mls-flow" className="py-12 frame:min-h-[1157px] frame:pb-[12px] frame:pt-[147px]">
-          <p className={eyebrow}>{mlsFlow.eyebrow}</p>
-          <h2 id="mls-flow" className={`mt-3 ${h2}`}>
-            {mlsFlow.title}
-          </h2>
-          <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
-            {mlsFlow.deck}
-          </p>
+        <section aria-labelledby="mls-flow" className="py-12 frame:min-h-[1157px] frame:pb-[12px] frame:pt-[131px]">
+          <div data-hairline="flow" className="border-t border-border pt-[15px] frame:min-h-[179px]">
+            <p className={eyebrow}>{mlsFlow.eyebrow}</p>
+            <h2 id="mls-flow" className={`mt-3 ${h2}`}>
+              {mlsFlow.title}
+            </h2>
+            <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+              {mlsFlow.deck}
+            </p>
+          </div>
           <CaseVisual className="mt-8" label={mlsPlaceholders.flow} alt="" sizes="(min-width: 1024px) 1296px, 100vw" />
         </section>
 
-        <section aria-labelledby="mls-decisions" className="py-12 frame:min-h-[1771px] frame:pt-[147px]">
-          <p className={eyebrow}>{mlsDecisions.eyebrow}</p>
-          <h2 id="mls-decisions" className={`mt-3 ${h2}`}>
-            {mlsDecisions.title}
-          </h2>
-          <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
-            {mlsDecisions.deck}
-          </p>
+        <section aria-labelledby="mls-decisions" className="py-12 frame:min-h-[1771px] frame:pt-[131px]">
+          <div data-hairline="decisions" className="border-t border-border pt-[15px] frame:min-h-[179px]">
+            <p className={eyebrow}>{mlsDecisions.eyebrow}</p>
+            <h2 id="mls-decisions" className={`mt-3 ${h2}`}>
+              {mlsDecisions.title}
+            </h2>
+            <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+              {mlsDecisions.deck}
+            </p>
+          </div>
           <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-x-6 md:gap-y-12">
             {mlsDecisions.cells.map((cell) => (
               <div key={cell.label}>
@@ -185,26 +193,30 @@ export default function MlsCaseStudy() {
               {mlsSystem.title}
             </h2>
             <p className={`mt-4 ${body}`}>{mlsSystem.body}</p>
-            <p className="mt-8 flex flex-wrap items-baseline gap-x-3">
-              <span className="text-[28px] font-medium leading-none text-ink-muted">{mlsSystem.from}</span>
-              <span className="text-[28px] leading-none text-ink-muted" aria-hidden="true">
-                →
-              </span>
-              <span className="text-[44px] font-medium leading-none text-ink">{mlsSystem.to}</span>
-            </p>
-            <p className="mt-3 text-[15px] leading-snug text-ink-secondary">{mlsSystem.caption}</p>
+            <div data-hairline="system" className="mt-8 border-t border-border pt-[15px] frame:h-[94px]">
+              <p className="flex flex-wrap items-baseline gap-x-3">
+                <span className="text-[28px] font-medium leading-none text-ink-muted">{mlsSystem.from}</span>
+                <span className="text-[28px] leading-none text-ink-muted" aria-hidden="true">
+                  →
+                </span>
+                <span className="text-[44px] font-medium leading-none text-ink">{mlsSystem.to}</span>
+              </p>
+              <p className="mt-3 text-[15px] leading-snug text-ink-secondary">{mlsSystem.caption}</p>
+            </div>
             <p className="mt-4 text-mono-s text-ink-muted">{mlsSystem.note}</p>
           </div>
         </section>
 
-        <section aria-labelledby="mls-validation" className="py-12 frame:min-h-[1310px] frame:pt-[163px]">
-          <p className={eyebrow}>{mlsValidation.eyebrow}</p>
-          <h2 id="mls-validation" className={`mt-3 ${h2}`}>
-            {mlsValidation.title}
-          </h2>
-          <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
-            {mlsValidation.deck}
-          </p>
+        <section aria-labelledby="mls-validation" className="py-12 frame:min-h-[1310px] frame:pt-[147px]">
+          <div data-hairline="validation" className="border-t border-border pt-[15px] frame:min-h-[179px]">
+            <p className={eyebrow}>{mlsValidation.eyebrow}</p>
+            <h2 id="mls-validation" className={`mt-3 ${h2}`}>
+              {mlsValidation.title}
+            </h2>
+            <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+              {mlsValidation.deck}
+            </p>
+          </div>
           <div className="mt-10 grid items-start gap-10 lg:grid-cols-[636fr_636fr] lg:gap-6">
             <div>
               <div className="hidden grid-cols-[344fr_130fr_130fr] gap-4 border-b border-border pb-3 md:grid">
@@ -253,7 +265,7 @@ export default function MlsCaseStudy() {
           </div>
           <div className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
             {mlsValidation.cards.map((card) => (
-              <div key={card.label}>
+              <div key={card.label} data-hairline="metric" className="border-t border-border pt-[15px]">
                 <p className={eyebrow}>{card.label}</p>
                 <p className="mt-2 text-[28px] font-medium leading-none text-ink">{card.value}</p>
                 <p className="mt-3 text-[15px] leading-snug text-ink-secondary">{card.body}</p>
@@ -266,11 +278,13 @@ export default function MlsCaseStudy() {
           </div>
         </section>
 
-        <section aria-labelledby="mls-behind" className="py-12 frame:min-h-[703px] frame:pt-[131px]">
-          <p className={eyebrow}>{mlsBehind.eyebrow}</p>
-          <h2 id="mls-behind" className={`mt-3 ${h2}`}>
-            {mlsBehind.title}
-          </h2>
+        <section aria-labelledby="mls-behind" className="py-12 frame:min-h-[703px] frame:pt-[115px]">
+          <div data-hairline="behind" className="border-t border-border pt-[15px] frame:min-h-[103px]">
+            <p className={eyebrow}>{mlsBehind.eyebrow}</p>
+            <h2 id="mls-behind" className={`mt-3 ${h2}`}>
+              {mlsBehind.title}
+            </h2>
+          </div>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">
             {mlsBehind.columns.map((column) => (
               <figure key={column.src}>
