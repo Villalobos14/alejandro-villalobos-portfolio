@@ -360,15 +360,15 @@ export default function MlsCaseStudy() {
                 {mlsNext.all}
               </TransitionLink>
             </div>
-            <p className="pointer-events-none absolute right-0 top-[104px] z-[2] hidden text-[17px] font-medium leading-none text-accent frame:block">
-              {mlsNext.read}
-            </p>
-            <TransitionLink
-              href="/projects"
-              className={`absolute right-0 top-[145px] z-[2] hidden min-h-11 items-center text-[17px] leading-none text-ink-secondary frame:inline-flex ${caseFocus}`}
-            >
-              {mlsNext.all}
-            </TransitionLink>
+            <div className="pointer-events-none absolute right-10 top-[103px] z-[2] hidden flex-col items-end gap-6 frame:flex">
+              <p className="text-[17px] font-medium leading-none text-accent">{mlsNext.read}</p>
+              <TransitionLink
+                href="/projects"
+                className={`pointer-events-auto inline-flex min-h-11 items-start text-[17px] leading-none text-ink-secondary ${caseFocus}`}
+              >
+                {mlsNext.all}
+              </TransitionLink>
+            </div>
           </div>
         </section>
       </div>
