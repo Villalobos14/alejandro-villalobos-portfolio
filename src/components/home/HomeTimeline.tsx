@@ -92,7 +92,7 @@ function Photo({ src, label }: { src: string; label: string }) {
 
   if (failed) {
     return (
-      <div className="flex h-full w-full items-end bg-ink/10 p-3 text-[10px] font-medium uppercase tracking-[0.16em] text-ink">
+      <div className="flex h-full w-full items-end bg-ink/10 p-3 text-[15px] font-medium uppercase tracking-[0.08em] text-ink">
         {label}
       </div>
     );
@@ -204,10 +204,12 @@ function MilestoneCopy({
   item,
   reduced,
   lift = true,
+  size = "desktop",
 }: {
   item: TimelineItem;
   reduced: boolean;
   lift?: boolean;
+  size?: "desktop" | "mobile";
 }) {
   // Every chapter shares one grid cell, so the cell is always as tall as the
   // tallest chapter at the current width (resize and font loads included).
@@ -230,8 +232,20 @@ function MilestoneCopy({
             }}
           >
             <p className="text-mono-s text-ink-muted">{entry.shortLabel}</p>
-            <p className="mt-2 text-[24px] font-medium leading-snug text-ink">{entry.title}</p>
-            <p className="mt-2 text-body text-ink-secondary">{entry.description}</p>
+            <p
+              className={`mt-2 font-medium leading-snug text-ink ${
+                size === "mobile" ? "text-[22px]" : "text-[24px]"
+              }`}
+            >
+              {entry.title}
+            </p>
+            <p
+              className={`mt-2 text-ink-secondary ${
+                size === "mobile" ? "text-[15px] leading-snug" : "text-body"
+              }`}
+            >
+              {entry.description}
+            </p>
           </div>
         );
       })}
@@ -666,94 +680,175 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
   );
 }
 
-function MobileScene({ reduced }: { reduced: boolean }) {
-  const [active, setActive] = useState(0);
-  const [outgoingId, setOutgoingId] = useState<string | null>(null);
-  const [boxWidth, setBoxWidth] = useState(0);
-  const collageRef = useRef<HTMLDivElement>(null);
-  const outgoingTimerRef = useRef(0);
-  const activeRef = useRef(0);
-  const current = items[active] ?? items[0];
-  const outgoing = items.find((item) => item.id === outgoingId);
+function MobileCurve({
+  active,
+  onSelect,
+}: {
+  active: number;
+  onSelect: (index: number) => void;
+}) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const widthRef = useRef(0);
+  const activeRef = useRef(active);
+  const gestureRef = useRef({ x: 0, y: 0, dragging: false });
 
-  useEffect(() => () => window.clearTimeout(outgoingTimerRef.current), []);
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
-  const select = (index: number) => {
-    const next = Math.min(items.length - 1, Math.max(0, index));
-    const previous = items[activeRef.current];
+  const draw = useCallback((index: number) => {
+    const width = widthRef.current;
+    const path = pathRef.current;
+    const box = boxRef.current;
 
-    if (previous && previous.id !== items[next]?.id) {
-      setOutgoingId(previous.id);
-      window.clearTimeout(outgoingTimerRef.current);
-      outgoingTimerRef.current = window.setTimeout(
-        () => setOutgoingId((value) => (value === previous.id ? null : value)),
-        reduced ? 0 : 320,
-      );
-    }
+    if (!path || !box || width < 1) return;
 
-    activeRef.current = next;
-    setActive(next);
-  };
+    const height = box.clientHeight;
+    const x = milestoneX(index, items.length, width);
+
+    path.setAttribute("d", curvePath(width, height, x));
+
+    box.querySelectorAll<HTMLElement>("[data-curve-dot]").forEach((dot, dotIndex) => {
+      const px = (dotIndex / (DOT_COUNT - 1)) * width;
+      const py = curveY(px, x, width, height);
+      dot.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
+    });
+  }, []);
 
   useLayoutEffect(() => {
-    const collage = collageRef.current;
+    const box = boxRef.current;
 
-    if (!collage) return;
+    if (!box) return;
 
-    const measure = () => setBoxWidth(collage.clientWidth);
+    const measure = () => {
+      widthRef.current = box.clientWidth;
+      draw(activeRef.current);
+    };
 
     measure();
     const observer = new ResizeObserver(measure);
-    observer.observe(collage);
+    observer.observe(box);
 
     return () => observer.disconnect();
-  }, []);
+  }, [draw]);
+
+  useEffect(() => {
+    draw(active);
+  }, [active, draw]);
+
+  const pick = (clientX: number) => {
+    const box = boxRef.current;
+
+    if (!box) return;
+
+    const rect = box.getBoundingClientRect();
+    const localX = clientX - rect.left;
+    const width = rect.width;
+    const xs = items.map((_, index) => milestoneX(index, items.length, width));
+    let next = activeRef.current;
+
+    for (let index = 0; index < xs.length; index += 1) {
+      const x = xs[index] ?? 0;
+      const previous = xs[index - 1] ?? 0;
+      const following = xs[index + 1] ?? width;
+      const left = index === 0 ? 0 : (previous + x) / 2;
+      const right = index === xs.length - 1 ? width : (x + following) / 2;
+
+      if (localX >= left && localX < right) {
+        next = index;
+        break;
+      }
+    }
+
+    if (next !== activeRef.current) onSelect(next);
+  };
+
+  return (
+    <div
+      ref={boxRef}
+      className="relative h-[132px] w-full touch-pan-y overflow-hidden"
+      onPointerDown={(event) => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+
+        gestureRef.current = { x: event.clientX, y: event.clientY, dragging: false };
+      }}
+      onPointerMove={(event) => {
+        const gesture = gestureRef.current;
+        const dx = event.clientX - gesture.x;
+        const dy = event.clientY - gesture.y;
+
+        if (!gesture.dragging) {
+          if (Math.hypot(dx, dy) < 6) return;
+          if (Math.abs(dy) > Math.abs(dx)) return;
+
+          gesture.dragging = true;
+          event.currentTarget.setPointerCapture(event.pointerId);
+        }
+
+        pick(event.clientX);
+      }}
+      onPointerUp={() => {
+        gestureRef.current.dragging = false;
+      }}
+      onPointerCancel={() => {
+        gestureRef.current.dragging = false;
+      }}
+    >
+      <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
+        <path ref={pathRef} fill="none" stroke="rgb(var(--accent))" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+      {Array.from({ length: DOT_COUNT }, (_, index) => (
+        <span
+          key={index}
+          data-curve-dot
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 size-1 rounded-full bg-ink-muted"
+        />
+      ))}
+    </div>
+  );
+}
+
+function MobileScene({ reduced }: { reduced: boolean }) {
+  const [active, setActive] = useState(0);
+  const current = items[active] ?? items[0];
 
   if (!current) return null;
 
-  const mobileLayouts: TimelineImageLayout[] = [
-    { x: 3, y: 2, width: 44, rotation: -3, aspectRatio: 0.82, zIndex: 2 },
-    { x: 53, y: 10, width: 44, rotation: 2.5, aspectRatio: 0.9, zIndex: 3 },
-    { x: 30, y: 56, width: 40, rotation: -2, aspectRatio: 1, zIndex: 1 },
-  ];
-
   return (
-    <div className="flex w-full flex-col gap-8 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-8">
-      <div role="group" aria-label="Timeline years" className="grid grid-cols-3 gap-2">
+    <div className="flex w-full min-w-0 flex-col gap-3 pt-2">
+      <div className="mobile-bleed flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1">
+        {current.images.map((src, index) => (
+          <div
+            key={`${current.id}-${index}`}
+            className="h-[150px] w-[46%] shrink-0 snap-start overflow-hidden rounded-[22px]"
+          >
+            <div
+              className="h-full w-full"
+              style={{ transform: `rotate(${index % 2 === 0 ? -2.5 : 2}deg) scale(1.08)` }}
+            >
+              <Photo src={src} label={current.fallback} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <MilestoneCopy item={current} reduced={reduced} lift={false} size="mobile" />
+      <MobileCurve active={active} onSelect={setActive} />
+      <div role="group" aria-label="Timeline years" className="flex justify-between gap-1">
         {items.map((item, index) => (
           <button
             key={item.id}
             type="button"
             aria-current={index === active ? "step" : undefined}
-            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-sans text-[14px] font-medium tracking-normal transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
-              index === active
-                ? "border-accent bg-accent/10 text-accent"
-                : "border-border text-ink-muted"
+            className={`inline-flex min-h-11 min-w-11 items-center justify-center px-1 font-sans text-[14px] font-medium tracking-normal ${focusStyles} ${
+              index === active ? "text-accent" : "text-ink-muted"
             }`}
-            onClick={() => select(index)}
+            onClick={() => setActive(index)}
           >
             {item.year}
           </button>
         ))}
-      </div>
-      <MilestoneCopy item={current} reduced={reduced} lift={false} />
-      <div ref={collageRef} aria-hidden="true" className="relative mx-auto aspect-[10/11] w-full max-w-[420px] overflow-visible">
-        {outgoing ? (
-          <CollageFrame
-            item={{ ...outgoing, images: outgoing.images.slice(0, 3) }}
-            layouts={mobileLayouts}
-            exiting
-            reduced={reduced}
-            boxWidth={boxWidth}
-          />
-        ) : null}
-        <CollageFrame
-          item={{ ...current, images: current.images.slice(0, 3) }}
-          layouts={mobileLayouts}
-          exiting={false}
-          reduced={reduced}
-          boxWidth={boxWidth}
-        />
       </div>
     </div>
   );
@@ -766,7 +861,7 @@ export default function HomeTimeline() {
   return (
     <div className="min-w-0">
       {desktop ? <DesktopScene reduced={reduced} /> : <MobileScene reduced={reduced} />}
-      <div className="pb-4 pt-8">
+      <div className="pb-2 pt-3 md:pb-4 md:pt-8">
         <ProfileLink />
       </div>
     </div>

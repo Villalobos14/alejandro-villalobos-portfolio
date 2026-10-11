@@ -31,7 +31,7 @@ function NarrativeSwitch() {
       role="tablist"
       aria-label="Home preview"
       aria-orientation="horizontal"
-      className="inline-flex shrink-0 items-center rounded-full border border-border p-1"
+      className="flex w-full shrink-0 items-center rounded-full border border-border p-1 md:inline-flex md:w-auto"
       onKeyDown={onKeyDown}
     >
       {panels.map((item) => {
@@ -46,7 +46,7 @@ function NarrativeSwitch() {
             aria-selected={selected}
             aria-controls={`home-panel-${item.id}`}
             tabIndex={selected ? 0 : -1}
-            className={`inline-flex min-h-11 items-center rounded-full px-4 text-body transition-colors duration-300 ${focusStyles} ${
+            className={`inline-flex min-h-11 flex-1 items-center justify-center rounded-full px-4 text-body transition-colors duration-300 md:flex-none ${focusStyles} ${
               selected ? "bg-ink text-white" : "text-ink-secondary"
             }`}
             onClick={() => setPanel(item.id)}
@@ -80,7 +80,7 @@ function NarrativePanels() {
   }, [panel]);
 
   return (
-    <div ref={ref} className="mt-6 sm:mt-10 lg:mt-12">
+    <div ref={ref} className="mt-3 md:mt-10 lg:mt-12">
       <div
         role="tabpanel"
         id="home-panel-professional"
@@ -104,8 +104,8 @@ function NarrativePanels() {
 export default function HomeNarrative() {
   return (
     <section id="home-narrative" aria-label="Practice and personal notes" className="w-full min-w-0">
-      <div className="flex flex-col gap-6 pt-10 sm:flex-row sm:items-start sm:justify-between">
-        <h2 className="min-w-0 text-[clamp(2rem,4.6vw,66px)] font-medium leading-[0.98] text-ink">
+      <div className="flex flex-col gap-3 pt-6 md:flex-row md:items-start md:justify-between md:gap-6 md:pt-10">
+        <h2 className="min-w-0 text-[clamp(30px,8.5vw,40px)] font-medium leading-none text-ink md:text-[clamp(2rem,4.6vw,66px)] md:leading-[0.98]">
           <span className="block">So, how did I get here? A quick tour,</span>
           <span className="block">2002 to now.</span>
         </h2>
