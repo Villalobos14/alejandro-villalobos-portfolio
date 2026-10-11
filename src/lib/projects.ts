@@ -7,6 +7,20 @@ export interface ProjectMetric {
   label: string;
 }
 
+/** A before → after figure on the home MLS card. */
+export interface MetricShift {
+  from: string;
+  to: string;
+  label: string;
+}
+
+export interface ResearchStudy {
+  id: string;
+  title: string;
+  summary: string;
+  meta: string;
+}
+
 /**
  * One cover structure for every featured case study. Every card fills the
  * same slots: index, title, summary, category line, meta chips and the CTA.
@@ -28,6 +42,13 @@ export interface FeaturedProject {
    * slot, and say in the label when a figure comes from a test, not production.
    */
   metrics?: ProjectMetric[];
+  /** Home card eyebrow, e.g. "01 · ML tooling · 2025". */
+  eyebrow: string;
+  /** Before → after figures. The case study keeps its own metric strings. */
+  shifts?: MetricShift[];
+  note?: string;
+  /** Placeholder label until a cover still or loop is supplied. */
+  coverSlot?: string;
   /** Estimated reading time of the case study. Omit while it is unwritten. */
   readMinutes?: number;
   /** Where the text sits on the cover. The media keeps the other side open. */
@@ -48,31 +69,38 @@ export interface FeaturedProject {
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "01",
-    name: "MLSToolbox",
+    name: "MLSToolbox —",
     subtitle: "CodeAssessment",
+    eyebrow: "01 · ML tooling · 2025",
     summary:
-      "Designing and building a workflow that takes ML engineers from an unfamiliar Python repository to prioritized, file-level issues backed by evidence.",
+      "From a single code-quality score to prioritized, file-level issues that ML engineers can act on.",
     category: ["Product Design", "Software Engineering"],
     meta: ["Python", "Angular", "Flask", "AST"],
-    // Task figures come from two moderated rounds of six participants each.
-    metrics: [
-      { value: "12", label: "Analyzers" },
-      { value: "5/6", label: "Moderated task success" },
-      { value: "4:18", label: "Median task time" },
+    // TODO(content): Cover B — product still or the 6 s loop, without its own title.
+    coverSlot:
+      "Visual slot — Cover B · Product or the 6 s loop, without its own title",
+    shifts: [
+      {
+        from: "10:52",
+        to: "4:18",
+        label: "Median time to first actionable issue",
+      },
+      { from: "2/6", to: "5/6", label: "Task success" },
     ],
+    note: "2 moderated rounds · n = 6 each · directional",
     // About 2,300 words of prose at the case-study route.
     readMinutes: 10,
     contentSide: "left",
     href: "/work/mlstoolbox",
-    linkLabel: "Read case study",
+    linkLabel: "Read case study →",
   },
-  // PLACEHOLDER copy until this case study is written. Media and route are
-  // the existing ones.
+  // Media and route are the existing ones. The card copy is the Figma line.
   {
     id: "02",
-    name: "Project Title Two",
+    name: "Ominio",
+    eyebrow: "02 · EdTech · DaCodes",
     summary:
-      "A concise description of the project, the problem space, and the type of product or system explored.",
+      "A gamified, AI-driven soft-skills app for students and early-career professionals.",
     category: ["Product Design", "Research"],
     meta: ["2026", "Product Design", "Research"],
     contentSide: "right",
@@ -82,15 +110,15 @@ export const featuredProjects: FeaturedProject[] = [
       alt: "Three Ominio phone screens: a green splash screen, an \"Interview Ready\" page offering 5 to 30 minute mock interview sessions, and a home screen with a level badge, a 21-day streak and weekly progress figures",
     },
     href: "/work/ominio",
-    linkLabel: "Read case study",
+    linkLabel: "Read case study →",
   },
-  // PLACEHOLDER copy until this case study is written. Media and route are
-  // the existing ones.
+  // Media and route are the existing ones. The card copy is the Figma line.
   {
     id: "03",
-    name: "Project Title Three",
+    name: "Nissan intranet",
+    eyebrow: "03 · Enterprise · DaCodes",
     summary:
-      "A concise description of the project, the product context, and the main design challenge.",
+      "An internal intranet redesign: workflows, a design system and ~150–200 responsive screens.",
     category: ["Product Design", "Systems"],
     meta: ["2026", "Product Design", "Systems"],
     contentSide: "left",
@@ -100,7 +128,35 @@ export const featuredProjects: FeaturedProject[] = [
       alt: "Andanac web page for Nissan headed \"Nissan presenta Xtremer\" over a close-up of an X-Trail headlight, with a banner reading \"16 años siendo líderes en la industria automotriz\"",
     },
     href: "/work/andanac",
-    linkLabel: "Read case study",
+    linkLabel: "Read case study →",
+  },
+];
+
+export const researchStudiesHeading = "Research studies · HSBC";
+
+/**
+ * Compact rows under the featured cases. No routes exist for these studies,
+ * so the home rows are not links.
+ */
+export const researchStudies: ResearchStudy[] = [
+  {
+    id: "04",
+    title: "HSBC Benefits Hub",
+    summary:
+      "Benchmarking points value, expiration and redemption across channels.",
+    meta: "UX research · Benchmark",
+  },
+  {
+    id: "05",
+    title: "Multifunctional ATM study",
+    summary: "Mapping the cash-deposit journey across five Mexican banks.",
+    meta: "UX research · Field",
+  },
+  {
+    id: "06",
+    title: "Mobile Security Benchmark",
+    summary: "Biometrics, device binding and security centers in banking apps.",
+    meta: "UX research · Benchmark",
   },
 ];
 

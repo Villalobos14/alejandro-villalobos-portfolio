@@ -3,7 +3,7 @@ import MaskedLines from "../ui/MaskedLines";
 import PetGlyphOrigin from "../pet-world/PetGlyphOrigin";
 import { homeHeroContent } from "@/lib/home-hero";
 
-const { statement, petGlyph, annotation } = homeHeroContent;
+const { statement, role, petGlyph } = homeHeroContent;
 
 /** The line with Calcifer's letter in it, or the line unchanged. The text itself is never altered. */
 function withPet(line: string): ReactNode {
@@ -22,34 +22,28 @@ function withPet(line: string): ReactNode {
 }
 
 /*
- * Each line is one MaskedLines line: HeroField reads them (h1 > span > span)
- * to veil the field under the words. Calcifer's teleport rises to about
- * 1.05em above the baseline on a phone, where his scale rounds up to whole
- * device pixels, so the masks bleed 0.24em above the line instead of 0.16em.
- * The larger bottom pull keeps lines 1.12em apart, as with the default mask,
- * and a leading under 0.96 would let ascenders show before the reveal.
+ * The three titular lines are the h1. Calcifer sits in the first "O" of
+ * PRODUCT, so that role line keeps the taller mask: his teleport rises to
+ * about 1.05em above the baseline on a phone.
  */
 export default function HeroStatement({ className = "" }: { className?: string }) {
-  const lines = [...statement.lead, ...statement.trail];
-  const petLine = lines.findIndex((line) => line.includes(petGlyph.word));
-  const last = lines.length - 1;
-
   return (
-    <MaskedLines
-      as="h1"
-      lines={lines.map((line, index) => (
-        <span key={line} className={index < statement.lead.length ? undefined : "text-ink-muted"}>
-          {index === petLine ? withPet(line) : line}
-          {index === last ? (
-            <span aria-hidden="true" className="relative -top-[0.85em] text-[0.4em] text-ink-muted">
-              {annotation.marker}
-            </span>
-          ) : null}
-        </span>
-      ))}
-      className={`text-[clamp(1.75rem,9.6vw,5.75rem)] font-normal leading-[0.96] tracking-tight text-ink md:text-[min(9.6vw,11vh,5.75rem)] lg:text-[min(7vw,10vh,8rem)] ${className}`}
-      lineClassName="whitespace-nowrap"
-      maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
-    />
+    <div className={className}>
+      <MaskedLines
+        as="h1"
+        lines={[...statement.lines]}
+        className="text-display-xl text-ink"
+      />
+      <p className="mt-6 flex flex-wrap items-baseline gap-y-1 sm:mt-8">
+        <span className="text-h3 text-ink">{role.lead} </span>
+        <MaskedLines
+          as="span"
+          lines={[withPet(role.title)]}
+          className="w-max max-w-full shrink-0 text-display-l text-ink sm:ml-3"
+          lineClassName="whitespace-nowrap"
+          maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
+        />
+      </p>
+    </div>
   );
 }
