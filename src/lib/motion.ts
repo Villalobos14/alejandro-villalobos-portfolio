@@ -9,6 +9,8 @@ export const BLOCK_EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
 export const BLOCK_DURATION_MS = 850;
 export const BLOCK_OFFSET_PX = 25;
 export const BLOCK_THRESHOLD = 0.08;
+/** Delay between sibling reveals. Four steps max: 0, 70, 140, 210. */
+export const REVEAL_STAGGER_MS = 70;
 
 /** Sticky stack only engages when a card stays usable at full size. */
 export const STACK_MIN_WIDTH_PX = 1000;
