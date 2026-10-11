@@ -166,3 +166,49 @@ export const researchStudies: ResearchStudy[] = [
 
 export const PROJECTS_SECTION_ID = "projects";
 export const PROJECTS_ANCHOR = `/#${PROJECTS_SECTION_ID}`;
+
+export interface ProjectLogCard {
+  id: string;
+  name: string;
+  summary: string;
+  meta: string;
+  href?: string;
+  cover: { src: string; alt: string; width: number; height: number };
+}
+
+const logCovers: Record<string, ProjectLogCard["cover"]> = {
+  "01": { src: "/projects/cover-mlstoolbox.svg", alt: "MLSToolbox findings card grouping actionable issues by file", width: 448, height: 400 },
+  "02": { src: "/projects/cover-ominio.png", alt: "Two Ominio phones showing the splash screen and learning dashboard", width: 448, height: 336 },
+  "03": { src: "/projects/cover-nissan.svg", alt: "Nissan intranet screen system with a selected screen among the grid", width: 448, height: 300 },
+  "04": { src: "/projects/cover-hsbc-benefits.svg", alt: "Benefits benchmark comparing points value across four banks", width: 448, height: 336 },
+  "05": { src: "/projects/cover-atm.svg", alt: "Cash-deposit journey mapped across five banks", width: 448, height: 260 },
+  "06": { src: "/projects/cover-mobile-security.svg", alt: "Biometric confirmation prompt with a security shield", width: 448, height: 300 },
+};
+
+/** Shared copy stays in the Home records; this route only supplies cover artwork. */
+export const projectLogCards: ProjectLogCard[] = [
+  ...featuredProjects.map((project) => ({
+    id: project.id,
+    name: [project.name, project.subtitle].filter(Boolean).join(" "),
+    summary: project.summary,
+    meta: project.eyebrow.replace(/^\d+ · /, ""),
+    href: project.href,
+    cover: logCovers[project.id],
+  })),
+  ...researchStudies.map((study) => ({
+    id: study.id,
+    name: study.title,
+    summary: study.summary,
+    meta: study.meta,
+    cover: logCovers[study.id],
+  })),
+];
+
+export const additionalProfessionalProject: ProjectLogCard = {
+  id: "dasoft",
+  name: "Dasoft",
+  meta: "Design system · DaCodes",
+  summary: "An internal people and project platform: ~120 screens and a design system built nearly from scratch.",
+  href: "https://www.figma.com/design/o0aDAZt693xMPJicOBpZ23/DASOFT-ALEJANDRO-VILLALOBOS?node-id=2235-237368",
+  cover: { src: "/dasoftmock.png", alt: "Dasoft technology directory and Volkswagen client administration screens", width: 120, height: 80 },
+};
