@@ -46,7 +46,7 @@ export default function CameraRoll() {
               >
                 {frame.photo === null ? (
                   <div className={`flex items-center justify-center bg-bg-subtle ${frame.ratio}`}>
-                    <p className="text-mono-s text-ink-muted">{cameraRoll.coming}</p>
+                    <p className="text-mono-s text-ink-secondary">{cameraRoll.coming}</p>
                   </div>
                 ) : (
                   <PhotoButton

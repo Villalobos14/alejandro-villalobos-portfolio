@@ -30,11 +30,12 @@ function Disclosure({ title }: { title: string }) {
       </button>
       <div
         id={panelId}
+        aria-hidden={!open}
         className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
-        <div className="overflow-hidden">
+        <div className={`overflow-hidden ${open ? "visible" : "invisible"}`}>
           <p className="pb-4 text-[15px] leading-snug text-ink-muted">TODO(content)</p>
         </div>
       </div>

@@ -204,7 +204,7 @@ export default function MlsCaseStudy() {
           </div>
           <Reveal className="mt-12">
           <div className="rounded-2xl bg-bg-subtle px-6 py-8 md:px-[33px] frame:flex frame:min-h-[192px] frame:items-center frame:gap-8">
-            <p className="text-mono-s text-ink-muted md:w-[156px] md:shrink-0">{mlsDecisions.droppedLabel}</p>
+            <p className="text-mono-s text-ink-secondary md:w-[156px] md:shrink-0">{mlsDecisions.droppedLabel}</p>
             <div>
               <p className="text-[clamp(32px,6vw,48px)] font-semibold leading-none tracking-[-0.025em] text-ink">
                 {mlsDecisions.droppedTitle}

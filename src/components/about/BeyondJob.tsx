@@ -1,10 +1,9 @@
-import CaseVisual from "@/components/case-study/CaseVisual";
 import Reveal from "@/components/ui/Reveal";
 import { beyondSection } from "@/lib/about";
 import { REVEAL_STAGGER_MS } from "@/lib/motion";
 import ProSection from "./ProSection";
 
-/** 04 — Beyond the job. Photos are placeholders until the assets exist. */
+/** 04 — Beyond the job. Photos remain omitted until the assets exist. */
 export default function BeyondJob() {
   return (
     <ProSection
@@ -19,12 +18,6 @@ export default function BeyondJob() {
           <li key={column.title} className="min-w-0">
             <Reveal delayMs={index * REVEAL_STAGGER_MS}>
               {/* TODO(content): photos for Teaching, Speaking and Hackathons */}
-              <CaseVisual
-                label={column.photo}
-                alt=""
-                ratio={416 / 260}
-                sizes="(min-width: 1440px) 416px, (min-width: 768px) 50vw, 100vw"
-              />
               <h3 className="mt-3 text-[20px] font-medium leading-[28px] text-ink">{column.title}</h3>
               <p className="mt-3 text-[15px] leading-[22px] text-ink-secondary">{column.body}</p>
             </Reveal>

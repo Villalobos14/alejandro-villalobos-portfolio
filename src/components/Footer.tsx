@@ -2,6 +2,7 @@ import Link from "next/link";
 import MaskedLines from "@/components/ui/MaskedLines";
 import { FooterTitle } from "../components/ui/FooterTitle";
 import { contactEmail, siteLinks } from "@/lib/links";
+import { hasCvPdf } from "@/lib/cv";
 
 const focusStyles =
   "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
@@ -61,12 +62,11 @@ export default function Footer() {
               GitHub ↗
             </Link>
           </li>
-          <li>
-            {/* TODO(content): public/cv.pdf is not in the repo yet. */}
+          {hasCvPdf() ? <li>
             <a href="/cv.pdf" download className={`inline-flex min-h-11 items-center ${linkClass}`}>
               CV (PDF) ↓
             </a>
-          </li>
+          </li> : null}
         </ul>
         <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-ink-secondary md:mt-4 md:text-body-s">
           Also on{" "}

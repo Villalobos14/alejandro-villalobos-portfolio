@@ -5,16 +5,16 @@ export const siteUrl =
 
 export const siteName = "Alejandro Villalobos";
 
-export const siteTitle = "Alejandro Villalobos | UX/UI Designer";
+export const siteTitle = "Alejandro Villalobos — Product Designer";
 
 export const siteDescription =
-  "UX designer with over 4 years of experience, based in México. Currently open to work.";
+  "Selected product design and UX by Alejandro Villalobos.";
 
 /**
  * Alt text for the generated social card. Keep this in step with whatever the
  * card renders, including a designed image dropped in later.
  */
-export const ogImageAlt = `${siteName} — UX/UI designer portfolio`;
+export const ogImageAlt = `${siteName} — Product designer portfolio`;
 
 export const ogImageSize = { width: 1200, height: 630 };
 

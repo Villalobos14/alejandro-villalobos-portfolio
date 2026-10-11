@@ -39,7 +39,7 @@ function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
       {shifts.map((shift) => (
         <p key={shift.label} className="min-w-0">
           <span className="flex flex-wrap items-baseline gap-x-2">
-            <span className="text-[20px] font-medium leading-none text-ink-muted line-through">
+            <span className="text-[20px] font-medium leading-none text-ink-secondary line-through">
               {shift.from}
             </span>
             <span className="text-[15px] text-ink-secondary" aria-hidden="true">
@@ -71,7 +71,7 @@ function FeaturedCase({ project }: { project: FeaturedProject }) {
         )}
       </div>
       <div className="min-w-0 bg-bg-subtle p-4 md:p-8 lg:p-10">
-        <p className={eyebrowClass}>{project.eyebrow}</p>
+        <p className={`${eyebrowClass} !text-ink-secondary`}>{project.eyebrow}</p>
         <h3 className="mt-2 text-[28px] font-medium leading-8 tracking-[-0.02em] text-ink md:mt-3 md:text-[40px] md:leading-[44px] md:tracking-[-0.025em]">
           {project.name}
           {project.subtitle ? (
@@ -86,7 +86,7 @@ function FeaturedCase({ project }: { project: FeaturedProject }) {
         </p>
         {project.shifts ? <MetricShifts shifts={project.shifts} /> : null}
         {project.note ? (
-          <p className="mt-3 font-mono text-[11px] leading-snug tracking-[0.02em] text-ink-muted md:mt-4 md:font-sans md:text-body-s md:tracking-normal">
+          <p className="mt-3 font-mono text-[11px] leading-snug tracking-[0.02em] text-ink-secondary md:mt-4 md:font-sans md:text-body-s md:tracking-normal">
             {project.note}
           </p>
         ) : null}

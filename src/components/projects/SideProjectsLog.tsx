@@ -32,15 +32,15 @@ function LogEntry({ project, open, onToggle }: { project: SideProject; open: boo
         </div>
         <dl className="mt-5 grid grid-cols-[1fr_1.35fr_1fr] items-start gap-3 md:contents">
           <div>
-            <dt className={`${mono} mb-1.5 text-ink-muted md:sr-only`}>Type</dt>
+            <dt className={`${mono} mb-1.5 text-ink-secondary md:sr-only`}>Type</dt>
             <dd className={`${mono} text-ink-secondary`}>{project.type}</dd>
           </div>
           <div>
-            <dt className={`${mono} mb-1.5 text-ink-muted md:sr-only`}>Built with</dt>
+            <dt className={`${mono} mb-1.5 text-ink-secondary md:sr-only`}>Built with</dt>
             <dd className={`${mono} text-ink-secondary`}>{project.builtWith}</dd>
           </div>
           <div>
-            <dt className={`${mono} mb-1.5 text-ink-muted md:sr-only`}>Result</dt>
+            <dt className={`${mono} mb-1.5 text-ink-secondary md:sr-only`}>Result</dt>
             <dd className={`${mono} text-ink-secondary`}>
               <span className={project.resultKind === "chip" ? "inline-flex rounded-full border border-border px-2.5 py-[5px]" : ""}>{project.result}</span>
             </dd>
@@ -83,7 +83,7 @@ export default function SideProjectsLog() {
       <div role="group" aria-label="Filter side projects" className="flex snap-x snap-mandatory gap-2 overflow-x-auto p-1 -mx-1">
         {filters.map((item) => (
           <button key={item.label} type="button" aria-pressed={filter === item.type} onClick={() => { setFilter(item.type); setOpenProject(null); }} className={`inline-flex min-h-11 shrink-0 snap-start items-center gap-2 rounded-full px-4 text-[14px] ${focusStyles} ${filter === item.type ? "bg-ink text-white" : "text-ink-secondary"}`}>
-            {item.label}<span className="text-ink-muted">{sideProjects.filter((project) => !item.type || project.type === item.type).length}</span>
+            {item.label}<span className={filter === item.type ? "text-on-ink-secondary" : "text-ink-muted"}>{sideProjects.filter((project) => !item.type || project.type === item.type).length}</span>
           </button>
         ))}
       </div>

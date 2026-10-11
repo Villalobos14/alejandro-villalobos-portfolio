@@ -75,8 +75,8 @@ export default function CaseVisual({
         />
       ) : (
         <figcaption className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center">
-          <p className="text-mono text-ink-muted">{label}</p>
-          <p className="text-mono-s text-ink-muted">Pendiente</p>
+          <p className="text-mono text-ink-secondary">{label}</p>
+          <p className="text-mono-s text-ink-secondary">Pendiente</p>
         </figcaption>
       )}
     </figure>

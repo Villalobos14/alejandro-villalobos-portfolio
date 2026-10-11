@@ -7,6 +7,8 @@ import SeeNext from "@/components/case-study/SeeNext";
 import MlsCaseStudy from "@/components/case-study/system/MlsCaseStudy";
 import { getMdxComponents } from "@/components/case-study/mdx-components";
 import { getAllCaseStudies, getCaseStudy } from "@/lib/case-studies";
+import { featuredProjects } from "@/lib/projects";
+import { pageMetadata } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -23,16 +25,22 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
   const { frontmatter } = getCaseStudy(params.slug);
 
-  return {
+  const metadata = pageMetadata({
     title: `${frontmatter.title} | Alejandro Villalobos`,
-    description: frontmatter.summary || frontmatter.title,
-    openGraph: {
-      title: frontmatter.title,
-      description: frontmatter.summary || frontmatter.title,
-      images: frontmatter.cover
-        ? [{ url: frontmatter.cover.src, alt: frontmatter.cover.alt }]
-        : undefined,
-    },
+    description:
+      frontmatter.summary ||
+      featuredProjects.find((project) => project.href === `/work/${params.slug}`)?.summary ||
+      frontmatter.title,
+    path: `/work/${params.slug}`,
+  });
+  const images = frontmatter.cover
+    ? [{ url: frontmatter.cover.src, alt: frontmatter.cover.alt }]
+    : undefined;
+
+  return {
+    ...metadata,
+    openGraph: { ...metadata.openGraph, images },
+    twitter: { ...metadata.twitter, images },
   };
 }
 

@@ -5,10 +5,11 @@ export const ogAlt = ogImageAlt;
 export const ogSize = ogImageSize;
 export const ogContentType = "image/png";
 
-const INK = "#ffffff";
-const BG = "#0C0D0E";
-const ACCENT = "#3DD964";
-const MUTED = "#8C8C8C";
+// Satori cannot resolve CSS custom properties; mirror the PF27 theme tokens.
+const INK = "#121212";
+const BG = "#FFFFFF";
+const ACCENT = "#1F6B4A";
+const MUTED = "#767676";
 
 /** Mirrors the site's glyph vocabulary as a single decorative band. */
 const GLYPH_BAND = "· + · # * · + · * # · + · * · + · # * · + · * # · + ·";

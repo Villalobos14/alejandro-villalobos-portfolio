@@ -1,6 +1,7 @@
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import RevealHeading from "@/components/ui/RevealHeading";
 import { aboutCta } from "@/lib/about";
+import { hasCvPdf } from "@/lib/cv";
 import { proH2 } from "./ProSection";
 import { focusRing } from "./tone";
 
@@ -19,12 +20,12 @@ export default function AboutCta() {
         >
           {aboutCta.title}
         </RevealHeading>
-        <a
+        {hasCvPdf() ? <a
           href="/cv.pdf"
           className={`inline-flex min-h-11 w-full items-center justify-center text-[17px] font-medium text-ink fine:hover:text-accent md:w-auto ${focusRing} frame:absolute frame:left-[869px] frame:top-[56px] frame:min-h-0 frame:w-auto frame:justify-start`}
         >
           {aboutCta.cv}
-        </a>
+        </a> : null}
         <TransitionLink
           href="/fun"
           className={`inline-flex min-h-11 w-full items-center justify-center rounded-full border border-border px-5 text-[17px] font-medium text-ink fine:hover:border-accent md:w-auto ${focusRing} frame:absolute frame:left-[1081px] frame:top-[41px] frame:h-[57px] frame:w-[215px] frame:px-0`}
