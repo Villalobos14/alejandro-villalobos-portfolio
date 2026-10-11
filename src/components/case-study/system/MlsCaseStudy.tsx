@@ -52,8 +52,8 @@ export default function MlsCaseStudy() {
     <article className="bg-bg text-ink">
       <div className="page-container">
         <header className="flex flex-col pb-12 pt-8 frame:min-h-[580px] frame:pb-[59px] frame:pt-[76px]">
-          <p className={`${eyebrow} flex flex-wrap items-center gap-x-3 gap-y-1`}>
-            <TransitionLink href="/projects" className={`inline-flex min-h-11 items-center ${caseFocus}`}>
+          <p className={`${eyebrow} mt-0.5 flex flex-wrap items-start gap-x-3 gap-y-1`}>
+            <TransitionLink href="/projects" className={`inline-flex min-h-11 items-start ${caseFocus}`}>
               ← Work
             </TransitionLink>
             <span aria-hidden="true">/</span>

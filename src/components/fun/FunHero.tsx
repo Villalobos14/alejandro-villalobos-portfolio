@@ -14,7 +14,7 @@ import { PHOTO_HOVER, PHOTO_IMAGE_HOVER } from "./motion";
 export default function FunHero() {
   return (
     <header className="grid w-full grid-cols-1 gap-x-8 gap-y-10 overflow-x-clip px-[var(--page-gutter)] pt-scale text-ink lg:grid-cols-12 lg:gap-y-0">
-      <div className="flex flex-col gap-scale lg:col-span-7 lg:pt-[60px]">
+      <div className="flex flex-col gap-scale lg:col-span-7 lg:pt-[57.5px]">
         <Reveal offsetY={10} durationMs={600}>
           <p className="flex items-center gap-3 text-body uppercase tracking-[0.2em] text-ink-muted">
             <span aria-hidden="true" className="h-px w-8 bg-accent" />

@@ -21,7 +21,7 @@ export default function CaseStudyHero({ frontmatter }: CaseStudyHeroProps) {
   );
 
   return (
-    <header className="flex flex-col gap-scale pt-scale">
+    <header className="flex flex-col gap-scale pt-scale frame:pt-[74.5px]">
       <TransitionLink
         href={PROJECTS_ANCHOR}
         data-cursor="Volver a proyectos"

@@ -13,7 +13,7 @@ const h1 =
 export default function AboutHeader() {
   return (
     <header className="relative flex flex-col gap-8 py-10 md:grid md:grid-cols-[minmax(320px,1fr)_minmax(0,330px)] md:items-start md:gap-x-8 md:py-16 frame:block frame:h-[690px] frame:py-0">
-      <p className="text-mono text-ink-muted md:col-start-1 frame:absolute frame:left-0 frame:top-[76px]">
+      <p className="text-mono text-ink-muted md:col-start-1 frame:absolute frame:left-0 frame:top-[78px]">
         {professionalHeader.eyebrow}
       </p>
       <MaskedLines
