@@ -31,7 +31,7 @@ function NarrativeSwitch() {
       role="tablist"
       aria-label="Home preview"
       aria-orientation="horizontal"
-      className="flex items-center gap-8"
+      className="inline-flex shrink-0 items-center rounded-full border border-border p-1"
       onKeyDown={onKeyDown}
     >
       {panels.map((item) => {
@@ -46,22 +46,12 @@ function NarrativeSwitch() {
             aria-selected={selected}
             aria-controls={`home-panel-${item.id}`}
             tabIndex={selected ? 0 : -1}
-            className={`relative inline-flex min-h-11 items-center gap-2 pb-2 text-lg transition-colors duration-300 md:text-2xl ${focusStyles} ${
-              selected ? "text-accent" : "text-ink-muted"
+            className={`inline-flex min-h-11 items-center rounded-full px-4 text-body transition-colors duration-300 ${focusStyles} ${
+              selected ? "bg-ink text-white" : "text-ink-secondary"
             }`}
             onClick={() => setPanel(item.id)}
           >
-            <span
-              aria-hidden="true"
-              className={`size-1.5 rounded-full ${selected ? "bg-accent" : "bg-transparent"}`}
-            />
             {item.label}
-            <span
-              aria-hidden="true"
-              className={`absolute bottom-0 left-0 h-px w-full origin-left bg-accent transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none ${
-                selected ? "scale-x-100" : "scale-x-0"
-              }`}
-            />
           </button>
         );
       })}
@@ -114,10 +104,14 @@ function NarrativePanels() {
 export default function HomeNarrative() {
   return (
     <section id="home-narrative" aria-label="Practice and personal notes" className="w-full min-w-0">
+      <div className="flex flex-col gap-6 px-[var(--page-gutter)] pt-10 sm:flex-row sm:items-start sm:justify-between">
+        <h2 className="min-w-0 text-[clamp(2rem,4.6vw,66px)] font-medium leading-[0.98] text-ink">
+          <span className="block">So, how did I get here? A quick tour,</span>
+          <span className="block">2002 to now.</span>
+        </h2>
+        <NarrativeSwitch />
+      </div>
       <div id="home-panels" className="scroll-mt-6 pb-8">
-        <div className="px-[var(--page-gutter)]">
-          <NarrativeSwitch />
-        </div>
         <NarrativePanels />
       </div>
     </section>

@@ -87,16 +87,6 @@ function ProfileLink() {
   );
 }
 
-function TimelineTitle({ desktop }: { desktop: boolean }) {
-  return (
-    <h2 className={`text-h2 text-ink ${desktop ? "max-w-[22em]" : "max-w-[14em]"}`}>
-      {homeNarrativeContent.timelineIntro.segments.map((segment) => (
-        <span key={segment.text}>{segment.text}</span>
-      ))}
-    </h2>
-  );
-}
-
 function Photo({ src, label }: { src: string; label: string }) {
   const [failed, setFailed] = useState(false);
 
@@ -601,10 +591,8 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
 
   return (
     <div ref={sceneRef} className="relative flex min-h-[100svh] w-full flex-col overflow-x-clip">
-      <div ref={titleRef} className="relative z-20 shrink-0 px-[var(--page-gutter)] pt-8">
-        <TimelineTitle desktop />
-      </div>
-      <div ref={collageRef} aria-hidden="true" className="relative mt-6 h-[34vh] min-h-[200px] shrink-0 overflow-hidden">
+      <div ref={titleRef} className="h-0 shrink-0" />
+      <div ref={collageRef} aria-hidden="true" className="relative mt-6 h-[34vh] min-h-[200px] shrink-0 overflow-visible">
         {outgoing ? (
           <CollageFrame
             item={outgoing}
@@ -731,7 +719,6 @@ function MobileScene({ reduced }: { reduced: boolean }) {
 
   return (
     <div className="flex w-full flex-col gap-8 px-[var(--page-gutter)] pb-[calc(7rem+env(safe-area-inset-bottom))] pt-8">
-      <TimelineTitle desktop={false} />
       <div role="group" aria-label="Timeline years" className="grid grid-cols-3 gap-2">
         {items.map((item, index) => (
           <button
@@ -750,7 +737,7 @@ function MobileScene({ reduced }: { reduced: boolean }) {
         ))}
       </div>
       <MilestoneCopy item={current} reduced={reduced} lift={false} />
-      <div ref={collageRef} aria-hidden="true" className="relative mx-auto aspect-[10/11] w-full max-w-[420px] overflow-hidden">
+      <div ref={collageRef} aria-hidden="true" className="relative mx-auto aspect-[10/11] w-full max-w-[420px] overflow-visible">
         {outgoing ? (
           <CollageFrame
             item={{ ...outgoing, images: outgoing.images.slice(0, 3) }}
