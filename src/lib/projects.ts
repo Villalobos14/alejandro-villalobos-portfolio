@@ -76,9 +76,13 @@ export const featuredProjects: FeaturedProject[] = [
       "From a single code-quality score to prioritized, file-level issues that ML engineers can act on.",
     category: ["Product Design", "Software Engineering"],
     meta: ["Python", "Angular", "Flask", "AST"],
-    // TODO(content): Cover B — product still or the 6 s loop, without its own title.
     coverSlot:
       "Visual slot — Cover B · Product or the 6 s loop, without its own title",
+    media: {
+      type: "image",
+      src: "/case-studies/cover-a2-metrics.png",
+      alt: "MLSToolbox CodeAssessment cover titled From metrics to next steps",
+    },
     shifts: [
       {
         from: "10:52",

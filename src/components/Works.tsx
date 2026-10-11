@@ -1,4 +1,4 @@
-import Monogatari from "../../public/smooth-images/4.png";
+import mlsCover from "../../public/case-studies/cover-a2-metrics.png";
 import ominio from "../../public/ominiocoer.png";
 import nissan from "../../public/nissan.png";
 import Fanaticus from "../../public/smooth-images/1.png";
@@ -19,8 +19,8 @@ export default function Works() {
           <div className=" col-span-1 md:col-span-12">
             <Projects
               link="/work/mlstoolbox"
-              img={Monogatari}
-              alt="Two Monogatari manga-reader screens: a light landing page reading “Discover unique stories anytime” over manga panel art, and a dark catalogue page with a best-sellers row of cover thumbnails"
+              img={mlsCover}
+              alt="MLSToolbox CodeAssessment cover titled From metrics to next steps"
               name="Ominio"
               description="Elearning platform"
             />
