@@ -13,7 +13,7 @@ const focusStyles =
 
 const panels: { id: NarrativePanel; label: string }[] = [
   { id: "professional", label: "Professional" },
-  { id: "personal", label: "Personal" },
+  { id: "personal", label: "Fun" },
 ];
 
 function NarrativeSwitch() {

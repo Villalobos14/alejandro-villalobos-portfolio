@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import {
@@ -81,26 +80,16 @@ function ProfileLink() {
   return (
     <TransitionLink
       href="/about"
-      className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-border px-5 py-3 text-label text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:bg-accent/10 ${focusStyles}`}
+      className={`inline-flex min-h-11 items-center text-body text-ink ${focusStyles}`}
     >
-      Explore the professional profile
-      <ArrowUpRightIcon
-        aria-hidden="true"
-        className="pointer-events-none size-4 transition-transform duration-300 ease-out fine:group-hover:translate-x-1 fine:group-hover:-translate-y-1"
-      />
+      Explore the professional profile ↗
     </TransitionLink>
   );
 }
 
 function TimelineTitle({ desktop }: { desktop: boolean }) {
   return (
-    <h2
-      className={`max-w-[16em] font-medium tracking-tight text-ink ${
-        desktop
-          ? "text-[clamp(2.8rem,4.6vw,6rem)] leading-[0.98]"
-          : "text-[clamp(2rem,9vw,3.2rem)] leading-[1.02]"
-      }`}
-    >
+    <h2 className={`text-h2 text-ink ${desktop ? "max-w-[22em]" : "max-w-[14em]"}`}>
       {homeNarrativeContent.timelineIntro.segments.map((segment) => (
         <span key={segment.text}>{segment.text}</span>
       ))}
@@ -250,9 +239,9 @@ function MilestoneCopy({
               transition: reduced ? "none" : "opacity 220ms ease, transform 220ms ease",
             }}
           >
-            <p className="text-body uppercase tracking-[0.18em] text-ink-muted">{entry.shortLabel}</p>
-            <p className="mt-2 text-2xl font-medium leading-tight text-ink">{entry.title}</p>
-            <p className="mt-2 text-body-lg text-ink-muted">{entry.description}</p>
+            <p className="text-mono-s text-ink-muted">{entry.shortLabel}</p>
+            <p className="mt-2 text-h3 text-ink">{entry.title}</p>
+            <p className="mt-2 text-body text-ink-secondary">{entry.description}</p>
           </div>
         );
       })}
@@ -638,14 +627,14 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
       </div>
       <div ref={curveRef} className="relative z-[2] mt-12 h-[220px] w-full shrink-0">
         <svg className="pointer-events-none absolute inset-0 z-[2] h-full w-full" aria-hidden="true">
-          <path ref={pathRef} fill="none" stroke="rgb(var(--ink-muted))" strokeWidth="2" strokeLinecap="round" />
+          <path ref={pathRef} fill="none" stroke="rgb(var(--accent))" strokeWidth="2" strokeLinecap="round" />
         </svg>
         {Array.from({ length: DOT_COUNT }, (_, index) => (
           <span
             key={index}
             data-curve-dot
             aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-0 size-2.5 rounded-full border border-ink bg-bg"
+            className="pointer-events-none absolute left-0 top-0 size-2.5 rounded-full border border-accent bg-bg"
           />
         ))}
         {items.map((item, index) => (
@@ -664,8 +653,8 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
           >
             <span
               aria-hidden="true"
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink bg-bg ${
-                index === active ? "size-4" : "size-2.5"
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent ${
+                index === active ? "size-4 bg-accent" : "size-2.5 bg-bg"
               }`}
             />
           </button>
@@ -676,7 +665,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
             type="button"
             data-year
             tabIndex={-1}
-            className={`absolute min-h-11 -translate-x-1/2 px-2 font-mono text-sm uppercase tracking-[0.14em] ${focusStyles} ${
+            className={`absolute min-h-11 -translate-x-1/2 px-2 font-mono text-[0.75rem] tracking-[0.06em] ${focusStyles} ${
               index === active ? "text-accent" : "text-ink-muted"
             }`}
             onClick={() => activate(index)}
@@ -749,7 +738,7 @@ function MobileScene({ reduced }: { reduced: boolean }) {
             key={item.id}
             type="button"
             aria-current={index === active ? "step" : undefined}
-            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-mono text-sm uppercase tracking-[0.14em] transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
+            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-mono text-[0.75rem] tracking-[0.06em] transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
               index === active
                 ? "border-accent bg-accent/10 text-accent"
                 : "border-border text-ink-muted"
