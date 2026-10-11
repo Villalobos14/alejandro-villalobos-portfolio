@@ -8,3 +8,7 @@ alwaysApply: true
 - Atomicidad: cambiar solo los componentes, funciones o bloques solicitados.
 - Prohibido refactor masivo, renombrar archivos o reestructurar directorios sin petición.
 - No alterar `next.config.mjs`, `tailwind.config.ts`, `tsconfig.json`, `globals.css` ni providers existentes (p. ej. `ReactLenis` en `src/app/layout.tsx`) salvo petición explícita.
+- Excepción vigente durante el rediseño PF27 (retirar en la Fase 4):
+  - Se puede editar `tailwind.config.ts` y `src/app/globals.css` solo para agregar o ajustar tokens y utilidades del sistema PF27.
+  - Se puede editar `src/app/layout.tsx` y `PetWorldProvider` solo para el montaje de Calcifer por ruta (Fase 2.3) y para tipografía o tema.
+  - La lógica de `pet-world/world/*`, `HomeTimeline`, `MaskedLines`, `Reveal` y el resto de módulos de animación sigue protegida: solo re-estilizar, nunca reescribir.
