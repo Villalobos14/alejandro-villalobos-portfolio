@@ -5,6 +5,7 @@ import { LINE_DURATION_MS, LINE_EASE, prefersReducedMotion } from "@/lib/motion"
 
 interface RevealHeadingProps {
   as?: "h2" | "h3";
+  id?: string;
   className?: string;
   children: ReactNode;
   delayMs?: number;
@@ -16,6 +17,7 @@ interface RevealHeadingProps {
  */
 export default function RevealHeading({
   as: Tag = "h3",
+  id,
   className = "",
   children,
   delayMs = 0,
@@ -64,7 +66,7 @@ export default function RevealHeading({
   }, [delayMs]);
 
   return (
-    <Tag className={className}>
+    <Tag id={id} className={className}>
       <span ref={maskRef} className="block overflow-hidden py-[0.12em] -my-[0.12em]">
         <span ref={innerRef} className="block">
           {children}

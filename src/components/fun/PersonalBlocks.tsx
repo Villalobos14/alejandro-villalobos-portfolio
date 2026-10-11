@@ -1,7 +1,7 @@
 import PhotoButton from "@/components/media/PhotoButton";
 import Reveal from "@/components/ui/Reveal";
 import { PHOTO_HOVER, PHOTO_IMAGE_HOVER } from "./motion";
-import RevealHeading from "./RevealHeading";
+import RevealHeading from "@/components/ui/RevealHeading";
 import Placeholder, { IS_PRODUCTION } from "@/components/ui/Placeholder";
 import {
   PERSONAL_BLOCK_SLOTS,

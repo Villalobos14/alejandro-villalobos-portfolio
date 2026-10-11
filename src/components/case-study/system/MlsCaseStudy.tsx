@@ -2,6 +2,7 @@ import Image from "next/image";
 import CaseVisual from "@/components/case-study/CaseVisual";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import MaskedLines from "@/components/ui/MaskedLines";
+import RevealHeading from "@/components/ui/RevealHeading";
 import {
   mlsBehind,
   mlsContext,
@@ -106,9 +107,9 @@ export default function MlsCaseStudy() {
             <p data-sticky-eyebrow="01" className={stickyEyebrow}>
               {mlsContext.eyebrow}
             </p>
-            <h2 id="mls-context" className={`mt-4 ${h3}`}>
+            <RevealHeading as="h2" id="mls-context" className={`mt-4 ${h3}`}>
               {mlsContext.title}
-            </h2>
+            </RevealHeading>
             <p className={`mt-6 ${body}`}>{mlsContext.body}</p>
             <div className="mt-8 border-l-2 border-ink py-1 pl-[22px] frame:min-h-[124px]">
               <p className={eyebrow}>{mlsContext.partLabel}</p>
@@ -136,9 +137,9 @@ export default function MlsCaseStudy() {
             <p className="mt-6 max-w-[460px] text-[15px] leading-snug text-ink-secondary">{mlsProblem.attribution}</p>
           </div>
           <div>
-            <h2 id="mls-problem" className={h3}>
+            <RevealHeading as="h2" id="mls-problem" className={h3}>
               {mlsProblem.title}
-            </h2>
+            </RevealHeading>
             <p className={`mt-4 ${body}`}>{mlsProblem.body}</p>
             <p className="mt-6 text-mono-s text-ink-muted">{mlsProblem.note}</p>
           </div>
@@ -150,9 +151,9 @@ export default function MlsCaseStudy() {
               {mlsFlow.eyebrow}
             </p>
             <div className="frame:min-h-[152px]">
-              <h2 id="mls-flow" className={`mt-3 ${h2}`}>
+              <RevealHeading as="h2" id="mls-flow" className={`mt-3 ${h2}`}>
                 {mlsFlow.title}
-              </h2>
+              </RevealHeading>
               <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
                 {mlsFlow.deck}
               </p>
@@ -167,9 +168,9 @@ export default function MlsCaseStudy() {
               {mlsDecisions.eyebrow}
             </p>
             <div className="frame:min-h-[152px]">
-              <h2 id="mls-decisions" className={`mt-3 ${h2}`}>
+              <RevealHeading as="h2" id="mls-decisions" className={`mt-3 ${h2}`}>
                 {mlsDecisions.title}
-              </h2>
+              </RevealHeading>
               <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
                 {mlsDecisions.deck}
               </p>
@@ -204,9 +205,9 @@ export default function MlsCaseStudy() {
             <p data-sticky-eyebrow="05" className={stickyEyebrow}>
               {mlsSystem.eyebrow}
             </p>
-            <h2 id="mls-system" className={`mt-4 ${h3}`}>
+            <RevealHeading as="h2" id="mls-system" className={`mt-4 ${h3}`}>
               {mlsSystem.title}
-            </h2>
+            </RevealHeading>
             <p className={`mt-4 ${body}`}>{mlsSystem.body}</p>
             <div data-hairline="system" className="mt-8 border-t border-border pt-[15px] frame:h-[94px]">
               <p className="flex flex-wrap items-baseline gap-x-3">
@@ -228,9 +229,9 @@ export default function MlsCaseStudy() {
               {mlsValidation.eyebrow}
             </p>
             <div className="frame:min-h-[152px]">
-              <h2 id="mls-validation" className={`mt-3 ${h2}`}>
+              <RevealHeading as="h2" id="mls-validation" className={`mt-3 ${h2}`}>
                 {mlsValidation.title}
-              </h2>
+              </RevealHeading>
               <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
                 {mlsValidation.deck}
               </p>
@@ -303,9 +304,9 @@ export default function MlsCaseStudy() {
               {mlsBehind.eyebrow}
             </p>
             <div className="frame:min-h-[76px]">
-              <h2 id="mls-behind" className={`mt-3 ${h2}`}>
+              <RevealHeading as="h2" id="mls-behind" className={`mt-3 ${h2}`}>
                 {mlsBehind.title}
-              </h2>
+              </RevealHeading>
             </div>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">
             {mlsBehind.columns.map((column) => (
@@ -328,9 +329,9 @@ export default function MlsCaseStudy() {
             <p data-sticky-eyebrow="08" className={stickyEyebrow}>
               {mlsReflection.eyebrow}
             </p>
-            <h2 id="mls-reflection" className={`mt-4 ${h2}`}>
+            <RevealHeading as="h2" id="mls-reflection" className={`mt-4 ${h2}`}>
               {mlsReflection.title}
-            </h2>
+            </RevealHeading>
             <p className="mt-6 text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
               {mlsReflection.body}
             </p>
