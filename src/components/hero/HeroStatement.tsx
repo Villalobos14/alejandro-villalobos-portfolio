@@ -3,7 +3,7 @@ import MaskedLines from "../ui/MaskedLines";
 import PetGlyphOrigin from "../pet-world/PetGlyphOrigin";
 import { homeHeroContent } from "@/lib/home-hero";
 
-const { statement, role, petGlyph } = homeHeroContent;
+const { role, petGlyph, description } = homeHeroContent;
 
 /** The line with Calcifer's letter in it, or the line unchanged. The text itself is never altered. */
 function withPet(line: string): ReactNode {
@@ -22,28 +22,21 @@ function withPet(line: string): ReactNode {
 }
 
 /*
- * The three titular lines are the h1. Calcifer sits in the first "O" of
- * PRODUCT, so that role line keeps the taller mask: his teleport rises to
- * about 1.05em above the baseline on a phone.
+ * PRODUCT DESIGNER is the h1. Calcifer sits in the first "O", so that line
+ * keeps the taller mask: his teleport rises above the baseline on a phone.
  */
 export default function HeroStatement({ className = "" }: { className?: string }) {
   return (
-    <div className={className}>
+    <div className={`flex max-w-full flex-col items-start lg:items-end lg:text-right ${className}`}>
+      <p className="text-[24px] leading-snug text-ink-secondary">{role.lead}</p>
       <MaskedLines
         as="h1"
-        lines={[...statement.lines]}
-        className="text-display-xl text-ink"
+        lines={[withPet(role.title)]}
+        className="max-w-full text-[clamp(2.25rem,7.014vw,101px)] font-semibold leading-none tracking-[-0.03em] text-ink"
+        lineClassName="whitespace-nowrap"
+        maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
       />
-      <p className="mt-6 flex flex-wrap items-baseline gap-y-1 sm:mt-8">
-        <span className="text-h3 text-ink">{role.lead} </span>
-        <MaskedLines
-          as="span"
-          lines={[withPet(role.title)]}
-          className="w-max max-w-full shrink-0 text-display-l text-ink sm:ml-3"
-          lineClassName="whitespace-nowrap"
-          maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
-        />
-      </p>
+      <p className="mt-3 max-w-xl text-[24px] leading-snug text-ink-secondary">{description}</p>
     </div>
   );
 }

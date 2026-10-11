@@ -1,7 +1,5 @@
 import MediaPlaceholder from "@/components/media/MediaPlaceholder";
-import SectionHeader from "@/components/system/SectionHeader";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
-import { homeHeroContent } from "@/lib/home-hero";
 import {
   PROJECTS_SECTION_ID,
   featuredProjects,
@@ -97,9 +95,8 @@ export default function Projects() {
     <section
       id={PROJECTS_SECTION_ID}
       aria-labelledby="selected-work-title"
-      className="w-full min-w-0 scroll-mt-8 px-[var(--page-gutter)] py-16 sm:py-24"
+      className="w-full min-w-0 scroll-mt-8 px-[var(--page-gutter)] pb-16 pt-6 sm:pb-24"
     >
-      <SectionHeader id="selected-work-title" title={homeHeroContent.intro} variant="strong" />
       {featured ? (
         <div className="mt-12">
           <FeaturedCase project={featured} />
