@@ -230,7 +230,7 @@ function MilestoneCopy({
             }}
           >
             <p className="text-mono-s text-ink-muted">{entry.shortLabel}</p>
-            <p className="mt-2 text-h3 text-ink">{entry.title}</p>
+            <p className="mt-2 text-[24px] font-medium leading-snug text-ink">{entry.title}</p>
             <p className="mt-2 text-body text-ink-secondary">{entry.description}</p>
           </div>
         );
@@ -622,7 +622,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
             key={index}
             data-curve-dot
             aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-0 size-2.5 rounded-full border border-accent bg-bg"
+            className="pointer-events-none absolute left-0 top-0 size-1 rounded-full bg-ink-muted"
           />
         ))}
         {items.map((item, index) => (
@@ -641,8 +641,8 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
           >
             <span
               aria-hidden="true"
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent ${
-                index === active ? "size-4 bg-accent" : "size-2.5 bg-bg"
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+                index === active ? "size-2 bg-accent" : "size-1 bg-ink-muted"
               }`}
             />
           </button>
@@ -653,7 +653,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
             type="button"
             data-year
             tabIndex={-1}
-            className={`absolute min-h-11 -translate-x-1/2 px-2 font-mono text-[0.75rem] tracking-[0.06em] ${focusStyles} ${
+            className={`absolute min-h-11 -translate-x-1/2 px-2 font-sans text-[14px] font-medium tracking-normal ${focusStyles} ${
               index === active ? "text-accent" : "text-ink-muted"
             }`}
             onClick={() => activate(index)}
@@ -725,7 +725,7 @@ function MobileScene({ reduced }: { reduced: boolean }) {
             key={item.id}
             type="button"
             aria-current={index === active ? "step" : undefined}
-            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-mono text-[0.75rem] tracking-[0.06em] transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
+            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-sans text-[14px] font-medium tracking-normal transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
               index === active
                 ? "border-accent bg-accent/10 text-accent"
                 : "border-border text-ink-muted"
