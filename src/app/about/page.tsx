@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AboutExperience from "@/components/about/AboutExperience";
 import AboutHeader from "@/components/about/AboutHeader";
 import AboutToolkit from "@/components/about/AboutToolkit";
+import BeyondJob from "@/components/about/BeyondJob";
 import HowIWork from "@/components/about/HowIWork";
 import ProfessionalClosing from "@/components/about/ProfessionalClosing";
 import { handFont } from "@/components/about/sketches/hand-font";
@@ -30,6 +31,7 @@ export default function AboutPage() {
           <HowIWork />
           <AboutExperience />
           <AboutToolkit />
+          <BeyondJob />
         </div>
         <ProfessionalClosing />
       </div>
