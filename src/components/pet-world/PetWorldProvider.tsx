@@ -1,39 +1,59 @@
 "use client";
 
-import { useLenis } from "lenis/react";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import PetLayer from "./PetLayer";
-import { createPetWorld, type PetWorld } from "./world/world";
+import { useLayoutEffect, useState, type ReactNode } from "react";
+import { FINE_POINTER_QUERY } from "@/lib/fine-pointer";
+import { PetWorldContext } from "./context";
 
-const PetWorldContext = createContext<PetWorld | null>(null);
+export { usePetWorld } from "./context";
 
-export function usePetWorld(): PetWorld | null {
-  return useContext(PetWorldContext);
+const PetWorldRuntime = dynamic(() => import("./PetWorldRuntime"), { ssr: false });
+
+const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
+/** Same cutoff as the pet-world mobile tier. The world module stays unloaded here. */
+const MOBILE_QUERY = "(max-width: 639px)";
+
+type PetMount = "off" | "hero" | "roam";
+
+function petMount(pathname: string): PetMount {
+  if (pathname === "/") return "hero";
+  if (pathname === "/fun") return "roam";
+
+  return "off";
 }
 
 /**
- * Lives in the root layout, inside Lenis, so pets outlast the hero and the
- * route: a pet on the dock is still there after navigating, since the dock is
- * part of the layout too. Creating the world touches no DOM, so this renders
- * on the server like anything else.
+ * Mounts Calcifer by route. `/fun` gets the roaming layer. `/` gets the hero
+ * letter only. Everywhere else, and on touch, narrow screens, or reduced
+ * motion, the world chunk is not rendered.
  */
 export default function PetWorldProvider({ children }: { children: ReactNode }) {
-  const [world] = useState(createPetWorld);
   const pathname = usePathname();
+  const mode = petMount(pathname);
+  const [deviceOn, setDeviceOn] = useState(false);
 
-  useLenis(() => world.scrolled(), [world]);
+  useLayoutEffect(() => {
+    const fine = window.matchMedia(FINE_POINTER_QUERY);
+    const reduced = window.matchMedia(REDUCED_QUERY);
+    const mobile = window.matchMedia(MOBILE_QUERY);
+    const sync = () => setDeviceOn(fine.matches && !reduced.matches && !mobile.matches);
 
-  useEffect(() => world.mount(), [world]);
+    sync();
+    fine.addEventListener("change", sync);
+    reduced.addEventListener("change", sync);
+    mobile.addEventListener("change", sync);
 
-  useEffect(() => {
-    world.routeChanged();
-  }, [world, pathname]);
+    return () => {
+      fine.removeEventListener("change", sync);
+      reduced.removeEventListener("change", sync);
+      mobile.removeEventListener("change", sync);
+    };
+  }, []);
 
-  return (
-    <PetWorldContext.Provider value={world}>
-      {children}
-      <PetLayer world={world} />
-    </PetWorldContext.Provider>
-  );
+  if (mode === "off" || !deviceOn) {
+    return <PetWorldContext.Provider value={null}>{children}</PetWorldContext.Provider>;
+  }
+
+  return <PetWorldRuntime roam={mode === "roam"}>{children}</PetWorldRuntime>;
 }
