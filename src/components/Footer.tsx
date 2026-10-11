@@ -16,7 +16,7 @@ function siteHref(id: string): string {
 
 export default function Footer() {
   return (
-    <footer className="relative mt-32 w-full overflow-hidden bg-bg text-ink">
+    <footer className="relative mt-8 w-full overflow-hidden bg-bg text-ink md:mt-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 [background-image:linear-gradient(to_right,rgb(var(--mat-major))_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--mat-major))_1px,transparent_1px),linear-gradient(to_right,rgb(var(--mat-minor))_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--mat-minor))_1px,transparent_1px)] [background-size:5rem_5rem,5rem_5rem,1rem_1rem,1rem_1rem]"
@@ -28,14 +28,14 @@ export default function Footer() {
           </span>
         ))}
       </div>
-      <div className="page-container relative pb-10 pt-16">
+      <div className="page-container relative pb-2 pt-8 md:pb-10 md:pt-16">
         <p className="text-mono-s text-ink-muted">Say hi</p>
         <MaskedLines
           as="h2"
           lines={["Working on something complex?", "Let’s talk."]}
-          className="mt-3 max-w-[12em] text-display-l text-ink"
+          className="mt-2 max-w-[12em] text-[clamp(32px,9vw,44px)] font-medium leading-[0.98] text-ink md:mt-3 md:text-display-l"
         />
-        <ul className="mt-8 flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:gap-x-8">
+        <ul className="mt-4 grid grid-cols-2 gap-x-4 md:mt-8 md:flex md:flex-row md:flex-wrap md:gap-x-8">
           <li>
             <a href={`mailto:${contactEmail}`} className={`inline-flex min-h-11 items-center ${linkClass}`}>
               Email me ↗
@@ -68,23 +68,38 @@ export default function Footer() {
             </a>
           </li>
         </ul>
-        <p className="mt-10 max-w-3xl text-body-s text-ink-secondary">
+        <p className="mt-4 max-w-3xl text-[12px] leading-relaxed text-ink-secondary md:mt-10 md:text-body-s">
           Also on{" "}
-          <Link href={siteHref("behance")} target="_blank" rel="noopener noreferrer" className={focusStyles}>
+          <Link
+            href={siteHref("behance")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex min-h-11 items-center ${focusStyles}`}
+          >
             Behance
           </Link>
           {" · "}
-          <Link href={siteHref("dribbble")} target="_blank" rel="noopener noreferrer" className={focusStyles}>
+          <Link
+            href={siteHref("dribbble")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex min-h-11 items-center ${focusStyles}`}
+          >
             Dribbble
           </Link>
           {" · "}
-          <Link href={siteHref("instagram")} target="_blank" rel="noopener noreferrer" className={focusStyles}>
+          <Link
+            href={siteHref("instagram")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex min-h-11 items-center ${focusStyles}`}
+          >
             Instagram
           </Link>
           {"   ·   "}
           © 2026 Alejandro Villalobos · Built with Next.js
         </p>
-        <div className="mt-10 border-t border-border pt-6">
+        <div className="mt-4 border-t border-border pt-4 md:mt-10 md:pt-6">
           <span className="sr-only">Villalobos</span>
           <FooterTitle />
         </div>
