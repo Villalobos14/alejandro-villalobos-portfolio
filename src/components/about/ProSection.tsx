@@ -16,6 +16,8 @@ export default function ProSection({
   title,
   hairline,
   className = "",
+  eyebrowClassName = "",
+  headingClassName = "",
   children,
 }: {
   id: string;
@@ -23,15 +25,17 @@ export default function ProSection({
   title: string;
   hairline: string;
   className?: string;
+  eyebrowClassName?: string;
+  headingClassName?: string;
   children: ReactNode;
 }) {
   return (
     <section aria-labelledby={id} className={`lg:isolate ${className}`}>
       <div data-hairline={hairline} className="border-t border-border">
-        <p data-sticky-eyebrow={id} className={`${stickyEyebrow} frame:mt-[15px]`}>
+        <p data-sticky-eyebrow={id} className={`${stickyEyebrow} frame:mt-[15px] ${eyebrowClassName}`}>
           {eyebrow}
         </p>
-        <RevealHeading as="h2" id={id} className={`mt-3 frame:mt-[14px] ${proH2}`}>
+        <RevealHeading as="h2" id={id} className={`mt-3 frame:mt-[14px] ${proH2} ${headingClassName}`}>
           {title}
         </RevealHeading>
         {children}
