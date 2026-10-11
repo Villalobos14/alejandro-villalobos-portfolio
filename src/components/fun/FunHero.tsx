@@ -1,68 +1,31 @@
-import AboutSubNav from "@/components/about/AboutSubNav";
-import PhotoButton from "@/components/media/PhotoButton";
+import AboutSwitch from "@/components/system/AboutSwitch";
 import MaskedLines from "@/components/ui/MaskedLines";
-import Reveal from "@/components/ui/Reveal";
-import { funIntro, heroPhotos } from "@/lib/personal";
-import { PHOTO_HOVER, PHOTO_IMAGE_HOVER } from "./motion";
+import { funHeader } from "@/lib/fun";
 
-/**
- * Opening spread of /fun. The photo is the café half of the first diptych; the
- * lightbox still opens the full frame.
- *
- * Entrance order: index → heading (masked lines) → intro → photo → caption.
- */
+/** The opening anchor comes from PageShell, including Geist Mono's optical offset. */
 export default function FunHero() {
   return (
-    <header className="grid w-full grid-cols-1 gap-x-8 gap-y-10 overflow-x-clip px-[var(--page-gutter)] pt-scale text-ink lg:grid-cols-12 lg:gap-y-0">
-      <div className="flex flex-col gap-scale lg:col-span-7 lg:pt-[57.5px]">
-        <Reveal offsetY={10} durationMs={600}>
-          <p className="flex items-center gap-3 text-body uppercase tracking-[0.2em] text-ink-muted">
-            <span aria-hidden="true" className="h-px w-8 bg-accent" />
-            02 — The personal side
-          </p>
-        </Reveal>
-        <MaskedLines
-          as="h1"
-          lines={[
-            funIntro.title[0],
-            <>
-              {funIntro.title[1]}
-              <span className="text-accent">.</span>
-            </>,
-          ]}
-          className="text-[clamp(4rem,20vw,9rem)] font-medium leading-[0.92] tracking-tight lg:text-[clamp(6rem,10vw,10.5rem)]"
-        />
-        <Reveal className="flex flex-col gap-6 lg:mt-6" delayMs={350}>
-          <p className="max-w-md text-body-lg text-ink-muted">{funIntro.body}</p>
-          <div className="w-fit">
-            <AboutSubNav active="fun" />
-          </div>
-        </Reveal>
+    <header data-fun-section="header" className="relative flex flex-col gap-8 pb-16 pt-[var(--page-mono-start)] frame:block frame:h-[543px] frame:py-0">
+      <p data-fun-eyebrow className="text-mono text-ink-muted frame:absolute frame:left-0 frame:top-[var(--page-mono-start)]">
+        {funHeader.eyebrow}
+      </p>
+      <MaskedLines
+        as="h1"
+        lines={[...funHeader.title]}
+        className="text-[clamp(40px,11vw,80px)] font-semibold leading-none tracking-[-0.04em] text-ink frame:absolute frame:left-0 frame:top-[112px] frame:text-[80px] frame:leading-[80px]"
+        maskClassName="py-[0.05em] -my-[0.05em]"
+      />
+      <p className="max-w-[560px] text-body-l text-ink-secondary frame:absolute frame:left-0 frame:top-[312px] frame:w-[560px]">
+        {funHeader.deck}
+      </p>
+      <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:gap-[30px] frame:absolute frame:left-0 frame:top-[410px]">
+        <div className="shrink-0 md:w-[198px]">
+          <AboutSwitch />
+        </div>
+        <p className="max-w-[560px] text-mono !leading-[18px] text-ink-muted md:!leading-[16px]">
+          {funHeader.meta}
+        </p>
       </div>
-
-      <figure className="ml-auto w-[82%] md:w-[52%] lg:col-span-5 lg:mt-[4vh] lg:w-full lg:max-w-[32rem]">
-        <Reveal delayMs={450} offsetY={32} rotateDeg={1.2}>
-          <PhotoButton
-            photos={heroPhotos}
-            index={0}
-            priority
-            sizes="(max-width: 1023px) 170vw, 80vw"
-            rounded="rounded-md"
-            imageClassName={`object-left ${PHOTO_IMAGE_HOVER}`}
-            className={`aspect-[3/4] w-full rotate-[1.5deg] ${PHOTO_HOVER}`}
-          />
-        </Reveal>
-        <Reveal
-          as="figcaption"
-          delayMs={800}
-          offsetY={8}
-          durationMs={600}
-          className="mt-4 flex items-baseline gap-3 text-body text-ink-muted"
-        >
-          <span className="uppercase tracking-[0.2em] text-accent">Fig.</span>
-          Café side. The guitars are further down.
-        </Reveal>
-      </figure>
     </header>
   );
 }

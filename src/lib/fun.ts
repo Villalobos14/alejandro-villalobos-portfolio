@@ -1,0 +1,101 @@
+import type { Photo } from "@/lib/media";
+
+/** Phase 3e copy from the supplied brief. Legacy copy stays in personal.ts. */
+export const funHeader = {
+  eyebrow: "About — Fun",
+  title: ["Music on.", "Camera out."],
+  deck: "Music most of the time. Cities when I can get to them. Photos and short video of whatever I don’t want to forget.",
+  meta: "Spanish at home · English daily · Korean, slowly",
+} as const;
+
+export const cameraRoll = {
+  eyebrow: "01 — Camera roll",
+  title: "Things I didn’t want to forget.",
+  gear: "Shot on Nikon D3200 · Osmo Pocket",
+  coming: "photos coming",
+} as const;
+
+/** Lightbox retains the original diptychs until individual photographs exist. */
+export const cameraPhotos: Photo[] = [
+  {
+    // TODO(content): reemplazar por foto individual
+    src: "/me-and-friends.png",
+    alt: "Black-and-white diptych: Alejandro at an outdoor café, and friends with guitars.",
+    caption: "the café side",
+    width: 2538,
+    height: 1692,
+  },
+  {
+    // TODO(content): reemplazar por foto individual
+    src: "/me-and-friends.png",
+    alt: "Black-and-white diptych: Alejandro at an outdoor café, and friends with guitars.",
+    caption: "people I like",
+    width: 2538,
+    height: 1692,
+  },
+  {
+    // TODO(content): reemplazar por foto individual
+    src: "/storytelling.png",
+    alt: "Black-and-white diptych: a computer classroom, and Alejandro speaking on a stage in Chiapas.",
+    caption: "on a stage in Chiapas",
+    width: 2568,
+    height: 1577,
+  },
+  {
+    // TODO(content): reemplazar por foto individual
+    src: "/sharing-knowledge.png",
+    alt: "Black-and-white diptych: people working on laptops, and a workshop group around a projector.",
+    caption: "someone stuck → the room helps",
+    width: 2756,
+    height: 1604,
+  },
+  {
+    // TODO(content): reemplazar por foto individual
+    src: "/storytelling.png",
+    alt: "Black-and-white diptych: a computer classroom, and Alejandro speaking on a stage in Chiapas.",
+    caption: "half a brief, one table",
+    width: 2568,
+    height: 1577,
+  },
+];
+
+export const japanCaption = "Japan → after the trip";
+
+export const everyday = {
+  eyebrow: "02 — Everyday",
+  title: "The quieter part.",
+  music: {
+    label: "On repeat",
+    title: "Something is always playing.",
+    // TODO(content): canciones reales
+    tracks: [
+      { title: "[Song] — [Artist]", duration: "3:41" },
+      { title: "[Song] — [Artist]", duration: "4:02" },
+      { title: "[Song] — [Artist]", duration: "2:58" },
+    ],
+  },
+  travel: {
+    label: "Elsewhere",
+    from: "MEX",
+    to: "TYO · SEL",
+    body: "I like learning how a city moves: trains, signs and food. Japan and Korea are the trips I keep planning around.",
+    meta: [
+      { label: "Status", value: "Planning" },
+      { label: "Seat", value: "Window, obviously" },
+      { label: "Carry-on", value: "Osmo Pocket" },
+    ],
+  },
+  korean: {
+    label: "Korean, slowly",
+    wordLabel: "word of the week",
+    word: "천천히",
+    pronunciation: "cheon-cheon-hi — slowly",
+    note: "Which is also how I’m learning it.",
+  },
+} as const;
+
+export const funCta = {
+  title: "Back to the way I work.",
+  professional: "Professional →",
+  work: "See the work →",
+} as const;
