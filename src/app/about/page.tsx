@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import AboutExperience from "@/components/about/AboutExperience";
 import AboutHeader from "@/components/about/AboutHeader";
+import AboutToolkit from "@/components/about/AboutToolkit";
 import HowIWork from "@/components/about/HowIWork";
-import ProfessionalCapabilities from "@/components/about/ProfessionalCapabilities";
 import ProfessionalClosing from "@/components/about/ProfessionalClosing";
 import { handFont } from "@/components/about/sketches/hand-font";
 import PageShell from "@/components/system/PageShell";
@@ -29,8 +29,8 @@ export default function AboutPage() {
           <AboutHeader />
           <HowIWork />
           <AboutExperience />
+          <AboutToolkit />
         </div>
-        <ProfessionalCapabilities />
         <ProfessionalClosing />
       </div>
     </PageShell>
