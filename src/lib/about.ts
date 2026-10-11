@@ -10,6 +10,22 @@ import {
   type ExperienceEntry,
 } from "./professional";
 
+/** Copy for the PF27 /about Professional frame. */
+export const professionalHeader = {
+  eyebrow: "About — Professional",
+  title: ["Understand the system.", "Then shape the interface."] as const,
+  deck: "I’m a product designer with a software-engineering degree and a UX-research job at HSBC. I make complex products easier to understand, use and build — and I’m happiest where research, design and code meet.",
+  meta: "Mexico City · Open to relocation · Spanish & English",
+  portraitCaption: "me, coffee, thinking about pipelines",
+};
+
+/**
+ * Previous /about Professional copy. PF27 phase 3d rewrote the route; these
+ * exports stay so the copy is not deleted. The new page stops reading them
+ * as each block lands. That includes the "question" thinking stage,
+ * workingWith, closing, the old hero, the career margin notes and the
+ * capability groups.
+ */
 export const aboutHero = {
   index: "01 — The professional side",
   title: ["Beyond", "the interface"] as [string, string],
