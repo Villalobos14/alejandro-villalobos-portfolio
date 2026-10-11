@@ -1,20 +1,21 @@
 "use client";
 
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import { PROJECTS_SECTION_ID } from "@/lib/projects";
+import { contactEmail } from "@/lib/links";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg";
 
 type DockSection = "home" | "work" | "narrative";
 type DockItem = "home" | "work" | "about" | "fun";
 
-const items: { id: DockItem; label: string; href: string }[] = [
-  { id: "home", label: "Home", href: "/" },
+const items: { id: Exclude<DockItem, "home">; label: string; href: string }[] = [
   { id: "work", label: "Work", href: "/projects" },
   { id: "about", label: "About", href: "/about" },
   { id: "fun", label: "Fun", href: "/fun" },
@@ -157,14 +158,20 @@ export default function HomeDock() {
 
     if (!list) return;
 
-    const current = list.querySelector<HTMLElement>("[data-dock-active='true']");
+    const update = () => {
+      const current = list.querySelector<HTMLElement>("[data-dock-active='true']");
 
-    if (!current) {
-      setIndicator({ x: 0, width: 0 });
-      return;
-    }
+      setIndicator(current
+        ? { x: current.offsetLeft, width: current.offsetWidth }
+        : { x: 0, width: 0 });
+    };
 
-    setIndicator({ x: current.offsetLeft, width: current.offsetWidth });
+    update();
+    // Re-measure after responsive padding or loaded fonts change the tab widths.
+    const observer = new ResizeObserver(update);
+    observer.observe(list);
+    list.querySelectorAll("a").forEach((link) => observer.observe(link));
+    return () => observer.disconnect();
   }, [active, pathname]);
 
   const scrollTo = (target: number | HTMLElement) => {
@@ -204,20 +211,29 @@ export default function HomeDock() {
       aria-label="Primary"
       data-pet-surface="dock"
       data-pet-surface-id="main-dock"
-      className={`fixed left-1/2 z-40 w-max max-w-[calc(100%-2rem)] rounded-full border border-border bg-bg px-1 py-1 transition-transform duration-300 motion-reduce:transition-none ${
+      className={`fixed bottom-[var(--dock-offset)] left-1/2 z-40 w-max max-w-[calc(100%-2rem)] rounded-full bg-ink p-1.5 text-bg drop-shadow-[0_12px_16px_rgb(var(--ink)/0.22)] transition-transform duration-300 motion-reduce:transition-none [@media(min-width:420px)]:w-[385px] ${
         dockHidden ? "pointer-events-none" : ""
       }`}
       style={{
-        bottom: "var(--dock-offset)",
         transform: dockHidden ? "translate3d(-50%, calc(100% + 2.5rem), 0)" : "translate3d(-50%, 0, 0)",
       }}
     >
-      <div ref={listRef} className="relative flex items-center">
+      <div ref={listRef} className="relative flex items-center gap-0 [@media(min-width:360px)]:gap-0.5 [@media(min-width:420px)]:justify-between">
         <span
           aria-hidden="true"
-          className="absolute bottom-0 top-0 rounded-full bg-accent transition-[transform,width] duration-[380ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
+          className="pointer-events-none absolute bottom-0 top-0 rounded-full bg-bg transition-[transform,width] duration-[380ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
           style={{ width: indicator.width, transform: `translateX(${indicator.x}px)` }}
         />
+        <TransitionLink
+          href="/"
+          aria-label="Home"
+          aria-current={active === "home" ? "page" : undefined}
+          onClick={onHomeClick}
+          className={`relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full bg-accent text-[15px] font-semibold leading-7 tracking-[0.02em] text-bg ${focusStyles} ${active === "home" ? "ring-2 ring-inset ring-bg" : ""}`}
+        >
+          AV
+        </TransitionLink>
+        <span aria-hidden="true" className="hidden h-2.5 w-1.5 shrink-0 [@media(min-width:360px)]:block" />
         {items.map((item) => {
           const selected = active === item.id;
 
@@ -227,15 +243,23 @@ export default function HomeDock() {
               href={item.href}
               aria-current={selected ? "page" : undefined}
               data-dock-active={selected ? "true" : undefined}
-              className={`relative z-10 inline-flex min-h-11 min-w-[4.75rem] shrink-0 items-center justify-center whitespace-nowrap rounded-full px-3 text-mono sm:px-4 ${focusStyles} ${
-                selected ? "text-white" : "text-ink-secondary fine:hover:text-ink active:text-ink"
+              className={`relative z-10 inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-1 py-[11px] text-[15px] font-medium leading-[23px] [@media(min-width:360px)]:px-2.5 [@media(min-width:420px)]:px-4 ${focusStyles} ${
+                selected ? "text-ink" : "text-bg fine:hover:bg-bg/10 active:bg-bg/10"
               }`}
-              onClick={item.id === "home" ? onHomeClick : item.id === "work" ? onWorkClick : undefined}
+              onClick={item.id === "work" ? onWorkClick : undefined}
             >
               {item.label}
             </TransitionLink>
           );
         })}
+        <span aria-hidden="true" className="h-5 w-px shrink-0 bg-bg/30" />
+        <a
+          href={`mailto:${contactEmail}`}
+          className={`relative z-10 inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-2 py-[11px] text-[15px] font-medium leading-[23px] text-bg fine:hover:bg-bg/10 active:bg-bg/10 [@media(min-width:360px)]:px-2.5 [@media(min-width:420px)]:pl-4 [@media(min-width:420px)]:pr-[18px] ${focusStyles}`}
+        >
+          <Image src="/navigation/status-dot.svg" alt="" width={8} height={8} className="shrink-0" />
+          Say hi ↗
+        </a>
       </div>
     </nav>
   );
