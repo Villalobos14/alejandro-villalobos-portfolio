@@ -3,7 +3,7 @@ import MaskedLines from "../ui/MaskedLines";
 import PetGlyphOrigin from "../pet-world/PetGlyphOrigin";
 import { homeHeroContent } from "@/lib/home-hero";
 
-const { role, petGlyph, description } = homeHeroContent;
+const { role, petGlyph } = homeHeroContent;
 
 /** The line with Calcifer's letter in it, or the line unchanged. The text itself is never altered. */
 function withPet(line: string): ReactNode {
@@ -22,21 +22,20 @@ function withPet(line: string): ReactNode {
 }
 
 /*
- * PRODUCT DESIGNER is the h1. Calcifer sits in the first "O", so that line
- * keeps the taller mask: his teleport rises above the baseline on a phone.
+ * PRODUCT DESIGNER is the h1, left-aligned with "I’m a". Calcifer sits in the
+ * first "O", so that line keeps the taller mask.
  */
 export default function HeroStatement({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex max-w-full flex-col items-start lg:items-end lg:text-right ${className}`}>
-      <p className="text-[24px] leading-snug text-ink-secondary">{role.lead}</p>
+    <div className={className}>
+      <p className="text-[24px] leading-none text-ink-secondary">{role.lead}</p>
       <MaskedLines
         as="h1"
         lines={[withPet(role.title)]}
-        className="max-w-full text-[clamp(2.25rem,7.014vw,101px)] font-semibold leading-none tracking-[-0.03em] text-ink"
-        lineClassName="whitespace-nowrap"
+        className="max-w-full text-[clamp(2.5rem,7.014vw,101px)] font-semibold leading-[1.04] tracking-[-0.03em] text-ink frame:w-max frame:max-w-none"
+        lineClassName="frame:whitespace-nowrap"
         maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
       />
-      <p className="mt-3 max-w-xl text-[24px] leading-snug text-ink-secondary">{description}</p>
     </div>
   );
 }

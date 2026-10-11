@@ -17,9 +17,11 @@ export default function Home() {
   return (
     <PageShell>
       <HomeNarrativeProvider>
-        <Hero />
-        <Projects />
-        <HomeNarrative />
+        <div className="mx-auto w-full max-w-[1440px] overflow-x-clip [--page-gutter:clamp(16px,5vw,72px)]">
+          <Hero />
+          <Projects />
+          <HomeNarrative />
+        </div>
       </HomeNarrativeProvider>
     </PageShell>
   );

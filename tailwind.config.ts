@@ -47,6 +47,7 @@ const config: Config = {
       },
       screens: {
         fine: { raw: "(hover: hover) and (pointer: fine)" },
+        frame: "1440px",
       },
     },
     colors: {
