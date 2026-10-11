@@ -1,26 +1,24 @@
 "use client";
 
-import { ArrowDownTrayIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 import { useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
-import { contactEmail, siteLinks } from "@/lib/links";
-import { PROJECTS_ANCHOR, PROJECTS_SECTION_ID } from "@/lib/projects";
+import { PROJECTS_SECTION_ID } from "@/lib/projects";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const focusStyles =
   "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 type DockSection = "home" | "work" | "narrative";
-type DockItem = "home" | "work";
+type DockItem = "home" | "work" | "about" | "fun";
 
-const items: { id: DockItem; label: string }[] = [
-  { id: "home", label: "Home" },
-  { id: "work", label: "Work" },
+const items: { id: DockItem; label: string; href: string }[] = [
+  { id: "home", label: "Home", href: "/" },
+  { id: "work", label: "Work", href: "/projects" },
+  { id: "about", label: "About", href: "/about" },
+  { id: "fun", label: "Fun", href: "/fun" },
 ];
-
-const resumeHref = siteLinks.find((link) => link.id === "resume")?.href ?? "/resume";
 
 export default function HomeDock() {
   const pathname = usePathname();
@@ -32,7 +30,17 @@ export default function HomeDock() {
   const [dockHidden, setDockHidden] = useState(false);
   const isHome = pathname === "/";
   const isWorkRoute = pathname === "/projects" || pathname.startsWith("/work");
-  const active: DockItem | null = isHome ? (section === "work" ? "work" : "home") : isWorkRoute ? "work" : null;
+  const active: DockItem | null = isHome
+    ? section === "work"
+      ? "work"
+      : "home"
+    : isWorkRoute
+      ? "work"
+      : pathname === "/about"
+        ? "about"
+        : pathname === "/fun"
+          ? "fun"
+          : null;
 
   useLayoutEffect(() => {
     const dock = dockRef.current;
@@ -216,38 +224,18 @@ export default function HomeDock() {
           return (
             <TransitionLink
               key={item.id}
-              href={item.id === "home" ? "/" : PROJECTS_ANCHOR}
+              href={item.href}
               aria-current={selected ? "page" : undefined}
               data-dock-active={selected ? "true" : undefined}
-              className={`relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-2.5 text-[13px] sm:px-4 sm:text-sm ${focusStyles} ${
-                selected ? "text-white" : "text-ink"
+              className={`relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-2.5 text-mono sm:px-4 ${focusStyles} ${
+                selected ? "text-white" : "text-ink-secondary fine:hover:text-ink active:text-ink"
               }`}
-              onClick={item.id === "home" ? onHomeClick : onWorkClick}
+              onClick={item.id === "home" ? onHomeClick : item.id === "work" ? onWorkClick : undefined}
             >
               {item.label}
             </TransitionLink>
           );
         })}
-        <span aria-hidden="true" className="mx-1 h-4 w-px shrink-0 bg-ink-muted/40" />
-        <TransitionLink
-          href={resumeHref}
-          aria-current={pathname === resumeHref ? "page" : undefined}
-          className={`group relative z-10 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-accent px-4 text-[13px] font-medium text-white transition-[filter] duration-300 fine:hover:brightness-110 sm:px-5 sm:text-sm ${focusStyles}`}
-        >
-          Resume
-          <ArrowDownTrayIcon
-            aria-hidden="true"
-            className="pointer-events-none size-3.5 transition-transform duration-300 fine:group-hover:translate-y-0.5"
-          />
-        </TransitionLink>
-        <a
-          href={`mailto:${contactEmail}`}
-          aria-label="Send an email"
-          className={`relative z-10 inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 px-2 text-[13px] text-ink transition-colors duration-300 fine:hover:text-accent sm:px-3 sm:text-sm ${focusStyles}`}
-        >
-          <EnvelopeIcon aria-hidden="true" className="pointer-events-none size-4" />
-          <span className="hidden sm:inline">Say hi</span>
-        </a>
       </div>
     </nav>
   );
