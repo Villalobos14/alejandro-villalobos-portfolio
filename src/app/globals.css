@@ -179,6 +179,18 @@ html.site-cursor-on [data-site-header] button * {
   margin-left: calc(-0.67% - 6px);
 }
 
+@media (max-width: 767px) {
+  .page-wordmark {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .mobile-bleed {
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding-inline: var(--page-gutter);
+  }
+}
+
 .hero-role {
   width: 100%;
   max-width: 922px;
