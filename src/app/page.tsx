@@ -4,7 +4,7 @@ import Hero from "@/components/Hero";
 import HomeNarrative from "@/components/home/HomeNarrative";
 import { HomeNarrativeProvider } from "@/components/home/NarrativeProvider";
 import Projects from "@/components/Projects";
-import SmoothSection from "@/components/SmoothSection";
+import PageShell from "@/components/system/PageShell";
 
 export const metadata: Metadata = pageMetadata({
   title: "Work | Alejandro Villalobos",
@@ -15,11 +15,12 @@ export const metadata: Metadata = pageMetadata({
 
 export default function Home() {
   return (
-    <HomeNarrativeProvider>
-      <Hero />
-      <Projects />
-      <SmoothSection />
-      <HomeNarrative />
-    </HomeNarrativeProvider>
+    <PageShell>
+      <HomeNarrativeProvider>
+        <Hero />
+        <Projects />
+        <HomeNarrative />
+      </HomeNarrativeProvider>
+    </PageShell>
   );
 }
