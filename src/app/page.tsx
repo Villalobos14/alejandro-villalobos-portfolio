@@ -7,9 +7,8 @@ import Projects from "@/components/Projects";
 import PageShell from "@/components/system/PageShell";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Work | Alejandro Villalobos",
-  description:
-    "Selected product design and UX work by Alejandro Villalobos.",
+  title: "Alejandro Villalobos — Product Designer",
+  description: "Selected product design and UX by Alejandro Villalobos.",
   path: "/",
 });
 
