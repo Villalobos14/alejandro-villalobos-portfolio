@@ -227,7 +227,7 @@ export default function HomeDock() {
               href={item.href}
               aria-current={selected ? "page" : undefined}
               data-dock-active={selected ? "true" : undefined}
-              className={`relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-2.5 text-mono sm:px-4 ${focusStyles} ${
+              className={`relative z-10 inline-flex min-h-11 min-w-[4.75rem] shrink-0 items-center justify-center whitespace-nowrap rounded-full px-3 text-mono sm:px-4 ${focusStyles} ${
                 selected ? "text-white" : "text-ink-secondary fine:hover:text-ink active:text-ink"
               }`}
               onClick={item.id === "home" ? onHomeClick : item.id === "work" ? onWorkClick : undefined}

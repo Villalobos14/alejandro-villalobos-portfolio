@@ -32,8 +32,8 @@ export default function HeroStatement({ className = "" }: { className?: string }
       <MaskedLines
         as="h1"
         lines={[withPet(role.title)]}
-        className="max-w-full text-[clamp(2.5rem,6.667vw,96px)] font-semibold leading-[1.04] tracking-[-0.03em] text-ink"
-        maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
+        className="max-w-full text-[clamp(44px,14.5vw,64px)] font-semibold leading-[1.04] tracking-[-0.03em] text-ink md:text-[clamp(2.5rem,6.667vw,96px)]"
+        maskClassName="py-[0.08em] md:-mb-[0.32em] md:-mt-[0.24em] md:py-[0.24em]"
       />
     </div>
   );

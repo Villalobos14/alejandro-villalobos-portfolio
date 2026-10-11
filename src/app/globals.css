@@ -188,22 +188,25 @@ html.site-cursor-on [data-site-header] button * {
 
 .hero-description {
   max-width: 100%;
-  font-size: 22px;
+  font-size: 17px;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.35;
   color: rgb(var(--ink-secondary));
 }
 
-@container (min-width: 46.5rem) {
+@media (min-width: 768px) {
   .hero-description {
-    width: max-content;
-    margin-left: auto;
-    white-space: nowrap;
+    font-size: 24px;
+    line-height: 1;
   }
 }
 
 @container (min-width: 51rem) {
   .hero-description {
+    width: max-content;
+    margin-left: auto;
     font-size: 24px;
+    line-height: 1;
+    white-space: nowrap;
   }
 }
