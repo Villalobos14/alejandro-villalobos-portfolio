@@ -62,6 +62,95 @@ export const howIWork = {
   ] as const satisfies readonly WorkHabit[],
 };
 
+export const experienceSection = {
+  eyebrow: "02 — Experience",
+  title: "Where I’ve worked.",
+  roles: [
+    {
+      dates: "2025 — Present",
+      company: "HSBC",
+      role: "UX Researcher",
+      body: "Mixed-methods research across digital banking, branches and service journeys: benchmarks, field research, NPS / FCR analysis and dashboards.",
+    },
+    {
+      dates: "Sep — Dec 2025",
+      company: "GESSI · UPC Barcelona",
+      role: "Research assistant · Software engineer",
+      body: "Redesigned CodeAssessment and built its new assessment flow; implemented ML cohesion metrics in Python, Flask and Angular.",
+    },
+    {
+      dates: "2023 — 2024",
+      company: "Orium",
+      role: "Product Designer",
+      body: "Product design across a Webflow migration, components and screens, plus AI-assisted visual work.",
+    },
+    {
+      dates: "2021 — 2023",
+      company: "DaCodes",
+      role: "Product Designer",
+      body: "Design across four to five products: SaaS information architecture, design systems and prototypes with engineering.",
+    },
+  ],
+  education: [
+    {
+      title: "Software Development Engineering",
+      detail: "Universidad Politécnica de Chiapas · 2025",
+    },
+    {
+      title: "Google UX Design Certificate",
+      detail: "Google · 2024",
+    },
+  ],
+} as const;
+
+export const toolkitSection = {
+  eyebrow: "03 — Toolkit",
+  title: "What I use, by job.",
+  rows: [
+    { label: "Design", value: "Figma, prototyping, design systems, Adobe Photoshop & Illustrator" },
+    {
+      label: "Research",
+      value:
+        "Interviews, usability testing, benchmarks, field research, surveys — UserTesting, Optimal Workshop, Hotjar, Google Analytics",
+      tall: true,
+    },
+    { label: "Data", value: "Python, pandas, NumPy, Plotly / Dash, R, Excel" },
+    { label: "Build", value: "React, Next.js, TypeScript, Angular, Flask, Git & GitHub" },
+    {
+      label: "AI workflow",
+      value: "Figma → MCP → Cursor for working prototypes; Claude and ChatGPT / Codex for synthesis and code",
+    },
+  ],
+} as const;
+
+export const beyondSection = {
+  eyebrow: "04 — Beyond the job",
+  title: "Teaching, talking, building with others.",
+  columns: [
+    {
+      title: "Teaching",
+      body: "Workshops where someone is stuck and the room figures it out together.",
+      photo: "Foto — Teaching",
+    },
+    {
+      title: "Speaking",
+      body: "Saying a thing out loud until it’s clear — sometimes on a stage in Chiapas.",
+      photo: "Foto — Speaking",
+    },
+    {
+      title: "Hackathons",
+      body: "Usually on the design side of the table. 1st place with Monogatari, 3rd with GoodActions.",
+      photo: "Foto — Hackathons",
+    },
+  ],
+} as const;
+
+export const aboutCta = {
+  title: "Want the details?",
+  cv: "Download CV (PDF) ↓",
+  fun: "The other side: Fun →",
+} as const;
+
 export const professionalHeader = {
   eyebrow: "About — Professional",
   title: ["Understand the system.", "Then shape the interface."] as const,

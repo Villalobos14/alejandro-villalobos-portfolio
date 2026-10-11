@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import AboutExperience from "@/components/about/AboutExperience";
 import AboutHeader from "@/components/about/AboutHeader";
 import HowIWork from "@/components/about/HowIWork";
 import ProfessionalCapabilities from "@/components/about/ProfessionalCapabilities";
 import ProfessionalClosing from "@/components/about/ProfessionalClosing";
-import ProfessionalExperience from "@/components/about/ProfessionalExperience";
 import { handFont } from "@/components/about/sketches/hand-font";
 import PageShell from "@/components/system/PageShell";
 import { professionalHeader } from "@/lib/about";
@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 /* Sketch strokes are server-rendered "armed" (undrawn). Without scripts they never play, so show them drawn. */
-const NO_SCRIPT_SKETCHES = `[data-sketch="armed"] [data-draw]{opacity:1!important;stroke-dashoffset:0!important}[data-sketch="armed"] [data-appear]{opacity:1!important}[data-sketch="armed"] [data-dim]{opacity:.3!important}[data-sketch="armed"] [data-underline]{background-size:100% .32em!important}`;
+const NO_SCRIPT_SKETCHES = `[data-sketch="armed"] [data-draw]{opacity:1!important;stroke-dashoffset:0!important}[data-sketch="armed"] [data-appear]{opacity:1!important}[data-sketch="armed"] [data-dim]{opacity:.3!important}[data-sketch="armed"] [data-underline]{-webkit-mask-size:100% .32em!important;mask-size:100% .32em!important}`;
 
 export default function AboutPage() {
   return (
@@ -28,12 +28,10 @@ export default function AboutPage() {
         <div className="page-container">
           <AboutHeader />
           <HowIWork />
+          <AboutExperience />
         </div>
-        <div className="[&>section]:mt-16 lg:[&>section]:mt-24">
-          <ProfessionalExperience />
-          <ProfessionalCapabilities />
-          <ProfessionalClosing />
-        </div>
+        <ProfessionalCapabilities />
+        <ProfessionalClosing />
       </div>
     </PageShell>
   );
