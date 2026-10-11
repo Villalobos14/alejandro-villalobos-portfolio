@@ -107,7 +107,7 @@ export default function MlsCaseStudy() {
               {mlsContext.title}
             </h2>
             <p className={`mt-6 ${body}`}>{mlsContext.body}</p>
-            <div className="mt-8 rounded-xl bg-bg-subtle p-[22px]">
+            <div className="mt-8 border-l-2 border-ink py-1 pl-[22px] frame:min-h-[124px]">
               <p className={eyebrow}>{mlsContext.partLabel}</p>
               <p className="mt-3 text-[15px] leading-snug text-ink">{mlsContext.part}</p>
             </div>
