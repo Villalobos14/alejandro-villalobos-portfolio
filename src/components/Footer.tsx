@@ -16,7 +16,7 @@ function siteHref(id: string): string {
 
 export default function Footer() {
   return (
-    <footer className="relative mt-8 w-full overflow-hidden bg-bg text-ink md:mt-32">
+    <footer className="relative w-full overflow-hidden bg-bg text-ink">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 [background-image:linear-gradient(to_right,rgb(var(--mat-major))_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--mat-major))_1px,transparent_1px),linear-gradient(to_right,rgb(var(--mat-minor))_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--mat-minor))_1px,transparent_1px)] [background-size:5rem_5rem,5rem_5rem,1rem_1rem,1rem_1rem]"
@@ -28,14 +28,14 @@ export default function Footer() {
           </span>
         ))}
       </div>
-      <div className="page-container relative pb-2 pt-8 md:pb-10 md:pt-16">
+      <div className="page-container relative pb-4 pt-8 md:flex md:h-[567px] md:flex-col md:pb-8 md:pt-12">
         <p className="text-mono-s text-ink-muted">Say hi</p>
         <MaskedLines
           as="h2"
           lines={["Working on something complex?", "Let’s talk."]}
-          className="mt-2 max-w-[12em] text-[clamp(32px,9vw,44px)] font-medium leading-[0.98] text-ink md:mt-3 md:text-display-l"
+          className="mt-2 text-[clamp(32px,9vw,44px)] font-medium leading-[0.98] text-ink md:mt-3 md:text-display-l"
         />
-        <ul className="mt-4 grid grid-cols-2 gap-x-4 md:mt-8 md:flex md:flex-row md:flex-wrap md:gap-x-8">
+        <ul className="mt-4 grid grid-cols-2 gap-x-4 md:mt-6 md:flex md:flex-row md:flex-wrap md:gap-x-8">
           <li>
             <a href={`mailto:${contactEmail}`} className={`inline-flex min-h-11 items-center ${linkClass}`}>
               Email me ↗
@@ -68,7 +68,7 @@ export default function Footer() {
             </a>
           </li>
         </ul>
-        <p className="mt-4 max-w-3xl text-[12px] leading-relaxed text-ink-secondary md:mt-10 md:text-body-s">
+        <p className="mt-3 max-w-3xl text-[12px] leading-relaxed text-ink-secondary md:mt-4 md:text-body-s">
           Also on{" "}
           <Link
             href={siteHref("behance")}
@@ -99,7 +99,7 @@ export default function Footer() {
           {"   ·   "}
           © 2026 Alejandro Villalobos · Built with Next.js
         </p>
-        <div className="mt-4 border-t border-border pt-4 md:mt-10 md:pt-6">
+        <div className="mt-4 border-t border-border pt-4 md:mt-auto md:pt-6">
           <span className="sr-only">Villalobos</span>
           <FooterTitle />
         </div>
