@@ -22,6 +22,7 @@ import MlsDisclosures from "./MlsDisclosures";
 import { caseFocus } from "./styles";
 
 const eyebrow = "text-mono text-ink-muted";
+const stickyEyebrow = `${eyebrow} lg:sticky lg:top-0 lg:z-20 lg:bg-bg lg:py-1`;
 const body = "text-[17px] leading-[27px] text-ink-secondary";
 const h2 =
   "text-[clamp(32px,8vw,48px)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink frame:text-[48px] frame:leading-[54px]";
@@ -100,9 +101,11 @@ export default function MlsCaseStudy() {
           <p className="text-mono-s text-ink-muted">{mlsResults.note}</p>
         </section>
 
-        <section aria-labelledby="mls-context" className="grid items-start gap-8 py-8 md:grid-cols-[408fr_840fr] md:gap-12 frame:min-h-[653px] frame:content-start frame:pb-0 frame:pt-32">
-          <div className="order-2 md:order-none">
-            <p className={eyebrow}>{mlsContext.eyebrow}</p>
+        <section aria-labelledby="mls-context" className="grid items-start gap-8 py-8 md:grid-cols-[408fr_840fr] md:gap-12 frame:min-h-[653px] frame:content-start frame:pb-0 frame:pt-32 lg:isolate">
+          <div className="order-2 md:order-none lg:self-stretch">
+            <p data-sticky-eyebrow="01" className={stickyEyebrow}>
+              {mlsContext.eyebrow}
+            </p>
             <h2 id="mls-context" className={`mt-4 ${h3}`}>
               {mlsContext.title}
             </h2>
@@ -120,9 +123,11 @@ export default function MlsCaseStudy() {
           />
         </section>
 
-        <section aria-labelledby="mls-problem" className="grid items-start gap-10 py-10 md:grid-cols-[463fr_612fr] md:gap-[221px] frame:min-h-[474px] frame:pt-28">
-          <div>
-            <p className={eyebrow}>{mlsProblem.eyebrow}</p>
+        <section aria-labelledby="mls-problem" className="grid items-start gap-10 py-10 md:grid-cols-[463fr_612fr] md:gap-[221px] frame:min-h-[474px] frame:pt-28 lg:isolate">
+          <div className="lg:self-stretch">
+            <p data-sticky-eyebrow="02" className={stickyEyebrow}>
+              {mlsProblem.eyebrow}
+            </p>
             <p className="mt-4 text-[clamp(32px,8vw,56px)] font-medium leading-[1.07] tracking-[-0.025em] text-ink frame:text-[56px] frame:leading-[60px]">
               {mlsProblem.quote[0]}
               <br />
@@ -139,29 +144,36 @@ export default function MlsCaseStudy() {
           </div>
         </section>
 
-        <section aria-labelledby="mls-flow" className="py-12 frame:min-h-[1157px] frame:pb-[12px] frame:pt-[131px]">
-          <div data-hairline="flow" className="border-t border-border pt-[15px] frame:min-h-[179px]">
-            <p className={eyebrow}>{mlsFlow.eyebrow}</p>
-            <h2 id="mls-flow" className={`mt-3 ${h2}`}>
-              {mlsFlow.title}
-            </h2>
-            <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
-              {mlsFlow.deck}
+        <section aria-labelledby="mls-flow" className="py-12 frame:min-h-[1157px] frame:pb-[12px] frame:pt-[131px] lg:isolate">
+          <div data-hairline="flow" className="border-t border-border pt-[15px] lg:pt-[11px]">
+            <p data-sticky-eyebrow="03" className={stickyEyebrow}>
+              {mlsFlow.eyebrow}
             </p>
+            <div className="frame:min-h-[152px]">
+              <h2 id="mls-flow" className={`mt-3 ${h2}`}>
+                {mlsFlow.title}
+              </h2>
+              <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+                {mlsFlow.deck}
+              </p>
+            </div>
+            <CaseVisual className="mt-8" label={mlsPlaceholders.flow} alt="" sizes="(min-width: 1024px) 1296px, 100vw" />
           </div>
-          <CaseVisual className="mt-8" label={mlsPlaceholders.flow} alt="" sizes="(min-width: 1024px) 1296px, 100vw" />
         </section>
 
-        <section aria-labelledby="mls-decisions" className="py-12 frame:min-h-[1771px] frame:pt-[131px]">
-          <div data-hairline="decisions" className="border-t border-border pt-[15px] frame:min-h-[179px]">
-            <p className={eyebrow}>{mlsDecisions.eyebrow}</p>
-            <h2 id="mls-decisions" className={`mt-3 ${h2}`}>
-              {mlsDecisions.title}
-            </h2>
-            <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
-              {mlsDecisions.deck}
+        <section aria-labelledby="mls-decisions" className="py-12 frame:min-h-[1771px] frame:pt-[131px] lg:isolate">
+          <div data-hairline="decisions" className="border-t border-border pt-[15px] lg:pt-[11px]">
+            <p data-sticky-eyebrow="04" className={stickyEyebrow}>
+              {mlsDecisions.eyebrow}
             </p>
-          </div>
+            <div className="frame:min-h-[152px]">
+              <h2 id="mls-decisions" className={`mt-3 ${h2}`}>
+                {mlsDecisions.title}
+              </h2>
+              <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+                {mlsDecisions.deck}
+              </p>
+            </div>
           <div className="mt-10 grid gap-12 md:grid-cols-2 md:gap-x-6 md:gap-y-12">
             {mlsDecisions.cells.map((cell) => (
               <div key={cell.label}>
@@ -183,12 +195,15 @@ export default function MlsCaseStudy() {
               </p>
             </div>
           </div>
+          </div>
         </section>
 
-        <section aria-labelledby="mls-system" className="grid items-center gap-8 py-12 md:grid-cols-[840fr_408fr] md:gap-12 frame:min-h-[669px]">
-          <CaseVisual label={mlsPlaceholders.system} alt="" sizes="(min-width: 1024px) 840px, 100vw" />
-          <div>
-            <p className={eyebrow}>{mlsSystem.eyebrow}</p>
+        <section aria-labelledby="mls-system" className="grid items-center gap-8 py-12 md:grid-cols-[840fr_408fr] md:gap-12 frame:min-h-[669px] lg:isolate">
+          <CaseVisual className="lg:self-center" label={mlsPlaceholders.system} alt="" sizes="(min-width: 1024px) 840px, 100vw" />
+          <div className="lg:flex lg:flex-col lg:justify-center lg:self-stretch">
+            <p data-sticky-eyebrow="05" className={stickyEyebrow}>
+              {mlsSystem.eyebrow}
+            </p>
             <h2 id="mls-system" className={`mt-4 ${h3}`}>
               {mlsSystem.title}
             </h2>
@@ -207,16 +222,19 @@ export default function MlsCaseStudy() {
           </div>
         </section>
 
-        <section aria-labelledby="mls-validation" className="py-12 frame:min-h-[1310px] frame:pt-[147px]">
-          <div data-hairline="validation" className="border-t border-border pt-[15px] frame:min-h-[179px]">
-            <p className={eyebrow}>{mlsValidation.eyebrow}</p>
-            <h2 id="mls-validation" className={`mt-3 ${h2}`}>
-              {mlsValidation.title}
-            </h2>
-            <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
-              {mlsValidation.deck}
+        <section aria-labelledby="mls-validation" className="py-12 frame:min-h-[1310px] frame:pt-[147px] lg:isolate">
+          <div data-hairline="validation" className="border-t border-border pt-[15px] lg:pt-[11px]">
+            <p data-sticky-eyebrow="06" className={stickyEyebrow}>
+              {mlsValidation.eyebrow}
             </p>
-          </div>
+            <div className="frame:min-h-[152px]">
+              <h2 id="mls-validation" className={`mt-3 ${h2}`}>
+                {mlsValidation.title}
+              </h2>
+              <p className="mt-4 max-w-[760px] text-[17px] leading-[1.55] text-ink-secondary md:text-[20px] md:leading-[31px]">
+                {mlsValidation.deck}
+              </p>
+            </div>
           <div className="mt-10 grid items-start gap-10 lg:grid-cols-[636fr_636fr] lg:gap-6">
             <div>
               <div className="hidden grid-cols-[344fr_130fr_130fr] gap-4 border-b border-border pb-3 md:grid">
@@ -276,15 +294,19 @@ export default function MlsCaseStudy() {
           <div className="mt-12">
             <MlsDisclosures titles={mlsValidation.disclosures} />
           </div>
+          </div>
         </section>
 
-        <section aria-labelledby="mls-behind" className="py-12 frame:min-h-[703px] frame:pt-[115px]">
-          <div data-hairline="behind" className="border-t border-border pt-[15px] frame:min-h-[103px]">
-            <p className={eyebrow}>{mlsBehind.eyebrow}</p>
-            <h2 id="mls-behind" className={`mt-3 ${h2}`}>
-              {mlsBehind.title}
-            </h2>
-          </div>
+        <section aria-labelledby="mls-behind" className="py-12 frame:min-h-[703px] frame:pt-[115px] lg:isolate">
+          <div data-hairline="behind" className="border-t border-border pt-[15px] lg:pt-[11px]">
+            <p data-sticky-eyebrow="07" className={stickyEyebrow}>
+              {mlsBehind.eyebrow}
+            </p>
+            <div className="frame:min-h-[76px]">
+              <h2 id="mls-behind" className={`mt-3 ${h2}`}>
+                {mlsBehind.title}
+              </h2>
+            </div>
           <div className="mt-8 grid gap-10 md:grid-cols-3 md:gap-6">
             {mlsBehind.columns.map((column) => (
               <figure key={column.src}>
@@ -298,11 +320,14 @@ export default function MlsCaseStudy() {
               </figure>
             ))}
           </div>
+          </div>
         </section>
 
-        <section aria-labelledby="mls-reflection" className="grid gap-10 py-12 md:grid-cols-[612fr_684fr] frame:min-h-[540px] frame:pt-32">
-          <div>
-            <p className={eyebrow}>{mlsReflection.eyebrow}</p>
+        <section aria-labelledby="mls-reflection" className="grid gap-10 py-12 md:grid-cols-[612fr_684fr] frame:min-h-[540px] frame:pt-32 lg:isolate">
+          <div className="lg:self-stretch">
+            <p data-sticky-eyebrow="08" className={stickyEyebrow}>
+              {mlsReflection.eyebrow}
+            </p>
             <h2 id="mls-reflection" className={`mt-4 ${h2}`}>
               {mlsReflection.title}
             </h2>
