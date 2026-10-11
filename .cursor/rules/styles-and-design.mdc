@@ -1,12 +1,81 @@
 ---
-description: Tailwind exclusivo, paleta y tipografía del portafolio
+description: Tokens, tipografía y reglas visuales PF27
 globs: "**/*.{tsx,ts,css}"
 alwaysApply: false
 ---
 
 # Estilos y diseño
 
+Tema claro. Los colores viven en `:root` de `src/app/globals.css` como tripletas RGB (`rgb(var(--token) / <alpha-value>)`) y se consumen por las utilidades de `tailwind.config.ts`.
+
 - Solo clases utilitarias de Tailwind. No crear `.css` / `.module.css` extra.
 - Prohibido `style={}` salvo valores dinámicos de runtime indispensables para animaciones.
-- Paleta (`tailwind.config.ts`): `primary` (#0C0D0E), `secondary` (#3DD964), `white`, `black`, `gray` (#8C8C8C). Sin colores arbitrarios sin justificación.
-- Tipografía: `--font-sf` montada en `src/app/layout.tsx`. Usar `font-sans`.
+- Cero hex hardcodeados en componentes. Todo color sale de un token. Excepción: el texto blanco sobre el scrim `--cover-ink` de las portadas de proyecto.
+- `white` y `black` se conservan solo por compatibilidad (texto sobre `--accent`, scrims). No son la paleta de la página.
+
+## Tokens
+
+| Token | Uso |
+|---|---|
+| `--bg` | Fondo de página |
+| `--bg-subtle` | Superficies suaves, pozos |
+| `--ink` | Texto principal |
+| `--ink-secondary` | Texto de apoyo |
+| `--ink-muted` | Texto terciario, meta |
+| `--border` | Línea sutil |
+| `--line-strong` | Regla fuerte |
+| `--accent` | Acento verde `#1F6B4A`. El único acento del sitio |
+| `--signal-red` | Señal puntual (`#D2462F`) |
+| `--mat-minor` | Cutting mat: línea menor |
+| `--mat-major` | Cutting mat: línea mayor, cada 5 |
+| `--mat-number` | Cutting mat: números en `text-mono-s` |
+| `--mat-wordmark` | Wordmark gigante del footer |
+| `--tint-ice` | Relleno suave |
+| `--tint-sky` | Relleno suave |
+| `--tint-mint` | Relleno suave |
+| `--tint-lilac` | Relleno suave |
+| `--tint-stone` | Relleno suave |
+| `--cover-ink` | Superficie oscura de portada |
+| `--cover-ink-raised` | Superficie oscura elevada |
+| `--on-ink-secondary` | Texto secundario sobre `--cover-ink` |
+| `--on-ink-positive` | Texto positivo sobre `--cover-ink` |
+
+- Prohibido el verde neón `#3DD964` y el azul `#334DAB`.
+
+## Tipografía
+
+Geist (`--font-sans`, `font-sans`) y Geist Mono (`--font-mono`, `font-mono`), montados en `src/app/layout.tsx`. Caveat solo en los bocetos hand-drawn de About (`about/sketches/hand-font.ts`). Prohibido SF y cualquier serif.
+
+| Clase | Cuándo |
+|---|---|
+| `text-display-xl` | Título máximo (hero). `clamp`, SemiBold |
+| `text-display-l` | Título grande. `clamp`, SemiBold |
+| `text-h2` | Título de sección. `clamp`, SemiBold |
+| `text-h3` | Subtítulo. Medium |
+| `text-h4` | Subtítulo menor. Medium |
+| `text-body-l` | Párrafo de entrada. Regular |
+| `text-body` | Cuerpo, 17/27. Regular. No usarlo en etiquetas, navegación ni chips |
+| `text-body-s` | UI pequeña que no es mono. Regular |
+| `text-stat` | Cifra. SemiBold |
+| `text-mono` | Etiqueta, navegación, chip. Geist Mono 12, uppercase |
+| `text-mono-s` | Etiqueta fina y números del cutting mat. Geist Mono 11, uppercase |
+
+Etiquetas, navegación y chips usan `text-mono`, `text-mono-s` o `text-body-s`.
+
+## Layout
+
+- Grid de 12 columnas, `max-w-content` (80rem), gutter `--page-gutter`.
+- Dock fijo a 32px del borde inferior (`--dock-offset`).
+- Cutting mat solo en TopBar, Footer y las zonas que indique cada ruta. Nunca como fondo general de la página.
+
+## Animaciones
+
+- Texto (`MaskedLines`, `HeroHoverText`, `RevealHeading`, `Reveal`): solo en `text-display-xl`, `text-display-l`, `text-h2` y el título de caso. El body no se anima.
+- `HomeTimeline` se conserva; solo cambian color y mono.
+- Calcifer (`pet-world`, `PetGlyphOrigin`) solo en `/fun` y en el momento del hero de Home. Apagado en `/work/*`, `/about` y `/projects`.
+- Toda interacción nueva respeta `prefers-reduced-motion` y el screen `fine` (`(hover: hover) and (pointer: fine)`).
+
+## Contenido y proceso
+
+- No inventar copy ni métricas. Todo sale de `src/lib/*` y `src/content/*`. Si falta un dato, dejar `TODO(content)`.
+- Una fase por vez. `npm run build` y `npm run lint` antes de cerrarla.
