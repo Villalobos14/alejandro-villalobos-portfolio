@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="flex w-full min-w-0 flex-col gap-4 pb-6 pt-8 md:gap-0 md:pb-12 md:pt-[58px] frame:h-[807px] frame:pb-[var(--dock-clearance)]"
+      className="flex w-full min-w-0 flex-col gap-3 pb-4 pt-8 md:gap-0 md:pb-12 md:pt-[58px] frame:h-[807px] frame:pb-[var(--dock-clearance)]"
     >
       <div className="contents md:grid md:grid-cols-[47.5%_25.4%_27.1%] md:items-start md:gap-y-4">
         <p className="order-1 text-[18px] font-medium leading-none text-ink md:order-none md:col-start-1 md:row-start-1 md:text-[25px]">
@@ -46,7 +46,7 @@ export default function Hero() {
       </div>
 
       <div className="order-3 md:order-none md:flex md:min-w-0 md:flex-1 md:flex-col md:justify-end">
-        <div className="hero-role max-md:max-w-none">
+        <div className="hero-role">
           <HeroStatement />
           <p className="hero-description mt-3 md:mt-4">{description}</p>
         </div>
@@ -58,7 +58,7 @@ export default function Hero() {
         </p>
         <TransitionLink
           href={PROJECTS_ANCHOR}
-          className={`inline-flex min-h-11 items-center text-[16px] font-medium leading-none text-accent max-md:w-full max-md:justify-center max-md:rounded-full max-md:bg-accent max-md:px-4 max-md:text-white md:shrink-0 ${focusStyles}`}
+          className={`inline-flex min-h-11 w-full items-center justify-center rounded-full bg-accent px-4 text-[16px] font-medium leading-none text-white md:w-auto md:shrink-0 md:justify-start md:rounded-none md:bg-[transparent] md:px-0 md:text-accent ${focusStyles}`}
         >
           {cta}
         </TransitionLink>
