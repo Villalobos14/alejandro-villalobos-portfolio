@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
+import Media from "@/components/media/Media";
 import {
   PROJECTS_SECTION_ID,
   featuredProjects,
@@ -56,9 +57,18 @@ function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
 function FeaturedCase({ project }: { project: FeaturedProject }) {
   return (
     <article className="grid overflow-hidden rounded-xl border border-border lg:grid-cols-[2fr_1fr]">
-      <div className="flex aspect-[16/10] min-h-0 items-center justify-center bg-gradient-to-br from-tint-ice to-tint-mint p-6 md:aspect-auto md:min-h-64 md:p-8">
-        {/* TODO(content): Cover B — product still or the 6 s loop, without its own title. */}
-        <p className="max-w-sm text-center text-mono text-ink-secondary">{project.coverSlot}</p>
+      <div className="relative aspect-[16/10] min-h-0 overflow-hidden bg-gradient-to-br from-tint-ice to-tint-mint md:aspect-auto md:min-h-64">
+        {project.media ? (
+          <Media
+            source={project.media}
+            placeholder={{ title: project.coverSlot }}
+            sizes="(min-width: 1024px) 864px, 100vw"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center p-6 md:p-8">
+            <p className="max-w-sm text-center text-mono text-ink-secondary">{project.coverSlot}</p>
+          </div>
+        )}
       </div>
       <div className="min-w-0 bg-bg-subtle p-4 md:p-8 lg:p-10">
         <p className={eyebrowClass}>{project.eyebrow}</p>
