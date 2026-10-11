@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
-import Works from "@/components/Works";
+import ProjectsLog from "@/components/projects/ProjectsLog";
 
 export const metadata: Metadata = pageMetadata({
   title: "Projects | Alejandro Villalobos",
@@ -10,5 +10,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function ProjectsPage() {
-  return <Works />;
+  return <ProjectsLog />;
 }
