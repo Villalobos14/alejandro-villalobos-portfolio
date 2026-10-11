@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
+import PageShell from "@/components/system/PageShell";
 import ProfessionalCapabilities from "@/components/about/ProfessionalCapabilities";
 import ProfessionalClosing from "@/components/about/ProfessionalClosing";
 import ProfessionalExperience from "@/components/about/ProfessionalExperience";
@@ -19,6 +20,7 @@ const NO_SCRIPT_SKETCHES = `[data-sketch="armed"] [data-draw]{opacity:1!importan
 
 export default function AboutPage() {
   return (
+    <PageShell>
     <div className={`${handFont.variable} contents`}>
       <noscript>
         <style>{NO_SCRIPT_SKETCHES}</style>
@@ -31,5 +33,6 @@ export default function AboutPage() {
         <ProfessionalClosing />
       </div>
     </div>
+    </PageShell>
   );
 }

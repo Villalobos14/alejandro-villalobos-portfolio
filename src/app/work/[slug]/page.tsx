@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageShell from "@/components/system/PageShell";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import CaseStudyHero from "@/components/case-study/CaseStudyHero";
 import CaseStudyLayout from "@/components/case-study/CaseStudyLayout";
@@ -37,13 +38,18 @@ export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
 
 export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   if (params.slug === "mlstoolbox") {
-    return <MlsCaseStudy />;
+    return (
+      <PageShell>
+        <MlsCaseStudy />
+      </PageShell>
+    );
   }
 
   const { frontmatter, content, sections, nextSlug } = getCaseStudy(params.slug);
   const nextCaseStudy = nextSlug ? getCaseStudy(nextSlug) : undefined;
 
   return (
+    <PageShell>
     <CaseStudyLayout sections={sections}>
       <CaseStudyHero frontmatter={frontmatter} />
       <article className="flex flex-col gap-scale">
@@ -59,5 +65,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
         ) : null}
       </article>
     </CaseStudyLayout>
+    </PageShell>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -21,11 +22,18 @@ function readCursorLabel(target: EventTarget | null): string {
 }
 
 export default function CustomCursor() {
+  const pathname = usePathname();
   const [enabled, setEnabled] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
+  const allowCursor = pathname !== "/";
 
   useEffect(() => {
+    if (!allowCursor) {
+      setEnabled(false);
+      return;
+    }
+
     const pointerMq = window.matchMedia(POINTER_QUERY);
     const syncEnabled = () => setEnabled(pointerMq.matches);
 
@@ -33,7 +41,7 @@ export default function CustomCursor() {
     pointerMq.addEventListener("change", syncEnabled);
 
     return () => pointerMq.removeEventListener("change", syncEnabled);
-  }, []);
+  }, [allowCursor]);
 
   useLayoutEffect(() => {
     if (!enabled) return;

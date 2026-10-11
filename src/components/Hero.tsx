@@ -15,37 +15,37 @@ export default function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="flex w-full min-w-0 flex-col px-[var(--page-gutter)] pb-12 pt-8 frame:h-[807px] frame:pb-[var(--dock-clearance)]"
+      className="flex w-full min-w-0 flex-col pb-12 pt-8 md:pt-[58px] frame:h-[807px] frame:pb-[var(--dock-clearance)]"
     >
-      <div className="relative">
-        <p className="text-[25px] font-medium leading-none text-ink">{greeting}</p>
-        <div className="relative mt-10">
-          <div className="max-w-[20rem] text-[24px] font-normal leading-[1.28] text-ink-secondary">
-            {statement.lines.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
-          <div className="mt-8 md:absolute md:left-[47.5%] md:top-0 md:mt-0 md:w-[23%]">
-            <p className={metaLabel}>{currently.label}</p>
-            <p className={`mt-2 ${metaValue}`}>{currently.role}</p>
-            <p className={metaValue}>{currently.place}</p>
-          </div>
-          <div className="mt-8 md:absolute md:left-[72.9%] md:top-0 md:mt-0 md:w-[27.1%]">
-            <p className={metaLabel}>{previously.label}</p>
-            {previously.lines.map((line) => (
-              <p key={line} className={`mt-2 ${metaValue}`}>
-                {line}
-              </p>
-            ))}
-          </div>
+      <div className="md:grid md:grid-cols-[47.5%_25.4%_27.1%] md:items-start md:gap-y-4">
+        <p className="text-[25px] font-medium leading-none text-ink md:col-start-1 md:row-start-1">
+          {greeting}
+        </p>
+        <p className={`${metaLabel} mt-8 md:col-start-2 md:row-start-1 md:mt-0`}>{currently.label}</p>
+        <p className={`${metaLabel} mt-8 md:col-start-3 md:row-start-1 md:mt-0`}>{previously.label}</p>
+        <div className="mt-8 max-w-[20rem] text-[24px] font-normal leading-[1.28] text-ink-secondary md:col-start-1 md:row-start-2 md:mt-0">
+          {statement.lines.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+        <div className="mt-8 md:col-start-2 md:row-start-2 md:mt-0">
+          <p className={metaValue}>{currently.role}</p>
+          <p className={metaValue}>{currently.place}</p>
+        </div>
+        <div className="mt-8 md:col-start-3 md:row-start-2 md:mt-0">
+          {previously.lines.map((line) => (
+            <p key={line} className={metaValue}>
+              {line}
+            </p>
+          ))}
         </div>
       </div>
 
       <div className="mt-12 flex min-w-0 flex-1 flex-col justify-end md:mt-0">
-        <HeroStatement className="md:pl-[28.9%] frame:w-max frame:max-w-none" />
-        <p className="mt-4 max-w-full text-[24px] font-normal leading-none text-ink-secondary md:pl-[28.9%] frame:ml-[calc(43.1%-2px)] frame:w-max frame:max-w-none frame:pl-0 frame:whitespace-nowrap">
-          {description}
-        </p>
+        <div className="hero-role">
+          <HeroStatement />
+          <p className="hero-description mt-4">{description}</p>
+        </div>
       </div>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">

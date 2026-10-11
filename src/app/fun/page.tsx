@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
+import PageShell from "@/components/system/PageShell";
 import Collage from "@/components/fun/Collage";
 import FunClosing from "@/components/fun/FunClosing";
 import FunHero from "@/components/fun/FunHero";
@@ -14,11 +15,11 @@ export const metadata: Metadata = pageMetadata({
 
 export default function FunPage() {
   return (
-    <>
+    <PageShell>
       <FunHero />
       <Collage />
       <PersonalBlocks />
       <FunClosing />
-    </>
+    </PageShell>
   );
 }

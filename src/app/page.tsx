@@ -14,9 +14,9 @@ export const metadata: Metadata = pageMetadata({
 
 export default function Home() {
   return (
-    <PageShell>
+    <PageShell topBar={false}>
       <HomeNarrativeProvider>
-        <div className="mx-auto w-full max-w-[1440px] overflow-x-clip [--page-gutter:clamp(16px,5vw,72px)]">
+        <div className="page-container overflow-x-clip">
           <Hero />
           <Projects />
           <HomeNarrative />
