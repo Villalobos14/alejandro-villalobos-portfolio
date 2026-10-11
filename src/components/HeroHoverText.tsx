@@ -17,16 +17,17 @@ const SCRAMBLE_SET =
 const TWEEN_MS = 1100;
 const SMOOTH_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 const RADIUS_RATIO = 0.85;
-const SCRAMBLE_COLORS = ["#FF90E8", "#FFC900", "#90FFE8", "#4D9FFF", "#FF5C32"];
-
-function accentScramble(): string {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
-  return raw.length > 0 ? `rgb(${raw})` : "rgb(31 107 74)";
+function tokenColor(name: string, fallback: string): string {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return raw.length > 0 ? `rgb(${raw})` : fallback;
 }
 
+/** Most glyphs stay ink. Accent is occasional. Signal red is rare. */
 function randomColor(): string {
-  if (Math.random() < 0.4) return accentScramble();
-  return SCRAMBLE_COLORS[Math.floor(Math.random() * SCRAMBLE_COLORS.length)] ?? accentScramble();
+  const roll = Math.random();
+  if (roll < 0.62) return tokenColor("--ink", "rgb(18 18 18)");
+  if (roll < 0.9) return tokenColor("--accent", "rgb(31 107 74)");
+  return tokenColor("--signal-red", "rgb(210 70 47)");
 }
 
 function randomChar(): string {
