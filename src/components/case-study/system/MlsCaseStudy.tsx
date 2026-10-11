@@ -324,37 +324,47 @@ export default function MlsCaseStudy() {
         </section>
 
         <section aria-label="Next case" className="pb-16 frame:min-h-[403px] frame:pb-0">
-          <div className="grid overflow-hidden rounded-3xl border border-border transition-colors duration-300 fine:hover:bg-bg-subtle md:h-[275px] md:grid-cols-[425px_minmax(0,1fr)]">
+          <div className="relative overflow-hidden rounded-3xl border border-border transition-colors duration-300 fine:hover:bg-bg-subtle frame:h-[275px]">
+            <TransitionLink
+              href="/work/ominio"
+              aria-label={`${mlsNext.label}. ${mlsNext.title}`}
+              className={`absolute inset-0 z-[1] hidden frame:block ${caseFocus}`}
+            />
             {ominioCover ? (
-              <div className="relative aspect-[16/10] md:aspect-auto">
-                <Image src={ominioCover.src} alt={ominioCover.alt} fill sizes="425px" className="object-cover" />
+              <div className="relative mx-6 mt-6 aspect-[16/10] overflow-hidden rounded-xl frame:absolute frame:left-[25px] frame:top-[25px] frame:mx-0 frame:mt-0 frame:aspect-auto frame:h-[225px] frame:w-[360px]">
+                <Image src={ominioCover.src} alt={ominioCover.alt} fill sizes="360px" className="object-cover" />
               </div>
-            ) : (
-              <div className="hidden md:block" />
-            )}
-            <div className="flex flex-col justify-center gap-3 px-6 py-8 md:px-8">
+            ) : null}
+            <div className="pointer-events-none px-6 py-8 frame:absolute frame:left-[425px] frame:top-[64px] frame:w-[650px] frame:p-0">
               <p className={eyebrow}>{mlsNext.label}</p>
-              <TransitionLink href="/work/ominio" className={`inline-flex min-h-11 items-center ${caseFocus}`}>
-                <span className="text-[clamp(36px,10vw,48px)] font-semibold leading-none tracking-[-0.04em] text-ink frame:text-[80px] frame:leading-[80px]">
-                  {mlsNext.title}
-                </span>
-              </TransitionLink>
-              <p className="max-w-[650px] text-[17px] leading-[27px] text-ink">{mlsNext.description}</p>
-              <div className="mt-2 flex flex-col items-start gap-1">
-                <TransitionLink
-                  href="/work/ominio"
-                  className={`inline-flex min-h-11 items-center text-[17px] font-medium text-accent ${caseFocus}`}
-                >
-                  {mlsNext.read}
-                </TransitionLink>
-                <TransitionLink
-                  href="/projects"
-                  className={`inline-flex min-h-11 items-center text-[17px] text-ink-secondary ${caseFocus}`}
-                >
-                  {mlsNext.all}
-                </TransitionLink>
-              </div>
+              <p className="mt-3 text-[clamp(36px,10vw,48px)] font-semibold leading-none tracking-[-0.04em] text-ink frame:mt-4 frame:text-[80px] frame:leading-[80px]">
+                {mlsNext.title}
+              </p>
+              <p className="mt-3 max-w-[650px] text-[17px] leading-[27px] text-ink">{mlsNext.description}</p>
             </div>
+            <div className="flex flex-col items-start px-6 pb-8 frame:hidden">
+              <TransitionLink
+                href="/work/ominio"
+                className={`inline-flex min-h-11 items-center text-[17px] font-medium text-accent ${caseFocus}`}
+              >
+                {mlsNext.read}
+              </TransitionLink>
+              <TransitionLink
+                href="/projects"
+                className={`inline-flex min-h-11 items-center text-[17px] text-ink-secondary ${caseFocus}`}
+              >
+                {mlsNext.all}
+              </TransitionLink>
+            </div>
+            <p className="pointer-events-none absolute right-0 top-[104px] z-[2] hidden text-[17px] font-medium leading-none text-accent frame:block">
+              {mlsNext.read}
+            </p>
+            <TransitionLink
+              href="/projects"
+              className={`absolute right-0 top-[145px] z-[2] hidden min-h-11 items-center text-[17px] leading-none text-ink-secondary frame:inline-flex ${caseFocus}`}
+            >
+              {mlsNext.all}
+            </TransitionLink>
           </div>
         </section>
       </div>
