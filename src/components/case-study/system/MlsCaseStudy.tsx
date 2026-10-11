@@ -310,11 +310,15 @@ export default function MlsCaseStudy() {
               {mlsReflection.body}
             </p>
           </div>
-          <div>
+          <div className="md:w-[612px] md:justify-self-end">
             <p className="text-mono-s text-ink-muted">{mlsReflection.nextLabel}</p>
-            <ol className="mt-4 space-y-6">
+            <ol className="mt-4">
               {mlsReflection.items.map((item, index) => (
-                <li key={item} className="grid grid-cols-[3rem_minmax(0,1fr)] gap-2">
+                <li
+                  key={item}
+                  data-hairline="next-time"
+                  className="grid h-16 grid-cols-[52px_minmax(0,1fr)] items-center border-t border-border"
+                >
                   <span className={eyebrow}>{String(index + 1).padStart(2, "0")}</span>
                   <p className={body}>{item}</p>
                 </li>
