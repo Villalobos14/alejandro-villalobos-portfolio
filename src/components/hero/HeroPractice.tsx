@@ -13,10 +13,10 @@ export default function HeroPractice({ className = "" }: { className?: string })
   return (
     <div data-hero-enter data-field-quiet className={className}>
       <p className={heroColumnLabel}>{practice.label}</p>
-      <p className="mt-4 inline-block border-b border-white/30 pb-3 text-[clamp(1.5rem,2.1vw,2rem)] font-medium leading-[1.1] tracking-[-0.01em] text-white">
+      <p className="mt-4 inline-block border-b border-ink/30 pb-3 text-[clamp(1.5rem,2.1vw,2rem)] font-medium leading-[1.1] tracking-[-0.01em] text-ink">
         {practice.discipline}
       </p>
-      <ul className={`mt-4 leading-[1.6] text-white/70 ${heroColumnText}`}>
+      <ul className={`mt-4 leading-[1.6] text-ink/70 ${heroColumnText}`}>
         {practice.attributes.map((attribute) => (
           <li key={attribute}>{attribute}</li>
         ))}

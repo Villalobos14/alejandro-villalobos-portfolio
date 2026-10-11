@@ -16,12 +16,12 @@ function StatementHeadline({
   as: Tag = "h3",
   children,
 }: StatementHeadlineProps) {
-  return <Tag className="max-w-3xl text-body-lg text-white">{children}</Tag>;
+  return <Tag className="max-w-3xl text-body-lg text-ink">{children}</Tag>;
 }
 
 function StatementBody({ children }: StatementProps) {
   return (
-    <div className="max-w-3xl text-body text-gray">{children}</div>
+    <div className="max-w-3xl text-body text-ink-muted">{children}</div>
   );
 }
 

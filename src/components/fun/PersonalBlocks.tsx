@@ -36,7 +36,7 @@ interface StoryLayout {
   pair?: boolean;
 }
 
-const TITLE = "text-3xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl";
+const TITLE = "text-3xl font-medium leading-[1.05] tracking-tight text-ink md:text-5xl";
 
 const layouts: Record<string, StoryLayout> = {
   "beyond-design": {
@@ -118,14 +118,14 @@ function Story({ block }: { block: PersonalBlock }) {
 
   return (
     <article
-      className={`grid grid-cols-1 gap-x-8 gap-y-5 border-t border-gray/30 pt-6 lg:gap-y-6 lg:pt-8 ${
+      className={`grid grid-cols-1 gap-x-8 gap-y-5 border-t border-border pt-6 lg:gap-y-6 lg:pt-8 ${
         pair ? "lg:grid-cols-1" : "lg:grid-cols-12"
       }`}
     >
       <header className={`flex flex-col gap-3 ${layout.head}`}>
         <Reveal offsetY={8} durationMs={600}>
-          <p className="flex items-baseline gap-3 text-body uppercase tracking-[0.2em] text-gray">
-            <span aria-hidden="true" className="h-px w-6 self-center bg-secondary" />
+          <p className="flex items-baseline gap-3 text-body uppercase tracking-[0.2em] text-ink-muted">
+            <span aria-hidden="true" className="h-px w-6 self-center bg-accent" />
             {block.label}
           </p>
         </Reveal>
@@ -154,10 +154,10 @@ function Story({ block }: { block: PersonalBlock }) {
 
       <Reveal className={`flex flex-col gap-4 ${layout.body}`} delayMs={180} offsetY={14}>
         {block.body ? (
-          <p className="max-w-xl text-body-lg text-gray">{block.body}</p>
+          <p className="max-w-xl text-body-lg text-ink-muted">{block.body}</p>
         ) : null}
         {block.items && block.items.length > 0 ? (
-          <ul className="flex flex-col gap-1 text-body text-gray">
+          <ul className="flex flex-col gap-1 text-body text-ink-muted">
             {block.items.map((item) => (
               <li key={item}>{item}</li>
             ))}

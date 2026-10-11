@@ -32,12 +32,12 @@ function LoopSketch() {
 
 function Group({ group }: { group: CapabilityGroup }) {
   return (
-    <li className="group grid grid-cols-1 gap-x-8 gap-y-5 border-t border-gray/30 py-8 lg:grid-cols-12 lg:gap-y-6 lg:py-12">
+    <li className="group grid grid-cols-1 gap-x-8 gap-y-5 border-t border-border py-8 lg:grid-cols-12 lg:gap-y-6 lg:py-12">
       <div className="flex flex-col gap-3 lg:col-span-4">
-        <p className={`text-body transition-colors duration-200 fine:group-hover:text-secondary ${tone.meta}`}>
+        <p className={`text-body transition-colors duration-200 fine:group-hover:text-accent ${tone.meta}`}>
           {group.number}
         </p>
-        <h3 className="relative w-fit text-[clamp(1.75rem,3vw,2.75rem)] font-medium leading-[1.05] tracking-tight text-white">
+        <h3 className="relative w-fit text-[clamp(1.75rem,3vw,2.75rem)] font-medium leading-[1.05] tracking-tight text-ink">
           {group.title}
           <svg
             viewBox="0 0 300 12"
@@ -49,7 +49,7 @@ function Group({ group }: { group: CapabilityGroup }) {
               d="M2 7 C 70 4, 150 9, 220 6 S 285 4, 298 3"
               pathLength={1}
               fill="none"
-              stroke="#3DD964"
+              stroke="rgb(var(--accent))"
               strokeWidth={2}
               strokeLinecap="round"
               className="transition-[stroke-dashoffset] duration-300 ease-out [stroke-dasharray:1_1] [stroke-dashoffset:1] motion-reduce:transition-none fine:group-hover:[stroke-dashoffset:0]"
@@ -67,15 +67,15 @@ function Group({ group }: { group: CapabilityGroup }) {
       <div className="grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:col-span-7 lg:col-start-6 lg:gap-y-6">
         {group.sets.map((set) => (
           <div key={set.label} className={set.items.length > 3 ? "sm:col-span-2" : ""}>
-            <h4 className={`${labelCase} ${set.tone === "exploring" ? "text-secondary" : tone.meta}`}>
+            <h4 className={`${labelCase} ${set.tone === "exploring" ? "text-accent" : tone.meta}`}>
               {set.label}
               {set.tone === "exploring" ? (
-                <span className="ml-3 font-[family-name:var(--font-hand)] text-xl normal-case tracking-normal text-white/70">
+                <span className="ml-3 font-[family-name:var(--font-hand)] text-xl normal-case tracking-normal text-ink/70">
                   still learning
                 </span>
               ) : null}
             </h4>
-            <ul className="mt-3 flex flex-col gap-1.5 text-body-lg text-white/90 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
+            <ul className="mt-3 flex flex-col gap-1.5 text-body-lg text-ink/90 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
               {set.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -104,7 +104,7 @@ export default function ProfessionalCapabilities() {
         ))}
       </ol>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-3 border-y border-gray/30 py-8 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-3 border-y border-border py-8 lg:grid-cols-12">
         <h3 className={`lg:col-span-4 ${labelCase} ${tone.meta}`}>Across all four</h3>
         <ul className={`flex max-w-3xl flex-col gap-1.5 text-body-lg sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-2 lg:col-span-7 lg:col-start-6 ${tone.secondary}`}>
           {workingWith.map((item) => (

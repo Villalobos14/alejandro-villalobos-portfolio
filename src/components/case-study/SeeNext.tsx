@@ -15,12 +15,12 @@ export default function SeeNext({ caseStudy }: SeeNextProps) {
       id={SEE_NEXT_SECTION_ID}
       href={`/work/${caseStudy.slug}`}
       data-cursor="Ver case study"
-      className="group flex w-full scroll-mt-[var(--site-header-h)] flex-col gap-scale rounded-2xl border border-gray/40 p-scale transition-transform duration-500 ease-out fine:hover:rotate-[0.5deg] fine:hover:scale-[0.99] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:p-12"
+      className="group flex w-full scroll-mt-[var(--site-header-h)] flex-col gap-scale rounded-2xl border border-border p-scale transition-transform duration-500 ease-out fine:hover:rotate-[0.5deg] fine:hover:scale-[0.99] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink md:p-12"
     >
-      <span className="text-body uppercase tracking-[0.2em] text-gray">
+      <span className="text-body uppercase tracking-[0.2em] text-ink-muted">
         Next project
       </span>
-      <span className="flex flex-wrap items-center gap-scale text-[clamp(1.75rem,5vw,3.5rem)] font-medium leading-tight tracking-tight text-white transition-colors duration-300 fine:group-hover:text-secondary">
+      <span className="flex flex-wrap items-center gap-scale text-[clamp(1.75rem,5vw,3.5rem)] font-medium leading-tight tracking-tight text-ink transition-colors duration-300 fine:group-hover:text-accent">
         {caseStudy.title}
         <ArrowRightIcon
           aria-hidden="true"

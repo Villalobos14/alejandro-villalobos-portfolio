@@ -191,7 +191,7 @@ export function MarkerSentence({
           {segments.map((segment) => {
             if (!segment.highlight) {
               return (
-                <span key={segment.text} className="text-white">
+                <span key={segment.text} className="text-ink">
                   {segment.text}
                 </span>
               );
@@ -209,7 +209,7 @@ export function MarkerSentence({
                       key={`${index}-${lineIndex}`}
                       data-marker
                       aria-hidden="true"
-                      className="pointer-events-none absolute block bg-secondary/35"
+                      className="pointer-events-none absolute block bg-accent/35"
                       style={{
                         left: line.left,
                         top: line.top,
@@ -226,7 +226,7 @@ export function MarkerSentence({
                   <span
                     data-highlight-text
                     className={`relative z-[1] transition-colors duration-300 ${
-                      marked || reduced ? "text-secondary" : "text-white"
+                      marked || reduced ? "text-accent" : "text-ink"
                     }`}
                   >
                     {segment.text}

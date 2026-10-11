@@ -3,13 +3,13 @@ import { experience } from "@/lib/professional";
 
 export default function Experience() {
   return (
-    <section className="h-full w-full px-[var(--page-gutter)] pb-8 pt-12 font-light text-white md:py-20">
+    <section className="h-full w-full px-[var(--page-gutter)] pb-8 pt-12 font-light text-ink md:py-20">
       <h1 className='font-medium text-4xl 2xl:text-6xl'>Experience</h1>
 
       {experience.map((entry) => (
         <article key={entry.id} className='flex flex-col mt-10'>
-          <h3 className='flex flex-col items-start text-3xl 2xl:text-5xl text-secondary'>
-            <span className='text-gray-500 text-lg 2xl:text-3xl'>{entry.id}</span>
+          <h3 className='flex flex-col items-start text-3xl 2xl:text-5xl text-accent'>
+            <span className="text-lg text-ink-muted 2xl:text-3xl">{entry.id}</span>
             {entry.role}, {entry.company}
           </h3>
           <div className='flex gap-2 mt-3 text-lg 2xl:text-2xl'>
@@ -21,7 +21,7 @@ export default function Experience() {
               <li key={bullet}>{bullet}</li>
             ))}
           </ul>
-          <hr className='border-t border-gray-300 my-4' />
+          <hr className="my-4 border-t border-border" />
         </article>
       ))}
 

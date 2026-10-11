@@ -30,7 +30,7 @@ export default function Split({
         className={`flex flex-col gap-3 ${imageFirst ? "md:order-1" : ""}`}
       >
         <div
-          className="relative w-full overflow-hidden rounded-2xl border border-gray/40"
+          className="relative w-full overflow-hidden rounded-2xl border border-border"
           style={{ aspectRatio: ratio }}
         >
           <Image
@@ -43,7 +43,7 @@ export default function Split({
           />
         </div>
         {caption ? (
-          <figcaption className="text-body text-gray">{caption}</figcaption>
+          <figcaption className="text-body text-ink-muted">{caption}</figcaption>
         ) : null}
       </figure>
     </div>

@@ -1,4 +1,4 @@
-import { FAMILIES, GLYPHS, HERO_FIELD_CONFIG as CONFIG, SEQUENCE, type EntityConfig, type ModeConfig } from "./config";
+import { FAMILIES, fieldTheme, GLYPHS, HERO_FIELD_CONFIG as CONFIG, SEQUENCE, type EntityConfig, type ModeConfig } from "./config";
 import { clamp, random, smoothstep, TAU } from "./math";
 import { alignByRole, canonical, morphGlyph, stampTiming, type MorphGlyph, type MorphPoint } from "./morph";
 import { MOTIFS } from "./motifs";
@@ -525,12 +525,12 @@ export function drawOrganism(ctx: CanvasRenderingContext2D, o: Organism): void {
     const glow = o.glow[i];
     if (glow < 0.01) continue;
     if (!tinted) {
-      ctx.fillStyle = green.color;
+      ctx.fillStyle = fieldTheme.accent;
       tinted = true;
     }
     ctx.font = o.fonts[o.bucket[i]] ?? "";
     ctx.globalAlpha = Math.min(green.maxAlpha, (o.a1[i] + o.a2[i]) * glow * green.gain);
     ctx.fillText(GLYPHS[o.c1[i]] ?? "·", o.x[i], o.y[i]);
   }
-  if (tinted) ctx.fillStyle = "#ffffff";
+  if (tinted) ctx.fillStyle = fieldTheme.ink;
 }

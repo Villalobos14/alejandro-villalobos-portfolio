@@ -22,8 +22,8 @@ function CompareOption({
   children,
 }: CompareOptionProps) {
   return (
-    <div className="flex flex-col gap-scale rounded-2xl border border-gray/40 p-scale">
-      <h4 className="text-label text-white">{title}</h4>
+    <div className="flex flex-col gap-scale rounded-2xl border border-border p-scale">
+      <h4 className="text-label text-ink">{title}</h4>
       {media ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
           <Image
@@ -37,10 +37,10 @@ function CompareOption({
         </div>
       ) : null}
       {children ? (
-        <div className="flex flex-col gap-2 text-body text-gray">{children}</div>
+        <div className="flex flex-col gap-2 text-body text-ink-muted">{children}</div>
       ) : null}
       {outcome ? (
-        <p className="mt-auto text-body text-secondary">{outcome}</p>
+        <p className="mt-auto text-body text-accent">{outcome}</p>
       ) : null}
     </div>
   );
@@ -56,7 +56,7 @@ function CompareRoot({ label, children }: CompareProps) {
   return (
     <section className="flex flex-col gap-scale">
       {label ? (
-        <p className="text-body uppercase tracking-[0.2em] text-gray">{label}</p>
+        <p className="text-body uppercase tracking-[0.2em] text-ink-muted">{label}</p>
       ) : null}
       <div className="grid grid-cols-1 gap-scale md:grid-cols-2">{children}</div>
     </section>

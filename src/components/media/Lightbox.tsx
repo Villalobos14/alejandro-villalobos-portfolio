@@ -22,7 +22,7 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const controlStyles =
-  "flex size-11 items-center justify-center rounded-full border border-gray text-white transition-colors duration-300 fine:hover:border-secondary fine:hover:text-secondary disabled:opacity-40 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "flex size-11 items-center justify-center rounded-full border border-border text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:text-accent disabled:opacity-40 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 export default function Lightbox({
   photos,
@@ -109,7 +109,7 @@ export default function Lightbox({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[2147483645] flex flex-col bg-primary/95 p-[var(--page-gutter)] backdrop-blur-sm"
+      className="fixed inset-0 z-[2147483645] flex flex-col bg-bg/95 p-[var(--page-gutter)] backdrop-blur-sm"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -122,7 +122,7 @@ export default function Lightbox({
         className="flex h-full w-full min-w-0 flex-col gap-scale"
       >
         <div className="flex items-center justify-between gap-scale">
-          <p className="text-body text-gray" aria-live="polite">
+          <p className="text-body text-ink-muted" aria-live="polite">
             {index + 1} / {photos.length}
           </p>
           <button
@@ -147,7 +147,7 @@ export default function Lightbox({
             className="max-h-full w-auto max-w-full rounded-2xl object-contain"
           />
           {photo.caption ? (
-            <figcaption className="text-body text-gray">{photo.caption}</figcaption>
+            <figcaption className="text-body text-ink-muted">{photo.caption}</figcaption>
           ) : null}
         </figure>
 

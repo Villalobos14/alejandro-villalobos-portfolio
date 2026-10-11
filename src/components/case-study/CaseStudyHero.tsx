@@ -25,7 +25,7 @@ export default function CaseStudyHero({ frontmatter }: CaseStudyHeroProps) {
       <TransitionLink
         href={PROJECTS_ANCHOR}
         data-cursor="Volver a proyectos"
-        className="group flex w-fit items-center gap-2 text-label text-gray transition-colors duration-300 fine:hover:text-white focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        className="group flex w-fit items-center gap-2 text-label text-ink-muted transition-colors duration-300 fine:hover:text-ink focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
       >
         <ArrowLeftIcon
           aria-hidden="true"
@@ -37,14 +37,14 @@ export default function CaseStudyHero({ frontmatter }: CaseStudyHeroProps) {
       <MaskedLines
         as="h1"
         lines={[frontmatter.title]}
-        className="w-full text-[clamp(1.875rem,4.5vw,3.25rem)] font-medium leading-[1.08] tracking-tight text-white"
+        className="w-full text-[clamp(1.875rem,4.5vw,3.25rem)] font-medium leading-[1.08] tracking-tight text-ink"
       />
 
       <ul className="flex flex-wrap gap-2">
         {frontmatter.skills.map((skill) => (
           <li
             key={skill}
-            className="rounded-full border border-gray/60 px-3 py-1 text-body text-gray"
+            className="rounded-full border border-border/60 px-3 py-1 text-body text-ink-muted"
           >
             {skill}
           </li>
@@ -52,18 +52,18 @@ export default function CaseStudyHero({ frontmatter }: CaseStudyHeroProps) {
       </ul>
 
       <Reveal>
-        <dl className="grid grid-cols-2 gap-scale border-y border-gray/40 py-scale lg:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-scale border-y border-border py-scale lg:grid-cols-4">
           {meta.map((item) => (
             <div key={item.label} className="flex flex-col gap-1">
-              <dt className="text-body text-gray">{item.label}</dt>
-              <dd className="text-label text-white">{item.value}</dd>
+              <dt className="text-body text-ink-muted">{item.label}</dt>
+              <dd className="text-label text-ink">{item.value}</dd>
             </div>
           ))}
         </dl>
       </Reveal>
 
       <Reveal>
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-gray/40">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-border">
           <Media
             source={frontmatter.cover}
             sizes="(max-width: 1024px) 100vw, 70vw"

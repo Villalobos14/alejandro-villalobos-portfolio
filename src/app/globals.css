@@ -3,26 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --bg: 12 13 14;
-  --ink: 255 255 255;
-  --ink-muted: 140 140 140;
-  --border: 140 140 140;
-  --accent: 61 217 100;
+  --bg: 255 255 255;
+  --bg-subtle: 245 245 245;
+  --ink: 18 18 18;
+  --ink-secondary: 90 90 90;
+  --ink-muted: 118 118 118;
+  --border: 234 234 234;
+  --line-strong: 18 18 18;
+  --mat-minor: 241 241 241;
+  --mat-major: 226 226 226;
+  --mat-number: 179 179 179;
+  --mat-wordmark: 228 228 228;
+  --accent: 31 107 74;
+  --signal-red: 210 70 47;
+  --cover-ink: 21 23 26;
+  --cover-ink-raised: 32 35 40;
+  --on-ink-secondary: 155 160 166;
+  --on-ink-positive: 125 211 168;
+  --tint-ice: 238 241 244;
+  --tint-sky: 228 236 246;
+  --tint-mint: 227 239 232;
+  --tint-lilac: 236 233 246;
+  --tint-stone: 241 241 240;
+  /* Geist sets --font-geist-*; these are the names the rest of the site reads. */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --site-header-h: 0px;
   --page-gutter: clamp(16px, 3vw, 64px);
   --bottom-nav-height: 0px;
   /*
-   * How much room the fixed dock needs at the bottom of the viewport: its
-   * measured height, the offset it floats at, and a gap. Anything anchored to
-   * the bottom of a viewport-height box subtracts this so the dock never
-   * covers it.
+   * The dock sits 32px above the safe area. Clearance is that offset, the
+   * dock's measured height, and a gap, so anything pinned to the bottom of a
+   * viewport-height box stays clear of it.
    */
-  --dock-clearance: calc(
-    var(--bottom-nav-height) + max(1.25rem, env(safe-area-inset-bottom) + 0.75rem) + 1rem
-  );
+  --dock-offset: calc(env(safe-area-inset-bottom, 0px) + 2rem);
+  --dock-clearance: calc(var(--bottom-nav-height) + var(--dock-offset) + 1rem);
 }
 
 body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   padding-bottom: var(--dock-clearance);
 }
 
@@ -36,8 +57,8 @@ html {
 }
 
 ::selection {
-  background-color: #000000;
-  color: #fff;
+  background-color: rgb(var(--ink));
+  color: rgb(255 255 255);
 }
 
 html {

@@ -3,7 +3,7 @@ import { skillGroups } from "@/lib/professional";
 
 export default function SkillsSection() {
   return (
-    <section className="w-full px-[var(--page-gutter)] py-8 text-white md:pt-16">
+    <section className="w-full px-[var(--page-gutter)] py-8 text-ink md:pt-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {skillGroups.map((group) => (
           <div key={group.id}>

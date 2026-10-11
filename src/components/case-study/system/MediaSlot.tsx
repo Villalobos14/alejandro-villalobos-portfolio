@@ -29,7 +29,7 @@ export default function MediaSlot({ asset, className = "", notes }: MediaSlotPro
 
   return (
     <figure className={`min-w-0 ${className}`}>
-      <div className={`relative overflow-hidden border border-white/15 bg-primary ${ratio}`}>
+      <div className={`relative overflow-hidden border border-ink/15 bg-bg ${ratio}`}>
         <Media
           source={asset.media}
           sizes="(max-width: 1024px) 100vw, 1200px"
@@ -46,7 +46,7 @@ export default function MediaSlot({ asset, className = "", notes }: MediaSlotPro
             {notes.map((note) => (
               <li
                 key={note}
-                className="border border-secondary/70 bg-primary/90 px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-secondary"
+                className="border border-accent/70 bg-bg/90 px-2 py-1 text-[11px] uppercase tracking-[0.14em] text-accent"
               >
                 {note}
               </li>
@@ -55,7 +55,7 @@ export default function MediaSlot({ asset, className = "", notes }: MediaSlotPro
         ) : null}
       </div>
       {asset.caption ? (
-        <figcaption className="mt-3 max-w-[42rem] text-sm leading-6 text-gray">{asset.caption}</figcaption>
+        <figcaption className="mt-3 max-w-[42rem] text-sm leading-6 text-ink-muted">{asset.caption}</figcaption>
       ) : null}
     </figure>
   );

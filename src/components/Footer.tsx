@@ -6,7 +6,7 @@ import { siteLinks } from "@/lib/links";
 
 export default function Footer() {
   return (
-    <footer className="mb-16 mt-32 w-full px-[var(--page-gutter)] text-gray sm:mb-0">
+    <footer className="mb-16 mt-32 w-full px-[var(--page-gutter)] text-ink-muted sm:mb-0">
       <div className="border-b border-b-dim-gray pb-6">
         <span className="sr-only">VILLALOBOS</span>
         <FooterTitle />
@@ -19,7 +19,7 @@ export default function Footer() {
               Made by{" "}
             </span>
             <Link
-              className="font-bold relative overflow-y-hidden w-full group h-fit focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="font-bold relative overflow-y-hidden w-full group h-fit focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               target="_blank"
               href="https://www.villaalobos.com"
               data-cursor="Abrir web"
@@ -42,7 +42,7 @@ export default function Footer() {
             >
               {link.href.startsWith("/") ? (
                 <TransitionLink
-                  className="group focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  className="group focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
                   href={link.href}
                   data-cursor={`Abrir ${link.label}`}
                 >
@@ -50,7 +50,7 @@ export default function Footer() {
                 </TransitionLink>
               ) : (
                 <Link
-                  className="group focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  className="group focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"

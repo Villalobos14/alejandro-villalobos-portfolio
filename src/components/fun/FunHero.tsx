@@ -13,11 +13,11 @@ import { PHOTO_HOVER, PHOTO_IMAGE_HOVER } from "./motion";
  */
 export default function FunHero() {
   return (
-    <header className="grid w-full grid-cols-1 gap-x-8 gap-y-10 overflow-x-clip px-[var(--page-gutter)] pt-scale text-white lg:grid-cols-12 lg:gap-y-0">
+    <header className="grid w-full grid-cols-1 gap-x-8 gap-y-10 overflow-x-clip px-[var(--page-gutter)] pt-scale text-ink lg:grid-cols-12 lg:gap-y-0">
       <div className="flex flex-col gap-scale lg:col-span-7 lg:pt-[7vh]">
         <Reveal offsetY={10} durationMs={600}>
-          <p className="flex items-center gap-3 text-body uppercase tracking-[0.2em] text-gray">
-            <span aria-hidden="true" className="h-px w-8 bg-secondary" />
+          <p className="flex items-center gap-3 text-body uppercase tracking-[0.2em] text-ink-muted">
+            <span aria-hidden="true" className="h-px w-8 bg-accent" />
             02 — The personal side
           </p>
         </Reveal>
@@ -27,13 +27,13 @@ export default function FunHero() {
             funIntro.title[0],
             <>
               {funIntro.title[1]}
-              <span className="text-secondary">.</span>
+              <span className="text-accent">.</span>
             </>,
           ]}
           className="text-[clamp(4rem,20vw,9rem)] font-medium leading-[0.92] tracking-tight lg:text-[clamp(6rem,10vw,10.5rem)]"
         />
         <Reveal className="flex flex-col gap-6 lg:mt-6" delayMs={350}>
-          <p className="max-w-md text-body-lg text-gray">{funIntro.body}</p>
+          <p className="max-w-md text-body-lg text-ink-muted">{funIntro.body}</p>
           <div className="w-fit">
             <AboutSubNav active="fun" />
           </div>
@@ -57,9 +57,9 @@ export default function FunHero() {
           delayMs={800}
           offsetY={8}
           durationMs={600}
-          className="mt-4 flex items-baseline gap-3 text-body text-gray"
+          className="mt-4 flex items-baseline gap-3 text-body text-ink-muted"
         >
-          <span className="uppercase tracking-[0.2em] text-secondary">Fig.</span>
+          <span className="uppercase tracking-[0.2em] text-accent">Fig.</span>
           Café side. The guitars are further down.
         </Reveal>
       </figure>

@@ -42,7 +42,7 @@ export default function Figure({
 
   return (
     <figure className="flex flex-col gap-scale">
-      <div className="overflow-hidden rounded-2xl border border-gray/40">
+      <div className="overflow-hidden rounded-2xl border border-border">
         {isVideo && !showPosterInstead ? (
           <video
             src={src}
@@ -66,7 +66,7 @@ export default function Figure({
           />
         )}
       </div>
-      <figcaption className="text-body text-gray">{caption}</figcaption>
+      <figcaption className="text-body text-ink-muted">{caption}</figcaption>
     </figure>
   );
 }

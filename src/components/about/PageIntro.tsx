@@ -16,15 +16,15 @@ export default function PageIntro({
   active,
 }: PageIntroProps) {
   return (
-    <header className="flex w-full flex-col gap-scale px-[var(--page-gutter)] pt-scale text-white">
-      <p className="text-body uppercase tracking-[0.2em] text-gray">{label}</p>
+    <header className="flex w-full flex-col gap-scale px-[var(--page-gutter)] pt-scale text-ink">
+      <p className="text-body uppercase tracking-[0.2em] text-ink-muted">{label}</p>
       <MaskedLines
         as="h1"
         lines={lines}
         className="text-[clamp(2.5rem,11vw,9rem)] font-medium leading-[0.95] tracking-tight"
       />
-      <Reveal className="flex flex-col gap-scale border-t border-gray/40 pt-scale md:flex-row md:items-center md:justify-between">
-        <p className="max-w-xl text-body-lg text-gray">{presentation}</p>
+      <Reveal className="flex flex-col gap-scale border-t border-border pt-scale md:flex-row md:items-center md:justify-between">
+        <p className="max-w-xl text-body-lg text-ink-muted">{presentation}</p>
         <AboutSubNav active={active} />
       </Reveal>
     </header>

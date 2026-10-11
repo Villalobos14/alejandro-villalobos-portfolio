@@ -26,7 +26,7 @@ export default function BackToTop() {
       type="button"
       onClick={handleClick}
       data-cursor="Volver arriba"
-      className="group flex w-fit items-center gap-2 text-base transition-colors duration-300 fine:hover:text-white xl:text-h7 2xl:text-h6 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+      className="group flex w-fit items-center gap-2 text-base transition-colors duration-300 fine:hover:text-ink xl:text-h7 2xl:text-h6 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
     >
       Back to top
       <ArrowUpIcon

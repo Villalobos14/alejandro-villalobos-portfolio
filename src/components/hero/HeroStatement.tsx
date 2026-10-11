@@ -38,16 +38,16 @@ export default function HeroStatement({ className = "" }: { className?: string }
     <MaskedLines
       as="h1"
       lines={lines.map((line, index) => (
-        <span key={line} className={index < statement.lead.length ? undefined : "text-gray"}>
+        <span key={line} className={index < statement.lead.length ? undefined : "text-ink-muted"}>
           {index === petLine ? withPet(line) : line}
           {index === last ? (
-            <span aria-hidden="true" className="relative -top-[0.85em] text-[0.4em] text-gray">
+            <span aria-hidden="true" className="relative -top-[0.85em] text-[0.4em] text-ink-muted">
               {annotation.marker}
             </span>
           ) : null}
         </span>
       ))}
-      className={`text-[clamp(1.75rem,9.6vw,5.75rem)] font-normal leading-[0.96] tracking-tight text-white md:text-[min(9.6vw,11vh,5.75rem)] lg:text-[min(7vw,10vh,8rem)] ${className}`}
+      className={`text-[clamp(1.75rem,9.6vw,5.75rem)] font-normal leading-[0.96] tracking-tight text-ink md:text-[min(9.6vw,11vh,5.75rem)] lg:text-[min(7vw,10vh,8rem)] ${className}`}
       lineClassName="whitespace-nowrap"
       maskClassName="-mb-[0.32em] -mt-[0.24em] py-[0.24em]"
     />

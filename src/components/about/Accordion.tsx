@@ -33,7 +33,7 @@ export default function Accordion({ items, label }: AccordionProps) {
         const buttonId = `accordion-button-${item.id}`;
 
         return (
-          <li key={item.id} className="border-t border-gray/40 last:border-b">
+          <li key={item.id} className="border-t border-border last:border-b">
             <h3>
               <button
                 id={buttonId}
@@ -42,17 +42,17 @@ export default function Accordion({ items, label }: AccordionProps) {
                 aria-controls={panelId}
                 onClick={() => toggle(item.id)}
                 data-cursor={isOpen ? "Cerrar" : "Abrir"}
-                className="group flex w-full items-center gap-scale py-6 text-left focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="group flex w-full items-center gap-scale py-6 text-left focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
-                <span className="w-12 shrink-0 text-body text-gray">
+                <span className="w-12 shrink-0 text-body text-ink-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="flex-1 text-2xl font-medium text-white transition-colors duration-300 fine:group-hover:text-secondary md:text-3xl">
+                <span className="flex-1 text-2xl font-medium text-ink transition-colors duration-300 fine:group-hover:text-accent md:text-3xl">
                   {item.title}
                 </span>
                 <ChevronDownIcon
                   aria-hidden="true"
-                  className={`pointer-events-none size-6 shrink-0 text-gray transition-transform duration-300 ease-out ${
+                  className={`pointer-events-none size-6 shrink-0 text-ink-muted transition-transform duration-300 ease-out ${
                     isOpen ? "rotate-180" : "rotate-0"
                   }`}
                 />

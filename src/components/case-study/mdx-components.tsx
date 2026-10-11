@@ -50,10 +50,10 @@ export function getMdxComponents(options?: MdxOptions) {
       return (
         <h2
           id={htmlId}
-          className="mt-stack flex scroll-mt-[var(--site-header-h)] flex-col gap-2 text-display text-white first:mt-0"
+          className="mt-stack flex scroll-mt-[var(--site-header-h)] flex-col gap-2 text-display text-ink first:mt-0"
         >
           {position >= 0 && !isSeeNext ? (
-            <span className="text-body uppercase tracking-[0.2em] text-gray">
+            <span className="text-body uppercase tracking-[0.2em] text-ink-muted">
               {String(position + 1).padStart(2, "0")}
             </span>
           ) : null}
@@ -62,10 +62,10 @@ export function getMdxComponents(options?: MdxOptions) {
       );
     },
     h3: ({ children }: { children?: ReactNode }) => (
-      <h3 className="text-body-lg text-white">{children}</h3>
+      <h3 className="text-body-lg text-ink">{children}</h3>
     ),
     p: ({ children }: { children?: ReactNode }) => (
-      <p className="max-w-3xl text-body text-gray">{children}</p>
+      <p className="max-w-3xl text-body text-ink-muted">{children}</p>
     ),
     a: ({
       href,
@@ -76,26 +76,26 @@ export function getMdxComponents(options?: MdxOptions) {
     }) => (
       <a
         href={href}
-        className="text-secondary underline decoration-secondary/40 underline-offset-4 transition-colors duration-150 hover:text-white"
+        className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors duration-150 hover:text-ink"
       >
         {children}
       </a>
     ),
     strong: ({ children }: { children?: ReactNode }) => (
-      <strong className="font-medium text-white">{children}</strong>
+      <strong className="font-medium text-ink">{children}</strong>
     ),
     ul: ({ children }: { children?: ReactNode }) => (
-      <ul className="max-w-3xl list-disc space-y-2 pl-5 text-body text-gray">
+      <ul className="max-w-3xl list-disc space-y-2 pl-5 text-body text-ink-muted">
         {children}
       </ul>
     ),
     ol: ({ children }: { children?: ReactNode }) => (
-      <ol className="max-w-3xl list-decimal space-y-2 pl-5 text-body text-gray">
+      <ol className="max-w-3xl list-decimal space-y-2 pl-5 text-body text-ink-muted">
         {children}
       </ol>
     ),
     li: ({ children }: { children?: ReactNode }) => (
-      <li className="text-body text-gray">{children}</li>
+      <li className="text-body text-ink-muted">{children}</li>
     ),
     Impact,
     "Impact.Metric": Impact.Metric,

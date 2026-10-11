@@ -27,7 +27,7 @@ export default function ScreenGallery({
       {screens.map((screen) => (
         <li key={screen.src} className="flex flex-col gap-3">
           <div
-            className="relative w-full overflow-hidden rounded-2xl border border-gray/40"
+            className="relative w-full overflow-hidden rounded-2xl border border-border"
             style={{ aspectRatio: ratio }}
           >
             <Image
@@ -40,7 +40,7 @@ export default function ScreenGallery({
             />
           </div>
           {screen.caption ? (
-            <p className="text-body text-gray">{screen.caption}</p>
+            <p className="text-body text-ink-muted">{screen.caption}</p>
           ) : null}
         </li>
       ))}

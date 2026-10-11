@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import localFont from 'next/font/local'
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import ReactLenis from 'lenis/react'
 import CustomCursor from "@/components/CustomCursor";
@@ -10,29 +11,6 @@ import { LightboxProvider } from "@/components/media/LightboxProvider";
 import PetWorldProvider from "@/components/pet-world/PetWorldProvider";
 import HashScroll from "@/components/ui/HashScroll";
 import { siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
-
-const sanFrancisco = localFont(
-  {
-    src: [
-      {
-        path: './fonts/SF-Bold.woff',
-        weight: '700',
-        style: 'normal'
-      },
-      {
-        path: './fonts/SF-Medium.woff',
-        weight: '500',
-        style: 'normal'
-      },
-      {
-        path: './fonts/SF-Regular.woff',
-        weight: '400',
-        style: 'normal'
-      }
-    ],
-    variable: '--font-sf',
-  },
-)
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -60,13 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${sanFrancisco.className} antialiased bg-primary`}
-      >
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="font-sans antialiased">
         <a
           href="#main-content"
-          className="sr-only rounded-full bg-secondary px-5 py-3 text-label text-black focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="sr-only rounded-full bg-accent px-5 py-3 text-body-s text-white focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
         >
           Skip to content
         </a>

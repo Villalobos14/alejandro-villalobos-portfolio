@@ -74,7 +74,7 @@ export default function SmoothSection() {
 
 function StaticGallery() {
   return (
-    <div className="grid w-full grid-cols-2 gap-3 bg-primary p-[var(--page-gutter)] sm:grid-cols-3">
+    <div className="grid w-full grid-cols-2 gap-3 bg-bg p-[var(--page-gutter)] sm:grid-cols-3">
       {staticImages.map((src, index) => (
         <div
           key={`${src}-${index}`}
@@ -124,7 +124,7 @@ function ParallaxGallery() {
   return (
     <div
       ref={gallery}
-      className="relative flex h-[175vh] w-full gap-5 overflow-hidden bg-primary p-[var(--page-gutter)]"
+      className="relative flex h-[175vh] w-full gap-5 overflow-hidden bg-bg p-[var(--page-gutter)]"
     >
       <Column images={[images[0], images[1], images[2]]} y={y} index={1} />
       <Column images={[images[3], images[4], images[5]]} y={y2} index={2} />

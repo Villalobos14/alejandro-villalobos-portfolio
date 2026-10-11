@@ -1,4 +1,4 @@
-import { HERO_FIELD_CONFIG as CONFIG, MONO } from "./config";
+import { fieldTheme, HERO_FIELD_CONFIG as CONFIG, MONO } from "./config";
 import { random, smoothstep, TAU } from "./math";
 import type { Organism } from "./organism";
 
@@ -200,7 +200,7 @@ export function drawAmbient(ctx: CanvasRenderingContext2D, field: Ambient, frame
   const wake = CONFIG.ambient.wake;
 
   ctx.font = `11px ${MONO}`;
-  ctx.fillStyle = "rgb(140,140,140)";
+  ctx.fillStyle = fieldTheme.muted;
 
   for (const band of field.waves) {
     for (const point of band.points) {
@@ -268,7 +268,7 @@ export function drawAmbient(ctx: CanvasRenderingContext2D, field: Ambient, frame
     paintMark(ctx, speck.mark, x + pushX, y + pushY, speck.size, speck.phase, time);
   }
 
-  ctx.fillStyle = "rgb(168,168,168)";
+  ctx.fillStyle = fieldTheme.ink;
   for (const cluster of field.clusters) {
     const nx = cluster.x + time * cluster.drift;
     const wrapped = nx - Math.floor(nx);

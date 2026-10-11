@@ -17,21 +17,16 @@ const SCRAMBLE_SET =
 const TWEEN_MS = 1100;
 const SMOOTH_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 const RADIUS_RATIO = 0.85;
-const SCRAMBLE_COLORS = [
-  "#3DD964",
-  "#FF90E8",
-  "#FFC900",
-  "#90FFE8",
-  "#4D9FFF",
-  "#FF5C32",
-];
+const SCRAMBLE_COLORS = ["#FF90E8", "#FFC900", "#90FFE8", "#4D9FFF", "#FF5C32"];
+
+function accentScramble(): string {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
+  return raw.length > 0 ? `rgb(${raw})` : "rgb(31 107 74)";
+}
 
 function randomColor(): string {
-  if (Math.random() < 0.4) return SCRAMBLE_COLORS[0];
-  return (
-    SCRAMBLE_COLORS[Math.floor(Math.random() * SCRAMBLE_COLORS.length)] ??
-    SCRAMBLE_COLORS[0]
-  );
+  if (Math.random() < 0.4) return accentScramble();
+  return SCRAMBLE_COLORS[Math.floor(Math.random() * SCRAMBLE_COLORS.length)] ?? accentScramble();
 }
 
 function randomChar(): string {

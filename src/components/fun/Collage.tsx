@@ -57,10 +57,10 @@ function Entry({
           delayMs={220}
           offsetY={8}
           durationMs={600}
-          className="mt-4 max-w-[19rem] text-body text-gray"
+          className="mt-4 max-w-[19rem] text-body text-ink-muted"
         >
-          <span className="block uppercase tracking-[0.2em] text-white">
-            <span className="text-secondary">0{index}</span> / {label}
+          <span className="block uppercase tracking-[0.2em] text-ink">
+            <span className="text-accent">0{index}</span> / {label}
           </span>
           <span className="mt-1 block">{caption}</span>
         </Reveal>

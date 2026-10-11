@@ -1,6 +1,27 @@
 import type { MotifType } from "./types";
 
-export const MONO = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
+export let MONO = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
+
+/** Canvas fills. Synced from :root so the field follows the page tokens. */
+export const fieldTheme = {
+  ink: "rgb(18 18 18)",
+  accent: "rgb(31 107 74)",
+  muted: "rgb(118 118 118)",
+};
+
+export function syncFieldTheme(): void {
+  const read = (token: string, fallback: string): string => {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+    return raw.length > 0 ? `rgb(${raw})` : fallback;
+  };
+
+  fieldTheme.ink = read("--ink", fieldTheme.ink);
+  fieldTheme.accent = read("--accent", fieldTheme.accent);
+  fieldTheme.muted = read("--ink-muted", fieldTheme.muted);
+
+  const mono = getComputedStyle(document.documentElement).getPropertyValue("--font-mono").trim();
+  if (mono.length > 0) MONO = mono;
+}
 
 /** Motifs each organism alternates between. Lily, Yuta and DATA stay registered in `motifs/` but are out of the hero. */
 export const SEQUENCE: readonly MotifType[] = ["manta", "jelly"];
@@ -570,7 +591,7 @@ export const HERO_FIELD_CONFIG = {
   },
   intro: { delay: 0.3, stagger: 0.35 },
   glyph: { cycle: 0.4, breathe: 0.1, maxAlpha: 0.5 },
-  green: { every: 130, minPeriod: 10, maxPeriod: 16, sharpness: 28, gain: 1.8, maxAlpha: 0.55, color: "#3DD964" },
+  green: { every: 130, minPeriod: 10, maxPeriod: 16, sharpness: 28, gain: 1.8, maxAlpha: 0.55 },
   pointer: { radius: 90, push: 3, stiffness: 0.12, damping: 0.8 },
   attraction: { reach: 1.7, pull: 7 },
   /** Keeps the background water at roughly 0.04–0.12 perceived opacity, under the organisms. */

@@ -1,8 +1,8 @@
 function Step({ index, label }: { index: string; label: string }) {
   return (
-    <li className="flex items-baseline gap-4 border-t border-white/15 py-3">
-      <span className="w-8 shrink-0 text-xs tracking-[0.14em] text-white/45">{index}</span>
-      <span className="text-sm text-white">{label}</span>
+    <li className="flex items-baseline gap-4 border-t border-ink/15 py-3">
+      <span className="w-8 shrink-0 text-xs tracking-[0.14em] text-ink/45">{index}</span>
+      <span className="text-sm text-ink">{label}</span>
     </li>
   );
 }
@@ -10,7 +10,7 @@ function Step({ index, label }: { index: string; label: string }) {
 export function SystemDiagram() {
   return (
     <figure className="max-w-3xl">
-      <figcaption className="text-sm leading-6 text-white/70">
+      <figcaption className="text-sm leading-6 text-ink/70">
         Analyzers can differ internally. The interface only needs a shared description of what a result means.
       </figcaption>
       <ol className="mt-6">

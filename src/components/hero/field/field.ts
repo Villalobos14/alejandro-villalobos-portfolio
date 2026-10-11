@@ -1,5 +1,5 @@
 import { createAmbient, drawAmbient, type AmbientFrame } from "./ambient";
-import { HERO_FIELD_CONFIG as CONFIG } from "./config";
+import { fieldTheme, HERO_FIELD_CONFIG as CONFIG, syncFieldTheme } from "./config";
 import { createZones, measureZones, quietFade, textFade, verticalMap } from "./layout";
 import { clamp } from "./math";
 import { createOrganism, drawOrganism, stepGlyphs, type FrameEnv } from "./organism";
@@ -27,6 +27,7 @@ export interface GlyphField {
 }
 
 export function createGlyphField(canvas: HTMLCanvasElement, mode: FieldMode): GlyphField | null {
+  syncFieldTheme();
   const context = canvas.getContext("2d", { alpha: true });
   if (!context) return null;
   const ctx = context;
@@ -115,7 +116,7 @@ export function createGlyphField(canvas: HTMLCanvasElement, mode: FieldMode): Gl
     ambientFrame.pointerY = env.pointer ? pointer.cy : -9999;
     drawAmbient(ctx, ambient, ambientFrame);
 
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = fieldTheme.ink;
     for (const organism of organisms) drawOrganism(ctx, organism);
     ctx.globalAlpha = 1;
   };

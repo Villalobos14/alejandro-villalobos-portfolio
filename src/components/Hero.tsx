@@ -22,7 +22,7 @@ const aside = "md:w-[22rem] md:shrink-0 lg:w-auto";
  * Below md the section is as tall as its content and ends well clear of the
  * dock. From md up it fills the viewport, keeping the dock's height and a
  * margin free at the bottom. The dock only measures itself once hydrated, so
- * until then --dock-clearance is short by the dock's height; the 5.625rem
+ * until then --dock-clearance is short by the dock's height; the 6.375rem
  * floor is what it comes to, which keeps the content from moving when it does.
  *
  * Nothing here clips: Calcifer's flame and teleport spill past the letter,
@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="relative -mt-[var(--site-header-h)] flex w-full flex-col px-[var(--page-gutter)] pb-[clamp(1.5rem,4vh,2.5rem)] pt-[calc(var(--site-header-h)+max(var(--page-gutter),1.25rem))] text-white md:min-h-[100svh] md:pb-[calc(max(var(--dock-clearance),5.625rem)+clamp(1.5rem,6vh,3.5rem))]"
+      className="relative -mt-[var(--site-header-h)] flex w-full flex-col px-[var(--page-gutter)] pb-[clamp(1.5rem,4vh,2.5rem)] pt-[calc(var(--site-header-h)+max(var(--page-gutter),1.25rem))] text-ink md:min-h-[100svh] md:pb-[calc(max(var(--dock-clearance),6.375rem)+clamp(1.5rem,6vh,3.5rem))]"
     >
       <HeroField />
 
@@ -54,7 +54,7 @@ export default function Hero() {
 
             <p
               data-hero-enter
-              className={`max-w-[34rem] text-[clamp(1rem,1.2vw,1.25rem)] leading-[1.45] text-gray md:max-w-none ${heroHalo}`}
+              className={`max-w-[34rem] text-[clamp(1rem,1.2vw,1.25rem)] leading-[1.45] text-ink-muted md:max-w-none ${heroHalo}`}
             >
               {supporting.map((line, index) => (
                 <span key={line} className="md:block">
@@ -70,18 +70,18 @@ export default function Hero() {
 
         <div data-hero-enter className={`flex flex-col gap-5 md:flex-row md:items-end md:justify-between lg:items-end ${columns} ${heroHalo}`}>
           <p className={`flex items-center gap-2 ${heroMeta}`}>
-            <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-secondary" />
+            <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-accent" />
             {availability}
           </p>
 
           {/* The designed breaks hold from md; below that the sentence wraps on its own. */}
           <div data-field-quiet className={`md:mt-4 ${aside}`}>
             <p className={heroColumnLabel}>{annotation.label}</p>
-            <p className={`mt-3 text-pretty leading-[1.5] text-white/80 ${heroColumnText}`}>
+            <p className={`mt-3 text-pretty leading-[1.5] text-ink/80 ${heroColumnText}`}>
               {annotation.lines.map((line, index) => (
                 <span key={line} className="md:block">
                   {index === 0 ? (
-                    <span aria-hidden="true" className="mr-1 text-white sm:-ml-[0.9em] sm:mr-0 sm:inline-block sm:w-[0.9em]">
+                    <span aria-hidden="true" className="mr-1 text-ink sm:-ml-[0.9em] sm:mr-0 sm:inline-block sm:w-[0.9em]">
                       {annotation.marker}
                     </span>
                   ) : (

@@ -10,9 +10,9 @@ export const homeHeroContent = {
   place: { location: profile.location, edition: "2027" },
   availability: profile.availability,
   statement: {
-    /** Who: set in white. */
+    /** Who: set in ink. */
     lead: ["I’m Alejandro,", "a Product Designer"],
-    /** How: set back in gray, so the role stays the identity. */
+    /** How: set back in ink-muted, so the role stays the identity. */
     trail: ["who researches", "and builds."],
   },
   /** Calcifer stands in for this letter of this word, the first time it appears in the statement. */

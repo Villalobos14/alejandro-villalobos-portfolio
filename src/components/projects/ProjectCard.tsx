@@ -35,14 +35,14 @@ const sides: Record<
     content: "",
     blur: "[mask-image:linear-gradient(to_right,#000_0%,#000_calc(var(--scrim-x)_*_0.8),transparent_calc(var(--scrim-x)_+_18%))]",
     shade:
-      "bg-[linear-gradient(to_right,rgb(12_13_14/0.8)_0%,rgb(12_13_14/0.74)_calc(var(--scrim-x)_*_0.6),rgb(12_13_14/0.62)_var(--scrim-x),rgb(12_13_14/0.3)_calc(var(--scrim-x)_+_10%),rgb(12_13_14/0.1)_calc(var(--scrim-x)_+_20%),rgb(12_13_14/0)_calc(var(--scrim-x)_+_30%))]",
+      "bg-[linear-gradient(to_right,rgb(var(--cover-ink)/0.8)_0%,rgb(var(--cover-ink)/0.74)_calc(var(--scrim-x)_*_0.6),rgb(var(--cover-ink)/0.62)_var(--scrim-x),rgb(var(--cover-ink)/0.3)_calc(var(--scrim-x)_+_10%),rgb(var(--cover-ink)/0.1)_calc(var(--scrim-x)_+_20%),rgb(var(--cover-ink)/0)_calc(var(--scrim-x)_+_30%))]",
   },
   right: {
     topRow: "md:flex-row-reverse",
     content: "md:self-end",
     blur: "[mask-image:linear-gradient(to_left,#000_0%,#000_calc(var(--scrim-x)_*_0.8),transparent_calc(var(--scrim-x)_+_18%))]",
     shade:
-      "bg-[linear-gradient(to_left,rgb(12_13_14/0.8)_0%,rgb(12_13_14/0.74)_calc(var(--scrim-x)_*_0.6),rgb(12_13_14/0.62)_var(--scrim-x),rgb(12_13_14/0.3)_calc(var(--scrim-x)_+_10%),rgb(12_13_14/0.1)_calc(var(--scrim-x)_+_20%),rgb(12_13_14/0)_calc(var(--scrim-x)_+_30%))]",
+      "bg-[linear-gradient(to_left,rgb(var(--cover-ink)/0.8)_0%,rgb(var(--cover-ink)/0.74)_calc(var(--scrim-x)_*_0.6),rgb(var(--cover-ink)/0.62)_var(--scrim-x),rgb(var(--cover-ink)/0.3)_calc(var(--scrim-x)_+_10%),rgb(var(--cover-ink)/0.1)_calc(var(--scrim-x)_+_20%),rgb(var(--cover-ink)/0)_calc(var(--scrim-x)_+_30%))]",
   },
 };
 
@@ -51,7 +51,7 @@ const lifted = {
   media:
     "motion-safe:fine:group-hover:scale-[1.03] motion-safe:group-has-[:focus-visible]:scale-[1.03]",
   shade: "fine:group-hover:opacity-100 group-has-[:focus-visible]:opacity-100",
-  cta: "fine:group-hover:text-secondary group-has-[:focus-visible]:text-secondary",
+  cta: "fine:group-hover:text-accent group-has-[:focus-visible]:text-accent",
   arrow:
     "fine:group-hover:translate-x-1 fine:group-hover:-translate-y-1 group-has-[:focus-visible]:translate-x-1 group-has-[:focus-visible]:-translate-y-1",
 };
@@ -71,7 +71,7 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
     <article
       data-pet-surface="card"
       data-pet-surface-id={`project-${project.id}`}
-      className={`group relative isolate flex w-full flex-col justify-between gap-24 overflow-hidden rounded-2xl border border-gray/40 bg-primary p-5 transition-colors duration-500 fine:hover:border-white/40 has-[:focus-visible]:border-white/40 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-white md:gap-8 md:p-8 lg:p-10 xl:p-12 ${
+      className={`group relative isolate flex w-full flex-col justify-between gap-24 overflow-hidden rounded-2xl border border-border bg-cover-ink p-5 transition-colors duration-500 fine:hover:border-ink/40 has-[:focus-visible]:border-ink/40 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-ink md:gap-8 md:p-8 lg:p-10 xl:p-12 ${
         isStacked
           ? "h-[min(40rem,calc(100svh-var(--dock-clearance)-4rem))]"
           : "min-h-[38rem] md:min-h-[36rem] lg:min-h-[40rem]"
@@ -90,7 +90,7 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
       {/* Mobile keeps the index readable over whatever the cover shows up top. */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-primary/60 to-transparent md:hidden"
+        className="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-cover-ink/60 to-transparent md:hidden"
       />
 
       <div
@@ -110,7 +110,7 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
           {project.id}
         </p>
         {project.readMinutes ? (
-          <p className="shrink-0 rounded-full border border-white/20 bg-primary/40 px-3 py-1 text-[0.6875rem] font-medium uppercase leading-4 tracking-[0.16em] text-white/80 backdrop-blur-md [-webkit-backdrop-filter:blur(12px)]">
+          <p className="shrink-0 rounded-full border border-white/20 bg-cover-ink/40 px-3 py-1 text-[0.6875rem] font-medium uppercase leading-4 tracking-[0.16em] text-white/80 backdrop-blur-md [-webkit-backdrop-filter:blur(12px)]">
             {project.readMinutes} min read
           </p>
         ) : null}
@@ -123,7 +123,7 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
         here: the raw `fine` screen in the Tailwind config disables max-*.)
       */}
       <div
-        className={`-mx-5 -mb-5 flex flex-col bg-[linear-gradient(to_top,rgb(12_13_14/0.92)_0%,rgb(12_13_14/0.86)_calc(100%_-_7rem),rgb(12_13_14/0.5)_calc(100%_-_3.5rem),rgb(12_13_14/0)_100%)] px-5 pb-5 pt-28 md:m-0 md:bg-none md:p-0 ${contentWidth} ${side.content}`}
+        className={`-mx-5 -mb-5 flex flex-col bg-[linear-gradient(to_top,rgb(var(--cover-ink)/0.92)_0%,rgb(var(--cover-ink)/0.86)_calc(100%_-_7rem),rgb(var(--cover-ink)/0.5)_calc(100%_-_3.5rem),rgb(var(--cover-ink)/0)_100%)] px-5 pb-5 pt-28 md:m-0 md:bg-none md:p-0 ${contentWidth} ${side.content}`}
       >
         <h3 className="break-words text-[clamp(2.125rem,5.4vw,5rem)] font-medium leading-[0.95] tracking-[-0.02em] text-white">
           <TransitionLink
@@ -168,7 +168,7 @@ export default function ProjectCard({ project, isStacked }: ProjectCardProps) {
             {project.meta.map((item) => (
               <li
                 key={item}
-                className="rounded-full border border-white/20 bg-primary/50 px-2.5 py-0.5 text-xs text-white/70"
+                className="rounded-full border border-white/20 bg-cover-ink/50 px-2.5 py-0.5 text-xs text-white/70"
               >
                 {item}
               </li>

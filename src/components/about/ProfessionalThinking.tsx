@@ -35,13 +35,13 @@ function Stage({ stage, mirrored }: { stage: ThinkingStage; mirrored: boolean })
       >
         <ProcessRail current={Number(stage.number)} loopBack={stage.loopsBack} />
         <p className={`${labelCase} ${tone.meta}`}>
-          <span className="text-secondary">{stage.number}</span>
+          <span className="text-accent">{stage.number}</span>
           <span aria-hidden="true"> — </span>
           {stage.title}
         </p>
         <h3
           id={`stage-${stage.id}`}
-          className="text-[clamp(1.75rem,3vw,2.75rem)] font-medium leading-[1.05] tracking-tight text-white"
+          className="text-[clamp(1.75rem,3vw,2.75rem)] font-medium leading-[1.05] tracking-tight text-ink"
         >
           {stage.question}
         </h3>

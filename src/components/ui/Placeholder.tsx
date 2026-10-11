@@ -9,7 +9,7 @@ export default function Placeholder({ label }: PlaceholderProps) {
   if (IS_PRODUCTION) return null;
 
   return (
-    <p className="rounded-lg border border-dashed border-gray px-3 py-2 text-body text-gray">
+    <p className="rounded-lg border border-dashed border-border px-3 py-2 text-body text-ink-muted">
       Pendiente: {label}
     </p>
   );

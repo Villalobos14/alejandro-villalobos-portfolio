@@ -77,7 +77,7 @@ export default function CaseStudySpyNav({ sections }: CaseStudySpyNavProps) {
   return (
     <nav
       aria-label="Case study sections"
-      className="sticky top-[var(--site-header-h)] z-30 -mx-[var(--page-gutter)] max-w-[100%] self-start overflow-x-auto bg-primary px-[var(--page-gutter)] py-scale lg:top-[calc(var(--site-header-h)+theme(spacing.scale))] lg:mx-0 lg:overflow-visible lg:px-0"
+      className="sticky top-[var(--site-header-h)] z-30 -mx-[var(--page-gutter)] max-w-[100%] self-start overflow-x-auto bg-bg px-[var(--page-gutter)] py-scale lg:top-[calc(var(--site-header-h)+theme(spacing.scale))] lg:mx-0 lg:overflow-visible lg:px-0"
     >
       <ul className="flex gap-scale lg:flex-col">
         {sections.map((section) => {
@@ -89,14 +89,14 @@ export default function CaseStudySpyNav({ sections }: CaseStudySpyNavProps) {
                 href={`#${section.id}`}
                 aria-current={isActive ? "location" : undefined}
                 onClick={(event) => handleClick(event, section.id)}
-                className={`flex items-center gap-2 whitespace-nowrap text-label transition-colors duration-150 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
-                  isActive ? "text-secondary" : "text-gray fine:hover:text-white"
+                className={`flex items-center gap-2 whitespace-nowrap text-label transition-colors duration-150 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink ${
+                  isActive ? "text-accent" : "text-ink-muted fine:hover:text-ink"
                 }`}
               >
                 <span
                   aria-hidden="true"
                   className={`size-2 shrink-0 rounded-full transition-colors duration-150 ${
-                    isActive ? "bg-secondary" : "bg-gray"
+                    isActive ? "bg-accent" : "bg-ink-muted"
                   }`}
                 />
                 {section.label}

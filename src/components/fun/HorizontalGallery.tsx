@@ -15,7 +15,7 @@ interface HorizontalGalleryProps {
 const SCROLL_RATIO = 0.8;
 
 const controlStyles =
-  "flex size-11 items-center justify-center rounded-full border border-gray text-white transition-colors duration-300 fine:hover:border-secondary fine:hover:text-secondary disabled:opacity-40 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "flex size-11 items-center justify-center rounded-full border border-border text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:text-accent disabled:opacity-40 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 export default function HorizontalGallery({
   title,
@@ -66,7 +66,7 @@ export default function HorizontalGallery({
   return (
     <section aria-label={title} className="flex w-full min-w-0 flex-col gap-scale px-[var(--page-gutter)]">
       <div className="flex items-end justify-between gap-scale">
-        <h2 className="text-3xl font-medium text-white md:text-4xl">{title}</h2>
+        <h2 className="text-3xl font-medium text-ink md:text-4xl">{title}</h2>
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -113,7 +113,7 @@ export default function HorizontalGallery({
                   : `Enlarge photo ${index + 1} of ${photos.length}`
               }
               data-cursor="Ampliar"
-              className="relative block aspect-[4/5] w-full overflow-hidden rounded-2xl transition-transform duration-500 ease-out fine:hover:-translate-y-1 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="relative block aspect-[4/5] w-full overflow-hidden rounded-2xl transition-transform duration-500 ease-out fine:hover:-translate-y-1 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               <Image
                 src={photo.src}

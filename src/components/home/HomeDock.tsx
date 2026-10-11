@@ -10,7 +10,7 @@ import { PROJECTS_ANCHOR, PROJECTS_SECTION_ID } from "@/lib/projects";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 type DockSection = "home" | "work" | "narrative";
 type DockItem = "home" | "work";
@@ -196,18 +196,18 @@ export default function HomeDock() {
       aria-label="Primary"
       data-pet-surface="dock"
       data-pet-surface-id="main-dock"
-      className={`fixed left-1/2 z-40 w-max max-w-[calc(100%-2rem)] rounded-full border border-gray/40 bg-primary px-1 py-1 transition-transform duration-300 motion-reduce:transition-none ${
+      className={`fixed left-1/2 z-40 w-max max-w-[calc(100%-2rem)] rounded-full border border-border bg-bg px-1 py-1 transition-transform duration-300 motion-reduce:transition-none ${
         dockHidden ? "pointer-events-none" : ""
       }`}
       style={{
-        bottom: "max(1.25rem, calc(env(safe-area-inset-bottom) + 0.75rem))",
+        bottom: "var(--dock-offset)",
         transform: dockHidden ? "translate3d(-50%, calc(100% + 2.5rem), 0)" : "translate3d(-50%, 0, 0)",
       }}
     >
       <div ref={listRef} className="relative flex items-center">
         <span
           aria-hidden="true"
-          className="absolute bottom-0 top-0 rounded-full bg-secondary transition-[transform,width] duration-[380ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
+          className="absolute bottom-0 top-0 rounded-full bg-accent transition-[transform,width] duration-[380ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
           style={{ width: indicator.width, transform: `translateX(${indicator.x}px)` }}
         />
         {items.map((item) => {
@@ -220,7 +220,7 @@ export default function HomeDock() {
               aria-current={selected ? "page" : undefined}
               data-dock-active={selected ? "true" : undefined}
               className={`relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-2.5 text-[13px] sm:px-4 sm:text-sm ${focusStyles} ${
-                selected ? "text-black" : "text-white"
+                selected ? "text-white" : "text-ink"
               }`}
               onClick={item.id === "home" ? onHomeClick : onWorkClick}
             >
@@ -228,11 +228,11 @@ export default function HomeDock() {
             </TransitionLink>
           );
         })}
-        <span aria-hidden="true" className="mx-1 h-4 w-px shrink-0 bg-gray/40" />
+        <span aria-hidden="true" className="mx-1 h-4 w-px shrink-0 bg-ink-muted/40" />
         <TransitionLink
           href={resumeHref}
           aria-current={pathname === resumeHref ? "page" : undefined}
-          className={`group relative z-10 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-secondary px-4 text-[13px] font-medium text-black transition-[filter] duration-300 fine:hover:brightness-110 sm:px-5 sm:text-sm ${focusStyles}`}
+          className={`group relative z-10 inline-flex min-h-11 items-center gap-1.5 rounded-full bg-accent px-4 text-[13px] font-medium text-white transition-[filter] duration-300 fine:hover:brightness-110 sm:px-5 sm:text-sm ${focusStyles}`}
         >
           Resume
           <ArrowDownTrayIcon
@@ -243,7 +243,7 @@ export default function HomeDock() {
         <a
           href={`mailto:${contactEmail}`}
           aria-label="Send an email"
-          className={`relative z-10 inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 px-2 text-[13px] text-white transition-colors duration-300 fine:hover:text-secondary sm:px-3 sm:text-sm ${focusStyles}`}
+          className={`relative z-10 inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 px-2 text-[13px] text-ink transition-colors duration-300 fine:hover:text-accent sm:px-3 sm:text-sm ${focusStyles}`}
         >
           <EnvelopeIcon aria-hidden="true" className="pointer-events-none size-4" />
           <span className="hidden sm:inline">Say hi</span>

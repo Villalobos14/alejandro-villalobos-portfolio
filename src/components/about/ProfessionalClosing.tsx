@@ -20,7 +20,7 @@ export default function ProfessionalClosing() {
           <UnderlinedPhrase
             text={closing.statement}
             phrase={closing.emphasis}
-            className="text-[clamp(1.75rem,3.6vw,3.5rem)] font-medium leading-[1.1] tracking-tight text-white"
+            className="text-[clamp(1.75rem,3.6vw,3.5rem)] font-medium leading-[1.1] tracking-tight text-ink"
           />
         </div>
       </div>
@@ -28,7 +28,7 @@ export default function ProfessionalClosing() {
       <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-5 lg:mt-20 lg:grid-cols-12">
         <div className="flex flex-col gap-2 lg:col-span-3">
           <h3 className={`${labelCase} ${tone.meta}`}>Where I want to go next</h3>
-          <p className="font-[family-name:var(--font-hand)] text-2xl leading-none text-white/70">
+          <p className="font-[family-name:var(--font-hand)] text-2xl leading-none text-ink/70">
             interests, not a track record
           </p>
         </div>
@@ -37,12 +37,12 @@ export default function ProfessionalClosing() {
             {closing.interests.map((interest, index) => (
               <li
                 key={interest}
-                className="flex items-baseline gap-5 border-t border-gray/30 py-3 last:border-b sm:py-4"
+                className="flex items-baseline gap-5 border-t border-border py-3 last:border-b sm:py-4"
               >
                 <span className={`w-6 shrink-0 text-body ${tone.meta}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[clamp(1.375rem,2.4vw,2.25rem)] font-medium leading-tight tracking-tight text-white">
+                <span className="text-[clamp(1.375rem,2.4vw,2.25rem)] font-medium leading-tight tracking-tight text-ink">
                   {interest}
                 </span>
               </li>
@@ -56,7 +56,7 @@ export default function ProfessionalClosing() {
         <TransitionLink
           href={PROJECTS_ANCHOR}
           data-cursor="Ver trabajo"
-          className={`group inline-flex min-h-11 items-center gap-2 rounded-full bg-secondary px-5 text-label font-medium text-black transition-[filter] duration-200 fine:hover:brightness-110 ${focusRing}`}
+          className={`group inline-flex min-h-11 items-center gap-2 rounded-full bg-accent px-5 text-label font-medium text-white transition-[filter] duration-200 fine:hover:brightness-110 ${focusRing}`}
         >
           View selected work
           <ArrowUpRightIcon
@@ -67,7 +67,7 @@ export default function ProfessionalClosing() {
         <TransitionLink
           href={resumeHref}
           data-cursor="Ver resume"
-          className={`group inline-flex min-h-11 items-center gap-2 rounded-full border border-gray/40 px-5 text-label text-white transition-colors duration-200 fine:hover:border-secondary fine:hover:bg-secondary/10 ${focusRing}`}
+          className={`group inline-flex min-h-11 items-center gap-2 rounded-full border border-border px-5 text-label text-ink transition-colors duration-200 fine:hover:border-accent fine:hover:bg-accent/10 ${focusRing}`}
         >
           Read the resume
           <ArrowUpRightIcon
@@ -81,19 +81,19 @@ export default function ProfessionalClosing() {
         <TransitionLink
           href="/fun"
           data-cursor="Ir a Fun"
-          className={`group flex flex-col gap-6 border-t border-gray/40 pt-6 transition-colors duration-200 fine:hover:border-secondary lg:pt-8 ${focusRing}`}
+          className={`group flex flex-col gap-6 border-t border-border pt-6 transition-colors duration-200 fine:hover:border-accent lg:pt-8 ${focusRing}`}
         >
           <span className={`flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 ${labelCase} ${tone.meta}`}>
             Next
-            <span className="text-secondary">02 — The personal side</span>
+            <span className="text-accent">02 — The personal side</span>
           </span>
           <span className="flex items-end justify-between gap-6">
-            <span className="text-[clamp(3.5rem,16vw,11rem)] font-medium leading-[0.9] tracking-tight text-white transition-colors duration-200 fine:group-hover:text-secondary">
+            <span className="text-[clamp(3.5rem,16vw,11rem)] font-medium leading-[0.9] tracking-tight text-ink transition-colors duration-200 fine:group-hover:text-accent">
               Fun
             </span>
             <ArrowRightIcon
               aria-hidden="true"
-              className="pointer-events-none mb-3 size-8 shrink-0 text-white transition-transform duration-200 ease-out motion-reduce:transition-none fine:group-hover:translate-x-2 lg:size-12"
+              className="pointer-events-none mb-3 size-8 shrink-0 text-ink transition-transform duration-200 ease-out motion-reduce:transition-none fine:group-hover:translate-x-2 lg:size-12"
             />
           </span>
         </TransitionLink>

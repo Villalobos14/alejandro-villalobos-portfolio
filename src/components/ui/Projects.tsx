@@ -44,11 +44,11 @@ export default function Projects({ name, img, alt, link, description }: Projects
           {image}
         </TransitionLink>
       )}
-      <div className='text-white mt-3 ml-2'>
+      <div className='text-ink mt-3 ml-2'>
         <h3>
           {name}
         </h3>
-        <p className='text-gray'>
+        <p className='text-ink-muted'>
           {description}
         </p>
       </div>

@@ -9,7 +9,7 @@ import { MarkerSentence } from "./MarkerSentence";
 import { useNarrativePanel, type NarrativePanel } from "./NarrativeProvider";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 const panels: { id: NarrativePanel; label: string }[] = [
   { id: "professional", label: "Professional" },
@@ -49,18 +49,18 @@ function NarrativeSwitch() {
             aria-controls={`home-panel-${item.id}`}
             tabIndex={selected ? 0 : -1}
             className={`relative inline-flex min-h-11 items-center gap-2 pb-2 text-lg transition-colors duration-300 md:text-2xl ${focusStyles} ${
-              selected ? "text-secondary" : "text-gray"
+              selected ? "text-accent" : "text-ink-muted"
             }`}
             onClick={() => setPanel(item.id)}
           >
             <span
               aria-hidden="true"
-              className={`size-1.5 rounded-full ${selected ? "bg-secondary" : "bg-transparent"}`}
+              className={`size-1.5 rounded-full ${selected ? "bg-accent" : "bg-transparent"}`}
             />
             {item.label}
             <span
               aria-hidden="true"
-              className={`absolute bottom-0 left-0 h-px w-full origin-left bg-secondary transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none ${
+              className={`absolute bottom-0 left-0 h-px w-full origin-left bg-accent transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none ${
                 selected ? "scale-x-100" : "scale-x-0"
               }`}
             />

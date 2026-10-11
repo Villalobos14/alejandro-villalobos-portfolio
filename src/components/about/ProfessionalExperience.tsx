@@ -17,7 +17,7 @@ function Period({ entry }: { entry: CareerEntry["entry"] }) {
       <span className="sr-only"> to </span>
       {current ? (
         <CircledWord>
-          <span className="text-secondary">{entry.end.label}</span>
+          <span className="text-accent">{entry.end.label}</span>
         </CircledWord>
       ) : (
         <time dateTime={entry.end.dateTime}>{entry.end.label}</time>
@@ -31,17 +31,17 @@ function Layer({ layer }: { layer: CareerEntry }) {
   const [lead, ...rest] = entry.bullets;
 
   return (
-    <li className="grid grid-cols-1 gap-x-8 gap-y-3 border-t border-gray/30 py-6 lg:grid-cols-12 lg:gap-y-4 lg:py-12">
+    <li className="grid grid-cols-1 gap-x-8 gap-y-3 border-t border-border py-6 lg:grid-cols-12 lg:gap-y-4 lg:py-12">
       <div className="lg:col-span-2">
         <Period entry={entry} />
       </div>
 
       <div className="flex flex-col gap-3 lg:col-span-6 lg:col-start-3 lg:gap-4">
         <div>
-          <h3 className="text-[clamp(2rem,4.4vw,3.75rem)] font-medium leading-none tracking-tight text-white">
+          <h3 className="text-[clamp(2rem,4.4vw,3.75rem)] font-medium leading-none tracking-tight text-ink">
             {entry.company}
           </h3>
-          <p className="mt-2 text-label text-white/85">{entry.role}</p>
+          <p className="mt-2 text-label text-ink/85">{entry.role}</p>
         </div>
         {lead ? <p className={`max-w-2xl text-body-lg ${tone.secondary}`}>{lead}</p> : null}
         <Responsibilities items={rest} />
@@ -49,7 +49,7 @@ function Layer({ layer }: { layer: CareerEntry }) {
           <TransitionLink
             href={layer.caseStudy.href}
             data-cursor="Ver caso"
-            className={`group inline-flex min-h-11 w-fit items-center gap-2 text-label text-white underline decoration-white/30 underline-offset-4 transition-colors duration-200 fine:hover:text-secondary fine:hover:decoration-secondary ${focusRing}`}
+            className={`group inline-flex min-h-11 w-fit items-center gap-2 text-label text-ink underline decoration-ink/30 underline-offset-4 transition-colors duration-200 fine:hover:text-accent fine:hover:decoration-accent ${focusRing}`}
           >
             {layer.caseStudy.label}
             <ArrowUpRightIcon
@@ -84,12 +84,12 @@ export default function ProfessionalExperience() {
         ))}
       </ol>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-4 border-y border-gray/30 py-8 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-4 border-y border-border py-8 lg:grid-cols-12">
         <h3 className={`lg:col-span-2 ${labelCase} ${tone.meta}`}>Education</h3>
         <ul className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:col-span-8 lg:col-start-3">
           {education.map((item) => (
             <li key={item.id} className="flex flex-col gap-1">
-              <p className="text-label text-white">{item.title}</p>
+              <p className="text-label text-ink">{item.title}</p>
               <p className={`text-body ${tone.secondary}`}>{item.detail}</p>
             </li>
           ))}

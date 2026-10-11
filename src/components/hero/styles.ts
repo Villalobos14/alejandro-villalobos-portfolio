@@ -1,8 +1,8 @@
 /** Working-file annotations: the same system monospace the field draws with. */
-export const heroMeta = "font-mono text-[0.6875rem] uppercase leading-4 tracking-[0.14em] text-gray";
+export const heroMeta = "font-mono text-[0.6875rem] uppercase leading-4 tracking-[0.14em] text-ink-muted";
 
 /** Section labels in the right column: the same monospace, a step larger and lighter so they hold their place. */
-export const heroColumnLabel = "font-mono text-xs uppercase leading-4 tracking-[0.16em] text-white/60";
+export const heroColumnLabel = "font-mono text-xs uppercase leading-4 tracking-[0.16em] text-ink/60";
 
 /** Secondary copy in the right column, on the supporting paragraph's scale. */
 export const heroColumnText = "text-[clamp(1rem,1.2vw,1.125rem)]";

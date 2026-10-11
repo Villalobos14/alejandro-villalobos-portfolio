@@ -14,7 +14,7 @@ const views: { id: AboutView; label: string; href: string }[] = [
 export default function AboutSubNav({ active }: AboutSubNavProps) {
   return (
     <nav aria-label="About sections">
-      <ul className="flex items-center gap-2 rounded-full border border-gray/40 p-1">
+      <ul className="flex items-center gap-2 rounded-full border border-border p-1">
         {views.map((view) => {
           const isActive = view.id === active;
 
@@ -24,10 +24,10 @@ export default function AboutSubNav({ active }: AboutSubNavProps) {
                 href={view.href}
                 aria-current={isActive ? "page" : undefined}
                 data-cursor={`Ir a ${view.label}`}
-                className={`block rounded-full px-5 py-2 text-label transition-colors duration-300 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
+                className={`block rounded-full px-5 py-2 text-label transition-colors duration-300 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink ${
                   isActive
-                    ? "bg-secondary text-black"
-                    : "text-gray fine:hover:text-white"
+                    ? "bg-accent text-white"
+                    : "text-ink-muted fine:hover:text-ink"
                 }`}
               >
                 {view.label}

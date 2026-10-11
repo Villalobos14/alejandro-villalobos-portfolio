@@ -31,8 +31,8 @@ export default function ProfessionalGrid() {
         <dl className="grid grid-cols-1 gap-scale sm:grid-cols-2">
           {skillGroups.map((group) => (
             <div key={group.id} className="flex flex-col gap-1">
-              <dt className="text-label text-white">{group.title}</dt>
-              <dd className="text-body text-gray">
+              <dt className="text-label text-ink">{group.title}</dt>
+              <dd className="text-body text-ink-muted">
                 {group.skills.slice(0, 4).join(" · ")}
               </dd>
             </div>
@@ -49,12 +49,12 @@ export default function ProfessionalGrid() {
           {experience.map((entry) => (
             <li
               key={entry.id}
-              className="flex flex-col gap-1 border-t border-gray/30 pt-scale first:border-t-0 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-scale"
+              className="flex flex-col gap-1 border-t border-border pt-scale first:border-t-0 first:pt-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-scale"
             >
-              <span className="text-label text-white">
+              <span className="text-label text-ink">
                 {entry.role}, {entry.company}
               </span>
-              <span className="shrink-0 text-body text-gray">
+              <span className="shrink-0 text-body text-ink-muted">
                 <time dateTime={entry.start.dateTime}>{entry.start.label}</time>
                 {" — "}
                 <time dateTime={entry.end.dateTime}>{entry.end.label}</time>
@@ -70,7 +70,7 @@ export default function ProfessionalGrid() {
         span="lg:col-span-3"
         delayMs={120}
       >
-        <ul className="flex flex-col gap-1 text-body text-gray">
+        <ul className="flex flex-col gap-1 text-body text-ink-muted">
           {PRACTICE_SKILLS.map((skill) => (
             <li key={skill}>{skill}</li>
           ))}

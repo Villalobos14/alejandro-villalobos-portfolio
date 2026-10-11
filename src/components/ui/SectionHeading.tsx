@@ -23,7 +23,7 @@ export default function SectionHeading({
     >
       <div className="flex min-w-0 flex-col gap-3">
         {label ? (
-          <p className="text-body uppercase tracking-[0.2em] text-gray">{label}</p>
+          <p className="text-body uppercase tracking-[0.2em] text-ink-muted">{label}</p>
         ) : null}
         <MaskedLines
           as={as}
@@ -33,11 +33,11 @@ export default function SectionHeading({
               {lines[1]}
             </span>,
           ]}
-          className="text-[clamp(2.25rem,8vw,5.5rem)] font-medium leading-[1.02] tracking-tight text-white"
+          className="text-[clamp(2.25rem,8vw,5.5rem)] font-medium leading-[1.02] tracking-tight text-ink"
         />
       </div>
       {aside ? (
-        <div className="shrink-0 text-body text-gray md:max-w-xs md:text-right">
+        <div className="shrink-0 text-body text-ink-muted md:max-w-xs md:text-right">
           {aside}
         </div>
       ) : null}

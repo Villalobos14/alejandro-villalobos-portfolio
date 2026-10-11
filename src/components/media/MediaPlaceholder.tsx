@@ -1,6 +1,3 @@
-const MONO =
-  "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
-
 const ROWS = 34;
 const COLS = 92;
 
@@ -114,26 +111,26 @@ export default function MediaPlaceholder({
   const layerStyles =
     "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-pre text-[clamp(7px,1vw,11px)] leading-[1.45]";
   const layerStyle = {
-    fontFamily: MONO,
+    fontFamily: "var(--font-mono), ui-monospace, monospace",
     WebkitMaskImage: FIELD_MASK,
     maskImage: FIELD_MASK,
   } as const;
 
   return (
     <div
-      className={`relative flex h-full w-full flex-col justify-between overflow-hidden bg-primary p-5 sm:p-7 ${className}`}
+      className={`relative flex h-full w-full flex-col justify-between overflow-hidden bg-bg p-5 sm:p-7 ${className}`}
     >
       <div aria-hidden="true">
-        <pre className={`${layerStyles} text-white/[0.14]`} style={layerStyle}>
+        <pre className={`${layerStyles} text-ink/[0.14]`} style={layerStyle}>
           {field.base}
         </pre>
-        <pre className={`${layerStyles} text-secondary/40`} style={layerStyle}>
+        <pre className={`${layerStyles} text-accent/40`} style={layerStyle}>
           {field.accent}
         </pre>
       </div>
 
       {index ? (
-        <p className="relative text-xs uppercase tracking-[0.18em] text-secondary">
+        <p className="relative text-xs uppercase tracking-[0.18em] text-accent">
           {index}
         </p>
       ) : (
@@ -143,12 +140,12 @@ export default function MediaPlaceholder({
       {title || detail ? (
         <div className="relative max-w-xl">
           {title ? (
-            <p className="text-[clamp(1.25rem,2.4vw,2rem)] font-medium leading-tight tracking-tight text-white">
+            <p className="text-[clamp(1.25rem,2.4vw,2rem)] font-medium leading-tight tracking-tight text-ink">
               {title}
             </p>
           ) : null}
           {detail ? (
-            <p className="mt-3 max-w-md text-sm leading-6 text-gray">{detail}</p>
+            <p className="mt-3 max-w-md text-sm leading-6 text-ink-muted">{detail}</p>
           ) : null}
         </div>
       ) : null}
@@ -157,13 +154,13 @@ export default function MediaPlaceholder({
         {tags?.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-gray/50 bg-primary/70 px-3 py-1 text-body text-gray"
+            className="rounded-full border border-border bg-bg/70 px-3 py-1 text-body text-ink-muted"
           >
             {tag}
           </span>
         ))}
         {footer ? (
-          <span className="text-xs uppercase tracking-[0.16em] text-gray">
+          <span className="text-xs uppercase tracking-[0.16em] text-ink-muted">
             {footer}
           </span>
         ) : null}

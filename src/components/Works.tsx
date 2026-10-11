@@ -10,12 +10,12 @@ import Heading from "../components/ui/Heading";
 
 export default function Works() {
   return (
-    <div className="w-full bg-primary px-[var(--page-gutter)] py-5 md:py-10">
+    <div className="w-full bg-bg px-[var(--page-gutter)] py-5 md:py-10">
       <section
         className="overflow-hidden"
       >
         <Heading title="Projects" />
-        <div className="mt-10 grid grid-cols-1 gap-16 gap-y-10 md:grid-cols-12 text-white">
+        <div className="mt-10 grid grid-cols-1 gap-16 gap-y-10 md:grid-cols-12 text-ink">
           <div className=" col-span-1 md:col-span-12">
             <Projects
               link="/work/mlstoolbox"

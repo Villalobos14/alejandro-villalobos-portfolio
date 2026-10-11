@@ -14,12 +14,12 @@ export default function ClosingBlock({ label, title, href }: ClosingBlockProps) 
       <TransitionLink
         href={href}
         data-cursor={`Ir a ${title}`}
-        className="group flex flex-col gap-scale rounded-2xl border border-gray/40 p-scale transition-transform duration-500 ease-out fine:hover:rotate-[0.5deg] fine:hover:scale-[0.99] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:p-12"
+        className="group flex flex-col gap-scale rounded-2xl border border-border p-scale transition-transform duration-500 ease-out fine:hover:rotate-[0.5deg] fine:hover:scale-[0.99] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink md:p-12"
       >
-        <span className="text-body uppercase tracking-[0.2em] text-gray">
+        <span className="text-body uppercase tracking-[0.2em] text-ink-muted">
           {label}
         </span>
-        <span className="flex flex-wrap items-center gap-scale text-[clamp(2rem,7vw,4.5rem)] font-medium leading-none tracking-tight text-white transition-colors duration-300 fine:group-hover:text-secondary">
+        <span className="flex flex-wrap items-center gap-scale text-[clamp(2rem,7vw,4.5rem)] font-medium leading-none tracking-tight text-ink transition-colors duration-300 fine:group-hover:text-accent">
           {title}
           <ArrowRightIcon
             aria-hidden="true"

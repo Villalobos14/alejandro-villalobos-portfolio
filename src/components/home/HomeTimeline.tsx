@@ -11,7 +11,7 @@ import {
 import { usePrefersReducedMotion } from "./desktop-motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 const DESKTOP_QUERY = "(min-width: 1024px) and (hover: hover) and (pointer: fine)";
 const CURVE_EASE = "cubic-bezier(0.22, 0.8, 0.24, 1)";
@@ -81,7 +81,7 @@ function ProfileLink() {
   return (
     <TransitionLink
       href="/about"
-      className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-gray/40 px-5 py-3 text-label text-white transition-colors duration-300 fine:hover:border-secondary fine:hover:bg-secondary/10 ${focusStyles}`}
+      className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-border px-5 py-3 text-label text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:bg-accent/10 ${focusStyles}`}
     >
       Explore the professional profile
       <ArrowUpRightIcon
@@ -95,7 +95,7 @@ function ProfileLink() {
 function TimelineTitle({ desktop }: { desktop: boolean }) {
   return (
     <h2
-      className={`max-w-[16em] font-medium tracking-tight text-white ${
+      className={`max-w-[16em] font-medium tracking-tight text-ink ${
         desktop
           ? "text-[clamp(2.8rem,4.6vw,6rem)] leading-[0.98]"
           : "text-[clamp(2rem,9vw,3.2rem)] leading-[1.02]"
@@ -113,7 +113,7 @@ function Photo({ src, label }: { src: string; label: string }) {
 
   if (failed) {
     return (
-      <div className="flex h-full w-full items-end bg-white/10 p-3 text-[10px] font-medium uppercase tracking-[0.16em] text-white">
+      <div className="flex h-full w-full items-end bg-ink/10 p-3 text-[10px] font-medium uppercase tracking-[0.16em] text-ink">
         {label}
       </div>
     );
@@ -250,9 +250,9 @@ function MilestoneCopy({
               transition: reduced ? "none" : "opacity 220ms ease, transform 220ms ease",
             }}
           >
-            <p className="text-body uppercase tracking-[0.18em] text-gray">{entry.shortLabel}</p>
-            <p className="mt-2 text-2xl font-medium leading-tight text-white">{entry.title}</p>
-            <p className="mt-2 text-body-lg text-gray">{entry.description}</p>
+            <p className="text-body uppercase tracking-[0.18em] text-ink-muted">{entry.shortLabel}</p>
+            <p className="mt-2 text-2xl font-medium leading-tight text-ink">{entry.title}</p>
+            <p className="mt-2 text-body-lg text-ink-muted">{entry.description}</p>
           </div>
         );
       })}
@@ -638,14 +638,14 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
       </div>
       <div ref={curveRef} className="relative z-[2] mt-12 h-[220px] w-full shrink-0">
         <svg className="pointer-events-none absolute inset-0 z-[2] h-full w-full" aria-hidden="true">
-          <path ref={pathRef} fill="none" stroke="#d5d5d5" strokeWidth="2" strokeLinecap="round" />
+          <path ref={pathRef} fill="none" stroke="rgb(var(--ink-muted))" strokeWidth="2" strokeLinecap="round" />
         </svg>
         {Array.from({ length: DOT_COUNT }, (_, index) => (
           <span
             key={index}
             data-curve-dot
             aria-hidden="true"
-            className="pointer-events-none absolute left-0 top-0 size-2.5 rounded-full border border-white/80 bg-black"
+            className="pointer-events-none absolute left-0 top-0 size-2.5 rounded-full border border-ink bg-bg"
           />
         ))}
         {items.map((item, index) => (
@@ -664,7 +664,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
           >
             <span
               aria-hidden="true"
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/80 bg-black ${
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ink bg-bg ${
                 index === active ? "size-4" : "size-2.5"
               }`}
             />
@@ -677,7 +677,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
             data-year
             tabIndex={-1}
             className={`absolute min-h-11 -translate-x-1/2 px-2 font-mono text-sm uppercase tracking-[0.14em] ${focusStyles} ${
-              index === active ? "text-secondary" : "text-gray/70"
+              index === active ? "text-accent" : "text-ink-muted"
             }`}
             onClick={() => activate(index)}
           >
@@ -749,10 +749,10 @@ function MobileScene({ reduced }: { reduced: boolean }) {
             key={item.id}
             type="button"
             aria-current={index === active ? "step" : undefined}
-            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-mono text-sm uppercase tracking-[0.14em] transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+            className={`inline-flex min-h-12 min-w-11 items-center justify-center rounded-full border px-3 font-mono text-sm uppercase tracking-[0.14em] transition-colors duration-200 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
               index === active
-                ? "border-secondary bg-secondary/10 text-secondary"
-                : "border-gray/30 text-gray"
+                ? "border-accent bg-accent/10 text-accent"
+                : "border-border text-ink-muted"
             }`}
             onClick={() => select(index)}
           >

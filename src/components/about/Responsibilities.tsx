@@ -18,7 +18,7 @@ export default function Responsibilities({ items }: { items: string[] }) {
       <ul className={`hidden max-w-2xl flex-col gap-2 text-body md:flex ${tone.secondary}`}>
         {items.map((item) => (
           <li key={item} className="flex gap-3">
-            <span aria-hidden="true" className="mt-[0.6em] h-px w-3 shrink-0 bg-white/40" />
+            <span aria-hidden="true" className="mt-[0.6em] h-px w-3 shrink-0 bg-ink/40" />
             {item}
           </li>
         ))}
@@ -30,11 +30,11 @@ export default function Responsibilities({ items }: { items: string[] }) {
           aria-expanded={open}
           aria-controls={panelId}
           onClick={() => setOpen((value) => !value)}
-          className={`inline-flex min-h-11 items-center gap-2 rounded-full text-body uppercase tracking-[0.1em] text-white/85 ${focusRing}`}
+          className={`inline-flex min-h-11 items-center gap-2 rounded-full text-body uppercase tracking-[0.1em] text-ink/85 ${focusRing}`}
         >
           <span
             aria-hidden="true"
-            className={`inline-block text-base leading-none text-secondary transition-transform duration-200 motion-reduce:transition-none ${
+            className={`inline-block text-base leading-none text-accent transition-transform duration-200 motion-reduce:transition-none ${
               open ? "rotate-45" : ""
             }`}
           >
@@ -54,7 +54,7 @@ export default function Responsibilities({ items }: { items: string[] }) {
         >
           {items.map((item) => (
             <li key={item} className="flex gap-3">
-              <span aria-hidden="true" className="mt-[0.6em] h-px w-3 shrink-0 bg-white/40" />
+              <span aria-hidden="true" className="mt-[0.6em] h-px w-3 shrink-0 bg-ink/40" />
               {item}
             </li>
           ))}

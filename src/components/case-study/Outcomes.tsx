@@ -12,10 +12,10 @@ interface OutcomeItemProps {
 
 function OutcomeItem({ title, children }: OutcomeItemProps) {
   return (
-    <li className="flex flex-col gap-2 border-t border-gray/40 pt-scale">
-      <h4 className="text-label text-white">{title}</h4>
+    <li className="flex flex-col gap-2 border-t border-border pt-scale">
+      <h4 className="text-label text-ink">{title}</h4>
       {children ? (
-        <div className="text-body text-gray">{children}</div>
+        <div className="text-body text-ink-muted">{children}</div>
       ) : null}
     </li>
   );
@@ -30,7 +30,7 @@ function OutcomesRoot({ label = "Results and learnings", children }: OutcomesPro
 
   return (
     <section className="flex flex-col gap-scale">
-      <p className="text-body uppercase tracking-[0.2em] text-gray">{label}</p>
+      <p className="text-body uppercase tracking-[0.2em] text-ink-muted">{label}</p>
       <ul className="grid grid-cols-1 gap-scale md:grid-cols-2">{children}</ul>
     </section>
   );

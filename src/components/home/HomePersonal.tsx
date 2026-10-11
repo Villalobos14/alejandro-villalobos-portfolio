@@ -9,7 +9,7 @@ import { MarkerSentence } from "./MarkerSentence";
 import { usePrefersReducedMotion } from "./desktop-motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
 const BASE_SIZE = 56;
 
@@ -85,7 +85,7 @@ function MemeMark() {
         />
       ) : null}
       {status !== "ready" ? (
-        <span className="px-1 text-center text-[8px] font-medium uppercase leading-tight tracking-[0.12em] text-gray">
+        <span className="px-1 text-center text-[8px] font-medium uppercase leading-tight tracking-[0.12em] text-ink-muted">
           MEME PLACEHOLDER
         </span>
       ) : null}
@@ -99,7 +99,7 @@ function MemeMark() {
         type="button"
         aria-label={alt}
         aria-expanded={open}
-        className={`relative mx-1 inline-flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-md border border-gray/40 bg-primary align-middle lg:size-14 ${
+        className={`relative mx-1 inline-flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-bg align-middle lg:size-14 ${
           open ? "z-30 shadow-[0_16px_40px_rgba(0,0,0,0.45)]" : "z-[1]"
         } ${focusStyles}`}
         style={{
@@ -162,13 +162,13 @@ function MemeMark() {
           onClick={close}
         >
           <div
-            className="relative flex h-[min(78vw,320px)] w-[min(78vw,320px)] items-center justify-center overflow-hidden rounded-md border border-gray/40 bg-primary"
+            className="relative flex h-[min(78vw,320px)] w-[min(78vw,320px)] items-center justify-center overflow-hidden rounded-md border border-border bg-bg"
             onClick={(event) => event.stopPropagation()}
           >
             <button
               ref={closeRef}
               type="button"
-              className={`absolute right-3 top-3 z-10 text-sm text-white ${focusStyles}`}
+              className={`absolute right-3 top-3 z-10 text-sm text-ink ${focusStyles}`}
               onClick={close}
             >
               Close
@@ -194,16 +194,16 @@ export default function HomePersonal() {
       />
       <ul className="grid grid-cols-1 gap-10 px-[var(--page-gutter)] sm:grid-cols-2">
         {homeNarrativeContent.personalPreview.map((item) => (
-          <li key={item.label} className="border-t border-gray/40 pt-4">
-            <p className="text-body uppercase tracking-[0.18em] text-gray">{item.label}</p>
-            <p className="mt-3 max-w-md text-xl text-white md:text-2xl">{item.value}</p>
+          <li key={item.label} className="border-t border-border pt-4">
+            <p className="text-body uppercase tracking-[0.18em] text-ink-muted">{item.label}</p>
+            <p className="mt-3 max-w-md text-xl text-ink md:text-2xl">{item.value}</p>
           </li>
         ))}
       </ul>
       <div className="px-[var(--page-gutter)]">
         <TransitionLink
           href="/fun"
-          className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-gray/40 px-5 py-3 text-label text-white transition-colors duration-300 fine:hover:border-secondary fine:hover:bg-secondary/10 ${focusStyles}`}
+          className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-border px-5 py-3 text-label text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:bg-accent/10 ${focusStyles}`}
         >
           See the personal side
           <ArrowUpRightIcon

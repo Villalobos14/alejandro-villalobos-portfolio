@@ -14,8 +14,8 @@ function ImpactMetricItem({ value, label }: ImpactMetric) {
     <div className="flex flex-col gap-2">
       <dt className="sr-only">{label}</dt>
       <dd className="flex flex-col gap-2">
-        <span className="text-display text-secondary">{value}</span>
-        <span className="text-body text-gray">{label}</span>
+        <span className="text-display text-accent">{value}</span>
+        <span className="text-body text-ink-muted">{label}</span>
       </dd>
     </div>
   );
@@ -29,7 +29,7 @@ function ImpactRoot({ children }: ImpactProps) {
   }
 
   return (
-    <dl className="grid grid-cols-1 gap-stack border-y border-gray/40 py-stack sm:grid-cols-2 lg:grid-cols-4">
+    <dl className="grid grid-cols-1 gap-stack border-y border-border py-stack sm:grid-cols-2 lg:grid-cols-4">
       {children}
     </dl>
   );
