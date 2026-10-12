@@ -79,9 +79,10 @@ export const featuredProjects: FeaturedProject[] = [
     coverSlot:
       "Visual slot — Cover B · Product or the 6 s loop, without its own title",
     media: {
-      type: "image",
-      src: "/case-studies/cover-a2-metrics.png",
-      alt: "MLSToolbox CodeAssessment cover titled From metrics to next steps",
+      type: "video",
+      src: "/case-studies/mlstoolbox-cover-1080p.mp4",
+      poster: "/case-studies/mlstoolbox-cover-poster.jpg",
+      alt: "MLSToolbox CodeAssessment cover, from metrics to the findings workspace",
     },
     shifts: [
       {
