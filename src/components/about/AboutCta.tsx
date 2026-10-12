@@ -22,7 +22,7 @@ export default function AboutCta() {
         </RevealHeading>
         {hasCvPdf() ? <a
           href="/cv.pdf"
-          className={`inline-flex min-h-11 w-full items-center justify-center text-[17px] font-medium text-ink fine:hover:text-accent md:w-auto ${focusRing} frame:absolute frame:left-[869px] frame:top-[56px] frame:min-h-0 frame:w-auto frame:justify-start`}
+          className={`inline-flex min-h-11 w-full items-center justify-center text-[17px] font-medium text-ink fine:hover:text-accent-strong md:w-auto ${focusRing} frame:absolute frame:left-[869px] frame:top-[56px] frame:min-h-0 frame:w-auto frame:justify-start`}
         >
           {aboutCta.cv}
         </a> : null}

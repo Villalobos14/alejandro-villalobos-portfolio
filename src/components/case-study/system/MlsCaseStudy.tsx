@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CaseVisual from "@/components/case-study/CaseVisual";
+import SectionDot from "@/components/system/SectionDot";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import MaskedLines from "@/components/ui/MaskedLines";
 import Reveal from "@/components/ui/Reveal";
@@ -26,7 +27,7 @@ import MlsDisclosures from "./MlsDisclosures";
 import { caseFocus } from "./styles";
 
 const eyebrow = "text-mono text-ink-muted";
-const stickyEyebrow = `${eyebrow} lg:sticky lg:top-0 lg:z-20 lg:bg-bg lg:py-1`;
+const stickyEyebrow = `${eyebrow} relative lg:sticky lg:top-0 lg:z-20 lg:bg-bg lg:py-1`;
 const body = "text-[17px] leading-[27px] text-ink-secondary";
 const h2 =
   "text-[clamp(32px,8vw,48px)] font-semibold leading-[1.12] tracking-[-0.025em] text-ink frame:text-[48px] frame:leading-[54px]";
@@ -111,6 +112,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-context" className="grid items-start gap-8 py-8 md:grid-cols-[408fr_840fr] md:gap-12 frame:min-h-[653px] frame:content-start frame:pb-0 frame:pt-32 lg:isolate">
           <div className="order-2 md:order-none lg:self-stretch">
             <p data-sticky-eyebrow="01" className={stickyEyebrow}>
+              <SectionDot label={mlsContext.eyebrow} />
               {mlsContext.eyebrow}
             </p>
             <RevealHeading as="h2" id="mls-context" className={`mt-4 ${h3}`}>
@@ -136,6 +138,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-problem" className="grid items-start gap-10 py-10 md:grid-cols-[463fr_612fr] md:gap-[221px] frame:min-h-[474px] frame:pt-28 lg:isolate">
           <div className="lg:self-stretch">
             <p data-sticky-eyebrow="02" className={stickyEyebrow}>
+              <SectionDot label={mlsProblem.eyebrow} />
               {mlsProblem.eyebrow}
             </p>
             <p className="mt-4 text-[clamp(32px,8vw,56px)] font-medium leading-[1.07] tracking-[-0.025em] text-ink frame:text-[56px] frame:leading-[60px]">
@@ -159,6 +162,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-flow" className="py-12 frame:min-h-[1157px] frame:pb-[12px] frame:pt-[131px] lg:isolate">
           <div data-hairline="flow" className="border-t border-border pt-[15px] lg:pt-[11px]">
             <p data-sticky-eyebrow="03" className={stickyEyebrow}>
+              <SectionDot label={mlsFlow.eyebrow} />
               {mlsFlow.eyebrow}
             </p>
             <div className="frame:min-h-[152px]">
@@ -180,6 +184,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-decisions" className="py-12 frame:min-h-[1771px] frame:pt-[131px] lg:isolate">
           <div data-hairline="decisions" className="border-t border-border pt-[15px] lg:pt-[11px]">
             <p data-sticky-eyebrow="04" className={stickyEyebrow}>
+              <SectionDot label={mlsDecisions.eyebrow} />
               {mlsDecisions.eyebrow}
             </p>
             <div className="frame:min-h-[152px]">
@@ -224,6 +229,7 @@ export default function MlsCaseStudy() {
           </Reveal>
           <div className="lg:flex lg:flex-col lg:justify-center lg:self-stretch">
             <p data-sticky-eyebrow="05" className={stickyEyebrow}>
+              <SectionDot label={mlsSystem.eyebrow} />
               {mlsSystem.eyebrow}
             </p>
             <RevealHeading as="h2" id="mls-system" className={`mt-4 ${h3}`}>
@@ -249,6 +255,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-validation" className="py-12 frame:min-h-[1310px] frame:pt-[147px] lg:isolate">
           <div data-hairline="validation" className="border-t border-border pt-[15px] lg:pt-[11px]">
             <p data-sticky-eyebrow="06" className={stickyEyebrow}>
+              <SectionDot label={mlsValidation.eyebrow} />
               {mlsValidation.eyebrow}
             </p>
             <div className="frame:min-h-[152px]">
@@ -333,6 +340,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-behind" className="py-12 frame:min-h-[703px] frame:pt-[115px] lg:isolate">
           <div data-hairline="behind" className="border-t border-border pt-[15px] lg:pt-[11px]">
             <p data-sticky-eyebrow="07" className={stickyEyebrow}>
+              <SectionDot label={mlsBehind.eyebrow} />
               {mlsBehind.eyebrow}
             </p>
             <div className="frame:min-h-[76px]">
@@ -375,6 +383,7 @@ export default function MlsCaseStudy() {
         <section aria-labelledby="mls-reflection" className="grid gap-10 py-12 md:grid-cols-[612fr_684fr] frame:min-h-[540px] frame:pt-32 lg:isolate">
           <div className="lg:self-stretch">
             <p data-sticky-eyebrow="08" className={stickyEyebrow}>
+              <SectionDot label={mlsReflection.eyebrow} />
               {mlsReflection.eyebrow}
             </p>
             <RevealHeading as="h2" id="mls-reflection" className={`mt-4 ${h2}`}>
@@ -427,7 +436,7 @@ export default function MlsCaseStudy() {
             <div className="flex flex-col items-start px-6 pb-8 frame:hidden">
               <TransitionLink
                 href="/work/ominio"
-                className={`inline-flex min-h-11 items-center text-[17px] font-medium text-accent ${caseFocus}`}
+                className={`inline-flex min-h-11 items-center text-[17px] font-medium text-accent-strong ${caseFocus}`}
               >
                 {mlsNext.read}
               </TransitionLink>
@@ -439,7 +448,7 @@ export default function MlsCaseStudy() {
               </TransitionLink>
             </div>
             <div className="pointer-events-none absolute right-10 top-[103px] z-[2] hidden flex-col items-end gap-6 frame:flex">
-              <p className="text-[17px] font-medium leading-none text-accent">{mlsNext.read}</p>
+              <p className="text-[17px] font-medium leading-none text-accent-strong">{mlsNext.read}</p>
               <TransitionLink
                 href="/projects"
                 className={`pointer-events-auto inline-flex min-h-11 items-start text-[17px] leading-none text-ink-secondary ${caseFocus}`}

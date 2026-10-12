@@ -16,6 +16,9 @@ const frames = [
 
 const MAT_NUMBERS = Array.from({ length: 11 }, (_, index) => index + 1);
 
+/** Two polaroids carry a strip of tape; the rest stay plain. Rotation in degrees. */
+const TAPE: Partial<Record<number, string>> = { 0: "-rotate-3", 4: "rotate-2" };
+
 export default function CameraRoll() {
   return (
     <div data-fun-section="camera-roll" data-cutting-mat="camera-roll" className="relative isolate bg-bg">
@@ -42,8 +45,14 @@ export default function CameraRoll() {
             <Reveal key={index} delayMs={index * REVEAL_STAGGER_MS} className={`w-full min-w-0 ${frame.width}`}>
               <figure
                 data-polaroid={index + 1}
-                className={`w-full rounded-none border border-border bg-bg px-3 pb-[14px] pt-3 shadow-[0_14px_26px_rgb(var(--ink)/0.15)] transition-transform duration-500 ease-out motion-reduce:transition-none ${frame.photo === null ? "" : `${PHOTO_HOVER} motion-reduce:fine:hover:translate-y-0`}`}
+                className={`relative w-full rounded-none border border-border bg-bg px-3 pb-[14px] pt-3 shadow-[0_14px_26px_rgb(var(--ink)/0.15)] transition-transform duration-500 ease-out motion-reduce:transition-none ${frame.photo === null ? "" : `${PHOTO_HOVER} motion-reduce:fine:hover:translate-y-0`}`}
               >
+                {TAPE[index] ? (
+                  <span
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute -top-2 left-1/2 z-[1] h-4 w-14 -translate-x-1/2 bg-pop-orange/45 ${TAPE[index]}`}
+                  />
+                ) : null}
                 {frame.photo === null ? (
                   <div className={`flex items-center justify-center bg-bg-subtle ${frame.ratio}`}>
                     <p className="text-mono-s text-ink-secondary">{cameraRoll.coming}</p>

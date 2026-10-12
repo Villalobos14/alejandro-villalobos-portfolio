@@ -5,6 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 import Media from "@/components/media/Media";
+import { HOVER_DOT, POP_GROUP, popForIndex } from "@/components/system/palette";
 import {
   PROJECTS_SECTION_ID,
   featuredProjects,
@@ -16,7 +17,7 @@ import {
 } from "@/lib/projects";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 /** Mono at the small size without the uppercase transform, so the Figma case stays. */
 const eyebrowClass =
@@ -54,10 +55,10 @@ function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
   );
 }
 
-function FeaturedCase({ project }: { project: FeaturedProject }) {
+function FeaturedCase({ project, index }: { project: FeaturedProject; index: number }) {
   return (
-    <article className="grid overflow-hidden rounded-xl border border-border lg:grid-cols-[2fr_1fr]">
-      <div className="relative aspect-[16/10] min-h-0 overflow-hidden bg-gradient-to-br from-tint-ice to-tint-mint md:aspect-auto md:min-h-64">
+    <article className={`${POP_GROUP} grid overflow-hidden rounded-xl border border-border lg:grid-cols-[2fr_1fr]`}>
+      <div className="relative aspect-[16/10] min-h-0 overflow-hidden bg-gradient-to-br from-tint-ice to-tint-stone md:aspect-auto md:min-h-64">
         {project.media ? (
           <Media
             source={project.media}
@@ -71,7 +72,10 @@ function FeaturedCase({ project }: { project: FeaturedProject }) {
         )}
       </div>
       <div className="min-w-0 bg-bg-subtle p-4 md:p-8 lg:p-10">
-        <p className={`${eyebrowClass} !text-ink-secondary`}>{project.eyebrow}</p>
+        <p className={`relative ${eyebrowClass} !text-ink-secondary`}>
+          <span aria-hidden="true" className={`${HOVER_DOT} ${popForIndex(index).dot}`} />
+          {project.eyebrow}
+        </p>
         <h3 className="mt-2 text-[28px] font-medium leading-8 tracking-[-0.02em] text-ink md:mt-3 md:text-[40px] md:leading-[44px] md:tracking-[-0.025em]">
           {project.name}
           {project.subtitle ? (
@@ -96,11 +100,11 @@ function FeaturedCase({ project }: { project: FeaturedProject }) {
   );
 }
 
-function CaseCard({ project }: { project: FeaturedProject }) {
+function CaseCard({ project, index }: { project: FeaturedProject; index: number }) {
   const cover = project.media?.type === "image" ? project.media : null;
 
   return (
-    <article className="flex h-full min-w-0 flex-col">
+    <article className={`${POP_GROUP} flex h-full min-w-0 flex-col`}>
       {cover ? (
         <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
           <Image
@@ -112,7 +116,10 @@ function CaseCard({ project }: { project: FeaturedProject }) {
           />
         </div>
       ) : null}
-      <p className={`mt-3 md:mt-5 ${eyebrowClass}`}>{project.eyebrow}</p>
+      <p className={`relative mt-3 md:mt-5 ${eyebrowClass}`}>
+        <span aria-hidden="true" className={`${HOVER_DOT} ${popForIndex(index).dot}`} />
+        {project.eyebrow}
+      </p>
       <h3 className="mt-2 text-[22px] font-medium leading-7 text-ink md:mt-3 md:text-h3">{project.name}</h3>
       <p className="mt-2 line-clamp-3 max-w-prose text-[15px] leading-snug text-ink-secondary md:mt-3 md:line-clamp-none md:text-body">
         {project.summary}
@@ -149,9 +156,10 @@ function CaseCarousel({ projects }: { projects: FeaturedProject[] }) {
         onScroll={onScroll}
         className="mobile-bleed mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 md:mt-12 md:grid md:snap-none md:grid-cols-2 md:gap-12 md:overflow-visible md:pb-0 lg:mt-16 lg:gap-x-20 lg:gap-y-16"
       >
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <div key={project.id} className="w-[85%] shrink-0 snap-start md:w-auto md:shrink">
-            <CaseCard project={project} />
+            {/* The featured case is index 0, so the carousel continues from 1. */}
+            <CaseCard project={project} index={index + 1} />
           </div>
         ))}
       </div>
@@ -223,7 +231,7 @@ export default function Projects() {
       aria-labelledby="selected-work-title"
       className="w-full min-w-0 scroll-mt-8 pb-6 pt-2 md:pb-16 md:pt-4 lg:pb-24"
     >
-      {featured ? <FeaturedCase project={featured} /> : null}
+      {featured ? <FeaturedCase project={featured} index={0} /> : null}
       <CaseCarousel projects={rest} />
       <div className="mt-8 md:mt-16 lg:mt-24">
         <h3 className="text-mono text-ink-muted">{researchStudiesHeading}</h3>

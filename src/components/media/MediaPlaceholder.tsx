@@ -130,7 +130,7 @@ export default function MediaPlaceholder({
       </div>
 
       {index ? (
-        <p className="relative text-xs uppercase tracking-[0.18em] text-accent">
+        <p className="relative text-xs uppercase tracking-[0.18em] text-accent-strong">
           {index}
         </p>
       ) : (

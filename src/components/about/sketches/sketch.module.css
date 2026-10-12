@@ -20,6 +20,8 @@
   --sk-muted-text: rgb(var(--ink-muted));
   --sk-faint: rgb(var(--ink) / 0.14);
   --sk-accent: rgb(var(--accent));
+  /* Pink words in sketches are mostly under 24px: the strong pink keeps them at 6:1. */
+  --sk-accent-text: rgb(var(--accent-strong));
   --sk-ease-draw: cubic-bezier(0.45, 0.05, 0.3, 1);
   --sk-ease-in: cubic-bezier(0.32, 0.72, 0, 1);
   --base: 0ms;
@@ -171,7 +173,7 @@
 .frame[data-focus="research"] [data-region~="research"],
 .frame[data-focus="design"] [data-region~="design"],
 .frame[data-focus="engineering"] [data-region~="engineering"] {
-  color: var(--sk-accent);
+  color: var(--sk-accent-text);
 }
 
 .frame [data-hit] {

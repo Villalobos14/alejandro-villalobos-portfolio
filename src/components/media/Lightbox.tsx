@@ -22,7 +22,7 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const controlStyles =
-  "flex size-11 items-center justify-center rounded-full border border-border text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:text-accent disabled:opacity-40 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "flex size-11 items-center justify-center rounded-full border border-border text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:text-accent disabled:opacity-40 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 export default function Lightbox({
   photos,

@@ -10,7 +10,7 @@ import {
 import { usePrefersReducedMotion } from "./desktop-motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const DESKTOP_QUERY = "(min-width: 1024px) and (hover: hover) and (pointer: fine)";
 const CURVE_EASE = "cubic-bezier(0.22, 0.8, 0.24, 1)";
@@ -668,7 +668,7 @@ function DesktopScene({ reduced }: { reduced: boolean }) {
             data-year
             tabIndex={-1}
             className={`absolute min-h-11 -translate-x-1/2 px-2 font-sans text-[14px] font-medium tracking-normal ${focusStyles} ${
-              index === active ? "text-accent" : "text-ink-muted"
+              index === active ? "text-accent-strong" : "text-ink-muted"
             }`}
             onClick={() => activate(index)}
           >
@@ -842,7 +842,7 @@ function MobileScene({ reduced }: { reduced: boolean }) {
             type="button"
             aria-current={index === active ? "step" : undefined}
             className={`inline-flex min-h-11 min-w-11 items-center justify-center px-1 font-sans text-[14px] font-medium tracking-normal ${focusStyles} ${
-              index === active ? "text-accent" : "text-ink-muted"
+              index === active ? "text-accent-strong" : "text-ink-muted"
             }`}
             onClick={() => setActive(index)}
           >

@@ -36,7 +36,7 @@ export default function PhotoButton({
         photo.alt ? `Enlarge photo: ${photo.alt}` : "Enlarge photo"
       }
       data-cursor="Ampliar"
-      className={`relative block overflow-hidden ${rounded} transition-transform duration-500 ease-out focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink ${className}`}
+      className={`relative block overflow-hidden ${rounded} transition-transform duration-500 ease-out focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${className}`}
     >
       <Image
         src={photo.src}

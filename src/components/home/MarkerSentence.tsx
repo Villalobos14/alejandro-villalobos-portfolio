@@ -223,12 +223,8 @@ export function MarkerSentence({
                       }}
                     />
                   ))}
-                  <span
-                    data-highlight-text
-                    className={`relative z-[1] transition-colors duration-300 ${
-                      marked || reduced ? "text-accent" : "text-ink"
-                    }`}
-                  >
+                  {/* Text over the pink marker stays ink (12:1); pink text on it would not read. */}
+                  <span data-highlight-text className="relative z-[1] text-ink">
                     {segment.text}
                   </span>
                 </span>

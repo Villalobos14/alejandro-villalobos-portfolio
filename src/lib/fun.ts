@@ -80,7 +80,7 @@ export const everyday = {
     to: "TYO · SEL",
     body: "I like learning how a city moves: trains, signs and food. Japan and Korea are the trips I keep planning around.",
     meta: [
-      { label: "Status", value: "Planning" },
+      { label: "Status", value: "Planning", kind: "status" },
       { label: "Seat", value: "Window, obviously" },
       { label: "Carry-on", value: "Osmo Pocket" },
     ],

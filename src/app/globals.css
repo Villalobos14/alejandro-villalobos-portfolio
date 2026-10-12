@@ -14,12 +14,32 @@
   --mat-major: 226 226 226;
   --mat-number: 179 179 179;
   --mat-wordmark: 228 228 228;
-  --accent: 31 107 74;
+  /*
+   * Pink is the site's signature. --accent fills shapes, dots, focus rings,
+   * underlines and text from 24px; --accent-strong carries smaller pink text
+   * (6.04:1 on white). Text on any pink or pop fill is --ink, never white.
+   * Each tint is its colour mixed over white (accent 10%, pops 12%): change
+   * a colour, recompute its tint.
+   */
+  --accent: 236 72 153; /* #EC4899 */
+  --accent-strong: 190 24 93; /* #BE185D */
+  --accent-tint: 253 237 245; /* #FDEDF5 */
+  /* Pops: tiny details only (dots, a stripe, a tape). Never text, never large fills. */
+  --pop-blue: 59 130 246; /* #3B82F6 */
+  --pop-blue-tint: 231 240 254; /* #E7F0FE */
+  --pop-orange: 240 160 60; /* #F0A03C */
+  --pop-orange-tint: 253 244 232; /* #FDF4E8 */
+  --pop-teal: 91 191 175; /* #5BBFAF */
+  --pop-teal-tint: 235 247 245; /* #EBF7F5 */
+  /* Success and "positive" roles. */
+  --positive: var(--pop-teal);
+  /* Errors only. */
   --signal-red: 210 70 47;
   --cover-ink: 21 23 26;
   --cover-ink-raised: 32 35 40;
   --on-ink-secondary: 155 160 166;
-  --on-ink-positive: 125 211 168;
+  /* Light teal for positive marks on --cover-ink: 10.86:1. */
+  --on-ink-positive: 134 216 203; /* #86D8CB */
   --tint-ice: 238 241 244;
   --tint-sky: 228 236 246;
   --tint-mint: 227 239 232;
@@ -57,12 +77,18 @@ html {
 }
 
 ::selection {
-  background-color: rgb(var(--ink));
-  color: rgb(255 255 255);
+  background-color: rgb(var(--accent-tint));
+  color: rgb(var(--ink));
 }
 
 html {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Anything without its own focus style still gets the pink ring, never the browser's blue. */
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 2px;
 }
 
 :focus:not(:focus-visible) {
@@ -130,7 +156,7 @@ html.site-cursor-on [data-site-header] button * {
   padding-inline: 0;
   border-radius: 9999px;
   background-color: rgb(var(--accent));
-  color: rgb(var(--bg));
+  color: rgb(var(--ink));
   overflow: hidden;
   transform: translate(-50%, -50%);
   font-size: 0.75rem;

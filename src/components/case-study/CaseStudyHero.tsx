@@ -25,7 +25,7 @@ export default function CaseStudyHero({ frontmatter }: CaseStudyHeroProps) {
       <TransitionLink
         href={PROJECTS_ANCHOR}
         data-cursor="Volver a proyectos"
-        className="group flex w-fit items-center gap-2 text-label text-ink-muted transition-colors duration-300 fine:hover:text-ink focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+        className="group flex w-fit items-center gap-2 text-label text-ink-muted transition-colors duration-300 fine:hover:text-ink focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
         <ArrowLeftIcon
           aria-hidden="true"

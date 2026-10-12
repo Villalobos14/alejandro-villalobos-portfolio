@@ -19,7 +19,7 @@ interface CaseVisualProps {
 }
 
 const focus =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 /**
  * A 16:10 case-study slot. Without `src` it stays a labelled placeholder.

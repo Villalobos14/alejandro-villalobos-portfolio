@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { TransitionLink } from "@/components/curtain/TransitionLink";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const options = [
   { id: "professional", label: "Professional", href: "/about" },
@@ -29,7 +29,7 @@ export default function AboutSwitch({ stretch = false }: { stretch?: boolean }) 
                   stretch ? "w-full justify-center md:w-auto" : ""
                 } ${
                   selected
-                    ? "bg-accent text-white"
+                    ? "bg-accent text-ink"
                     : "text-ink-secondary fine:hover:text-ink active:text-ink"
                 }`}
               >

@@ -5,7 +5,7 @@ export let MONO = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monosp
 /** Canvas fills. Synced from :root so the field follows the page tokens. */
 export const fieldTheme = {
   ink: "rgb(18 18 18)",
-  accent: "rgb(31 107 74)",
+  accent: "rgb(236 72 153)",
   muted: "rgb(118 118 118)",
 };
 

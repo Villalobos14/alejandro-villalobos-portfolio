@@ -2,13 +2,14 @@
 
 import { useId, useState } from "react";
 import Image from "next/image";
+import { HOVER_DOT, POP_GROUP, ROW_TINT, popForIndex } from "@/components/system/palette";
 import Reveal from "@/components/ui/Reveal";
 import { REVEAL_STAGGER_MS } from "@/lib/motion";
 import { sideProjects, type SideProject } from "@/lib/side-projects";
 
 const mono = "font-mono text-[10px] leading-[14px] tracking-[0.04em] uppercase";
 const rowGrid = "md:grid md:grid-cols-[minmax(0,1fr)_14%_18%_14%_44px] md:gap-x-5";
-const focusStyles = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
+const focusStyles = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 const filters: { label: string; type?: SideProject["type"] }[] = [
   { label: "All" },
   { label: "Hackathons", type: "Hackathon" },
@@ -17,16 +18,20 @@ const filters: { label: string; type?: SideProject["type"] }[] = [
   { label: "Visual", type: "Visual" },
 ];
 
-function LogEntry({ project, open, onToggle }: { project: SideProject; open: boolean; onToggle: () => void }) {
+function LogEntry({ project, index, open, onToggle }: { project: SideProject; index: number; open: boolean; onToggle: () => void }) {
   const id = useId();
+  const pop = popForIndex(index);
 
   return (
-    <article data-log-entry={project.name} data-hairline={`log-${project.name}`} className={`border-t border-border ${open ? "bg-bg-subtle" : ""}`}>
+    <article data-log-entry={project.name} data-hairline={`log-${project.name}`} className={`${POP_GROUP} ${ROW_TINT} ${pop.rowTint} border-t border-border ${open ? "bg-bg-subtle" : ""}`}>
       <div className={`relative py-4 md:min-h-[100px] md:items-center ${rowGrid}`}>
         <div className="flex min-w-0 items-center gap-4 pr-12 md:gap-5 md:pr-0">
           {project.thumb ? <Image {...project.thumb} alt={project.thumb.alt} width={104} height={68} sizes="104px" className="h-[68px] w-[104px] shrink-0 rounded object-cover" /> : null}
           <div className="min-w-0">
-            <h3 id={`${id}-title`} className="text-[17px] font-medium leading-6">{project.name}</h3>
+            <h3 id={`${id}-title`} className="relative text-[17px] font-medium leading-6">
+              <span aria-hidden="true" className={`${HOVER_DOT} ${pop.dot}`} />
+              {project.name}
+            </h3>
             <p className="mt-0.5 text-[14px] leading-[21px] text-ink-secondary">{project.summary}</p>
           </div>
         </div>
@@ -46,7 +51,7 @@ function LogEntry({ project, open, onToggle }: { project: SideProject; open: boo
             </dd>
           </div>
         </dl>
-        <button type="button" id={`${id}-toggle`} aria-label={`${open ? "Collapse" : "Expand"} ${project.name}`} aria-expanded={open} aria-controls={`${id}-detail`} onClick={onToggle} className={`absolute right-0 top-4 flex size-11 items-center justify-center rounded-full text-[20px] text-accent md:static ${focusStyles}`}>
+        <button type="button" id={`${id}-toggle`} aria-label={`${open ? "Collapse" : "Expand"} ${project.name}`} aria-expanded={open} aria-controls={`${id}-detail`} onClick={onToggle} className={`absolute right-0 top-4 flex size-11 items-center justify-center rounded-full text-[20px] text-accent-strong md:static ${focusStyles}`}>
           <span aria-hidden="true">{open ? "−" : "+"}</span>
         </button>
       </div>
@@ -59,12 +64,12 @@ function LogEntry({ project, open, onToggle }: { project: SideProject; open: boo
               </div>
             ) : <div className="hidden md:block" />}
             <div className="min-w-0 space-y-[14px] px-4 pt-2 md:col-span-4 md:pl-0 md:pr-6">
-              <p className={`${mono} text-accent`}>{project.detail?.label ?? `${project.type} · ${project.result}`}</p>
+              <p className={`${mono} text-accent-strong`}>{project.detail?.label ?? `${project.type} · ${project.result}`}</p>
               {project.detail ? <>
                 <p className="text-[17px] leading-[26px] tracking-[-0.002em]">{project.detail.body}</p>
                 <p className="text-[14px] leading-[21px] text-ink-secondary">{project.detail.contribution}</p>
               </> : null}
-              {project.href ? <a href={project.href} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1} className={`inline-flex min-h-11 items-center text-[15px] font-medium leading-[22px] text-accent underline underline-offset-4 ${focusStyles}`}>View project ↗</a> : null}
+              {project.href ? <a href={project.href} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1} className={`inline-flex min-h-11 items-center text-[15px] font-medium leading-[22px] text-accent-strong underline decoration-accent underline-offset-4 ${focusStyles}`}>View project ↗</a> : null}
             </div>
           </div>
         </div>
@@ -94,7 +99,7 @@ export default function SideProjectsLog() {
         </div>
         {visible.map((project, index) => (
           <Reveal key={project.name} delayMs={index * REVEAL_STAGGER_MS}>
-            <LogEntry project={project} open={openProject === project.name} onToggle={() => setOpenProject((current) => current === project.name ? null : project.name)} />
+            <LogEntry project={project} index={index} open={openProject === project.name} onToggle={() => setOpenProject((current) => current === project.name ? null : project.name)} />
           </Reveal>
         ))}
       </div>

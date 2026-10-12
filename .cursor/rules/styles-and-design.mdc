@@ -11,7 +11,7 @@ Tema claro. Los colores viven en `:root` de `src/app/globals.css` como tripletas
 - Solo clases utilitarias de Tailwind. No crear `.css` / `.module.css` extra.
 - Prohibido `style={}` salvo valores dinámicos de runtime indispensables para animaciones.
 - Cero hex hardcodeados en componentes. Todo color sale de un token. Excepción: el texto blanco sobre el scrim `--cover-ink` de las portadas de proyecto.
-- `white` y `black` se conservan solo por compatibilidad (texto sobre `--accent`, scrims). No son la paleta de la página.
+- `white` y `black` se conservan solo por compatibilidad (scrims, texto sobre `--ink`). No son la paleta de la página.
 
 ## Tokens
 
@@ -24,8 +24,13 @@ Tema claro. Los colores viven en `:root` de `src/app/globals.css` como tripletas
 | `--ink-muted` | Texto terciario, meta |
 | `--border` | Línea sutil |
 | `--line-strong` | Regla fuerte |
-| `--accent` | Acento verde `#1F6B4A`. El único acento del sitio |
-| `--signal-red` | Señal puntual (`#D2462F`) |
+| `--accent` | Rosa `#EC4899`, la firma del sitio: fills, puntos, focus ring, subrayados, estado activo y texto ≥ 24px |
+| `--accent-strong` | Rosa `#BE185D` para links y texto rosa < 24px sobre blanco (6.04:1) |
+| `--accent-tint` | Rosa al 10% sobre blanco: hover suave y `::selection` |
+| `--pop-blue` / `--pop-orange` / `--pop-teal` | Pops `#3B82F6` / `#F0A03C` / `#5BBFAF`: puntos de 8px, franjas y cintas. Nunca texto ni fondos grandes; máximo dos por pantalla |
+| `--pop-*-tint` | Cada pop al 12% sobre blanco: hover de filas y chips de estado |
+| `--positive` | Rol positivo/éxito (= `--pop-teal`) |
+| `--signal-red` | Solo errores (`#D2462F`) |
 | `--mat-minor` | Cutting mat: línea menor |
 | `--mat-major` | Cutting mat: línea mayor, cada 5 |
 | `--mat-number` | Cutting mat: números en `text-mono-s` |
@@ -38,9 +43,10 @@ Tema claro. Los colores viven en `:root` de `src/app/globals.css` como tripletas
 | `--cover-ink` | Superficie oscura de portada |
 | `--cover-ink-raised` | Superficie oscura elevada |
 | `--on-ink-secondary` | Texto secundario sobre `--cover-ink` |
-| `--on-ink-positive` | Texto positivo sobre `--cover-ink` |
+| `--on-ink-positive` | Teal claro `#86D8CB` para positivo sobre `--cover-ink` (10.86:1) |
 
-- Prohibido el verde neón `#3DD964` y el azul `#334DAB`.
+- El verde `#1F6B4A` está retirado. Prohibido también el verde neón `#3DD964` y el azul `#334DAB`.
+- Texto sobre un fill rosa o pop: siempre `--ink`, nunca blanco. Los pops por fila salen de `popForIndex(i)` en `src/components/system/palette.ts`.
 
 ## Tipografía
 

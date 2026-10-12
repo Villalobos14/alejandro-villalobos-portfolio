@@ -22,12 +22,12 @@ function tokenColor(name: string, fallback: string): string {
   return raw.length > 0 ? `rgb(${raw})` : fallback;
 }
 
-/** Most glyphs stay ink. Accent is occasional. Signal red is rare. */
+/** Most glyphs stay ink. Pink is occasional; the strong pink is rare. Signal red is kept for errors. */
 function randomColor(): string {
   const roll = Math.random();
   if (roll < 0.62) return tokenColor("--ink", "rgb(18 18 18)");
-  if (roll < 0.9) return tokenColor("--accent", "rgb(31 107 74)");
-  return tokenColor("--signal-red", "rgb(210 70 47)");
+  if (roll < 0.9) return tokenColor("--accent", "rgb(236 72 153)");
+  return tokenColor("--accent-strong", "rgb(190 24 93)");
 }
 
 function randomChar(): string {

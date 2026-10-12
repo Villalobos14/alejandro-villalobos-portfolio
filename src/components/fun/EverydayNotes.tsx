@@ -49,6 +49,8 @@ export default function EverydayNotes() {
           </Reveal>
           <Reveal delayMs={REVEAL_STAGGER_MS} className="min-w-0">
             <article className={`${card} frame:!px-7`}>
+              {/* Boarding-pass stripe over the top border: decoration only, no layout. */}
+              <span aria-hidden="true" className="pointer-events-none absolute -inset-x-px -top-px h-1 bg-pop-orange" />
               <h3 className="text-mono text-ink-muted">{everyday.travel.label}</h3>
               <p className="mt-5 flex items-baseline justify-between gap-2 whitespace-nowrap text-[clamp(36px,10vw,56px)] font-medium leading-none tracking-[-0.04em] md:text-[clamp(32px,4vw,56px)] frame:mt-[21px] frame:text-[56px]">
                 <span>{everyday.travel.from}</span>
@@ -63,14 +65,21 @@ export default function EverydayNotes() {
                 {everyday.travel.meta.map((item) => (
                   <div key={item.label} className="min-w-0">
                     <dt className="text-mono-s text-ink-muted">{item.label}</dt>
-                    <dd className="mt-[7px] text-body-s leading-[20px] frame:whitespace-nowrap">{item.value}</dd>
+                    <dd className="mt-[7px] text-body-s leading-[20px] frame:whitespace-nowrap">
+                      {"kind" in item ? (
+                        // Status chip: tint behind ink text, pulled back so the word stays aligned.
+                        <span className="-mx-1.5 inline-block rounded-full bg-pop-orange-tint px-1.5 text-ink">{item.value}</span>
+                      ) : (
+                        item.value
+                      )}
+                    </dd>
                   </div>
                 ))}
               </dl>
             </article>
           </Reveal>
           <Reveal delayMs={2 * REVEAL_STAGGER_MS} className="min-w-0 md:col-span-2 frame:col-span-1 frame:ml-px">
-            <article className={`${card} bg-bg`}>
+            <article className={`${card} bg-bg !border-pop-teal/40`}>
               <h3 className="text-mono text-ink-muted">{everyday.korean.label}</h3>
               <p className="mt-[30px] text-mono-s text-ink-muted">{everyday.korean.wordLabel}</p>
               {/* Geist has no Hangul glyphs: the existing system-ui/sans-serif stack supplies them. */}

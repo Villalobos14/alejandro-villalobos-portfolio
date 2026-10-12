@@ -89,8 +89,8 @@ export default function CaseStudySpyNav({ sections }: CaseStudySpyNavProps) {
                 href={`#${section.id}`}
                 aria-current={isActive ? "location" : undefined}
                 onClick={(event) => handleClick(event, section.id)}
-                className={`flex items-center gap-2 whitespace-nowrap text-label transition-colors duration-150 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink ${
-                  isActive ? "text-accent" : "text-ink-muted fine:hover:text-ink"
+                className={`flex items-center gap-2 whitespace-nowrap text-label transition-colors duration-150 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${
+                  isActive ? "text-accent-strong" : "text-ink-muted fine:hover:text-ink"
                 }`}
               >
                 <span

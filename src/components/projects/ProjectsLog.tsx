@@ -14,11 +14,11 @@ export default function ProjectsLog() {
         <div className="mt-24 md:mt-[240px]">
           <ProjectSection id="side-projects" eyebrow="02 — Side projects & hackathons" count="5 entries" title="Side projects, logged." deck="Hackathons, open source and visual experiments. Open a row to see it.">
             <SideProjectsLog />
-            <p className="mt-7 text-[15px] leading-[22px] text-accent">
+            <p className="mt-7 text-[15px] leading-[22px] text-accent-strong">
               More experiments on{" "}
               {experimentLinks.map((link, index) => <span key={link.id}>
                 {index > 0 ? " · " : null}
-                <a href={link.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline-offset-4 fine:hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">{link.id === "github" ? "GitHub" : link.label}</a>
+                <a href={link.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center underline-offset-4 fine:hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">{link.id === "github" ? "GitHub" : link.label}</a>
               </span>)}{" "}<span aria-hidden="true">→</span>
             </p>
           </ProjectSection>

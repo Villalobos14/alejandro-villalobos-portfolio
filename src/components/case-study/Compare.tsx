@@ -40,7 +40,7 @@ function CompareOption({
         <div className="flex flex-col gap-2 text-body text-ink-muted">{children}</div>
       ) : null}
       {outcome ? (
-        <p className="mt-auto text-body text-accent">{outcome}</p>
+        <p className="mt-auto text-body text-accent-strong">{outcome}</p>
       ) : null}
     </div>
   );

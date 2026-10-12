@@ -6,7 +6,7 @@ import HeroStatement from "./hero/HeroStatement";
 const { greeting, currently, previously, statement, description, intro, cta } = homeHeroContent;
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const metaLabel = "font-sans text-[13px] font-normal normal-case tracking-normal text-ink-muted";
 const metaValue = "text-[15px] font-normal leading-snug text-ink md:text-[18px]";
@@ -58,7 +58,7 @@ export default function Hero() {
         </p>
         <TransitionLink
           href={PROJECTS_ANCHOR}
-          className={`inline-flex min-h-11 w-full items-center justify-center rounded-full bg-accent px-4 text-[16px] font-medium leading-none text-white md:w-auto md:shrink-0 md:justify-start md:rounded-none md:bg-[transparent] md:px-0 md:text-accent ${focusStyles}`}
+          className={`inline-flex min-h-11 w-full items-center justify-center rounded-full bg-accent px-4 text-[16px] font-medium leading-none text-ink md:w-auto md:shrink-0 md:justify-start md:rounded-none md:bg-[transparent] md:px-0 md:text-accent-strong ${focusStyles}`}
         >
           {cta}
         </TransitionLink>

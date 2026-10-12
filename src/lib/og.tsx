@@ -8,7 +8,8 @@ export const ogContentType = "image/png";
 // Satori cannot resolve CSS custom properties; mirror the PF27 theme tokens.
 const INK = "#121212";
 const BG = "#FFFFFF";
-const ACCENT = "#1F6B4A";
+/** --accent-strong: pink text under 24px on white (6.04:1). */
+const ACCENT = "#BE185D";
 const MUTED = "#767676";
 
 /** Mirrors the site's glyph vocabulary as a single decorative band. */

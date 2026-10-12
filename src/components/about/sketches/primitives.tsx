@@ -135,7 +135,7 @@ export function Note({
   const fontSize = size ?? (variant === "hand" ? 24 : 11);
   const shift = align === "center" ? "-50%" : align === "right" ? "-100%" : "0";
   const color =
-    tone === "accent" ? "var(--sk-accent)" : tone === "muted" ? "var(--sk-muted-text)" : undefined;
+    tone === "accent" ? "var(--sk-accent-text)" : tone === "muted" ? "var(--sk-muted-text)" : undefined;
   const typeClass =
     variant === "hand"
       ? "font-[family-name:var(--font-hand)] leading-none"

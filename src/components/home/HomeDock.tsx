@@ -10,7 +10,7 @@ import { contactEmail } from "@/lib/links";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 type DockSection = "home" | "work" | "narrative";
 type DockItem = "home" | "work" | "about" | "fun";
@@ -221,7 +221,7 @@ export default function HomeDock() {
       <div ref={listRef} className="relative flex items-center gap-0 [@media(min-width:360px)]:gap-0.5 [@media(min-width:420px)]:justify-between">
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 top-0 rounded-full bg-bg transition-[transform,width] duration-[380ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
+          className="pointer-events-none absolute bottom-0 top-0 rounded-full bg-accent transition-[transform,width] duration-[380ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none"
           style={{ width: indicator.width, transform: `translateX(${indicator.x}px)` }}
         />
         <TransitionLink
@@ -229,7 +229,10 @@ export default function HomeDock() {
           aria-label="Home"
           aria-current={active === "home" ? "page" : undefined}
           onClick={onHomeClick}
-          className={`relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full bg-accent text-[15px] font-semibold leading-7 tracking-[0.02em] text-bg ${focusStyles} ${active === "home" ? "ring-2 ring-inset ring-bg" : ""}`}
+          className={`relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full text-[15px] font-semibold leading-7 tracking-[0.02em] ${focusStyles} ${
+            // Pink marks the active page, so the monogram is pink only on Home.
+            active === "home" ? "bg-accent text-ink" : "bg-bg/10 text-bg fine:hover:bg-bg/20 active:bg-bg/20"
+          }`}
         >
           AV
         </TransitionLink>

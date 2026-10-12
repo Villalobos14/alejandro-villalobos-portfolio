@@ -76,7 +76,7 @@ export function getMdxComponents(options?: MdxOptions) {
     }) => (
       <a
         href={href}
-        className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors duration-150 hover:text-ink"
+        className="text-accent-strong underline decoration-accent underline-offset-4 transition-colors duration-150 hover:text-ink"
       >
         {children}
       </a>

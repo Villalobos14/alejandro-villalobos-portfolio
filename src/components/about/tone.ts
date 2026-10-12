@@ -14,4 +14,4 @@ export const tone = {
 export const labelCase = "text-body uppercase leading-5 tracking-[0.1em] sm:tracking-[0.16em]";
 
 export const focusRing =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";

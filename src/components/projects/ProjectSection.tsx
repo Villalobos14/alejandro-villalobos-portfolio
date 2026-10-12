@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { proH2 } from "@/components/about/ProSection";
 import MaskedLines from "@/components/ui/MaskedLines";
 import RevealHeading from "@/components/ui/RevealHeading";
+import SectionDot from "@/components/system/SectionDot";
 
 export default function ProjectSection({
   id, eyebrow, count, title, deck, first = false, children,
@@ -18,7 +19,10 @@ export default function ProjectSection({
     <section aria-label={title} className="min-w-0 lg:isolate">
       <div data-hairline={id} className="border-t border-border">
         <div data-sticky-eyebrow={id} className="mt-[14px] flex items-start justify-between gap-4 bg-bg py-1 text-mono text-ink-muted lg:sticky lg:top-0 lg:z-20">
-          <p>{eyebrow}</p>
+          <p className="relative">
+            <SectionDot label={eyebrow} />
+            {eyebrow}
+          </p>
           <p className="shrink-0">{count}</p>
         </div>
         {first ? (

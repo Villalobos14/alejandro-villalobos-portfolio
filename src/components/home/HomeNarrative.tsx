@@ -7,7 +7,7 @@ import HomeTimeline from "./HomeTimeline";
 import { useNarrativePanel, type NarrativePanel } from "./NarrativeProvider";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const panels: { id: NarrativePanel; label: string }[] = [
   { id: "professional", label: "Professional" },

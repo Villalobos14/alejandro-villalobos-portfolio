@@ -15,7 +15,7 @@ export default function SeeNext({ caseStudy }: SeeNextProps) {
       id={SEE_NEXT_SECTION_ID}
       href={`/work/${caseStudy.slug}`}
       data-cursor="Ver case study"
-      className="group flex w-full scroll-mt-[var(--site-header-h)] flex-col gap-scale rounded-2xl border border-border p-scale transition-transform duration-500 ease-out fine:hover:rotate-[0.5deg] fine:hover:scale-[0.99] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink md:p-12"
+      className="group flex w-full scroll-mt-[var(--site-header-h)] flex-col gap-scale rounded-2xl border border-border p-scale transition-transform duration-500 ease-out fine:hover:rotate-[0.5deg] fine:hover:scale-[0.99] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent md:p-12"
     >
       <span className="text-body uppercase tracking-[0.2em] text-ink-muted">
         Next project

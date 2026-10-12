@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 function Disclosure({ title }: { title: string }) {
   const [open, setOpen] = useState(false);

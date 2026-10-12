@@ -5,11 +5,11 @@ import { contactEmail, siteLinks } from "@/lib/links";
 import { hasCvPdf } from "@/lib/cv";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const MAT_NUMBERS = Array.from({ length: 24 }, (_, index) => index * 5);
 
-const linkClass = `text-body-s text-ink transition-colors duration-300 fine:hover:text-accent active:text-accent ${focusStyles}`;
+const linkClass = `text-body-s text-ink transition-colors duration-300 fine:hover:text-accent-strong active:text-accent-strong ${focusStyles}`;
 
 function siteHref(id: string): string {
   return siteLinks.find((link) => link.id === id)?.href ?? "#";

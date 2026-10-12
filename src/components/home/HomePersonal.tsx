@@ -9,7 +9,7 @@ import { MarkerSentence } from "./MarkerSentence";
 import { usePrefersReducedMotion } from "./desktop-motion";
 
 const focusStyles =
-  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
+  "focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 const BASE_SIZE = 56;
 
@@ -203,7 +203,7 @@ export default function HomePersonal() {
       <div>
         <TransitionLink
           href="/fun"
-          className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-border px-5 py-3 text-label text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:bg-accent/10 ${focusStyles}`}
+          className={`group inline-flex min-h-11 items-center gap-3 rounded-full border border-border px-5 py-3 text-label text-ink transition-colors duration-300 fine:hover:border-accent fine:hover:bg-accent-tint ${focusStyles}`}
         >
           See the personal side
           <ArrowUpRightIcon
