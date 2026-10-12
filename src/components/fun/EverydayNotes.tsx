@@ -1,5 +1,6 @@
 import ProSection from "@/components/about/ProSection";
 import ElsewhereCard from "@/components/fun/ElsewhereCard";
+import KoreanCard from "@/components/fun/KoreanCard";
 import OnRepeatCard from "@/components/fun/OnRepeatCard";
 import Reveal from "@/components/ui/Reveal";
 import { everyday } from "@/lib/fun";
@@ -25,16 +26,7 @@ export default function EverydayNotes() {
             <ElsewhereCard className={`${card} frame:!px-7`} />
           </Reveal>
           <Reveal delayMs={2 * REVEAL_STAGGER_MS} className="min-w-0 md:col-span-2 frame:col-span-1 frame:ml-px">
-            <article className={`${card} bg-bg`}>
-              <h3 className="text-mono text-ink-muted">{everyday.korean.label}</h3>
-              <p className="mt-[30px] text-mono-s text-ink-muted">{everyday.korean.wordLabel}</p>
-              {/* Geist has no Hangul glyphs: the existing system-ui/sans-serif stack supplies them. */}
-              <p lang="ko" className="mt-8 font-sans text-[clamp(56px,16vw,88px)] font-medium leading-none tracking-[-0.04em] frame:mt-[39px]">
-                {everyday.korean.word}
-              </p>
-              <p className="mt-8 text-mono !leading-[18px] text-ink frame:mt-[42px]">{everyday.korean.pronunciation}</p>
-              <p className="mt-[18px] text-body-s text-ink-secondary">{everyday.korean.note}</p>
-            </article>
+            <KoreanCard className={`${card} bg-bg`} />
           </Reveal>
         </div>
       </ProSection>

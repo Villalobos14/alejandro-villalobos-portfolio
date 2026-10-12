@@ -112,12 +112,27 @@ export const everyday = {
   },
   korean: {
     label: "Korean, slowly",
-    wordLabel: "word of the week",
-    word: "천천히",
-    pronunciation: "cheon-cheon-hi — slowly",
+    /** "Of the week" stopped being true once the word rotates. */
+    wordLabel: "word of the moment",
+    /** Rotation order; 천천히 stays first. */
+    words: [
+      { hangul: "천천히", romanization: "cheon-cheon-hi", meaning: "slowly" },
+      { hangul: "안녕", romanization: "annyeong", meaning: "hello" },
+      { hangul: "감사합니다", romanization: "gamsahamnida", meaning: "thank you" },
+      { hangul: "맛있다", romanization: "masitda", meaning: "delicious" },
+      { hangul: "화이팅", romanization: "hwaiting", meaning: "you can do it" },
+      { hangul: "보고 싶다", romanization: "bogo sipda", meaning: "I miss you" },
+      { hangul: "같이", romanization: "gachi", meaning: "together" },
+      { hangul: "여행", romanization: "yeohaeng", meaning: "trip" },
+    ],
+    nextWord: "Next word",
     note: "Which is also how I’m learning it.",
+    streak: { unit: "day streak", service: "Duolingo" },
   },
 } as const;
+
+// TODO(content): valor estático a propósito (Duolingo no tiene API pública); actualizar manualmente.
+export const duolingoStreakDays = 150;
 
 export const funCta = {
   title: "Back to the way I work.",
