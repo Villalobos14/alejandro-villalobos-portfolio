@@ -13,7 +13,7 @@ const LEAVE_GRACE_MS = 1000;
 const FADE_MS = 300;
 
 const onInkFocus =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bg";
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 /** Decorative equalizer: each bar loops between its peaks while the preview plays, from a shared rest. */
 const BARS = [
@@ -453,7 +453,7 @@ export default function OnRepeatCard({ className }: { className: string }) {
           />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-bg/15 outline-offset-4 outline-bg peer-focus-visible:outline peer-focus-visible:outline-2"
+            className="pointer-events-none absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-bg/15 outline-offset-4 outline-accent peer-focus-visible:outline peer-focus-visible:outline-2"
           >
             <span ref={fillRef} className="block size-full origin-left scale-x-0 rounded-full bg-on-ink-positive" />
           </span>

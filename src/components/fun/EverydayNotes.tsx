@@ -26,7 +26,7 @@ export default function EverydayNotes() {
             <ElsewhereCard className={`${card} frame:!px-7`} />
           </Reveal>
           <Reveal delayMs={2 * REVEAL_STAGGER_MS} className="min-w-0 md:col-span-2 frame:col-span-1 frame:ml-px">
-            <KoreanCard className={`${card} bg-bg`} />
+            <KoreanCard className={`${card} bg-bg !border-pop-teal/40`} />
           </Reveal>
         </div>
       </ProSection>

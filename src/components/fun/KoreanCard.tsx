@@ -116,7 +116,7 @@ export default function KoreanCard({ className }: { className: string }) {
         type="button"
         aria-label={korean.nextWord}
         onClick={next}
-        className="absolute right-3 top-2 inline-flex h-11 min-w-11 items-center justify-end gap-1.5 rounded-full px-3 text-mono-s text-ink-muted transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink fine:hover:text-ink md:right-4 md:top-3 frame:right-[15px] frame:top-[11px]"
+        className="absolute right-3 top-2 inline-flex h-11 min-w-11 items-center justify-end gap-1.5 rounded-full px-3 text-mono-s text-ink-muted transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent fine:hover:text-ink md:right-4 md:top-3 frame:right-[15px] frame:top-[11px]"
       >
         <span aria-hidden="true">
           {index + 1}/{count}
@@ -163,7 +163,8 @@ export default function KoreanCard({ className }: { className: string }) {
       </p>
       <p className="mt-[18px] text-body-s text-ink-secondary frame:mt-3">{korean.note}</p>
       <p className="mt-5 inline-flex items-center gap-1.5 self-start rounded-full border border-border px-2.5 py-[5px] text-mono-s text-ink-secondary frame:mt-auto">
-        <FireIcon aria-hidden="true" className="size-3 text-signal" />
+        {/* Decorative: orange like section 02. Signal red is kept for errors. */}
+        <FireIcon aria-hidden="true" className="size-3 text-pop-orange" />
         {duolingoStreakDays} {korean.streak.unit} · {korean.streak.service}
       </p>
       <p aria-live="polite" className="sr-only">

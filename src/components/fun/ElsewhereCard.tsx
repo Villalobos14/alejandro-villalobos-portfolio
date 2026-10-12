@@ -66,6 +66,8 @@ export default function ElsewhereCard({ className }: { className: string }) {
 
   return (
     <article ref={cardRef} className={className}>
+      {/* Boarding-pass stripe over the top border: decoration only, no layout. */}
+      <span aria-hidden="true" className="pointer-events-none absolute -inset-x-px -top-px h-1 bg-pop-orange" />
       <h3 className="text-mono text-ink-muted">{travel.label}</h3>
       <p className="sr-only">
         From {travel.fromCity} to {destination.city}
@@ -99,7 +101,14 @@ export default function ElsewhereCard({ className }: { className: string }) {
         {travel.meta.map((item) => (
           <div key={item.label} className="min-w-0">
             <dt className="text-mono-s text-ink-muted">{item.label}</dt>
-            <dd className="mt-[7px] text-body-s leading-[20px] frame:whitespace-nowrap">{item.value}</dd>
+            <dd className="mt-[7px] text-body-s leading-[20px] frame:whitespace-nowrap">
+              {"kind" in item ? (
+                // Status chip: tint behind ink text, pulled back so the word stays aligned.
+                <span className="-mx-1.5 inline-block rounded-full bg-pop-orange-tint px-1.5 text-ink">{item.value}</span>
+              ) : (
+                item.value
+              )}
+            </dd>
           </div>
         ))}
       </dl>
