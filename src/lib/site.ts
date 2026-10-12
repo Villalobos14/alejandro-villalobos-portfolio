@@ -1,20 +1,27 @@
-/** Absolute origin used to resolve canonical and social URLs. */
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://alejandro-villalobos-portfolio.vercel.app";
+/**
+ * Absolute origin used to resolve canonical and social URLs: the apex of the
+ * production domain. NEXT_PUBLIC_SITE_URL may override it (previews), but it
+ * must not be set to the old vercel.app address in Vercel.
+ */
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://notreallyjosh.com").replace(/\/+$/, "");
 
-export const siteName = "Alejandro Villalobos";
+/** The professional identity. notreallyjosh.com is only the domain. */
+export const personName = "Alejandro Villalobos";
 
-export const siteTitle = "Alejandro Villalobos — Product Designer";
+export const personRole = "Product Designer & Engineer";
+
+export const siteName = `${personName} — ${personRole}`;
+
+export const siteTitle = `${personName} | ${personRole}`;
 
 export const siteDescription =
-  "Selected product design and UX by Alejandro Villalobos.";
+  "Product Designer and Engineer combining UX research, software engineering, and AI to design intuitive, accessible, and human-centered digital experiences.";
 
 /**
  * Alt text for the generated social card. Keep this in step with whatever the
  * card renders, including a designed image dropped in later.
  */
-export const ogImageAlt = `${siteName} — Product designer portfolio`;
+export const ogImageAlt = `${personName}, ${personRole}. Research × Design × Engineering.`;
 
 export const ogImageSize = { width: 1200, height: 630 };
 
@@ -31,11 +38,22 @@ export function pageMetadata({
   description: string;
   path: string;
 }) {
+  /*
+   * A page's own openGraph replaces the one the layout inherits, image
+   * included, so the shared card is named here. Case studies pass their own.
+   */
+  const image = { url: "/opengraph-image", ...ogImageSize, alt: ogImageAlt };
+
   return {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { type: "website" as const, url: path, siteName, title, description },
-    twitter: { card: "summary_large_image" as const, title, description },
+    openGraph: { type: "website" as const, url: path, siteName, title, description, images: [image] },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description,
+      images: [{ url: "/twitter-image", alt: ogImageAlt }],
+    },
   };
 }

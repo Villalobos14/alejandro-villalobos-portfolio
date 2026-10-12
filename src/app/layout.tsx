@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import ReactLenis from 'lenis/react'
 import CustomCursor from "@/components/CustomCursor";
 import Footer from "@/components/Footer";
@@ -10,12 +11,17 @@ import { CurtainProvider } from "@/components/curtain/CurtainProvider";
 import { LightboxProvider } from "@/components/media/LightboxProvider";
 import PetWorldProvider from "@/components/pet-world/PetWorldProvider";
 import HashScroll from "@/components/ui/HashScroll";
-import { siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
+import StructuredData from "@/components/system/StructuredData";
+import { personName, siteDescription, siteName, siteTitle, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: siteTitle,
   description: siteDescription,
+  applicationName: personName,
+  authors: [{ name: personName, url: siteUrl }],
+  creator: personName,
+  robots: { index: true, follow: true },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -65,6 +71,8 @@ export default function RootLayout({
             </PetWorldProvider>
           </ReactLenis>
         </CurtainProvider>
+        <StructuredData />
+        <Analytics />
       </body>
     </html>
   );

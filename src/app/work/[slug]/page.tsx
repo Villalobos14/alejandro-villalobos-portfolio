@@ -39,8 +39,9 @@ export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
 
   return {
     ...metadata,
-    openGraph: { ...metadata.openGraph, images },
-    twitter: { ...metadata.twitter, images },
+    // Without its own cover a case study keeps the shared card.
+    openGraph: { ...metadata.openGraph, images: images ?? metadata.openGraph.images },
+    twitter: { ...metadata.twitter, images: images ?? metadata.twitter.images },
   };
 }
 
