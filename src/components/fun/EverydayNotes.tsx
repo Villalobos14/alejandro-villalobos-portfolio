@@ -1,4 +1,5 @@
 import ProSection from "@/components/about/ProSection";
+import ElsewhereCard from "@/components/fun/ElsewhereCard";
 import OnRepeatCard from "@/components/fun/OnRepeatCard";
 import Reveal from "@/components/ui/Reveal";
 import { everyday } from "@/lib/fun";
@@ -21,26 +22,7 @@ export default function EverydayNotes() {
             <OnRepeatCard className={`${card} bg-cover-ink text-bg`} />
           </Reveal>
           <Reveal delayMs={REVEAL_STAGGER_MS} className="min-w-0">
-            <article className={`${card} frame:!px-7`}>
-              <h3 className="text-mono text-ink-muted">{everyday.travel.label}</h3>
-              <p className="mt-5 flex items-baseline justify-between gap-2 whitespace-nowrap text-[clamp(36px,10vw,56px)] font-medium leading-none tracking-[-0.04em] md:text-[clamp(32px,4vw,56px)] frame:mt-[21px] frame:text-[56px]">
-                <span>{everyday.travel.from}</span>
-                <span className="text-[28px] text-accent" aria-hidden="true">→</span>
-                <span className="sr-only">to</span>
-                <span>{everyday.travel.to}</span>
-              </p>
-              <p className="mt-5 border-t border-border pt-[10px] text-body text-ink-secondary frame:mt-4 frame:pt-[13px]">
-                {everyday.travel.body}
-              </p>
-              <dl className="mt-5 grid grid-cols-[0.8fr_1.5fr_1.3fr] gap-3 frame:mt-[18px] frame:grid-cols-[77px_143px_minmax(0,1fr)]">
-                {everyday.travel.meta.map((item) => (
-                  <div key={item.label} className="min-w-0">
-                    <dt className="text-mono-s text-ink-muted">{item.label}</dt>
-                    <dd className="mt-[7px] text-body-s leading-[20px] frame:whitespace-nowrap">{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </article>
+            <ElsewhereCard className={`${card} frame:!px-7`} />
           </Reveal>
           <Reveal delayMs={2 * REVEAL_STAGGER_MS} className="min-w-0 md:col-span-2 frame:col-span-1 frame:ml-px">
             <article className={`${card} bg-bg`}>

@@ -92,7 +92,17 @@ export const everyday = {
   travel: {
     label: "Elsewhere",
     from: "MEX",
+    fromCity: "Mexico City",
+    /** The ticket as it reads without motion; the board rotates through `destinations` instead. */
     to: "TYO · SEL",
+    // TODO(content): confirmar qué ciudad de USA y de Brasil quiere mostrar el usuario; NYC y RIO son placeholders.
+    destinations: [
+      { code: "TYO", city: "Tokyo", country: "Japan" },
+      { code: "SEL", city: "Seoul", country: "South Korea" },
+      { code: "NYC", city: "New York", country: "USA" },
+      { code: "RIO", city: "Rio de Janeiro", country: "Brazil" },
+    ],
+    destinationsLabel: "Destinations",
     body: "I like learning how a city moves: trains, signs and food. Japan and Korea are the trips I keep planning around.",
     meta: [
       { label: "Status", value: "Planning" },
