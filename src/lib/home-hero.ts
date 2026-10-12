@@ -27,10 +27,10 @@ export const homeHeroContent = {
     title: "PRODUCT DESIGNER",
   },
   /**
-   * Calcifer occupies the first "O" of PRODUCT. The word and letter are a
-   * slice of `role.title`, not a second headline.
+   * Calcifer perches on top of the "G" of DESIGNER, which stays visible. The
+   * word and letter are a slice of `role.title`, not a second headline.
    */
-  petGlyph: { word: "PRODUCT", letter: "O" },
+  petGlyph: { word: "DESIGNER", letter: "G" },
   description:
     "I combine research, design and engineering to create human–AI interfaces",
   intro: "A few things I’ve helped make.",

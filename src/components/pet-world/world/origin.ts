@@ -17,6 +17,8 @@ export interface GlyphOrigin {
   /** aria-hidden element the inline sprite is painted on. */
   sprite: HTMLElement;
   character: string;
+  /** Stands on top of the letter instead of replacing it: the letter is never hidden. */
+  perch: boolean;
   /** `fadeMs` fades the letter in, and on release also fades out a sprite that is still showing. */
   setMode: (mode: GlyphMode, fadeMs?: number) => void;
 }
@@ -26,18 +28,20 @@ export function createGlyphOrigin(
   glyph: HTMLElement,
   sprite: HTMLElement,
   character: string,
+  perch = false,
 ): GlyphOrigin {
   return {
     petId,
     glyph,
     sprite,
     character,
+    perch,
     setMode(mode, fadeMs = 0) {
       glyph.dataset.petGlyph = mode;
 
       if (mode === "mascot") {
         glyph.style.transition = "";
-        glyph.style.color = "transparent";
+        glyph.style.color = perch ? "" : "transparent";
         sprite.style.transition = "";
         sprite.style.opacity = "";
         sprite.style.display = "block";
@@ -106,9 +110,13 @@ export function fitGlyph(
   const inkCenterX = (ink.actualBoundingBoxRight - ink.actualBoundingBoxLeft) / 2;
   const inkBottom = ink.fontBoundingBoxAscent + ink.actualBoundingBoxDescent;
 
+  // A perched pet stands on the letter's top edge, with a hair of air under his base.
+  const inkTop = ink.fontBoundingBoxAscent - ink.actualBoundingBoxAscent;
+  const gap = Math.max(2, Math.round(scale * 0.5));
+
   return {
     scale,
     left: inkCenterX - (body.x + body.width / 2) * scale,
-    top: inkBottom - (body.y + body.height) * scale,
+    top: (origin.perch ? inkTop - gap : inkBottom) - (body.y + body.height) * scale,
   };
 }

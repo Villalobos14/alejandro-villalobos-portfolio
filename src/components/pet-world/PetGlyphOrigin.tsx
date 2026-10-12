@@ -9,6 +9,8 @@ interface PetGlyphOriginProps {
   petId: PetId;
   /** The letter the pet stands in for. It stays in the DOM and in the accessible name throughout. */
   children: string;
+  /** Stand on top of the letter, which stays visible, instead of standing in for it. */
+  perch?: boolean;
 }
 
 /** Animations still running on any ancestor, such as the MaskedLines entrance the letter rides in on. */
@@ -30,7 +32,7 @@ function ancestorAnimations(element: HTMLElement): Animation[] {
  * or makes it transparent (so it still holds its exact width) and draws the
  * pet over it on an aria-hidden span. Nothing here changes layout.
  */
-export default function PetGlyphOrigin({ petId, children }: PetGlyphOriginProps) {
+export default function PetGlyphOrigin({ petId, children, perch = false }: PetGlyphOriginProps) {
   const world = usePetWorld();
   const glyphRef = useRef<HTMLSpanElement>(null);
   const spriteRef = useRef<HTMLSpanElement>(null);
@@ -41,7 +43,7 @@ export default function PetGlyphOrigin({ petId, children }: PetGlyphOriginProps)
 
     if (!world || !glyph || !sprite) return;
 
-    const origin = createGlyphOrigin(petId, glyph, sprite, children);
+    const origin = createGlyphOrigin(petId, glyph, sprite, children, perch);
     let live = true;
 
     world.claimOrigin(origin);
@@ -67,7 +69,7 @@ export default function PetGlyphOrigin({ petId, children }: PetGlyphOriginProps)
       resize.disconnect();
       world.releaseOrigin(origin);
     };
-  }, [world, petId, children]);
+  }, [world, petId, children, perch]);
 
   return (
     <span ref={glyphRef} className="relative">
