@@ -9,6 +9,8 @@ import { HOVER_DOT, POP_GROUP, popForIndex } from "@/components/system/palette";
 import {
   PROJECTS_SECTION_ID,
   featuredProjects,
+  projectMeta,
+  projectTitle,
   researchStudies,
   researchStudiesHeading,
   type FeaturedProject,
@@ -57,7 +59,12 @@ function MetricShifts({ shifts }: { shifts: MetricShift[] }) {
 
 function FeaturedCase({ project, index }: { project: FeaturedProject; index: number }) {
   return (
-    <article className={`${POP_GROUP} grid overflow-hidden rounded-xl border border-border lg:grid-cols-[2fr_1fr]`}>
+    <article
+      data-cursor="pill"
+      data-cursor-title={projectTitle(project)}
+      data-cursor-meta={projectMeta(project)}
+      className={`${POP_GROUP} grid overflow-hidden rounded-xl border border-border lg:grid-cols-[2fr_1fr]`}
+    >
       <div className="relative aspect-[16/10] min-h-0 overflow-hidden bg-gradient-to-br from-tint-ice to-tint-stone md:aspect-auto md:min-h-64">
         {project.media ? (
           <Media
@@ -104,7 +111,12 @@ function CaseCard({ project, index }: { project: FeaturedProject; index: number 
   const cover = project.media?.type === "image" ? project.media : null;
 
   return (
-    <article className={`${POP_GROUP} flex h-full min-w-0 flex-col`}>
+    <article
+      data-cursor="pill"
+      data-cursor-title={projectTitle(project)}
+      data-cursor-meta={projectMeta(project)}
+      className={`${POP_GROUP} flex h-full min-w-0 flex-col`}
+    >
       {cover ? (
         <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
           <Image

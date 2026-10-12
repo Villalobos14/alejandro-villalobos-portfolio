@@ -136,6 +136,13 @@ export const featuredProjects: FeaturedProject[] = [
   },
 ];
 
+/** "MLSToolbox — CodeAssessment": the name with its subtitle on one line. */
+export const projectTitle = (project: FeaturedProject) =>
+  [project.name, project.subtitle].filter(Boolean).join(" ");
+
+/** The eyebrow without its index: "ML tooling · 2025". */
+export const projectMeta = (project: FeaturedProject) => project.eyebrow.replace(/^\d+ · /, "");
+
 export const researchStudiesHeading = "Research studies · HSBC";
 
 /**
@@ -189,9 +196,9 @@ const logCovers: Record<string, ProjectLogCard["cover"]> = {
 export const projectLogCards: ProjectLogCard[] = [
   ...featuredProjects.map((project) => ({
     id: project.id,
-    name: [project.name, project.subtitle].filter(Boolean).join(" "),
+    name: projectTitle(project),
     summary: project.summary,
-    meta: project.eyebrow.replace(/^\d+ · /, ""),
+    meta: projectMeta(project),
     href: project.href,
     cover: logCovers[project.id],
   })),

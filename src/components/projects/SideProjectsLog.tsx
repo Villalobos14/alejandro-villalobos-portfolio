@@ -21,9 +21,11 @@ const filters: { label: string; type?: SideProject["type"] }[] = [
 function LogEntry({ project, index, open, onToggle }: { project: SideProject; index: number; open: boolean; onToggle: () => void }) {
   const id = useId();
   const pop = popForIndex(index);
+  /* The same "Type · Result" pair the row shows in its columns. */
+  const meta = `${project.type} · ${project.result}`;
 
   return (
-    <article data-log-entry={project.name} data-hairline={`log-${project.name}`} className={`${POP_GROUP} ${ROW_TINT} ${pop.rowTint} border-t border-border ${open ? "bg-bg-subtle" : ""}`}>
+    <article data-log-entry={project.name} data-hairline={`log-${project.name}`} data-cursor="pill" data-cursor-title={project.name} data-cursor-meta={meta} className={`${POP_GROUP} ${ROW_TINT} ${pop.rowTint} border-t border-border ${open ? "bg-bg-subtle" : ""}`}>
       <div className={`relative py-4 md:min-h-[100px] md:items-center ${rowGrid}`}>
         <div className="flex min-w-0 items-center gap-4 pr-12 md:gap-5 md:pr-0">
           {project.thumb ? <Image {...project.thumb} alt={project.thumb.alt} width={104} height={68} sizes="104px" className="h-[68px] w-[104px] shrink-0 rounded object-cover" /> : null}
@@ -64,7 +66,7 @@ function LogEntry({ project, index, open, onToggle }: { project: SideProject; in
               </div>
             ) : <div className="hidden md:block" />}
             <div className="min-w-0 space-y-[14px] px-4 pt-2 md:col-span-4 md:pl-0 md:pr-6">
-              <p className={`${mono} text-accent-strong`}>{project.detail?.label ?? `${project.type} · ${project.result}`}</p>
+              <p className={`${mono} text-accent-strong`}>{project.detail?.label ?? meta}</p>
               {project.detail ? <>
                 <p className="text-[17px] leading-[26px] tracking-[-0.002em]">{project.detail.body}</p>
                 <p className="text-[14px] leading-[21px] text-ink-secondary">{project.detail.contribution}</p>
