@@ -1,20 +1,12 @@
 import ProSection from "@/components/about/ProSection";
+import ElsewhereCard from "@/components/fun/ElsewhereCard";
+import KoreanCard from "@/components/fun/KoreanCard";
+import OnRepeatCard from "@/components/fun/OnRepeatCard";
 import Reveal from "@/components/ui/Reveal";
 import { everyday } from "@/lib/fun";
 import { REVEAL_STAGGER_MS } from "@/lib/motion";
 
 const card = "relative min-w-0 border border-border p-6 md:p-7 frame:h-[328px] frame:p-[27px]";
-
-/** Static decorative waveform from the Figma card; it is not a playback control. */
-const waveform = [
-  "h-[6px]", "h-[17px]", "h-[25px]", "h-[26px]", "h-[21px]", "h-[12px]",
-  "h-[8px]", "h-[14px]", "h-[20px]", "h-[22px]", "h-[19px]", "h-[11px]",
-  "h-[13px]", "h-[23px]", "h-[28px]", "h-[26px]", "h-[18px]", "h-[7px]",
-  "h-[14px]", "h-[19px]", "h-[19px]", "h-[17px]", "h-[13px]", "h-[7px]",
-  "h-[17px]", "h-[25px]", "h-[27px]", "h-[23px]", "h-[13px]", "h-[11px]",
-  "h-[20px]", "h-[24px]", "h-[22px]", "h-[15px]", "h-[8px]", "h-[11px]",
-  "h-[19px]", "h-[24px]", "h-[24px]", "h-[17px]", "h-[6px]", "h-[18px]",
-] as const;
 
 export default function EverydayNotes() {
   return (
@@ -28,67 +20,13 @@ export default function EverydayNotes() {
       >
         <div className="mt-10 grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2 frame:grid-cols-[433fr_435fr_380fr]">
           <Reveal delayMs={0} className="min-w-0">
-            <article className={`${card} bg-ink text-bg`}>
-              <h3 className="text-mono text-bg">{everyday.music.label}</h3>
-              <p className="mt-1 text-h3 tracking-[-0.015em] frame:whitespace-nowrap">{everyday.music.title}</p>
-              <ol className="mt-5">
-                {everyday.music.tracks.map((track, index) => (
-                  <li key={index} data-hairline="song" className="grid min-h-[52px] grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-3 border-t border-border">
-                    <span className="text-mono-s">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="text-body-s">{track.title}</span>
-                    <span className="text-mono-s">{track.duration}</span>
-                  </li>
-                ))}
-              </ol>
-              <div aria-hidden="true" className="mt-[18px] flex h-7 items-center justify-between gap-1">
-                {waveform.map((height, index) => (
-                  <span key={index} className={`w-[3px] shrink rounded-sm ${height} ${index < 17 ? "bg-on-ink-positive" : "bg-bg/30"}`} />
-                ))}
-              </div>
-            </article>
+            <OnRepeatCard className={`${card} bg-cover-ink text-bg`} />
           </Reveal>
           <Reveal delayMs={REVEAL_STAGGER_MS} className="min-w-0">
-            <article className={`${card} frame:!px-7`}>
-              {/* Boarding-pass stripe over the top border: decoration only, no layout. */}
-              <span aria-hidden="true" className="pointer-events-none absolute -inset-x-px -top-px h-1 bg-pop-orange" />
-              <h3 className="text-mono text-ink-muted">{everyday.travel.label}</h3>
-              <p className="mt-5 flex items-baseline justify-between gap-2 whitespace-nowrap text-[clamp(36px,10vw,56px)] font-medium leading-none tracking-[-0.04em] md:text-[clamp(32px,4vw,56px)] frame:mt-[21px] frame:text-[56px]">
-                <span>{everyday.travel.from}</span>
-                <span className="text-[28px] text-accent" aria-hidden="true">→</span>
-                <span className="sr-only">to</span>
-                <span>{everyday.travel.to}</span>
-              </p>
-              <p className="mt-5 border-t border-border pt-[10px] text-body text-ink-secondary frame:mt-4 frame:pt-[13px]">
-                {everyday.travel.body}
-              </p>
-              <dl className="mt-5 grid grid-cols-[0.8fr_1.5fr_1.3fr] gap-3 frame:mt-[18px] frame:grid-cols-[77px_143px_minmax(0,1fr)]">
-                {everyday.travel.meta.map((item) => (
-                  <div key={item.label} className="min-w-0">
-                    <dt className="text-mono-s text-ink-muted">{item.label}</dt>
-                    <dd className="mt-[7px] text-body-s leading-[20px] frame:whitespace-nowrap">
-                      {"kind" in item ? (
-                        // Status chip: tint behind ink text, pulled back so the word stays aligned.
-                        <span className="-mx-1.5 inline-block rounded-full bg-pop-orange-tint px-1.5 text-ink">{item.value}</span>
-                      ) : (
-                        item.value
-                      )}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </article>
+            <ElsewhereCard className={`${card} frame:!px-7`} />
           </Reveal>
           <Reveal delayMs={2 * REVEAL_STAGGER_MS} className="min-w-0 md:col-span-2 frame:col-span-1 frame:ml-px">
-            <article className={`${card} bg-bg !border-pop-teal/40`}>
-              <h3 className="text-mono text-ink-muted">{everyday.korean.label}</h3>
-              <p className="mt-[30px] text-mono-s text-ink-muted">{everyday.korean.wordLabel}</p>
-              {/* Geist has no Hangul glyphs: the existing system-ui/sans-serif stack supplies them. */}
-              <p lang="ko" className="mt-8 font-sans text-[clamp(56px,16vw,88px)] font-medium leading-none tracking-[-0.04em] frame:mt-[39px]">
-                {everyday.korean.word}
-              </p>
-              <p className="mt-8 text-mono !leading-[18px] text-ink frame:mt-[42px]">{everyday.korean.pronunciation}</p>
-              <p className="mt-[18px] text-body-s text-ink-secondary">{everyday.korean.note}</p>
-            </article>
+            <KoreanCard className={`${card} bg-bg`} />
           </Reveal>
         </div>
       </ProSection>
