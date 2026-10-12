@@ -1,20 +1,10 @@
 import ProSection from "@/components/about/ProSection";
+import OnRepeatCard from "@/components/fun/OnRepeatCard";
 import Reveal from "@/components/ui/Reveal";
 import { everyday } from "@/lib/fun";
 import { REVEAL_STAGGER_MS } from "@/lib/motion";
 
 const card = "relative min-w-0 border border-border p-6 md:p-7 frame:h-[328px] frame:p-[27px]";
-
-/** Static decorative waveform from the Figma card; it is not a playback control. */
-const waveform = [
-  "h-[6px]", "h-[17px]", "h-[25px]", "h-[26px]", "h-[21px]", "h-[12px]",
-  "h-[8px]", "h-[14px]", "h-[20px]", "h-[22px]", "h-[19px]", "h-[11px]",
-  "h-[13px]", "h-[23px]", "h-[28px]", "h-[26px]", "h-[18px]", "h-[7px]",
-  "h-[14px]", "h-[19px]", "h-[19px]", "h-[17px]", "h-[13px]", "h-[7px]",
-  "h-[17px]", "h-[25px]", "h-[27px]", "h-[23px]", "h-[13px]", "h-[11px]",
-  "h-[20px]", "h-[24px]", "h-[22px]", "h-[15px]", "h-[8px]", "h-[11px]",
-  "h-[19px]", "h-[24px]", "h-[24px]", "h-[17px]", "h-[6px]", "h-[18px]",
-] as const;
 
 export default function EverydayNotes() {
   return (
@@ -28,24 +18,7 @@ export default function EverydayNotes() {
       >
         <div className="mt-10 grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2 frame:grid-cols-[433fr_435fr_380fr]">
           <Reveal delayMs={0} className="min-w-0">
-            <article className={`${card} bg-ink text-bg`}>
-              <h3 className="text-mono text-bg">{everyday.music.label}</h3>
-              <p className="mt-1 text-h3 tracking-[-0.015em] frame:whitespace-nowrap">{everyday.music.title}</p>
-              <ol className="mt-5">
-                {everyday.music.tracks.map((track, index) => (
-                  <li key={index} data-hairline="song" className="grid min-h-[52px] grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-3 border-t border-border">
-                    <span className="text-mono-s">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="text-body-s">{track.title}</span>
-                    <span className="text-mono-s">{track.duration}</span>
-                  </li>
-                ))}
-              </ol>
-              <div aria-hidden="true" className="mt-[18px] flex h-7 items-center justify-between gap-1">
-                {waveform.map((height, index) => (
-                  <span key={index} className={`w-[3px] shrink rounded-sm ${height} ${index < 17 ? "bg-on-ink-positive" : "bg-bg/30"}`} />
-                ))}
-              </div>
-            </article>
+            <OnRepeatCard className={`${card} bg-cover-ink text-bg`} />
           </Reveal>
           <Reveal delayMs={REVEAL_STAGGER_MS} className="min-w-0">
             <article className={`${card} frame:!px-7`}>

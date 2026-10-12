@@ -61,18 +61,33 @@ export const cameraPhotos: Photo[] = [
 
 export const japanCaption = "Japan → after the trip";
 
+/** One song on the "On repeat" card. `query` is what the iTunes Search API is asked for. */
+export interface Track {
+  title: string;
+  artist: string;
+  query: string;
+}
+
+/** What /api/preview resolves for a track: Apple's own ~30 s preview, cover and store page. */
+export interface TrackPreview {
+  previewUrl: string;
+  artworkUrl: string;
+  trackViewUrl: string;
+}
+
+// TODO(content): reemplazar por las canciones reales del usuario (1–3). BTS — "One More Night" es un placeholder.
+const tracks: readonly Track[] = [
+  { title: "One More Night", artist: "BTS", query: "One More Night BTS" },
+];
+
 export const everyday = {
   eyebrow: "02 — Everyday",
   title: "The quieter part.",
   music: {
     label: "On repeat",
     title: "Something is always playing.",
-    // TODO(content): canciones reales
-    tracks: [
-      { title: "[Song] — [Artist]", duration: "3:41" },
-      { title: "[Song] — [Artist]", duration: "4:02" },
-      { title: "[Song] — [Artist]", duration: "2:58" },
-    ],
+    tracks,
+    appleMusic: "Listen on Apple Music",
   },
   travel: {
     label: "Elsewhere",
