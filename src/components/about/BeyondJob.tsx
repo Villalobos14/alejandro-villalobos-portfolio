@@ -17,7 +17,11 @@ export default function BeyondJob() {
         {beyondSection.columns.map((column, index) => (
           <li key={column.title} className="min-w-0">
             <Reveal delayMs={index * REVEAL_STAGGER_MS}>
-              {/* TODO(content): photos for Teaching, Speaking and Hackathons */}
+              {/*
+                TODO(content): photos for Teaching, Speaking and Hackathons. Each goes in a
+                <figure data-cursor="pill" data-cursor-title={column.photo.caption}> with an
+                sr-only <figcaption>{column.photo.caption}</figcaption>, so the caption is not cursor-only.
+              */}
               <h3 className="mt-3 text-[20px] font-medium leading-[28px] text-ink">{column.title}</h3>
               <p className="mt-3 text-[15px] leading-[22px] text-ink-secondary">{column.body}</p>
             </Reveal>

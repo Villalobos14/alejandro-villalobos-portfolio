@@ -1,7 +1,7 @@
 import AboutSwitch from "@/components/system/AboutSwitch";
 import MediaPlaceholder from "@/components/media/MediaPlaceholder";
 import MaskedLines from "@/components/ui/MaskedLines";
-import { professionalHeader } from "@/lib/about";
+import { aboutPhotos, professionalHeader } from "@/lib/about";
 
 const h1 =
   "max-w-[12em] text-[clamp(40px,11vw,80px)] font-semibold leading-none tracking-[-0.04em] text-ink frame:max-w-none frame:text-[80px] frame:leading-[80px]";
@@ -31,7 +31,11 @@ export default function AboutHeader() {
       <p className="order-6 max-w-[411px] text-mono text-ink-muted md:max-w-none md:whitespace-nowrap md:order-none md:col-start-1 frame:absolute frame:left-0 frame:top-[548px] frame:w-[411px]">
         {professionalHeader.meta}
       </p>
-      <figure className="relative order-5 mx-auto aspect-[330/420] w-full max-w-[330px] border border-border bg-bg md:order-none md:col-start-2 md:row-span-5 md:row-start-1 md:mx-0 md:justify-self-end frame:absolute frame:right-0 frame:top-[96px] frame:mx-0 frame:h-[420px] frame:w-[330px] frame:max-w-none">
+      {/* The caption is already visible below the photo, so the pill repeats it without a hidden copy. */}
+      <figure
+        data-cursor="pill"
+        data-cursor-title={aboutPhotos[0].caption}
+        className="relative order-5 mx-auto aspect-[330/420] w-full max-w-[330px] border border-border bg-bg md:order-none md:col-start-2 md:row-span-5 md:row-start-1 md:mx-0 md:justify-self-end frame:absolute frame:right-0 frame:top-[96px] frame:mx-0 frame:h-[420px] frame:w-[330px] frame:max-w-none">
         {/* TODO(content): retrato 330×420 */}
         <div className="absolute inset-x-0 top-0 h-[83%]">
           <MediaPlaceholder seed="about-portrait" className="h-full" />

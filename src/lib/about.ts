@@ -111,6 +111,20 @@ export const toolkitSection = {
   ],
 } as const;
 
+/**
+ * One caption per About photo. The cursor pill and each photo's figcaption
+ * read from here, so a caption is never only in the cursor.
+ */
+export const aboutPhotos = [
+  { id: "portrait", caption: "me, coffee, thinking about pipelines" },
+  // TODO(content): caption real
+  { id: "teaching", caption: "Caption — placeholder 1" },
+  // TODO(content): caption real
+  { id: "speaking", caption: "Caption — placeholder 2" },
+  // TODO(content): caption real
+  { id: "hackathons", caption: "Caption — placeholder 3" },
+] as const;
+
 export const beyondSection = {
   eyebrow: "04 — Beyond the job",
   title: "Teaching, talking, building with others.",
@@ -118,17 +132,17 @@ export const beyondSection = {
     {
       title: "Teaching",
       body: "Workshops where someone is stuck and the room figures it out together.",
-      photo: "Foto — Teaching",
+      photo: aboutPhotos[1],
     },
     {
       title: "Speaking",
       body: "Saying a thing out loud until it’s clear — sometimes on a stage in Chiapas.",
-      photo: "Foto — Speaking",
+      photo: aboutPhotos[2],
     },
     {
       title: "Hackathons",
       body: "Usually on the design side of the table. 1st place with Monogatari, 3rd with GoodActions.",
-      photo: "Foto — Hackathons",
+      photo: aboutPhotos[3],
     },
   ],
 } as const;
@@ -144,5 +158,5 @@ export const professionalHeader = {
   title: ["Understand the system.", "Then shape the interface."] as const,
   deck: "I’m a product designer with a software-engineering degree and a UX-research job at HSBC. I make complex products easier to understand, use and build — and I’m happiest where research, design and code meet.",
   meta: "Mexico City · Open to relocation · Spanish & English",
-  portraitCaption: "me, coffee, thinking about pipelines",
+  portraitCaption: aboutPhotos[0].caption,
 };
